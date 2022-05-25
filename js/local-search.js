@@ -1,7 +1,7 @@
 /* global CONFIG */
 
 const CONFIG = {
-    root             : '/',
+    root             : '/blog/',
     path             : 'search.json',
     localsearch      : {
         trigger           : 'auto',
