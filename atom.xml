@@ -123,9 +123,9 @@
     
     <category term="блог" scheme="https://blog.coolsoftware.ru/tags/%D0%B1%D0%BB%D0%BE%D0%B3/"/>
     
-    <category term="поиск" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%B8%D1%81%D0%BA/"/>
-    
     <category term="hexo" scheme="https://blog.coolsoftware.ru/tags/hexo/"/>
+    
+    <category term="поиск" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%B8%D1%81%D0%BA/"/>
     
     <category term="theme" scheme="https://blog.coolsoftware.ru/tags/theme/"/>
     
@@ -178,11 +178,11 @@
     
     
     
+    <category term="переезд" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4/"/>
+    
     <category term="блог" scheme="https://blog.coolsoftware.ru/tags/%D0%B1%D0%BB%D0%BE%D0%B3/"/>
     
     <category term="hexo" scheme="https://blog.coolsoftware.ru/tags/hexo/"/>
-    
-    <category term="переезд" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4/"/>
     
     <category term="blogger" scheme="https://blog.coolsoftware.ru/tags/blogger/"/>
     
