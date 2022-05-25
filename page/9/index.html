@@ -1,0 +1,712 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Страница 9 | Cool Software Blog</title>
+  <meta name="author" content="Vitaly Yakovlev">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Cool Software Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="shortcut icon" href="/favicon.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Cool Software Blog" type="application/atom+xml">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+  
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div id="title-wrapper">
+  <div class="alignleft">
+    <div id="title"><a href="/"><img src="/images/coolsoftware-blog.png" /></a></div>
+    <h2><a href="/">Записки программиста</a></h2>
+  </div>
+  <nav id="main-nav" class="alignright">
+    <ul>
+      
+        
+        <li><a href="/archives">Архив</a></li>
+      
+        
+        <li><a href="/search"><span class="menuicon"></span></a></li>
+      
+        
+        <li><a href="/atom.xml" target="_blank"><span class="menuicon"></span></a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article id="post-coolsoftware-on-github" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2012-03-14T05:40:00.000Z"><a href="/2012/03/coolsoftware-on-github/">2012-03-14</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2012/03/coolsoftware-on-github/">Coolsoftware on github</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Завел аккаунт в github: <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/">https://github.com/coolsoftware/</a><div style="font-family: Georgia, serif; font-size: 100%; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; "></div> <div style="font-family: Georgia, serif; font-size: 100%; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; ">Это не первый мой аккаунт в github, поэтому потребовалось как-то организовывать одновременный доступ к нему из под разных учеток, с разными SSHKey. По этому поводу маленький “трик” - как я все это сделал:</div> <div style="font-family: Georgia, serif; font-size: 100%; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; "></div></p>
+<p>1. При установке <a target="_blank" rel="noopener" href="http://code.google.com/p/msysgit/downloads/list">Git for Windows</a> создает такой ярлык для Git Bash:</p>
+<p><a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-U_ghHd9gdnI/T2AxzEEsyNI/AAAAAAAAAB4/1r0scPKoqZk/s1600/gitbash.png"><img src="http://3.bp.blogspot.com/-U_ghHd9gdnI/T2AxzEEsyNI/AAAAAAAAAB4/1r0scPKoqZk/s400/gitbash.png"></a></p>
+<div style="font-family: Georgia, serif; font-size: 100%; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; ">Как мы видим текущий каталог Git Bash - %HOMEDRIVE%%HOMEPATH%. В нем хранятся все настройки git, каталог .ssh с SSHKey и проекты обычно тоже там.</div>
+
+<p>Я создал в %HOMEDRIVE%%HOMEPATH% каталог Coolsoftware и в нем git.cmd следующего содержания:</p>
+<p>@set HOME=%HOMEDRIVE%%HOMEPATH%\Coolsoftware</p>
+<p>C:\Windows\SysWOW64\cmd.exe /c “”C:\Program Files (x86)\Git\bin\sh.exe” –login -i”</p>
+<p>Затем создал ярлык на этот git.cmd и вынес его на рабочий стол, обозвав “Git Bash - Coolsoftware”. Теперь при его запуске текущий каталог пользователя в “баше” %HOMEDRIVE%%HOMEPATH%\Coolsoftware, а при запуске старого ярлыка “Git Bash” текущий каталог %HOMEDRIVE%%HOMEPATH%. Таким образом получилось два “баша”, в каждом - свои настройки.</p>
+<p>Далее запустил “Git Bash - Coolsoftware” произвел установку github в соответствии с <a target="_blank" rel="noopener" href="http://help.github.com/win-set-up-git/">инструкцией</a> и выложил проект <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/VHashedStringList">VHashedStringList</a> - оптимизированный список строк, доступ к элементам которого организован с помощью хеш-индекса.</p>
+<p>TVHashedStringList - аналог стандартного THashedStringList (фактически, он сделан на его основе, хотя наследуется не от него, а от TStringList).</p>
+<p>Существенное отличие от THashedStringList заключается в том, что оптимизированы операции перестроения индекса при изменении списка.</p>
+<p>В THashedStringList полное перестроение индекса требуется после любого изменения, что приводит к значительным задержкам в реальных приложениях.</p>
+<p>Например, в следующем примере полное перестроение индекса будет произведено 3 раза:</p>
+<figure class="highlight pascal"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">procedure</span> <span class="title">ChangeList</span><span class="params">(lst: THashedStringList)</span>;</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  lst.Values[<span class="string">&#x27;key1&#x27;</span>] := <span class="string">&#x27;Value1&#x27;</span>;</span><br><span class="line">  lst.Values[<span class="string">&#x27;key2&#x27;</span>] := <span class="string">&#x27;Value2&#x27;</span>; <span class="comment">//неявный вызов IndexOfName и перестроение индекса</span></span><br><span class="line">  lst.Values[<span class="string">&#x27;key3&#x27;</span>] := <span class="string">&#x27;Value3&#x27;</span>; <span class="comment">//неявный вызов IndexOfName и перестроение индекса</span></span><br><span class="line">  lst.Values[<span class="string">&#x27;key4&#x27;</span>] := <span class="string">&#x27;Value4&#x27;</span>; <span class="comment">//неявный вызов IndexOfName и перестроение индекса</span></span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<p>В отличие от THashedStringList, TVHashedStringList не требует полного перестроения индекса после добавления нового элемента в конец списка или</p>
+<p>при изменении значений элементов списка. Перестроение происходит только после вставки нового элемента в список или удаления из списка.</p>
+<p>Поэтому в следующем примере полного перестроения индекса не произойдет ни разу.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">procedure ChangeList(lst: TVHashedStringList);</span><br><span class="line">begin</span><br><span class="line">  lst.Values[&#x27;key1&#x27;] := &#x27;Value1&#x27;; //индекс модифицирован и не требует перестроения</span><br><span class="line">  lst.Values[&#x27;key2&#x27;] := &#x27;Value2&#x27;; //индекс модифицирован и не требует перестроения</span><br><span class="line">  lst.Values[&#x27;key3&#x27;] := &#x27;Value3&#x27;; //индекс модифицирован и не требует перестроения</span><br><span class="line">  lst.Values[&#x27;key4&#x27;] := &#x27;Value4&#x27;; //индекс модифицирован и не требует перестроения</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>===</p>
+<p>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/github/">github</a>, <a href="/tags/vhashedstringlist/">VHashedStringList</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-blog-post_14" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2012-02-15T04:19:00.000Z"><a href="/2012/02/blog-post_14/">2012-02-15</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2012/02/blog-post_14/">Много читателей и один писатель</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>В много-поточном приложении довольно часто возникает необходимость синхронизировать обращение к разделяемому ресурсу, который могут одновременно читать несколько потоков “читателей”, а производить запись в этот ресурс может только один поток “писатель”. Когда читатели читают данные, то писатель не может писать и должен ждать, пока все читатели не закончат чтение. Когда писатель пишет, то все читатели должны ждать, пока он не запишет все данные и не освободит ресурс.  </p>
+<p>Ниже приведена моя реализация “читателя” и “писателя”. В этой реализации есть допущение о том, что нам известно максимальное количество читателей MAX_READERS.  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">LONG gCounter = 0;</span><br><span class="line">//алгоритм читателя</span><br><span class="line">for (;;) //бесконечный цикл ожидания освобождения ресурса</span><br><span class="line">&#123;</span><br><span class="line">  LONG n = InterlockedIncrement(&amp;gCounter); </span><br><span class="line">  //в n - значение gCounter после инкремента</span><br><span class="line">  if (n &lt;= MAX_READERS) break; //писатель ничего не пишет - можно читать</span><br><span class="line">  InterlockedDecrement(&amp;gCounter);</span><br><span class="line">&#125;</span><br><span class="line">// здесь читаем данные</span><br><span class="line">...</span><br><span class="line">//</span><br><span class="line">InterlockedDecrement(&amp;gCounter); //освобождаем блокировку читателем</span><br><span class="line">// алгоритм писателя</span><br><span class="line">for (;;) //бесконечный цикл освобождения ресурса читателями/писателями</span><br><span class="line">&#123;</span><br><span class="line">  LONG n = InterlockedCompareExchange(&amp;gCounter, (MAX_READERS+1), 0); </span><br><span class="line">  //в n - предыдущее значение gCounter, которое было ДО попытки заменить его на MAX_READERS+1 в InterlockedCompareExchange; </span><br><span class="line">  //если там был 0, то никаких читателей/писателей не было, новое значение в gCounter будет MAX_READERS+1; </span><br><span class="line">  //если в gCounter был не 0, то это значение НЕ будет заменено на MAX_READERS+1, а останется прежним</span><br><span class="line">  if (n == 0) break;</span><br><span class="line">&#125;</span><br><span class="line">// здесь пишем данные</span><br><span class="line">...</span><br><span class="line">//</span><br><span class="line">InterlockedExchangeAdd(&amp;gCounter, -(MAX_READERS+1)); //освобождаем блокировку писателем</span><br></pre></td></tr></table></figure>
+
+<p>Обращаю внимание на использование Interlocked-функций. Это такие функции, которые обеспечивают атомарность.<br>Например, InterlockedIncrement(&amp;gCounter) - это атомарное увеличение на 1 (инкремент) значения gCounter.<br>Вообще, операция инкремента gCounter не атомарна, она состоит из следующих 3-х операций:  </p>
+<p>1. прочитать значение из памяти по адресу &amp;gCounter<br>2. увеличить значение на 1<br>3. записать результат в память по адресу &amp;gCounter  </p>
+<p>Если выполняется параллельно 2 потока, то возможна такая ситуация :  </p>
+<p>[поток 1] читает gCounter, прочитан 0<br>[поток 2] читает gCounter, прочитан 0<br>[поток 1] увеличивает значение на 1, получается 1<br>[поток 2] увеличивает значение на 1, получается 1<br>[поток 1] записывает 1 в gCounter<br>[поток 2] записывает 1 в gCounter  </p>
+<p>В итоге в gCounter будет 1, а не 2, как можно было бы предположить.  </p>
+<p>UPD. LockLib - классы C++ для блокировки разделяемых ресурсов: <a href="http://blog.coolsoftware.ru/2013/12/locklib.html">http://blog.coolsoftware.ru/2013/12/locklib.html</a>  </p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D0%B5%D0%BB%D0%B8/">Писатели</a>, <a href="/tags/%D1%87%D0%B8%D1%82%D0%B0%D1%82%D0%B5%D0%BB%D0%B8/">Читатели</a>, <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/">алгоритм</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-blog-post" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2012-02-10T02:18:00.000Z"><a href="/2012/02/blog-post/">2012-02-10</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2012/02/blog-post/">Свой ГСЧ</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Стандартный генератор случайных чисел (ГСЧ) в C++ - функция rand(). Он работает по так-называемому <a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BA%D0%BE%D0%BD%D0%B3%D1%80%D1%83%D1%8D%D0%BD%D1%82%D0%BD%D1%8B%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4">конгруэнтному линейному алгоритму</a>. Для инициализации генератора используется srand(seed).  </p>
+<p>У этого генератора есть несколько неприятных особенностей.</p>
+<p>1. Он более-менее сносно работает, когда в своей программе вы генерируете небольшое количество независимых между собой случайных величин. Но когда с помощью одного и того же датчика генерируется с десяток различных переменных (A, B, C, D, E, F, G, H, I, J), то последовательность псевдослучайных значений, например, переменной A: A1, A2, A3, A4, A5, … уже не будет выглядеть как случайная.</p>
+<p>2. Требуется производить инициализацию счетчика с помощью функции srand(seed) в каждом потоке, в котором вызывается rand().</p>
+<p>В общем, столкнувшись на практике со странностями работы стандартного ГСЧ, я решил написать свой. Основные требования - скорость работы и возможность обращаться к одному и тому же ГСЧ из разных потоков. И вот, что у меня получилось:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">class CRnd</span><br><span class="line">&#123;</span><br><span class="line">  private:</span><br><span class="line">    unsigned long m_iran;</span><br><span class="line">  public:</span><br><span class="line">    void Init(unsigned long seed);</span><br><span class="line">    unsigned long Rand();</span><br><span class="line">&#125;</span><br><span class="line">void CRnd::Init(unsigned long seed)</span><br><span class="line">&#123;</span><br><span class="line">  m_iran = seed;</span><br><span class="line">&#125;</span><br><span class="line">unsigned long CRnd::Rand()</span><br><span class="line">&#123;</span><br><span class="line">  unsigned long old_iran = m_iran;</span><br><span class="line">  unsigned long new_iran, cur_iran;</span><br><span class="line">  for (;;)</span><br><span class="line">  &#123;</span><br><span class="line">    new_iran = 1664525L*old_iran+1013904223L;</span><br><span class="line">    cur_iran = InterlockedCompareExchange((volatile long*)&amp;m_iran, new_iran, old_iran);</span><br><span class="line">    if (cur_iran == old_iran) break;</span><br><span class="line">    old_iran = cur_iran;</span><br><span class="line">  &#125;</span><br><span class="line">  return new_iran;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>UPD</strong>. <em>Множитель a</em> = 1664525 и <em>слагаемое c</em> = 1013904223 были взяты из <a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BA%D0%BE%D0%BD%D0%B3%D1%80%D1%83%D1%8D%D0%BD%D1%82%D0%BD%D1%8B%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4">статьи в вики</a>. На практике, однако, выяснилось, что получаемая последовательность чисел имеет короткий период, поэтому имеет смысл использовать другие параметры:<br>a = 1103515245, c = 12345, m = 2^31.  </p>
+<p>unsigned long CRnd::Rand()  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  unsigned long old_iran = m_iran;</span><br><span class="line">  unsigned long new_iran, cur_iran;</span><br><span class="line">  for (;;)</span><br><span class="line">  &#123;</span><br><span class="line">    new_iran = 1103515245L*old_iran+12345L;</span><br><span class="line">    cur_iran = InterlockedCompareExchange((volatile long*)&amp;m_iran, new_iran, old_iran);</span><br><span class="line">    if (cur_iran == old_iran) break;</span><br><span class="line">    old_iran = cur_iran;</span><br><span class="line">  &#125;</span><br><span class="line">  return ((new_iran &gt;&gt; 16) &amp; 32767L);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>===</p>
+<p>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/cpp/">cpp</a>, <a href="/tags/%D0%B3%D1%81%D1%87/">ГСЧ</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-c-delphi" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-11-21T08:59:00.000Z"><a href="/2011/11/c-delphi/">2011-11-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/11/c-delphi/">Вызов кода на C# из программы на Delphi</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Обычно решают противоположную задачу - вызов внешних модулей (DLL, COM), написанных на C++, Delphi и т.п., из программы на C#. У меня же возникла необходимость вызвать из программы написанной на Delphi функцию библиотеки, написанной на C#. В этом посте я расскажу о том, как это делается.  </p>
+<p>Итак, нужно сделать на C# COM объект, к которому затем мы сможем обращаться из нашей программы на Delphi.  </p>
+<ol>
+<li><p> В Visual Studio создаем новый проект New/Project/Visual C#/Class Library.</p>
+</li>
+<li><p>В свойствах проекта на вкладке Application жмем кнопку “Assembly Information” и отмечаем “Make assembly COM-visible”.<br> <img src="http://2.bp.blogspot.com/-1gmRXzGe_ZY/TsoXPYjY4dI/AAAAAAAAABE/E75IOweSZvM/s400/20111121-1.png"></p>
+</li>
+<li><p>В свойствах проекта на вкладке Build отмечаем Register for COM interop.<br> <img src="http://1.bp.blogspot.com/-83aanUd2-cQ/TsoYg4wxbdI/AAAAAAAAABQ/F4vyxSQ6jW4/s400/20111121-2.png"></p>
+</li>
+<li><p>Для регистрации библиотеки вместо regsvr32 нужно использовать regasm. Вызов будет типа такого:  </p>
+<p> regasm.exe vcomclasslibrary.dll /tlb:vcomclasslibrary.tlb  </p>
+<p> regasm.exe обычно расположен тут:  </p>
+<p> c:\Windows\Microsoft.NET\Framework\v2.0.50727\  </p>
+</li>
+<li><p>Код на C#:  </p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">using System;</span><br><span class="line">using System.Drawing;</span><br><span class="line">using System.Runtime.InteropServices;</span><br><span class="line">namespace VCOMClassLibrary</span><br><span class="line">&#123;</span><br><span class="line"> [ComVisible(true)]</span><br><span class="line"> public interface IVCOMInterface</span><br><span class="line"> &#123;</span><br><span class="line">   string LoadImageFromStream(System.IO.Stream stream);</span><br><span class="line"> &#125;</span><br><span class="line"> [ComVisible(true), ClassInterface(ClassInterfaceType.None)]</span><br><span class="line"> public class VCOMClass : IVCOMInterface</span><br><span class="line"> &#123;</span><br><span class="line">   public string LoadImageFromStream(System.IO.Stream stream)</span><br><span class="line">   &#123;</span><br><span class="line">     Image img = Image.FromStream(stream);</span><br><span class="line">     //put code to load image here</span><br><span class="line">     return &quot;OK&quot;;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>В проекте на Delphi импортируем VCOMClassLibrary (Project/Import Type Library). Пример вызова (в котором я заодно показал как передавать Stream):  </p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">procedure TForm1.Button1Click(Sender: TObject);</span><br><span class="line">var</span><br><span class="line"> cls: IVCOMInterface;</span><br><span class="line"> Stream: IStream;</span><br><span class="line"> FileStream: TFileStream;</span><br><span class="line">begin</span><br><span class="line"> cls := CreateComObject(CLASS_VCOMClass) as IVCOMInterface;</span><br><span class="line"> FileStream := TFileStream.Create(&#x27;c:\temp\1.jpg&#x27;, fmOpenRead);</span><br><span class="line"> Stream := TStreamAdapter.Create(FileStream, soOwned) as IStream;</span><br><span class="line"> cls.LoadImageFromStream(Stream);</span><br><span class="line"> FileStream.Free;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/dll/">dll</a>, <a href="/tags/c/">C#</a>, <a href="/tags/com/">COM</a>, <a href="/tags/delphi/">delphi</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-sqlite" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-11-19T11:57:00.000Z"><a href="/2011/11/sqlite/">2011-11-19</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/11/sqlite/">Быстрая загрузка данных в Sqlite</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Sqlite замечательная локальная база данных. Не требует установки, легко встраивается в приложения благодаря API. Шустрая благодаря тому, что данные не гоняются ни по сети, ни даже между процессами. У меня загрузка листа в миллион записей в Sqlite занимает порядка 30 секунд. Для сравнения - та же самая процедура загружает те же данные в локальный MySQL в 10 раз дольше.<br>Однако, для того, чтобы загрузка данных в Sqlite происходила с максимально возможной скоростью нужно использовать две вещи:  </p>
+<p>1. <strong>Параметризованный Sql</strong>, типа такого: INSERT INTO `table1` (`A`, `B`) VALUES (:param1, :param2). В начале процедуры загрузки выполнять “prepare” (Sqlite3_Prepare_v2). Перед вставкой “биндить” переменные с помощью sqlite3_bind_text, sqlite3_bind_int64 и т.п.,<br>а затем выполнять вставку вызовом функции sqlite3_step.  </p>
+<p>2. <strong>Транзакции</strong>: вставлять данные большими порциями, например, по 1000 записей. Перед вставкой очередной порции выполнять BEGIN TRANSACTION. В конце вставки - COMMIT TRANSACTION. Если этого не делать, то после каждой операции вставки данные будут немедленно сбрасываться на диск, что замедлит процесс во много раз.  </p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/fast-insert/">fast insert</a>, <a href="/tags/sqlite/">sqlite</a>, <a href="/tags/tuning/">tuning</a>, <a href="/tags/%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F-%D0%B2%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B0/">быстрая вставка</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-ssl-delphi" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-11-09T13:48:00.000Z"><a href="/2011/11/ssl-delphi/">2011-11-09</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/11/ssl-delphi/">Проверка серверного сертификата SSL в Delphi</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Понадобилось мне осуществить проверку серверного сертификата в моей программе на Delphi. Эта программа была написана довольно давно, на Delphi 7 с использованием Indy 9.  </p>
+<p>Вот как выглядит проверка сертификата:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var</span><br><span class="line">  IdHTTP: TIdHTTP;</span><br><span class="line">  IdSSLIOHandlerSocket: TIdSSLIOHandlerSocket;</span><br><span class="line">begin</span><br><span class="line">  IdHTTP := TIdHTTP.Create(nil);</span><br><span class="line">  IdSSLIOHandlerSocket := TIdSSLIOHandlerSocket.Create(nil);</span><br><span class="line">  IdHTTP.IOHandler := IdSSLIOHandlerSocket;</span><br><span class="line">  with IdSSLIOHandlerSocket do</span><br><span class="line">  begin</span><br><span class="line">    SSLOptions.Method := sslvSSLv23;</span><br><span class="line">    SSLOptions.Mode := sslmClient;</span><br><span class="line">    SSLOptions.VerifyMode := [sslvrfPeer];</span><br><span class="line">    SSLOptions.VerifyDepth := 10;</span><br><span class="line">  end;</span><br><span class="line">  IdHTTP.Get(&#x27;https://www.google.com&#x27;);</span><br><span class="line">  FreeAndNil(IdHTTP); </span><br><span class="line">  FreeAndNil(IdSSLIOHandlerSocket);</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>Если попробовать выполнить выше приведенный код, то результат будет всегда такой: <strong>Error connecting with SSL.</strong>  </p>
+<p>Проблема тут в том, что в Indy используется OpenSSL, который не умеет работать с хранилищем сертификатов Windows и не может проверить подписан ли сертификат, полученный от сервера, одним из доверенных корневых сертификатов из этого хранилища.  </p>
+<p>Посмотрим в исходник модуля IdSSLOpenSSL. В нем есть такая функция:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function VerifyCallback(Ok: Integer; ctx: PX509_STORE_CTX): Integer; cdecl;</span><br><span class="line">var</span><br><span class="line">  hcert: PX509;</span><br><span class="line">  Certificate: TIdX509;</span><br><span class="line">  hSSL: PSSL;</span><br><span class="line">  IdSSLSocket: TIdSSLSocket;</span><br><span class="line"> // str: String;</span><br><span class="line">  VerifiedOK: Boolean;</span><br><span class="line">  Depth: Integer;</span><br><span class="line"> // Error: Integer;</span><br><span class="line">begin</span><br><span class="line">  LockVerifyCB.Enter;</span><br><span class="line">  try</span><br><span class="line">    VerifiedOK := True;</span><br><span class="line">    try</span><br><span class="line">      hcert := IdSslX509StoreCtxGetCurrentCert(ctx);</span><br><span class="line">      hSSL := IdSslX509StoreCtxGetAppData(ctx);</span><br><span class="line">      Certificate := TIdX509.Create(hcert);</span><br><span class="line">      if hSSL &lt;&gt; nil then begin</span><br><span class="line">        IdSSLSocket := TIdSSLSocket(IdSslGetAppData(hSSL));</span><br><span class="line">      end</span><br><span class="line">      else begin</span><br><span class="line">        Result := Ok;</span><br><span class="line">        exit;</span><br><span class="line">      end;</span><br><span class="line">      //Error :=</span><br><span class="line">      IdSslX509StoreCtxGetError(ctx);</span><br><span class="line">      //</span><br><span class="line">      Depth := IdSslX509StoreCtxGetErrorDepth(ctx);</span><br><span class="line">     // str := Format(&#x27;Certificate: %s&#x27;, [Certificate.Subject.OneLine]);    &#123;Do not Localize&#125;</span><br><span class="line">     // str := IdSSLSocket.GetSessionIDAsString;</span><br><span class="line">     // ShowMessage(str);</span><br><span class="line">      if (IdSSLSocket.fParent is TIdSSLIOHandlerSocket) then begin</span><br><span class="line">        VerifiedOK := TIdSSLIOHandlerSocket(IdSSLSocket.fParent).DoVerifyPeer(Certificate);</span><br><span class="line">      end;</span><br><span class="line">      if (IdSSLSocket.fParent is TIdServerIOHandlerSSL) then begin</span><br><span class="line">        VerifiedOK := TIdServerIOHandlerSSL(IdSSLSocket.fParent).DoVerifyPeer(Certificate);</span><br><span class="line">      end;</span><br><span class="line">      if not ((Ok&gt;0) and (IdSSLSocket.fSSLContext.VerifyDepth&gt;=Depth)) then begin</span><br><span class="line">        Ok := 0;</span><br><span class="line">        &#123;if Error = OPENSSL_X509_V_OK then begin</span><br><span class="line">          Error := OPENSSL_X509_V_ERR_CERT_CHAIN_TOO_LONG;</span><br><span class="line">        end;&#125;</span><br><span class="line">      end;</span><br><span class="line">      FreeAndNil(Certificate);</span><br><span class="line">    except</span><br><span class="line">    end;</span><br><span class="line">    if VerifiedOK and (Ok &gt; 0) then begin</span><br><span class="line">      Result := 1;</span><br><span class="line">    end</span><br><span class="line">    else begin</span><br><span class="line">      Result := 0;</span><br><span class="line">    end;</span><br><span class="line">  //  Result := Ok; // testing</span><br><span class="line">  finally</span><br><span class="line">    LockVerifyCB.Leave;</span><br><span class="line">  end;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>Эта callback-функция вызывается при проверке сертификата библиотекой OpenSSL, и для того, чтобы не случилось ошибки “Error connecting with SSL” она должна возвращать значение Result = 1. Видно, что VerifyCallback возвращает Result = 1 только в том случае, когда Ok &gt; 0. А параметр Ok для последнего сертификата в цепочке проверяемых всегда будет = 0, т.к. корневой сертификат, с помощью которого его можно проверить, не определен.  </p>
+<p>Таким образом, задача в следующем: проверить - подписан ли последний в цепочке сертификат одним из доверенных корневых (ROOT) сертификатов в хранилище Windows, и если подписан, то присвоить Ok = 1.  </p>
+<p>К сожалению, при проектировании Indy 9 было допущено много ошибок, и для того, чтобы решить поставленную задачу, придется вносить изменения в код модуля IdSSLOpenSSL, а затем перекомпилировать пакет<br>Indy70.dpk.  </p>
+<p>Внесем следующие изменения:  </p>
+<p>1. Изменим определение события TVerifyPeerEvent на следующее:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">TVerifyPeerEvent = function(Certificate: TIdX509; Error: Integer; var Ok: Integer): Boolean of object;</span><br></pre></td></tr></table></figure>
+
+<p>2. Изменим определение метода DoVerifyPeer в классах TIdSSLIOHandlerSocket и TIdServerIOHandlerSSL на следующее:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function DoVerifyPeer(Certificate: TIdX509; Error: Integer; var Ok: Integer): Boolean; virtual;</span><br></pre></td></tr></table></figure>
+
+<p>3. Изменим реализации метода DoVerifyPeer в классах TIdSSLIOHandlerSocket и TIdServerIOHandlerSSL на следующие:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function TIdServerIOHandlerSSL.DoVerifyPeer(Certificate: TIdX509;</span><br><span class="line">  Error: Integer; var Ok: Integer): Boolean;</span><br><span class="line">begin</span><br><span class="line">  Result := True;</span><br><span class="line">  if Assigned(fOnVerifyPeer) then</span><br><span class="line">    Result := fOnVerifyPeer(Certificate, Error, Ok);</span><br><span class="line">end;</span><br><span class="line">function TIdSSLIOHandlerSocket.DoVerifyPeer(Certificate: TIdX509;</span><br><span class="line">  Error: Integer; var Ok: Integer): Boolean;</span><br><span class="line">begin</span><br><span class="line">  Result := True;</span><br><span class="line">  if Assigned(fOnVerifyPeer) then</span><br><span class="line">    Result := fOnVerifyPeer(Certificate, Error, Ok);</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>4. Добавим public-свойство X509 классу TIdX509:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">property X509: PX509 read FX509;</span><br></pre></td></tr></table></figure>
+
+<p>5. Изменим функцию VerifyCallback на следующую:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function VerifyCallback(Ok: Integer; ctx: PX509_STORE_CTX): Integer; cdecl;</span><br><span class="line">var</span><br><span class="line">  hcert: PX509;</span><br><span class="line">  Certificate: TIdX509;</span><br><span class="line">  hSSL: PSSL;</span><br><span class="line">  IdSSLSocket: TIdSSLSocket;</span><br><span class="line"> // str: String;</span><br><span class="line">  VerifiedOK: Boolean;</span><br><span class="line">  Depth: Integer;</span><br><span class="line">  Error: Integer;</span><br><span class="line">begin</span><br><span class="line">  LockVerifyCB.Enter;</span><br><span class="line">  try</span><br><span class="line">    VerifiedOK := True;</span><br><span class="line">    try</span><br><span class="line">      hcert := IdSslX509StoreCtxGetCurrentCert(ctx);</span><br><span class="line">      hSSL := IdSslX509StoreCtxGetAppData(ctx);</span><br><span class="line">      Certificate := TIdX509.Create(hcert);</span><br><span class="line">      if hSSL &lt;&gt; nil then begin</span><br><span class="line">        IdSSLSocket := TIdSSLSocket(IdSslGetAppData(hSSL));</span><br><span class="line">      end</span><br><span class="line">      else begin</span><br><span class="line">        Result := Ok;</span><br><span class="line">        exit;</span><br><span class="line">      end;</span><br><span class="line">      Error :=</span><br><span class="line">      IdSslX509StoreCtxGetError(ctx);</span><br><span class="line">      //</span><br><span class="line">      Depth := IdSslX509StoreCtxGetErrorDepth(ctx);</span><br><span class="line">     // str := Format(&#x27;Certificate: %s&#x27;, [Certificate.Subject.OneLine]);    &#123;Do not Localize&#125;</span><br><span class="line">     // str := IdSSLSocket.GetSessionIDAsString;</span><br><span class="line">     // ShowMessage(str);</span><br><span class="line">      if (IdSSLSocket.fParent is TIdSSLIOHandlerSocket) then begin</span><br><span class="line">        VerifiedOK := TIdSSLIOHandlerSocket(IdSSLSocket.fParent).DoVerifyPeer(Certificate, Error, Ok);</span><br><span class="line">      end;</span><br><span class="line">      if (IdSSLSocket.fParent is TIdServerIOHandlerSSL) then begin</span><br><span class="line">        VerifiedOK := TIdServerIOHandlerSSL(IdSSLSocket.fParent).DoVerifyPeer(Certificate, Error, Ok);</span><br><span class="line">      end;</span><br><span class="line">      if not ((Ok&gt;0) and (IdSSLSocket.fSSLContext.VerifyDepth&gt;=Depth)) then begin</span><br><span class="line">        Ok := 0;</span><br><span class="line">        &#123;if Error = OPENSSL_X509_V_OK then begin</span><br><span class="line">          Error := OPENSSL_X509_V_ERR_CERT_CHAIN_TOO_LONG;</span><br><span class="line">        end;&#125;</span><br><span class="line">      end;</span><br><span class="line">      FreeAndNil(Certificate);</span><br><span class="line">    except</span><br><span class="line">    end;</span><br><span class="line">    if VerifiedOK and (Ok &gt; 0) then begin</span><br><span class="line">      Result := 1;</span><br><span class="line">    end</span><br><span class="line">    else begin</span><br><span class="line">      Result := 0;</span><br><span class="line">    end;</span><br><span class="line">  //  Result := Ok; // testing</span><br><span class="line">  finally</span><br><span class="line">    LockVerifyCB.Leave;</span><br><span class="line">  end;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>Теперь нужно перекомпилировать Indy70.dpk.  </p>
+<p>В результате наших изменений обработчик события OnVerifyPeer получает два дополнительных параметра: Error - код ошибки проверки сертификата (это может быть, например, OPENSSL_X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY) и параметр Ok, который можно изменить. Ниже приведена реализация обработчика:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function TForm1.SSLIOHandlerVerifyPeer(ThePeerCert: TIdX509; Error: Integer; var Ok: Integer): Boolean;</span><br><span class="line">var</span><br><span class="line">  LBIO: PBIO;</span><br><span class="line">  LLen: Integer;</span><br><span class="line">  LStr: String;</span><br><span class="line">  hStore: HCERTSTORE;</span><br><span class="line">  pCert, pIssuer: PCCERT_CONTEXT;</span><br><span class="line">  dwFlags: DWORD;</span><br><span class="line">begin</span><br><span class="line">  //Result := False;</span><br><span class="line">  //</span><br><span class="line">  if (Ok = 0)</span><br><span class="line">  then begin</span><br><span class="line">    hStore := nil;</span><br><span class="line">    pCert := nil;</span><br><span class="line">    pIssuer := nil;</span><br><span class="line">    LBIO := BIO_new(BIO_s_mem());</span><br><span class="line">    try</span><br><span class="line">      i2d_X509_bio(LBIO, ThePeerCert.X509);</span><br><span class="line">      LLen := BIO_ctrl_pending(LBIO);</span><br><span class="line">      SetLength(LStr, LLen);</span><br><span class="line">      BIO_read(LBIO, @LStr[1], LLen);</span><br><span class="line">      BIO_free(LBIO);</span><br><span class="line">      LBIO := nil;</span><br><span class="line">      hStore := CertOpenSystemStore(0, &#x27;ROOT&#x27;);</span><br><span class="line">      if hStore &lt;&gt; nil then</span><br><span class="line">      begin</span><br><span class="line">        pCert := CertCreateCertificateContext(</span><br><span class="line">          PKCS_7_ASN_ENCODING or X509_ASN_ENCODING, @LStr[1], LLen);</span><br><span class="line">        if pCert &lt;&gt; nil then</span><br><span class="line">        begin</span><br><span class="line">          dwFlags := CERT_STORE_REVOCATION_FLAG or</span><br><span class="line">                     CERT_STORE_SIGNATURE_FLAG or</span><br><span class="line">                     CERT_STORE_TIME_VALIDITY_FLAG;</span><br><span class="line">          pIssuer := CertGetIssuerCertificateFromStore(</span><br><span class="line">                       hStore, pCert, nil, @dwFlags);</span><br><span class="line">          if pIssuer &lt;&gt; nil then</span><br><span class="line">          begin</span><br><span class="line">            Ok := 1;</span><br><span class="line">            CertFreeCertificateContext(pIssuer);</span><br><span class="line">            pIssuer := nil;</span><br><span class="line">          end;</span><br><span class="line">          CertFreeCertificateContext(pCert);</span><br><span class="line">          pCert := nil;</span><br><span class="line">        end;</span><br><span class="line">        CertCloseStore(hStore, 0);</span><br><span class="line">        hStore := nil;</span><br><span class="line">      end;</span><br><span class="line">    finally</span><br><span class="line">      if LBIO &lt;&gt; nil then</span><br><span class="line">        BIO_free(LBIO);</span><br><span class="line">      if pIssuer &lt;&gt; nil then</span><br><span class="line">        CertFreeCertificateContext(pIssuer);</span><br><span class="line">      if pCert &lt;&gt; nil then</span><br><span class="line">        CertFreeCertificateContext(pCert);</span><br><span class="line">      if hStore &lt;&gt; nil then</span><br><span class="line">        CertCloseStore(hStore, 0);</span><br><span class="line">    end;</span><br><span class="line">  end;</span><br><span class="line">  //</span><br><span class="line">  Result := (Ok &gt; 0);</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>В этом обработчике использованы функции OpenSSL и СryptoAPI, объявления которых можно найти в libeay32.pas и wcrypt2.pas. Собственно, из-за необходимости подключения этих модулей я и вынес проверку в обработчик события OnVerifyPeer, вместо того, чтобы сделать все в функции VerifyCallback.  </p>
+<p>Подключаем обработчик SSLIOHandlerVerifyPeer к IdSSLIOHandlerSocket и окончательно получаем загрузку страницы по протоколу https: с проверкой серверного сертификата:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var</span><br><span class="line">  IdHTTP: TIdHTTP;</span><br><span class="line">  IdSSLIOHandlerSocket: TIdSSLIOHandlerSocket;</span><br><span class="line">begin</span><br><span class="line">  IdHTTP := TIdHTTP.Create(nil);</span><br><span class="line">  IdSSLIOHandlerSocket := TIdSSLIOHandlerSocket.Create(nil);</span><br><span class="line">  IdHTTP.IOHandler := IdSSLIOHandlerSocket;</span><br><span class="line">  with IdSSLIOHandlerSocket do</span><br><span class="line">  begin</span><br><span class="line">    SSLOptions.Method := sslvSSLv23;</span><br><span class="line">    SSLOptions.Mode := sslmClient;</span><br><span class="line">    SSLOptions.VerifyMode := [sslvrfPeer];</span><br><span class="line">    SSLOptions.VerifyDepth := 10;</span><br><span class="line">    OnVerifyPeer := SSLIOHandlerVerifyPeer;</span><br><span class="line">  end;</span><br><span class="line">  IdHTTP.Get(&#x27;https://www.google.com&#x27;);</span><br><span class="line">  FreeAndNil(IdHTTP); </span><br><span class="line">  FreeAndNil(IdSSLIOHandlerSocket);</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>PS. <a href="http://blog.coolsoftware.ru/2012/07/enhanced-security.html">Проверка серверного сертификата и Enhanced Security</a>  </p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/delphi/">delphi</a>, <a href="/tags/certificate/">certificate</a>, <a href="/tags/cryptoapi/">cryptoapi</a>, <a href="/tags/indy/">indy</a>, <a href="/tags/ssl/">ssl</a>, <a href="/tags/%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/">проверка</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-google-code-highlight" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-11-09T10:05:00.000Z"><a href="/2011/11/google-code-highlight/">2011-11-09</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/11/google-code-highlight/">Google code highlight</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Подключил подсветку кода от гугла (<a target="_blank" rel="noopener" href="http://google-code-prettify.googlecode.com/">http://google-code-prettify.googlecode.com</a>).  </p>
+<p>Проверка:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;QtCore&gt;</span><br><span class="line">#include &lt;QtGui&gt;</span><br><span class="line">int main(int argc, char* argv[]) &#123;</span><br><span class="line">    QApplication app(argc, argv);</span><br><span class="line">    QDialog *dialog = new QDialog;</span><br><span class="line">    QLabel *label = new QLabel(dialog);</span><br><span class="line">    label-&gt;setText(&quot;&lt;font color=red&gt;Hello, World!&lt;/font&gt;&quot;);</span><br><span class="line">    dialog-&gt;show();</span><br><span class="line">    return app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Вроде работает. К Blogger-у подключается просто:<br>в шаблоне (Дизайн-&gt;Изменить HTML) перед <strong></head></strong> добавляем:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;link href=&quot;http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;/&gt;</span><br><span class="line">&lt;script src=&quot;http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js&quot; type=&quot;text/javascript&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Затем к тегу <strong><body></strong> нужно добавить: <strong>onload=”prettyPrint()”</strong>  </p>
+<p>Использовать так:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;pre class=&quot;prettyprint&quot;&gt;</span><br><span class="line">    // put your code here</span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Можно указать явным образом язык, например <strong>lang-html</strong>:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;pre class=&quot;prettyprint lang-html&quot;&gt;</span><br><span class="line">  The lang-* class specifies the language file extensions.</span><br><span class="line">  File extensions supported by default include</span><br><span class="line">    &quot;bsh&quot;, &quot;c&quot;, &quot;cc&quot;, &quot;cpp&quot;, &quot;cs&quot;, &quot;csh&quot;, &quot;cyc&quot;, &quot;cv&quot;, &quot;htm&quot;, </span><br><span class="line">    &quot;html&quot;, &quot;java&quot;, &quot;js&quot;, &quot;m&quot;, &quot;mxml&quot;, &quot;perl&quot;, &quot;pl&quot;, &quot;pm&quot;, </span><br><span class="line">    &quot;py&quot;, &quot;rb&quot;, &quot;sh&quot;, &quot;xhtml&quot;, &quot;xml&quot;, &quot;xsl&quot;.</span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+<p>PS. Гугловский Highlighter похоже Delphi не поддерживает. Поэтому я его удалил, а вместо него подключил highlight.js.<br>Сделал я это так:  </p>
+<p>1. Скачал <a target="_blank" rel="noopener" href="http://softwaremaniacs.org/soft/highlight/download/">HIGHLIGHT.JS</a> (при этом выбрал нужный мне Delphi).<br>2. Файлы highlight.js, highlight.pack.js и стили styles/*.css из скачанного архива разместил в google apps.<br>3. В шаблоне Blogger-а (Дизайн-&gt;Изменить HTML) перед </head> добавил:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;link href=&#x27;http://testapp.coolsoftware.ru/styles/default.css&#x27; rel=&#x27;stylesheet&#x27;/&gt;</span><br><span class="line">&lt;script src=&#x27;http://testapp.coolsoftware.ru/highlight.pack.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">hljs.initHighlightingOnLoad();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Чтобы использовать подсветку синтаксиса, нужно заключать код в <strong><pre><code class="delphi">...</code></pre></strong>. Пример:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">type</span><br><span class="line">  TMyObject = class(TObject)</span><br><span class="line">  private</span><br><span class="line">    FStr: String;</span><br><span class="line">  public</span><br><span class="line">    constructor Create;  </span><br><span class="line">  end;</span><br><span class="line">&#123; TMyObject &#125;</span><br><span class="line">constructor TMyObject.Create;</span><br><span class="line">begin</span><br><span class="line">  FStr := &#x27;Hello, world!&#x27;;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/google/">google</a>, <a href="/tags/code/">code</a>, <a href="/tags/highlight/">highlight</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-active-server-pages" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-11-04T13:51:00.000Z"><a href="/2011/11/active-server-pages/">2011-11-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/11/active-server-pages/">Active Server Pages</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Пара замечаний про конфигурирование IIS.</p>
+<p>1. Если при попытке обратиться к динамической странице (ASP) на вашем сервере IIS выдается ошибка “HTTP Error 404 - File or Directory not found” (при этом статические страницы нормально выдаются), то нужно включить “Active Server Pages” в настройках “Web Service Extensions”.</p>
+<p><img src="http://2.bp.blogspot.com/--SVi8IGF318/TrPwdyCpbDI/AAAAAAAAAAw/65t8BSC9TYM/s400/turn-on-asp.png"></p>
+<p>2. При обращении из ASP к базе Access (MDB): если SELECT выполняется нормально, а при попытке добавить, удалить или отредактировать записи выдаются сообщения “В операции должен использоваться обновляемый запрос.”, “Невозможно удаление записей из указанных таблиц.”, то нужно дать права пользователю, от имени которого выполняется сайт (IUSR или что-то похожее), на файл базы MDB и на каталог, в котором этот файл расположен (права на создание/удаление/изменение).</p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/asp/">ASP</a>, <a href="/tags/iis/">IIS</a>, <a href="/tags/404/">404</a>, <a href="/tags/active-server-pages/">Active Server Pages</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-classic-asp-microsoft-access-databases" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-10-27T16:10:00.000Z"><a href="/2011/10/classic-asp-microsoft-access-databases/">2011-10-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/10/classic-asp-microsoft-access-databases/">Classic ASP и Microsoft Access Databases (MDB) на IIS 7 и 64-битной системе</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>64-битного драйвера MDB в природе не существует, поэтому есть проблема доступа к MDB из 64-битных приложений. В частности из ASP-приложений под IIS. Проблема решается разрешением 32-битных приложений в настройках IIS:</p>
+<p><a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-lFFmOmiO7rc/TqmFSbJH-OI/AAAAAAAAAAQ/bOD6YS40yTg/s1600/x64-asp-mdb.png"><img src="http://4.bp.blogspot.com/-lFFmOmiO7rc/TqmFSbJH-OI/AAAAAAAAAAQ/bOD6YS40yTg/s400/x64-asp-mdb.png"></a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/32/">32</a>, <a href="/tags/64/">64</a>, <a href="/tags/asp/">ASP</a>, <a href="/tags/driver/">Driver</a>, <a href="/tags/iis/">IIS</a>, <a href="/tags/mdb-access/">MDB Access</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-how-to-use-external-dll-in-c-builder" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-10-07T10:28:00.000Z"><a href="/2011/10/how-to-use-external-dll-in-c-builder/">2011-10-07</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/10/how-to-use-external-dll-in-c-builder/">How to use external dll in c++ builder</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>1. Создаем либу: implib dllname.lib dllname.dll</p>
+<p>2. Добавляем созданную либу к проекту: <span class="Apple-style-span" style="background-color: #efefef; font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; font-size: 14px;">Project-&gt;AddToProject</span>  </p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/builder/">builder</a>, <a href="/tags/cpp/">cpp</a>, <a href="/tags/dll/">dll</a>, <a href="/tags/lib/">lib</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/8/" class="alignleft prev">Назад</a>
+  
+  
+    <a href="/page/10/" class="alignright next">Вперед</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  
+
+<div class="widget tag">
+    <h3 class="title">Контакты</h3>
+    <div class="entry">
+        
+<div class="contactlink githublink">
+    <div class="icon"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/">github.com/coolsoftware</a>
+</div>
+
+<div class="contactlink mailtolink">
+    <div class="icon"></div>
+    <a href="mailto:vitalyyakovlev777@gmail.com">vitalyyakovlev777@gmail.com</a>
+</div>
+
+    </div>
+</div>
+
+
+  
+
+<div class="widget tag">
+    <h3 class="title">Избранные сообщения</h3>
+    <div class="entry">
+        
+<div>
+    <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
+</div>
+
+<div>
+    <a href="/tags/howto/">Howto</a>
+</div>
+
+<div>
+    <a href="/2021/01/blog-post/">Музыка</a>
+</div>
+
+<div>
+    <a href="/tags/trie/">Поиск подстрок с помощью дерева цифрового поиска</a>
+</div>
+
+<div>
+    <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D0%B0%D0%BB%D0%BE%D0%B2/">Дерево Интервалов (Отрезков)</a>
+</div>
+
+<div>
+    <a href="/tags/throttling/">Throttling</a>
+</div>
+
+    </div>
+</div>
+
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Облако меток</h3>
+  <div class="entry">
+    <a href="/tags/net/" style="font-size: 11px;">.NET</a> <a href="/tags/0xe06d7363/" style="font-size: 10px;">0xe06d7363</a> <a href="/tags/32/" style="font-size: 10px;">32</a> <a href="/tags/404/" style="font-size: 10px;">404</a> <a href="/tags/64/" style="font-size: 11px;">64</a> <a href="/tags/ahci/" style="font-size: 10px;">AHCI</a> <a href="/tags/asp/" style="font-size: 11px;">ASP</a> <a href="/tags/asprotect/" style="font-size: 11px;">ASProtect</a> <a href="/tags/asus/" style="font-size: 10px;">ASUS</a> <a href="/tags/access-violation/" style="font-size: 10px;">Access Violation</a> <a href="/tags/active-server-pages/" style="font-size: 10px;">Active Server Pages</a> <a href="/tags/amazon/" style="font-size: 10px;">Amazon</a> <a href="/tags/android/" style="font-size: 10px;">Android</a> <a href="/tags/angular/" style="font-size: 10px;">Angular</a> <a href="/tags/apache/" style="font-size: 11px;">Apache</a> <a href="/tags/bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/bouncy-castle/" style="font-size: 10px;">Bouncy Castle</a> <a href="/tags/c/" style="font-size: 12px;">C#</a> <a href="/tags/com/" style="font-size: 10px;">COM</a> <a href="/tags/centos/" style="font-size: 15px;">CentOS</a> <a href="/tags/cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/createprocess/" style="font-size: 10px;">CreateProcess</a> <a href="/tags/dst/" style="font-size: 10px;">DST</a> <a href="/tags/designer/" style="font-size: 10px;">Designer</a> <a href="/tags/desktop/" style="font-size: 10px;">Desktop</a> <a href="/tags/development/" style="font-size: 10px;">Development</a> <a href="/tags/driver/" style="font-size: 10px;">Driver</a> <a href="/tags/ec2/" style="font-size: 10px;">EC2</a> <a href="/tags/eosio/" style="font-size: 10px;">EOSIO</a> <a href="/tags/enhanced-security/" style="font-size: 10px;">Enhanced Security</a> <a href="/tags/git/" style="font-size: 10px;">Git.</a> <a href="/tags/iis/" style="font-size: 11px;">IIS</a> <a href="/tags/insert/" style="font-size: 10px;">INSERT</a> <a href="/tags/icons/" style="font-size: 11px;">Icons</a> <a href="/tags/interval-tree/" style="font-size: 10px;">Interval Tree</a> <a href="/tags/java/" style="font-size: 10px;">Java</a> <a href="/tags/lazarus/" style="font-size: 10px;">Lazarus</a> <a href="/tags/linux/" style="font-size: 13px;">Linux</a> <a href="/tags/locklib/" style="font-size: 11px;">LockLib</a> <a href="/tags/md4/" style="font-size: 10px;">MD4</a> <a href="/tags/md5/" style="font-size: 10px;">MD5</a> <a href="/tags/mdb-access/" style="font-size: 10px;">MDB Access</a> <a href="/tags/mac/" style="font-size: 10px;">Mac</a> <a href="/tags/microsoft/" style="font-size: 10px;">Microsoft</a> <a href="/tags/mikrotik/" style="font-size: 10px;">MikroTik</a> <a href="/tags/minidlna/" style="font-size: 11px;">MiniDLNA</a> <a href="/tags/netbeans/" style="font-size: 10px;">NetBeans</a> <a href="/tags/node-js/" style="font-size: 11px;">Node.js</a> <a href="/tags/oracle/" style="font-size: 11px;">Oracle</a> <a href="/tags/php/" style="font-size: 12px;">PHP</a> <a href="/tags/pl-sql/" style="font-size: 10px;">PL/SQL</a> <a href="/tags/parseservercookie/" style="font-size: 10px;">ParseServerCookie</a> <a href="/tags/performance/" style="font-size: 10px;">Performance</a> <a href="/tags/perl/" style="font-size: 10px;">Perl</a> <a href="/tags/python/" style="font-size: 10px;">Python</a> <a href="/tags/qstring/" style="font-size: 10px;">QString</a> <a href="/tags/qt/" style="font-size: 13px;">Qt</a> <a href="/tags/raii/" style="font-size: 10px;">RAII</a> <a href="/tags/rsa/" style="font-size: 10px;">RSA</a> <a href="/tags/raspberry-pi/" style="font-size: 13px;">Raspberry Pi</a> <a href="/tags/react/" style="font-size: 10px;">React</a> <a href="/tags/redis/" style="font-size: 10px;">Redis</a> <a href="/tags/refresh/" style="font-size: 10px;">Refresh</a> <a href="/tags/sax/" style="font-size: 12px;">SAX</a> <a href="/tags/seh/" style="font-size: 10px;">SEH</a> <a href="/tags/selinux/" style="font-size: 10px;">SELinux</a> <a href="/tags/sql/" style="font-size: 11px;">SQL</a> <a href="/tags/schematron/" style="font-size: 11px;">Schematron</a> <a href="/tags/shelliconoverlayidentifiers/" style="font-size: 10px;">ShellIconOverlayIdentifiers</a> <a href="/tags/skype/" style="font-size: 10px;">Skype</a> <a href="/tags/teredo/" style="font-size: 10px;">Teredo</a> <a href="/tags/testing/" style="font-size: 10px;">Testing</a> <a href="/tags/tinker-board/" style="font-size: 10px;">Tinker Board</a> <a href="/tags/tortoisegit/" style="font-size: 10px;">TortoiseGit</a> <a href="/tags/unhandled-exception/" style="font-size: 10px;">Unhandled Exception</a> <a href="/tags/vhashedstringlist/" style="font-size: 11px;">VHashedStringList</a> <a href="/tags/vlock/" style="font-size: 11px;">VLock</a> <a href="/tags/vrwlock/" style="font-size: 11px;">VRWLock</a> <a href="/tags/vuncopyable/" style="font-size: 10px;">VUncopyable</a> <a href="/tags/verqueryvalue/" style="font-size: 10px;">VerQueryValue</a> <a href="/tags/visial-studio/" style="font-size: 10px;">Visial Studio</a> <a href="/tags/visual-c/" style="font-size: 10px;">Visual C++</a> <a href="/tags/visual-studio-2010/" style="font-size: 13px;">Visual Studio 2010</a> <a href="/tags/wcf/" style="font-size: 10px;">WCF</a> <a href="/tags/when/" style="font-size: 10px;">WHEN</a> <a href="/tags/wsdl/" style="font-size: 10px;">WSDL</a> <a href="/tags/web-service/" style="font-size: 10px;">Web Service</a> <a href="/tags/wi-fi/" style="font-size: 10px;">Wi-Fi</a> <a href="/tags/xe-2/" style="font-size: 11px;">XE 2</a> <a href="/tags/xe2/" style="font-size: 11px;">XE2</a> <a href="/tags/xml/" style="font-size: 12px;">XML</a> <a href="/tags/xsd/" style="font-size: 12px;">XSD</a> <a href="/tags/tchar/" style="font-size: 10px;">_TCHAR</a> <a href="/tags/throwinfo/" style="font-size: 10px;">_ThrowInfo</a> <a href="/tags/aggregate/" style="font-size: 10px;">aggregate</a> <a href="/tags/aggregation/" style="font-size: 10px;">aggregation</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/apk/" style="font-size: 10px;">apk</a> <a href="/tags/arm/" style="font-size: 11px;">arm</a> <a href="/tags/auto-increment/" style="font-size: 10px;">auto-increment</a> <a href="/tags/avahi/" style="font-size: 11px;">avahi</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/bigdata/" style="font-size: 10px;">bigdata</a> <a href="/tags/blogger/" style="font-size: 10px;">blogger</a> <a href="/tags/blogspot/" style="font-size: 10px;">blogspot</a> <a href="/tags/books/" style="font-size: 10px;">books</a> <a href="/tags/boost/" style="font-size: 10px;">boost</a> <a href="/tags/bug/" style="font-size: 11px;">bug</a> <a href="/tags/build/" style="font-size: 10px;">build</a> <a href="/tags/builder/" style="font-size: 10px;">builder</a> <a href="/tags/certificate/" style="font-size: 11px;">certificate</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/console/" style="font-size: 10px;">console</a> <a href="/tags/cpp/" style="font-size: 20px;">cpp</a> <a href="/tags/cryptoapi/" style="font-size: 10px;">cryptoapi</a> <a href="/tags/delphi/" style="font-size: 17px;">delphi</a> <a href="/tags/dll/" style="font-size: 11px;">dll</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/ethereum/" style="font-size: 14px;">ethereum</a> <a href="/tags/exception/" style="font-size: 10px;">exception</a> <a href="/tags/exe/" style="font-size: 10px;">exe</a> <a href="/tags/failure/" style="font-size: 10px;">failure</a> <a href="/tags/fast-insert/" style="font-size: 11px;">fast insert</a> <a href="/tags/faucet/" style="font-size: 10px;">faucet</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/geth/" style="font-size: 10px;">geth</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 16px;">github</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/google/" style="font-size: 13px;">google</a> <a href="/tags/hexo/" style="font-size: 11px;">hexo</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/howto/" style="font-size: 18px;">howto</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/indy/" style="font-size: 11px;">indy</a> <a href="/tags/ipv6/" style="font-size: 10px;">ipv6</a> <a href="/tags/itree/" style="font-size: 10px;">itree</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/lib/" style="font-size: 10px;">lib</a> <a href="/tags/light-plus/" style="font-size: 10px;">light-plus</a> <a href="/tags/links/" style="font-size: 10px;">links</a> <a href="/tags/mdns/" style="font-size: 10px;">mDNS</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/max-connections/" style="font-size: 10px;">max_connections</a> <a href="/tags/mist/" style="font-size: 10px;">mist</a> <a href="/tags/mkv/" style="font-size: 10px;">mkv</a> <a href="/tags/mongo/" style="font-size: 12px;">mongo</a> <a href="/tags/mp4/" style="font-size: 10px;">mp4</a> <a href="/tags/my-ini/" style="font-size: 10px;">my.ini</a> <a href="/tags/mysql/" style="font-size: 11px;">mysql</a> <a href="/tags/nodejs/" style="font-size: 11px;">nodejs</a> <a href="/tags/oddeven/" style="font-size: 10px;">oddeven</a> <a href="/tags/openssl/" style="font-size: 11px;">openssl</a> <a href="/tags/openvpn/" style="font-size: 11px;">openvpn</a> <a href="/tags/pagination/" style="font-size: 10px;">pagination</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/random/" style="font-size: 10px;">random</a> <a href="/tags/reac/" style="font-size: 10px;">reac</a> <a href="/tags/rinkeby/" style="font-size: 11px;">rinkeby</a> <a href="/tags/rpi/" style="font-size: 11px;">rpi</a> <a href="/tags/search/" style="font-size: 11px;">search</a> <a href="/tags/smart-contract/" style="font-size: 13px;">smart contract</a> <a href="/tags/sqlite/" style="font-size: 11px;">sqlite</a> <a href="/tags/ssl/" style="font-size: 12px;">ssl</a> <a href="/tags/string/" style="font-size: 11px;">string</a> <a href="/tags/theme/" style="font-size: 10px;">theme</a> <a href="/tags/throttle/" style="font-size: 10px;">throttle</a> <a href="/tags/throttling/" style="font-size: 10px;">throttling</a> <a href="/tags/tinkerboard/" style="font-size: 11px;">tinkerboard</a> <a href="/tags/trick/" style="font-size: 10px;">trick</a> <a href="/tags/trie/" style="font-size: 11px;">trie</a> <a href="/tags/tuning/" style="font-size: 11px;">tuning</a> <a href="/tags/tutorial/" style="font-size: 10px;">tutorial</a> <a href="/tags/uncopyable/" style="font-size: 10px;">uncopyable</a> <a href="/tags/version/" style="font-size: 10px;">version</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/web-development-design/" style="font-size: 10px;">web development & design</a> <a href="/tags/web3/" style="font-size: 10px;">web3</a> <a href="/tags/windows/" style="font-size: 15px;">windows</a> <a href="/tags/wsl2/" style="font-size: 11px;">wsl2</a> <a href="/tags/zlib/" style="font-size: 10px;">zlib</a> <a href="/tags/%D0%B3%D1%81%D1%87/" style="font-size: 10px;">ГСЧ</a> <a href="/tags/%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D0%B5%D0%BB%D0%B8/" style="font-size: 11px;">Писатели</a> <a href="/tags/%D1%81%D1%85%D0%B5%D0%BC%D0%B0%D1%82%D1%80%D0%BE%D0%BD/" style="font-size: 10px;">Схематрон</a> <a href="/tags/%D1%87%D0%B8%D1%82%D0%B0%D1%82%D0%B5%D0%BB%D0%B8/" style="font-size: 11px;">Читатели</a> <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/" style="font-size: 12px;">алгоритм</a> <a href="/tags/%D0%B1%D0%B0%D0%B3/" style="font-size: 10px;">баг</a> <a href="/tags/%D0%B1%D0%BB%D0%BE%D0%B3/" style="font-size: 11px;">блог</a> <a href="/tags/%D0%B1%D0%BB%D0%BE%D0%B3%D0%B8/" style="font-size: 10px;">блоги</a> <a href="/tags/%D0%B1%D0%BE%D1%80/" style="font-size: 11px;">бор</a> <a href="/tags/%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F-%D0%B2%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B0/" style="font-size: 11px;">быстрая вставка</a> <a href="/tags/%D0%B2-%D0%BE%D0%B4%D0%BD%D1%83-%D1%81%D1%82%D1%80%D0%BE%D0%BA%D1%83/" style="font-size: 10px;">в одну строку</a> <a href="/tags/%D0%B2%D0%B8%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F/" style="font-size: 10px;">виртуальная функция</a> <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D0%B0%D0%BB%D0%BE%D0%B2/" style="font-size: 10px;">дерево интервалов</a> <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%BE%D1%82%D1%80%D0%B5%D0%B7%D0%BA%D0%BE%D0%B2/" style="font-size: 10px;">дерево отрезков</a> <a href="/tags/%D0%B8%D0%BA%D0%BE%D0%BD%D0%BA%D0%B8/" style="font-size: 10px;">иконки</a> <a href="/tags/%D0%B8%D1%81%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D1%8F/" style="font-size: 10px;">исключения</a> <a href="/tags/%D0%BA%D0%BD%D0%B8%D0%B3%D0%B8/" style="font-size: 10px;">книги</a> <a href="/tags/%D0%BA%D0%BE%D0%BD%D1%81%D0%BE%D0%BB%D1%8C/" style="font-size: 10px;">консоль</a> <a href="/tags/%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D0%BE%D1%80/" style="font-size: 10px;">конструктор</a> <a href="/tags/%D0%BC%D1%83%D0%B7%D1%8B%D0%BA%D0%B0/" style="font-size: 10px;">музыка</a> <a href="/tags/%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C/" style="font-size: 10px;">обновить</a> <a href="/tags/%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BE%D1%88%D0%B8%D0%B1%D0%BE%D0%BA/" style="font-size: 10px;">обработка ошибок</a> <a href="/tags/%D0%BF%D0%B0%D1%80%D1%81%D0%B5%D1%80/" style="font-size: 11px;">парсер</a> <a href="/tags/%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4/" style="font-size: 10px;">переезд</a> <a href="/tags/%D0%BF%D0%BE%D0%B8%D1%81%D0%BA/" style="font-size: 10px;">поиск</a> <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/" style="font-size: 19px;">полезные ссылки</a> <a href="/tags/%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80/" style="font-size: 10px;">пример</a> <a href="/tags/%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/" style="font-size: 10px;">проверка</a> <a href="/tags/%D1%82%D1%80%D0%BE%D1%82%D1%82%D0%BB%D0%B8%D0%BD%D0%B3/" style="font-size: 10px;">троттлинг</a> <a href="/tags/%D1%85%D0%BE%D0%B1%D0%B1%D0%B8/" style="font-size: 10px;">хобби</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2022 Vitaly Yakovlev
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+<script src="/js/copy-code.js"></script>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script>
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
