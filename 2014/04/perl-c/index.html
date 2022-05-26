@@ -6,9 +6,9 @@
   <title>Вызов скриптов Perl из программы на C++ | Cool Software Blog</title>
   <meta name="author" content="Vitaly Yakovlev">
   
-  <meta name="description" content="Оказалось, что организовать вызов Perl-скриптов из C&amp;#x2F;C++ (MS Visual C++ 2010) достаточно просто:  
+  <meta name="description" content="Оказалось, что организовать вызов Perl-скриптов из C/C++ (MS Visual C++ 2010) достаточно просто:  
 
-Прописываем в Include Directories и Library D">
+Прописываем в Include Directories и Library Direct">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -72,18 +72,18 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>Оказалось, что организовать вызов Perl-скриптов из C&#x2F;C++ (MS Visual C++ 2010) достаточно просто:  </p>
+        <p>Оказалось, что организовать вызов Perl-скриптов из C/C++ (MS Visual C++ 2010) достаточно просто:  </p>
 <ol>
 <li><p>Прописываем в <strong>Include Directories</strong> и <strong>Library Directories</strong> проекта путь к Perl\CORE:  </p>
-<p><a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-OYOOdJk7BRc/U1Sqhzph12I/AAAAAAAAANk/nEMVKTQBHkI/s1600/testperl1.png"><img src="http://4.bp.blogspot.com/-OYOOdJk7BRc/U1Sqhzph12I/AAAAAAAAANk/nEMVKTQBHkI/s1600/testperl1.png"></a></p>
+<p> <a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-OYOOdJk7BRc/U1Sqhzph12I/AAAAAAAAANk/nEMVKTQBHkI/s1600/testperl1.png"><img src="http://4.bp.blogspot.com/-OYOOdJk7BRc/U1Sqhzph12I/AAAAAAAAANk/nEMVKTQBHkI/s1600/testperl1.png"></a></p>
 </li>
 <li><p>Добавляем perl512.lib в Linker-&gt;Input-&gt;<strong>Additional Dependencies</strong>.  </p>
-<p><a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-Bm3RzTGOCe0/U1SryOnY5dI/AAAAAAAAANw/QqTHrJ9k2tA/s1600/testperl2.png"><img src="http://3.bp.blogspot.com/-Bm3RzTGOCe0/U1SryOnY5dI/AAAAAAAAANw/QqTHrJ9k2tA/s1600/testperl2.png"></a></p>
+<p> <a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-Bm3RzTGOCe0/U1SryOnY5dI/AAAAAAAAANw/QqTHrJ9k2tA/s1600/testperl2.png"><img src="http://3.bp.blogspot.com/-Bm3RzTGOCe0/U1SryOnY5dI/AAAAAAAAANw/QqTHrJ9k2tA/s1600/testperl2.png"></a></p>
 </li>
 <li><p>Ниже приведен пример кода, вызывающего perl из консольного приложения C++. Обращу внимание на два момента: a) <strong>#pragma warning (disable:4005)</strong> для подавления сообщения компилятора “<strong>‘ENOTSOCK’ : macro redefinition</strong>“; b) если опустить вызов <strong>PERL_SYS_INIT(0, NULL)</strong>, то на шаге perl_parse получим <strong>Access Violation</strong>.  </p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"><span class="comment">//avoid warning C4005: &#x27;ENOTSOCK&#x27; : macro redefinition</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _MSC_VER</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span> ( disable : 4005 )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> </span></span><br><span class="line"> </span><br><span class="line">PerlInterpreter *my_perl;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> _tmain(<span class="keyword">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">PERL_SYS_INIT</span>(<span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"> </span><br><span class="line">    my_perl = <span class="built_in">perl_alloc</span>();</span><br><span class="line">    <span class="built_in">perl_construct</span>(my_perl);</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">perl_parse</span>(my_perl, <span class="literal">NULL</span>, argc, argv, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">perl_run</span>(my_perl);</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">perl_destruct</span>(my_perl);</span><br><span class="line">    <span class="built_in">perl_free</span>(my_perl);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"><span class="comment">//avoid warning C4005: &#x27;ENOTSOCK&#x27; : macro redefinition</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _MSC_VER</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span> ( disable : 4005 )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> </span></span><br><span class="line"> </span><br><span class="line">PerlInterpreter *my_perl;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> _tmain(<span class="keyword">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">PERL_SYS_INIT</span>(<span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"> </span><br><span class="line">    my_perl = <span class="built_in">perl_alloc</span>();</span><br><span class="line">    <span class="built_in">perl_construct</span>(my_perl);</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">perl_parse</span>(my_perl, <span class="literal">NULL</span>, argc, argv, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">perl_run</span>(my_perl);</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">perl_destruct</span>(my_perl);</span><br><span class="line">    <span class="built_in">perl_free</span>(my_perl);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -137,6 +137,10 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
+<div>
+    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
+</div>
+
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

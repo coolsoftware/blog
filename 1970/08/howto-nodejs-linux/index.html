@@ -6,13 +6,14 @@
   <title>Howto: запустить приложение на node.js в виде сервиса (linux) | Cool Software Blog</title>
   <meta name="author" content="Vitaly Yakovlev">
   
-  <meta name="description" content="1. Создаем файл ~&amp;#x2F;myapp.service:
+  <meta name="description" content="1. Создаем файл ~/myapp.service:
 [Unit]
-Description&amp;#x3D;My App
-After&amp;#x3D;network-online.target
+Description=My App
+After=network-online.target
 [Service]
-Restart&amp;#x3D;on-failure
-WorkingDirecto">
+Restart=on-failure
+WorkingDirectory=/var/mayapp
+ExecS">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -76,21 +77,21 @@ WorkingDirecto">
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>1. Создаем файл ~&#x2F;myapp.service:</p>
+        <p>1. Создаем файл ~/myapp.service:</p>
 <p>[Unit]</p>
-<p>Description&#x3D;My App</p>
-<p>After&#x3D;network-online.target</p>
+<p>Description=My App</p>
+<p>After=network-online.target</p>
 <p>[Service]</p>
-<p>Restart&#x3D;on-failure</p>
-<p>WorkingDirectory&#x3D;&#x2F;var&#x2F;mayapp</p>
-<p>ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;node &#x2F;var&#x2F;myapp&#x2F;index.js</p>
+<p>Restart=on-failure</p>
+<p>WorkingDirectory=/var/mayapp</p>
+<p>ExecStart=/usr/bin/node /var/myapp/index.js</p>
 <p>[Install]</p>
-<p>WantedBy&#x3D;multi-user.target</p>
-<p>2. cp ~&#x2F;myapp.service &#x2F;etc&#x2F;systemd&#x2F;system</p>
+<p>WantedBy=multi-user.target</p>
+<p>2. cp ~/myapp.service /etc/systemd/system</p>
 <p>3. systemctl start myapp.service</p>
 <p>4. systemctl enable myapp.service</p>
 <p>5. journalctl -u myapp</p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -144,6 +145,10 @@ WorkingDirecto">
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
+<div>
+    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
+</div>
+
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

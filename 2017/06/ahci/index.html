@@ -73,8 +73,8 @@
         <p><a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/Advanced_Host_Controller_Interface">Wiki</a>: “Advanced Host Controller Interface (AHCI) — механизм, используемый для подключения накопителей информации по протоколу Serial ATA, позволяющий пользоваться расширенными функциями, такими, как встроенная очерёдность команд (NCQ) и горячая замена.”  </p>
 <p>Как включить:  </p>
 <p><strong>Windows 7</strong>  </p>
-<p>1. В реестре в разделе HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\msachi установить значение параметра “Start” (REG_DWORD) равным 0 (по-умолчанию Start&#x3D;3).  </p>
-<p>2. В реестре в разделе HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\iaStorV установить значение параметра “Start” (REG_DWORD) равным 0 (по-умолчанию Start&#x3D;3).  </p>
+<p>1. В реестре в разделе HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\msachi установить значение параметра “Start” (REG_DWORD) равным 0 (по-умолчанию Start=3).  </p>
+<p>2. В реестре в разделе HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\iaStorV установить значение параметра “Start” (REG_DWORD) равным 0 (по-умолчанию Start=3).  </p>
 <p>3. В BIOS включить режим AHCI вместо IDE.  </p>
 <p><strong>Windows 10</strong>  </p>
 <p>1. В реестре в разделе HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\iaStorV установить значение параметра “Start” (REG_DWORD) равным 0.  </p>
@@ -86,7 +86,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo modprobe ahci</span><br><span class="line">sudo cp /boot/initramfs-`uname -r`.img /boot/initramfs-`uname -r`.img.bak</span><br><span class="line">sudo mkinitrd -f --with=ahci /boot/initramfs-`uname -r`.img `uname -r`</span><br></pre></td></tr></table></figure>
 
 <p>2. В BIOS включить режим AHCI вместо IDE.  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -140,6 +140,10 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
+<div>
+    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
+</div>
+
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

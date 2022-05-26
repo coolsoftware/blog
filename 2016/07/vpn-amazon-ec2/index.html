@@ -8,7 +8,7 @@
   
   <meta name="description" content="Отличная инструкция по настройке VPN через Amazon EC2: https://dxdt.ru/2012/08/06/5063/.  
 Два замечания:  
-1. Если отсутствует файл &amp;#x2F;etc&amp;#x2F;VP">
+1. Если отсутствует файл /etc/VPNCA/CA/ind">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -74,14 +74,14 @@
       
         <p>Отличная инструкция по настройке VPN через Amazon EC2: <a target="_blank" rel="noopener" href="https://dxdt.ru/2012/08/06/5063/">https://dxdt.ru/2012/08/06/5063/</a>.  </p>
 <p>Два замечания:  </p>
-<p>1. Если отсутствует файл <em>&#x2F;etc&#x2F;VPNCA&#x2F;CA&#x2F;index.txt</em>, то может вылезти ошибка на шаге выпуска сертификата:  </p>
-<p><em># openssl ca -config openssl.vpn.cnf -policy policy_anything -out certs&#x2F;vpn-node.crt -infiles vpn-node.csr</em>  </p>
+<p>1. Если отсутствует файл <em>/etc/VPNCA/CA/index.txt</em>, то может вылезти ошибка на шаге выпуска сертификата:  </p>
+<p><em># openssl ca -config openssl.vpn.cnf -policy policy_anything -out certs/vpn-node.crt -infiles vpn-node.csr</em>  </p>
 <p>Чтобы ее не было надо создать пустой index.txt:  </p>
-<p><em># touch</em> <em>&#x2F;etc&#x2F;VPNCA&#x2F;CA&#x2F;index.txt</em>  </p>
+<p><em># touch</em> <em>/etc/VPNCA/CA/index.txt</em>  </p>
 <p>2. Нужно обратить внимание на следующую строчку в конфигурационном файле named.conf:  </p>
 <p>listen-on port 53 { <strong>localhost</strong>; };  </p>
 <p>Должно быть именно localhost, а не 127.0.0.1, иначе DNS в OpenVPN-соединении работать не будет.  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -135,6 +135,10 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
+<div>
+    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
+</div>
+
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

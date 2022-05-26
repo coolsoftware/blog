@@ -83,9 +83,8 @@
 <p>Кроме работы над темой, пришлось разбираться с импортом записей из старого блога. Для миграции из blogger в hexo нашелся “hexo-migrator-blogger”. Однако, он сильно устарел, некоторые зависимости уже не устанавливаются. А кроме того, мне хотелось, чтобы сохранились все внешние ссылки на записи. Поэтому пришлось писать свой “мигратор”: <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/hexo-migrator-blogspot">https://github.com/coolsoftware/hexo-migrator-blogspot</a>.</p>
 <p>Чтобы сохранить ссылки на существующие посты нужно:</p>
 <ol>
-<li><p>В новом блоге сделать такую же структуру записей, что была в старом, т.е. &#x2F;&lt;год&gt;&#x2F;&lt;месяц&gt;&#x2F;&lt;заголовок&gt;. <code>_config.yml</code>:</p>
- <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:name/</span></span><br><span class="line"><span class="attr">new_post_name:</span> <span class="string">:year/:month/:title.md</span></span><br></pre></td></tr></table></figure>
-</li>
+<li><p>В новом блоге сделать такую же структуру записей, что была в старом, т.е. /&lt;год&gt;/&lt;месяц&gt;/&lt;заголовок&gt;. <code>_config.yml</code>:</p>
+ <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:name/</span></span><br><span class="line"><span class="attr">new_post_name:</span> <span class="string">:year/:month/:title.md</span></span><br></pre></td></tr></table></figure></li>
 <li><p>Прописать mod_rewrite-правила (для Апача):</p>
  <figure class="highlight apacheconf"><table><tr><td class="code"><pre><span class="line"><span class="attribute"><span class="nomarkup">RewriteEngine</span></span> <span class="literal">on</span></span><br><span class="line"><span class="attribute"><span class="nomarkup">RewriteRule</span></span> ^(/[<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">4</span>&#125;/[<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">2</span>&#125;/[^/]+).html$ $<span class="number">1</span>/<span class="meta"> [NC,NE,L,R=301]</span></span><br><span class="line"><span class="attribute"><span class="nomarkup">RewriteRule</span></span> ^/([<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">4</span>&#125;)/$ /archives/$<span class="number">1</span>/<span class="meta"> [NC,NE,L,R=301]</span></span><br><span class="line"><span class="attribute"><span class="nomarkup">RewriteRule</span></span> ^/([<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">4</span>&#125;)/([<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">2</span>&#125;)/$ /archives/$<span class="number">1</span>/$<span class="number">2</span>/<span class="meta"> [NC,NE,L,R=301]</span></span><br></pre></td></tr></table></figure></li>
 </ol>
@@ -142,6 +141,10 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
+<div>
+    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
+</div>
+
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

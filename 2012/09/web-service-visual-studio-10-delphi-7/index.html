@@ -82,11 +82,11 @@
 <div style="text-align: left;">Теперь немного про развертывание веб-службы на сервере IIS. Можно воспользоваться визардом (Publish), а можно сделать все "ручками":</div>
 
 <ol>
-<li>Установить <a target="_blank" rel="noopener" href="http://www.microsoft.com/ru-ru/download/details.aspx?id=17851">.Net Framework 4.0</a>, если он еще не установлен.</li>
-<li>Создать каталог на сайте, например C:\inetpub\wwwroot\Service1.</li>
-<li>Скопировать туда Service1.svc файлы Service1.svc, Web.Config и папку bin с файлами WcfService1.dll и WcfService1.pdb.</li>
-<li>Дать права “Чтение, Чтение и выполнение” пользователю IIS (IUSR)  на каталог Service1 и все скопированные в него файлы&#x2F;подкаталоги.</li>
-<li>В диспетчере служб IIS в контекстном меню каталога Service1 выбрать “Преобразовать в приложение”. В диалоге “Добавление приложения” нажать кнопку “Выбрать…” справа от “Пул приложений”, выбрать пул приложений с версией среды .Net Framework соответствующей веб-сервису (ASP .NET v4.0), и нажать Ok. Каталог Service1 будет преобразован в приложение.</li>
+<li> Установить <a target="_blank" rel="noopener" href="http://www.microsoft.com/ru-ru/download/details.aspx?id=17851">.Net Framework 4.0</a>, если он еще не установлен.</li>
+<li> Создать каталог на сайте, например C:\inetpub\wwwroot\Service1.</li>
+<li> Скопировать туда Service1.svc файлы Service1.svc, Web.Config и папку bin с файлами WcfService1.dll и WcfService1.pdb.</li>
+<li> Дать права “Чтение, Чтение и выполнение” пользователю IIS (IUSR)  на каталог Service1 и все скопированные в него файлы/подкаталоги.</li>
+<li> В диспетчере служб IIS в контекстном меню каталога Service1 выбрать “Преобразовать в приложение”. В диалоге “Добавление приложения” нажать кнопку “Выбрать…” справа от “Пул приложений”, выбрать пул приложений с версией среды .Net Framework соответствующей веб-сервису (ASP .NET v4.0), и нажать Ok. Каталог Service1 будет преобразован в приложение.</li>
 </ol>
 <p>Иногда сразу же приложение не хочет работать в IIS (как случилось и у меня) с формулировкой типа “HTTP Error 404.3 - Not Found The page you are requesting cannot be served because of the extension configuration. If the page is a script, add a handler. If the file should be downloaded, add a MIME map.” В таком случае помогает выполнение команды ServiceModelReg.exe -i. ServiceModelReg.exe находится в C:\Windows\Microsoft .NET\Framework\v4.0.30319. Там же находится aspnet_regiis.exe. Он помогает в том случае, если .Net 4 вдруг оказывается не зарегистрированным (см. картинку ниже) и по этой причине веб-сервис не запускается.  </p>
 <p><a target="_blank" rel="noopener" href="http://1.bp.blogspot.com/-a1NscGcCKQg/UFqGZ5WDTvI/AAAAAAAAAEQ/elv-MdAGZHc/s1600/ISAPIFilters.png"><img src="http://1.bp.blogspot.com/-a1NscGcCKQg/UFqGZ5WDTvI/AAAAAAAAAEQ/elv-MdAGZHc/s400/ISAPIFilters.png"></a></p>
@@ -157,6 +157,10 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
+<div>
+    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
+</div>
+
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

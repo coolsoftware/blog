@@ -6,7 +6,7 @@
   <title>Генерация пар открытых/закрытых ключей (RSA) на C# | Cool Software Blog</title>
   <meta name="author" content="Vitaly Yakovlev">
   
-  <meta name="description" content="Понадобилось мне создать пару открытый&amp;#x2F;закрытый ключ на C#. Я поискал немного и нашел замечательную криптографическую библиотеку под названием Bo">
+  <meta name="description" content="Понадобилось мне создать пару открытый/закрытый ключ на C#. Я поискал немного и нашел замечательную криптографическую библиотеку под названием Bouncy ">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -70,28 +70,28 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>Понадобилось мне создать пару открытый&#x2F;закрытый ключ на C#. Я поискал немного и нашел замечательную криптографическую библиотеку под названием Bouncy Castle: <a target="_blank" rel="noopener" href="https://www.bouncycastle.org/">https://www.bouncycastle.org/</a>. Для C# исходники можно скачать здесь: <a target="_blank" rel="noopener" href="http://www.bouncycastle.org/csharp/">http://www.bouncycastle.org/csharp/</a>. Ниже описан порядок установки и использования.  </p>
+        <p>Понадобилось мне создать пару открытый/закрытый ключ на C#. Я поискал немного и нашел замечательную криптографическую библиотеку под названием Bouncy Castle: <a target="_blank" rel="noopener" href="https://www.bouncycastle.org/">https://www.bouncycastle.org/</a>. Для C# исходники можно скачать здесь: <a target="_blank" rel="noopener" href="http://www.bouncycastle.org/csharp/">http://www.bouncycastle.org/csharp/</a>. Ниже описан порядок установки и использования.  </p>
 <ol>
-<li><p>Качаем bccrypto-net-1.7-src.zip, распаковываем в какой-нибудь каталог на диске.</p>
+<li><p> Качаем bccrypto-net-1.7-src.zip, распаковываем в какой-нибудь каталог на диске.</p>
 </li>
-<li><p>Открываем проект csharp.sln в Visual Studio 2010.</p>
+<li><p> Открываем проект csharp.sln в Visual Studio 2010.</p>
 </li>
 <li><p>В свойствах проекта crypto в Build-&gt;General-&gt;Conditional compilation symbols комментируем INCLUDE_IDEA.  </p>
-<p><a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-vhWW_yv95co/U4ckjLlh7ZI/AAAAAAAAAOQ/BGqnXiFDGYQ/s1600/crypto1.png"><img src="http://3.bp.blogspot.com/-vhWW_yv95co/U4ckjLlh7ZI/AAAAAAAAAOQ/BGqnXiFDGYQ/s1600/crypto1.png"></a></p>
-<div class="separator" style="clear: both; text-align: center;"></div></li>
-<li><p>Пробуем выполнить Build и видим ошибки:<br>error CS1504: Source file ‘C:\temp\csharp\crypto\src\crypto\engines\IDEAEngine.cs’ could not be opened (‘Неопознанная ошибка ‘)<br>error CS1504: Source file ‘C:\temp\csharp\crypto\test\src\crypto\test\IDEATest.cs’ could not be opened (‘Неопознанная ошибка ‘)<br>error CS1504: Source file ‘C:\temp\csharp\crypto\src\asn1\misc\IDEACBCPar.cs’ could not be opened (‘Неопознанная ошибка ‘)</p>
+<p> <a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-vhWW_yv95co/U4ckjLlh7ZI/AAAAAAAAAOQ/BGqnXiFDGYQ/s1600/crypto1.png"><img src="http://3.bp.blogspot.com/-vhWW_yv95co/U4ckjLlh7ZI/AAAAAAAAAOQ/BGqnXiFDGYQ/s1600/crypto1.png"></a></p>
+ <div class="separator" style="clear: both; text-align: center;"></div></li>
+<li><p>Пробуем выполнить Build и видим ошибки:<br> error CS1504: Source file ‘C:\temp\csharp\crypto\src\crypto\engines\IDEAEngine.cs’ could not be opened (‘Неопознанная ошибка ‘)<br> error CS1504: Source file ‘C:\temp\csharp\crypto\test\src\crypto\test\IDEATest.cs’ could not be opened (‘Неопознанная ошибка ‘)<br> error CS1504: Source file ‘C:\temp\csharp\crypto\src\asn1\misc\IDEACBCPar.cs’ could not be opened (‘Неопознанная ошибка ‘)</p>
 </li>
-<li><p>Удаляем из проекта crypto отсутствующие файлы:<br>src\crypto\engines\IDEAEngine.cs<br>src\asn1\misc\IDEACBCPar.cs<br>test\src\crypto\test\IDEATest.cs</p>
+<li><p>Удаляем из проекта crypto отсутствующие файлы:<br> src\crypto\engines\IDEAEngine.cs<br> src\asn1\misc\IDEACBCPar.cs<br> test\src\crypto\test\IDEATest.cs</p>
 </li>
-<li><p>Пробуем еще раз выполнить Build - на этот раз все должно получиться и будет создана библиотека crypto.dll.</p>
+<li><p> Пробуем еще раз выполнить Build - на этот раз все должно получиться и будет создана библиотека crypto.dll.</p>
 </li>
 <li><p>Прописываем созданную библиотеку в References проекта.  </p>
-<p><a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-Jqy8eJsH5Qs/U4dlbpi5G-I/AAAAAAAAAOg/4L9JncCNtVc/s1600/ref-crypto.png"><img src="http://4.bp.blogspot.com/-Jqy8eJsH5Qs/U4dlbpi5G-I/AAAAAAAAAOg/4L9JncCNtVc/s1600/ref-crypto.png"></a></p>
+<p> <a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-Jqy8eJsH5Qs/U4dlbpi5G-I/AAAAAAAAAOg/4L9JncCNtVc/s1600/ref-crypto.png"><img src="http://4.bp.blogspot.com/-Jqy8eJsH5Qs/U4dlbpi5G-I/AAAAAAAAAOg/4L9JncCNtVc/s1600/ref-crypto.png"></a></p>
 </li>
-<li><p>Код для генерации пары открытый&#x2F;закрытый ключ приведен ниже. Открытый ключ - в формате <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/PKCS_8">PKCS#8</a>. Закрытый ключ - в формате <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/PKCS_1">PKCS#1</a>.</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Asn1.Pkcs;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Asn1.X509;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto.Parameters;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Pkcs;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Security;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.X509;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto.Generators;</span><br><span class="line"> </span><br><span class="line">RsaKeyPairGenerator rsa = <span class="keyword">new</span> RsaKeyPairGenerator();</span><br><span class="line">rsa.Init(<span class="keyword">new</span> KeyGenerationParameters(<span class="keyword">new</span> Org.BouncyCastle.Security.SecureRandom(), <span class="number">1024</span>));</span><br><span class="line">AsymmetricCipherKeyPair pair = rsa.GenerateKeyPair();</span><br><span class="line">PrivateKeyInfo privateKeyInfo = PrivateKeyInfoFactory.CreatePrivateKeyInfo(pair.Private);</span><br><span class="line"><span class="built_in">byte</span>[] serializedPrivateBytes = privateKeyInfo.PrivateKey.ToAsn1Object().GetDerEncoded();</span><br><span class="line"><span class="built_in">string</span> privateKey = Convert.ToBase64String(serializedPrivateBytes);</span><br><span class="line">SubjectPublicKeyInfo publicKeyInfo = SubjectPublicKeyInfoFactory.CreateSubjectPublicKeyInfo(pair.Public);</span><br><span class="line"><span class="built_in">byte</span>[] serializedPublicBytes = publicKeyInfo.ToAsn1Object().GetDerEncoded();</span><br><span class="line"><span class="built_in">string</span> publicKey = Convert.ToBase64String(serializedPublicBytes);</span><br></pre></td></tr></table></figure>
+<li><p>Код для генерации пары открытый/закрытый ключ приведен ниже. Открытый ключ - в формате <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/PKCS_8">PKCS#8</a>. Закрытый ключ - в формате <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/PKCS_1">PKCS#1</a>.</p>
+ <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Asn1.Pkcs;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Asn1.X509;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto.Parameters;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Pkcs;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Security;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.X509;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto.Generators;</span><br><span class="line"> </span><br><span class="line">RsaKeyPairGenerator rsa = <span class="keyword">new</span> RsaKeyPairGenerator();</span><br><span class="line">rsa.Init(<span class="keyword">new</span> KeyGenerationParameters(<span class="keyword">new</span> Org.BouncyCastle.Security.SecureRandom(), <span class="number">1024</span>));</span><br><span class="line">AsymmetricCipherKeyPair pair = rsa.GenerateKeyPair();</span><br><span class="line">PrivateKeyInfo privateKeyInfo = PrivateKeyInfoFactory.CreatePrivateKeyInfo(pair.Private);</span><br><span class="line"><span class="built_in">byte</span>[] serializedPrivateBytes = privateKeyInfo.PrivateKey.ToAsn1Object().GetDerEncoded();</span><br><span class="line"><span class="built_in">string</span> privateKey = Convert.ToBase64String(serializedPrivateBytes);</span><br><span class="line">SubjectPublicKeyInfo publicKeyInfo = SubjectPublicKeyInfoFactory.CreateSubjectPublicKeyInfo(pair.Public);</span><br><span class="line"><span class="built_in">byte</span>[] serializedPublicBytes = publicKeyInfo.ToAsn1Object().GetDerEncoded();</span><br><span class="line"><span class="built_in">string</span> publicKey = Convert.ToBase64String(serializedPublicBytes);</span><br></pre></td></tr></table></figure>
 
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p> ===<br> Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 </li>
 </ol>
 
@@ -103,7 +103,7 @@
       
   
   <div class="tags">
-    <a href="/tags/c/">C#</a>, <a href="/tags/bouncy-castle/">Bouncy Castle</a>, <a href="/tags/rsa/">RSA</a>, <a href="/tags/visual-studio-2010/">Visual Studio 2010</a>
+    <a href="/tags/c/">C#</a>, <a href="/tags/visual-studio-2010/">Visual Studio 2010</a>, <a href="/tags/bouncy-castle/">Bouncy Castle</a>, <a href="/tags/rsa/">RSA</a>
   </div>
 
       
@@ -147,6 +147,10 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
+<div>
+    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
+</div>
+
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

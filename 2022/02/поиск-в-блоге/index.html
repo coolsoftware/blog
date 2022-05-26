@@ -84,7 +84,7 @@
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: </span><br><span class="line">date: 2022-02-14 17:31:44</span><br><span class="line">type: search</span><br><span class="line"><span class="section">layout: search</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
 
 <p>Я добавил <code>layout</code> <code>search</code> в тему <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/hexo-theme-light-plus">hexo-theme-light-plus</a>. <code>title</code> лучше оставить пустым, тогда в качестве заголовка страницы поиска будет использоваться локализованная строка “search”.</p>
-<p>Скрипт для поиска лежит в <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/hexo-theme-light-plus/blob/master/source/js/local-search.js">js&#x2F;local-search.js</a>. Я его сделал на основе <a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next/blob/v8.8.0/source/js/third-party/search/local-search.js">вот этого</a>. Убрал “popup”. Сделал постраничный показ результатов поиска (по 10 на страницу). Настройки в самом <code>local-search.js</code>:</p>
+<p>Скрипт для поиска лежит в <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/hexo-theme-light-plus/blob/master/source/js/local-search.js">js/local-search.js</a>. Я его сделал на основе <a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next/blob/v8.8.0/source/js/third-party/search/local-search.js">вот этого</a>. Убрал “popup”. Сделал постраничный показ результатов поиска (по 10 на страницу). Настройки в самом <code>local-search.js</code>:</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> CONFIG = &#123;</span><br><span class="line">    <span class="attr">root</span>             : <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>             : <span class="string">&#x27;search.json&#x27;</span>,</span><br><span class="line">    <span class="attr">localsearch</span>      : &#123;</span><br><span class="line">        <span class="attr">trigger</span>           : <span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">        <span class="attr">top_n_per_article</span> : <span class="number">1</span>,</span><br><span class="line">        <span class="attr">unescape</span>          : <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">preload</span>           : <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">results_per_page</span>  : <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>В общем, получилось так: <a href="https://blog.coolsoftware.ru/search/?q=nodejs">поиск</a>.</p>
@@ -141,6 +141,10 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
+<div>
+    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
+</div>
+
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

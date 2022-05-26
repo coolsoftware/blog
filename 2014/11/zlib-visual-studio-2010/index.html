@@ -72,13 +72,13 @@
       
         <p>1. Скачиваем zlib 1.2.8 с <a target="_blank" rel="noopener" href="http://www.zlib.net/">http://www.zlib.net/</a><br>2. Распаковываем архив в c:\zlib-1.2.8<br>3. Открываем в Visual Studio 2010 проект C:\zlib-1.2.8\contrib\vstudio\vc10\zlibvc.sln<br>4. Меняем следующие настройки проекта zlibstat:  </p>
 <p>  Конфигурация Debug:  </p>
-<p>    General-&gt;Output Directory: **..\..\..\win32-MDd\**<br>    General-&gt;Intermediate Directory: **..\..\..\win32-MDd\Tmp\**<br>    C&#x2F;C++-&gt;Preprocessor-&gt;Preprocessor Definitions: &lt;удаляем **ZLIB_WINAPI**&gt;<br>    C&#x2F;C++-&gt;Code Generation-&gt;Runtime Library: <strong>Multi-threaded Debug DLL (&#x2F;MDd)</strong><br>    Librarian-&gt;General-&gt;Output File: <strong>$(OutDir)\..\zlibMDd.lib</strong>  </p>
+<p>    General-&gt;Output Directory: **..\..\..\win32-MDd\**<br>    General-&gt;Intermediate Directory: **..\..\..\win32-MDd\Tmp\**<br>    C/C++-&gt;Preprocessor-&gt;Preprocessor Definitions: &lt;удаляем **ZLIB_WINAPI**&gt;<br>    C/C++-&gt;Code Generation-&gt;Runtime Library: <strong>Multi-threaded Debug DLL (/MDd)</strong><br>    Librarian-&gt;General-&gt;Output File: <strong>$(OutDir)\..\zlibMDd.lib</strong>  </p>
 <p>  Конфигурация Release:  </p>
-<p>    General-&gt;Output Directory: **..\..\..\win32-MT\**<br>    General-&gt;Intermediate Directory: **..\..\..\win32-MT\Tmp\**<br>    C&#x2F;C++-&gt;Preprocessor-&gt;Preprocessor Definitions: &lt;удаляем **ZLIB_WINAPI**&gt;<br>    C&#x2F;C++-&gt;Code Generation-&gt;Runtime Library: <strong>Multi-threaded (&#x2F;MT)</strong><br>    Librarian-&gt;General-&gt;Output File: <strong>$(OutDir)\..\zlibMT.lib</strong><br>   <br>5. Собираем Debug и Release версии zlibstat. На выходе получаем:  </p>
+<p>    General-&gt;Output Directory: **..\..\..\win32-MT\**<br>    General-&gt;Intermediate Directory: **..\..\..\win32-MT\Tmp\**<br>    C/C++-&gt;Preprocessor-&gt;Preprocessor Definitions: &lt;удаляем **ZLIB_WINAPI**&gt;<br>    C/C++-&gt;Code Generation-&gt;Runtime Library: <strong>Multi-threaded (/MT)</strong><br>    Librarian-&gt;General-&gt;Output File: <strong>$(OutDir)\..\zlibMT.lib</strong><br>   <br>5. Собираем Debug и Release версии zlibstat. На выходе получаем:  </p>
 <p>  C:\zlib-1.2.8\zlibMDd.lib<br>  C:\zlib-1.2.8\zlibMT.lib  </p>
 <p>6. Открываем в Visual Studio 2010 любой проект C++ и открываем Property Manager-&gt;(Project Name)-&gt;Debug | Win32-&gt;Microsoft.Cpp.Win32.user-&gt;Common Properties-&gt;VC++ Directories. Добавляем c:\zlib-1.2.8 в Include Directories, Library Direcories и Source Directories.  </p>
 <p><a target="_blank" rel="noopener" href="http://2.bp.blogspot.com/-JfK1474NEAQ/VHdKsR46ehI/AAAAAAAAAPE/DLEOzwUBEZU/s1600/zlib.png"><img src="http://2.bp.blogspot.com/-JfK1474NEAQ/VHdKsR46ehI/AAAAAAAAAPE/DLEOzwUBEZU/s1600/zlib.png"></a></p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -132,6 +132,10 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
+<div>
+    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
+</div>
+
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

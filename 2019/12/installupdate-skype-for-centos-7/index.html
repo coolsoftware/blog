@@ -6,11 +6,11 @@
   <title>Install/Update Skype for CentOS 7 | Cool Software Blog</title>
   <meta name="author" content="Vitaly Yakovlev">
   
-  <meta name="description" content="Install&amp;#x2F;Update Skype for CentOS 7
-wget https://go.skype.com/skypeforlinux-64.rpm
-sudo yum localinstall .&amp;#x2F;skypeforlinux-64.rpm
+  <meta name="description" content="Install/Update Skype for CentOS 7
+ wget https://go.skype.com/skypeforlinux-64.rpm
+ sudo yum localinstall ./skypeforlinux-64.rpm
 
-Если после об">
+Если после обновления">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -74,25 +74,24 @@ sudo yum localinstall .&amp;#x2F;skypeforlinux-64.rpm
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h4 id="Install-x2F-Update-Skype-for-CentOS-7"><a href="#Install-x2F-Update-Skype-for-CentOS-7" class="headerlink" title="Install&#x2F;Update Skype for CentOS 7"></a>Install&#x2F;Update Skype for CentOS 7</h4><ol>
-<li>wget <a target="_blank" rel="noopener" href="https://go.skype.com/skypeforlinux-64.rpm">https://go.skype.com/skypeforlinux-64.rpm</a></li>
-<li>sudo yum localinstall .&#x2F;skypeforlinux-64.rpm</li>
+        <h4 id="Install-Update-Skype-for-CentOS-7"><a href="#Install-Update-Skype-for-CentOS-7" class="headerlink" title="Install/Update Skype for CentOS 7"></a>Install/Update Skype for CentOS 7</h4><ol>
+<li> wget <a target="_blank" rel="noopener" href="https://go.skype.com/skypeforlinux-64.rpm">https://go.skype.com/skypeforlinux-64.rpm</a></li>
+<li> sudo yum localinstall ./skypeforlinux-64.rpm</li>
 </ol>
 <p>Если после обновления Skype не стартует, то выполняем в терминале:</p>
 <ul>
-<li>&#x2F;usr&#x2F;share&#x2F;skypeforlinux&#x2F;skypeforlinux</li>
+<li>  /usr/share/skypeforlinux/skypeforlinux</li>
 </ul>
 <p>Если видим результат типа такого:</p>
 <ul>
-<li>[4154:1230&#x2F;082038.483647:FATAL:setuid_sandbox_host.cc(157)] The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I’m aborting now. You need to make sure that &#x2F;usr&#x2F;share&#x2F;skypeforlinux&#x2F;chrome-sandbox is owned by root and has mode 4755.</li>
+<li>  [4154:1230/082038.483647:FATAL:setuid_sandbox_host.cc(157)] The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I’m aborting now. You need to make sure that /usr/share/skypeforlinux/chrome-sandbox is owned by root and has mode 4755.</li>
 </ul>
 <p>то выполняем:</p>
 <ul>
-<li>sudo chmod 4755 &#x2F;usr&#x2F;share&#x2F;skypeforlinux&#x2F;chrome-sandbox</li>
+<li>  sudo chmod 4755 /usr/share/skypeforlinux/chrome-sandbox </li>
 </ul>
-<p> </p>
 <p>В результате права будут изменены с -rw<strong>x</strong>r-xr-x на -rw<strong>s</strong>r-xr-x (“s” means “suid” - takes the rights of user or group when executed).  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -146,6 +145,10 @@ sudo yum localinstall .&amp;#x2F;skypeforlinux-64.rpm
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
+<div>
+    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
+</div>
+
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

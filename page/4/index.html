@@ -69,17 +69,17 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>Полезные ссылки. Загрузка&#x2F;обработка данных, bigdata, machine learning, etc:  </p>
+        <p>Полезные ссылки. Загрузка/обработка данных, bigdata, machine learning, etc:  </p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.tensorflow.org/">TensorFlow: end-to-end open source machine learning platform</a></li>
-<li><a target="_blank" rel="noopener" href="https://pandas.pydata.org/">Pandas: open source data analysis and manipulation tool (Python)</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.elastic.co/">Elasticsearch: search engine based on the Lucene library</a></li>
-<li><a target="_blank" rel="noopener" href="https://lucene.apache.org/">Lucene: Java library providing powerful indexing and search feature</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.elastic.co/blog/importing-csv-and-log-data-into-elasticsearch-with-file-data-visualizer">Importing CSV and Log Data into Elasticsearch with File Data Visualizer</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/liveramp-engineering/using-machine-learning-to-auto-detect-column-types-in-customer-files-80413c976a1e">Using Machine Learning to Auto Detect Column Types in Customer Files</a></li>
-<li><a target="_blank" rel="noopener" href="https://keras.io/">Keras: The Python Deep Learning library</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.tensorflow.org/">TensorFlow: end-to-end open source machine learning platform</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://pandas.pydata.org/">Pandas: open source data analysis and manipulation tool (Python)</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.elastic.co/">Elasticsearch: search engine based on the Lucene library</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://lucene.apache.org/">Lucene: Java library providing powerful indexing and search feature</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.elastic.co/blog/importing-csv-and-log-data-into-elasticsearch-with-file-data-visualizer">Importing CSV and Log Data into Elasticsearch with File Data Visualizer</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://medium.com/liveramp-engineering/using-machine-learning-to-auto-detect-column-types-in-customer-files-80413c976a1e">Using Machine Learning to Auto Detect Column Types in Customer Files</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://keras.io/">Keras: The Python Deep Learning library</a></li>
 </ul>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -120,25 +120,24 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h4 id="Install-x2F-Update-Skype-for-CentOS-7"><a href="#Install-x2F-Update-Skype-for-CentOS-7" class="headerlink" title="Install&#x2F;Update Skype for CentOS 7"></a>Install&#x2F;Update Skype for CentOS 7</h4><ol>
-<li>wget <a target="_blank" rel="noopener" href="https://go.skype.com/skypeforlinux-64.rpm">https://go.skype.com/skypeforlinux-64.rpm</a></li>
-<li>sudo yum localinstall .&#x2F;skypeforlinux-64.rpm</li>
+        <h4 id="Install-Update-Skype-for-CentOS-7"><a href="#Install-Update-Skype-for-CentOS-7" class="headerlink" title="Install/Update Skype for CentOS 7"></a>Install/Update Skype for CentOS 7</h4><ol>
+<li> wget <a target="_blank" rel="noopener" href="https://go.skype.com/skypeforlinux-64.rpm">https://go.skype.com/skypeforlinux-64.rpm</a></li>
+<li> sudo yum localinstall ./skypeforlinux-64.rpm</li>
 </ol>
 <p>Если после обновления Skype не стартует, то выполняем в терминале:</p>
 <ul>
-<li>&#x2F;usr&#x2F;share&#x2F;skypeforlinux&#x2F;skypeforlinux</li>
+<li>  /usr/share/skypeforlinux/skypeforlinux</li>
 </ul>
 <p>Если видим результат типа такого:</p>
 <ul>
-<li>[4154:1230&#x2F;082038.483647:FATAL:setuid_sandbox_host.cc(157)] The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I’m aborting now. You need to make sure that &#x2F;usr&#x2F;share&#x2F;skypeforlinux&#x2F;chrome-sandbox is owned by root and has mode 4755.</li>
+<li>  [4154:1230/082038.483647:FATAL:setuid_sandbox_host.cc(157)] The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I’m aborting now. You need to make sure that /usr/share/skypeforlinux/chrome-sandbox is owned by root and has mode 4755.</li>
 </ul>
 <p>то выполняем:</p>
 <ul>
-<li>sudo chmod 4755 &#x2F;usr&#x2F;share&#x2F;skypeforlinux&#x2F;chrome-sandbox</li>
+<li>  sudo chmod 4755 /usr/share/skypeforlinux/chrome-sandbox </li>
 </ul>
-<p> </p>
 <p>В результате права будут изменены с -rw<strong>x</strong>r-xr-x на -rw<strong>s</strong>r-xr-x (“s” means “suid” - takes the rights of user or group when executed).  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -179,39 +178,39 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>Полезные ссылки. Установка, администрирование Linux&#x2F;CentOS, Apache, PHP, Git:  </p>
+        <p>Полезные ссылки. Установка, администрирование Linux/CentOS, Apache, PHP, Git:  </p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-centos-7">How To Install the Apache Web Server on CentOS 7</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/questions/trying-to-install-latest-php-version-on-centos-7">Install Latest PHP version on CentOS 7</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-mod_rewrite-for-apache-on-centos-7">How To Set Up mod_rewrite for Apache on CentOS 7</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?reload=9&v=_WOKRaM-HI4">Security-Enhanced Linux for mere mortals</a> (Video)</li>
-<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/questions/proper-permissions-for-web-server-s-directory">Proper permissions for web server’s directory</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-centos-quickstart">Steps to Create a New Sudo User</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-centos-7">How To Secure Apache with Let’s Encrypt on CentOS 7</a></li>
-<li><a target="_blank" rel="noopener" href="https://gist.github.com/Nilpo/8ed5e44be00d6cf21f22">Using Git to Manage a Live Web Site</a></li>
-<li><a target="_blank" rel="noopener" href="https://help.github.com/en/github/using-git">Git: Using Git (Help)</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.git-tower.com/learn/git/faq/track-remote-upstream-branch">Git: How can I tell a local branch to track a remote branch?</a></li>
-<li><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/230673/how-to-generate-a-random-string">How to generate a random string (from shell)?</a></li>
-<li><a target="_blank" rel="noopener" href="https://tecadmin.net/install-latest-nodejs-and-npm-on-centos/">How to install latest NodeJS on CentOS</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@bipul.k.kuri/install-latest-gcc-on-centos-linux-release-7-6-a704a11d943d">Install latest GCC from source on Centos Linux release</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.archlinux.org/">Arch Linux</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-and-configure-an-openvpn-server-on-centos-7">How To Set Up and Configure an OpenVPN Server on CentOS 7</a> </li>
-<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-firewalld-on-centos-7">How To Set Up a Firewall Using FirewallD on CentOS 7</a></li>
-<li><a target="_blank" rel="noopener" href="https://ideaman924.com/2020/02/10/using-tinc-to-get-around-double-nat.html">Using tinc to get around double-NAT</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cloud2help.com/how-to-install-and-configure-tinc-vpn/">How to install and configure tinc vpn</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-install-tinc-and-set-up-a-basic-vpn-on-ubuntu-14-04">How To Install Tinc and Set Up a Basic VPN on Ubuntu 14.04</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@vi1996ash/steps-to-build-apache-web-server-docker-image-1a2f21504a8e">Steps to Build Apache Web Server Docker Image</a></li>
-<li><a target="_blank" rel="noopener" href="https://semaphoreci.com/community/tutorials/dockerizing-a-php-application">Dockerizing a PHP Application</a></li>
-<li><a target="_blank" rel="noopener" href="https://linuxhint.com/lamp_server_docker/">Set up a LAMP server with Docker</a></li>
-<li><a target="_blank" rel="noopener" href="https://tecadmin.net/install-mysql-8-on-centos/">How to install MySQL 8.0 on CentOS 7&#x2F;6 &amp; Fedore 31&#x2F;30</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-use-apache-http-server-as-reverse-proxy-using-mod_proxy-extension">How To Use Apache HTTP Server As Reverse-Proxy Using mod_proxy Extension</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.tecmint.com/open-port-for-specific-ip-address-in-firewalld/">How to Open Port for a Specific IP Address in Firewalld</a> </li>
-<li><a target="_blank" rel="noopener" href="https://habr.com/ru/post/275643/">Как в первый раз запустить i2pd: инструкция под Debian&#x2F;Ubuntu</a> (прим.: в дополнение к указанным в инструкции либам, нужно установить apt-get install zlib1g-dev)</li>
-<li><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/">Install MongoDB Community Edition on Red Hat or CentOS</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-remote-access-for-the-gnome-desktop-on-centos-7">How To Install and Configure VNC Remote Access for the GNOME Desktop on CentOS 7</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.f2h.cloud/how-to-setup-an-exim-email-server-using-centos-7/">How To Setup An Exim Email Server Using CentOS 7</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-centos-7">How To Install the Apache Web Server on CentOS 7</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/questions/trying-to-install-latest-php-version-on-centos-7">Install Latest PHP version on CentOS 7</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-mod_rewrite-for-apache-on-centos-7">How To Set Up mod_rewrite for Apache on CentOS 7</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?reload=9&v=_WOKRaM-HI4">Security-Enhanced Linux for mere mortals</a> (Video)</li>
+<li>  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/questions/proper-permissions-for-web-server-s-directory">Proper permissions for web server’s directory</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-centos-quickstart">Steps to Create a New Sudo User</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-centos-7">How To Secure Apache with Let’s Encrypt on CentOS 7</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://gist.github.com/Nilpo/8ed5e44be00d6cf21f22">Using Git to Manage a Live Web Site</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://help.github.com/en/github/using-git">Git: Using Git (Help)</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.git-tower.com/learn/git/faq/track-remote-upstream-branch">Git: How can I tell a local branch to track a remote branch?</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/230673/how-to-generate-a-random-string">How to generate a random string (from shell)?</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://tecadmin.net/install-latest-nodejs-and-npm-on-centos/">How to install latest NodeJS on CentOS</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://medium.com/@bipul.k.kuri/install-latest-gcc-on-centos-linux-release-7-6-a704a11d943d">Install latest GCC from source on Centos Linux release</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.archlinux.org/">Arch Linux</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-and-configure-an-openvpn-server-on-centos-7">How To Set Up and Configure an OpenVPN Server on CentOS 7</a> </li>
+<li>  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-firewalld-on-centos-7">How To Set Up a Firewall Using FirewallD on CentOS 7</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://ideaman924.com/2020/02/10/using-tinc-to-get-around-double-nat.html">Using tinc to get around double-NAT</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.cloud2help.com/how-to-install-and-configure-tinc-vpn/">How to install and configure tinc vpn</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-install-tinc-and-set-up-a-basic-vpn-on-ubuntu-14-04">How To Install Tinc and Set Up a Basic VPN on Ubuntu 14.04</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://medium.com/@vi1996ash/steps-to-build-apache-web-server-docker-image-1a2f21504a8e">Steps to Build Apache Web Server Docker Image</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://semaphoreci.com/community/tutorials/dockerizing-a-php-application">Dockerizing a PHP Application</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://linuxhint.com/lamp_server_docker/">Set up a LAMP server with Docker</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://tecadmin.net/install-mysql-8-on-centos/">How to install MySQL 8.0 on CentOS 7/6 &amp; Fedore 31/30</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-use-apache-http-server-as-reverse-proxy-using-mod_proxy-extension">How To Use Apache HTTP Server As Reverse-Proxy Using mod_proxy Extension</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.tecmint.com/open-port-for-specific-ip-address-in-firewalld/">How to Open Port for a Specific IP Address in Firewalld</a> </li>
+<li>  <a target="_blank" rel="noopener" href="https://habr.com/ru/post/275643/">Как в первый раз запустить i2pd: инструкция под Debian/Ubuntu</a> (прим.: в дополнение к указанным в инструкции либам, нужно установить apt-get install zlib1g-dev)</li>
+<li>  <a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/">Install MongoDB Community Edition on Red Hat or CentOS</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-remote-access-for-the-gnome-desktop-on-centos-7">How To Install and Configure VNC Remote Access for the GNOME Desktop on CentOS 7</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://blog.f2h.cloud/how-to-setup-an-exim-email-server-using-centos-7/">How To Setup An Exim Email Server Using CentOS 7</a></li>
 </ul>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -252,8 +251,8 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>Хорошее введение в Angular: <a target="_blank" rel="noopener" href="https://code.tutsplus.com/series/creating-your-first-angular-app--cms-1248">https://code.tutsplus.com/series/creating-your-first-angular-app--cms-1248</a>  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+        <p>Хорошее введение в Angular: <a target="_blank" rel="noopener" href="https://code.tutsplus.com/series/creating-your-first-angular-app--cms-1248">https://code.tutsplus.com/series/creating-your-first-angular-app–cms-1248</a>  </p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -301,7 +300,7 @@
 <h3 id="Правила"><a href="#Правила" class="headerlink" title="Правила"></a>Правила</h3><p>В игре участвуют двое: “банкир” и игрок. За банкира играет сервис на PHP.<br>Банкир загадывает число, и записывает в смарт-контракт хэш от него. Затем игрок вводит свое число, которое отправляется в смарт-контракт. Потом “банкир” сообщает смарт-контракту загаданное им число (которое должно совпасть с хэшем). В конце определяется победитель: если игрок и банкир оба загадали четное число, или оба загадали нечетное число (иными словами: игрок угадал, загадал ли банкир четное число или нечетное), то выиграл игрок. Иначе выиграл банкир.</p>
 <p>Смарт-контракт опубликован в тестовой сети rinkeby: <a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/address/0x7a21ff65b1c509c2236aeaad47e1c938e6dd921c">https://rinkeby.etherscan.io/address/0x7a21ff65b1c509c2236aeaad47e1c938e6dd921c</a></p>
 <p>Для игры игроку нужно установить MetaMask (<a target="_blank" rel="noopener" href="https://metamask.io/">https://metamask.io/</a>) и завести аккаунт в сети rinkeby. Получить (бесплатно) ETH в этой тестовой сети можно тут: <a target="_blank" rel="noopener" href="https://www.rinkeby.io/#faucet">https://www.rinkeby.io/#faucet</a></p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -314,7 +313,7 @@
       
   
   <div class="tags">
-    <a href="/tags/ethereum/">ethereum</a>, <a href="/tags/smart-contract/">smart contract</a>, <a href="/tags/oddeven/">oddeven</a>, <a href="/tags/rinkeby/">rinkeby</a>
+    <a href="/tags/ethereum/">ethereum</a>, <a href="/tags/smart-contract/">smart contract</a>, <a href="/tags/rinkeby/">rinkeby</a>, <a href="/tags/oddeven/">oddeven</a>
   </div>
 
       
@@ -342,7 +341,7 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>Получить ETH в тестовой сети rinkeby можно тут: <a target="_blank" rel="noopener" href="https://www.rinkeby.io/#faucet">https://www.rinkeby.io/#faucet</a><br>Надо указать ссылку на пост с адресом для получения, типа такого: <a target="_blank" rel="noopener" href="https://twitter.com/vit_cs/status/1119231148654301184">https://twitter.com/vit_cs&#x2F;status&#x2F;1119231148654301184</a><br>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+        <p>Получить ETH в тестовой сети rinkeby можно тут: <a target="_blank" rel="noopener" href="https://www.rinkeby.io/#faucet">https://www.rinkeby.io/#faucet</a><br>Надо указать ссылку на пост с адресом для получения, типа такого: <a target="_blank" rel="noopener" href="https://twitter.com/vit_cs/status/1119231148654301184">https://twitter.com/vit_cs/status/1119231148654301184</a><br>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -355,7 +354,7 @@
       
   
   <div class="tags">
-    <a href="/tags/ethereum/">ethereum</a>, <a href="/tags/rinkeby/">rinkeby</a>, <a href="/tags/faucet/">faucet</a>
+    <a href="/tags/ethereum/">ethereum</a>, <a href="/tags/faucet/">faucet</a>, <a href="/tags/rinkeby/">rinkeby</a>
   </div>
 
       
@@ -389,8 +388,8 @@
 <p>A php interface for interacting with the Ethereum blockchain and ecosystem<br><a target="_blank" rel="noopener" href="https://github.com/sc0Vu/web3.php">https://github.com/sc0Vu/web3.php</a>  </p>
 <p>Устанавливаются библиотеки с пом. композера, брать его тут: <a target="_blank" rel="noopener" href="https://getcomposer.org/">https://getcomposer.org/</a>  </p>
 <p>Подключается установленная с пом. композера либа так:  </p>
-<p>&amp;#60;?php require_once __DIR__ . ‘&#x2F;vendor&#x2F;autoload.php’; ?&amp;#62;  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>&#60;?php require_once __DIR__ . ‘/vendor/autoload.php’; ?&#62;  </p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -403,7 +402,7 @@
       
   
   <div class="tags">
-    <a href="/tags/ethereum/">ethereum</a>, <a href="/tags/php/">PHP</a>, <a href="/tags/smart-contract/">smart contract</a>
+    <a href="/tags/ethereum/">ethereum</a>, <a href="/tags/smart-contract/">smart contract</a>, <a href="/tags/php/">PHP</a>
   </div>
 
       
@@ -435,8 +434,8 @@
 <p>Парочка замечаний:  </p>
 <p>1. Устанавливать надо версию web3 0.20.6 (в версии 0.20.7 можем получить ошибку: Access to XMLHttpRequest at ‘<a target="_blank" rel="noopener" href="http://localhost:8545/&#39;">http://localhost:8545/&#39;</a> from origin ‘null’ has been blocked by CORS policy: Response to preflight request doesn’t pass access control check: The value of the ‘Access-Control-Allow-Origin’ header in the response must not be the wildcard ‘*‘ when the request’s credentials mode is ‘include’. The credentials mode of requests initiated by the XMLHttpRequest is controlled by the withCredentials attribute.)  </p>
 <p>2. Чтобы установился dist\web3.min.js нужно при установке добавлять ключ –verbose.  </p>
-<p>Резюмируя: npm install <a href="mailto:&#119;&#x65;&#98;&#51;&#64;&#x30;&#x2e;&#50;&#x30;&#46;&#x36;">&#119;&#x65;&#98;&#51;&#64;&#x30;&#x2e;&#50;&#x30;&#46;&#x36;</a> –save –verbose  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>Резюмируя: npm install <a href="mailto:&#x77;&#101;&#98;&#x33;&#x40;&#48;&#46;&#50;&#48;&#46;&#54;">&#x77;&#101;&#98;&#x33;&#x40;&#48;&#46;&#50;&#48;&#46;&#54;</a> –save –verbose  </p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -486,7 +485,7 @@
 <p>Upd. Под Win10 Mist 0.11.1 работает OK. Правда, после установки Mist изругался: “Checksum mismatch in downloaded node. Please install the Geth node version 1.8.23 manually”. Пришлось переустанавливать geth. Причем, устанавливать надо 64-битную версию. Иначе при попытке запустить майнер можно получить ошибку: “Fatal Error:Not enough storage is available”  </p>
 <p>Полезные ссылки:  </p>
 <p>Go-Ethereum Management APIs: <a target="_blank" rel="noopener" href="https://github.com/ethereum/go-ethereum/wiki/Management-APIs">https://github.com/ethereum/go-ethereum/wiki/Management-APIs</a><br>Solidity 0.5.3 documentation: <a target="_blank" rel="noopener" href="https://solidity.readthedocs.io/en/v0.5.3/contracts.html">https://solidity.readthedocs.io/en/v0.5.3/contracts.html</a>  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -531,7 +530,7 @@
 <p><a target="_blank" rel="noopener" href="https://4.bp.blogspot.com/-nIROh1z1je8/WlcbbmovouI/AAAAAAAAAWY/o640qYZFhcwtZktO3iL80G1i2BbIKD28ACLcBGAs/s1600/IMG_20180111_115033.jpg"><img src="https://4.bp.blogspot.com/-nIROh1z1je8/WlcbbmovouI/AAAAAAAAAWY/o640qYZFhcwtZktO3iL80G1i2BbIKD28ACLcBGAs/s320/IMG_20180111_115033.jpg"></a></p>
 <p><a target="_blank" rel="noopener" href="https://3.bp.blogspot.com/-TWLC_rSYh6M/WlcbbvIinoI/AAAAAAAAAWg/B8RFyxQ2y2cNWLJyR4ZnNFbHyaIVChQYQCLcBGAs/s1600/IMG_20180111_115045.jpg"><img src="https://3.bp.blogspot.com/-TWLC_rSYh6M/WlcbbvIinoI/AAAAAAAAAWg/B8RFyxQ2y2cNWLJyR4ZnNFbHyaIVChQYQCLcBGAs/s320/IMG_20180111_115045.jpg"></a></p>
 <p><a target="_blank" rel="noopener" href="https://1.bp.blogspot.com/-TJDQ0sCC-RI/WlcbcsyJ5FI/AAAAAAAAAWk/uUeguZi6zZUiM_oQ-9LM424CU0XXx7SFACLcBGAs/s1600/IMG_20180111_115108.jpg"><img src="https://1.bp.blogspot.com/-TJDQ0sCC-RI/WlcbcsyJ5FI/AAAAAAAAAWk/uUeguZi6zZUiM_oQ-9LM424CU0XXx7SFACLcBGAs/s320/IMG_20180111_115108.jpg"></a></p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -593,6 +592,10 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
+<div>
+    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
+</div>
+
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

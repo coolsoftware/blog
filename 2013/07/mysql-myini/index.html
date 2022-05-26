@@ -70,10 +70,10 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>Понадобилось мне поднять max_connections в MySQL, который по-умолчанию был установлен инсталлером в C:\Program Files\MySQL\MySQL Server 5.6.<br>В этом каталоге лежит my-default.ini, который я переименовал в my.ini и прописал в нем max_connections&#x3D;250. Перезапустил сервис MySQL - не работает! select @@max_connections возвращает 100. Не видит MySQL моего my.ini.<br>Полчаса потратил на поиски откуда же MySQL читает настройки. Поэтому и решил написать это сообщение здесь - вдруг кому-нибудь поможет и сэкономит время.  </p>
+        <p>Понадобилось мне поднять max_connections в MySQL, который по-умолчанию был установлен инсталлером в C:\Program Files\MySQL\MySQL Server 5.6.<br>В этом каталоге лежит my-default.ini, который я переименовал в my.ini и прописал в нем max_connections=250. Перезапустил сервис MySQL - не работает! select @@max_connections возвращает 100. Не видит MySQL моего my.ini.<br>Полчаса потратил на поиски откуда же MySQL читает настройки. Поэтому и решил написать это сообщение здесь - вдруг кому-нибудь поможет и сэкономит время.  </p>
 <p><a target="_blank" rel="noopener" href="http://1.bp.blogspot.com/-4lOAFIHTemo/UfJwBcqQX6I/AAAAAAAAAG4/1qLFTApy97o/s1600/mysqld.png"><img src="http://1.bp.blogspot.com/-4lOAFIHTemo/UfJwBcqQX6I/AAAAAAAAAG4/1qLFTApy97o/s400/mysqld.png"></a></p>
-<p>Оказывается сервис запускается с параметром –defaults-file&#x3D;”C:\ProgramData\MySQL\MySQL Server 5.6\my.ini”. Вот, значит, где находится my.ini.  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>Оказывается сервис запускается с параметром –defaults-file=”C:\ProgramData\MySQL\MySQL Server 5.6\my.ini”. Вот, значит, где находится my.ini.  </p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -127,6 +127,10 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
+<div>
+    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
+</div>
+
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>
