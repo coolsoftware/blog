@@ -76,9 +76,9 @@ XSD-схема замечательно работае">
 <p>Однако, хранить две отдельных схемы (XSD и Schematron) в разных файлах неудобно. К тому же, существующие механизмы обработки XML-файлов (<a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/Document_Object_Model">DOM</a>- и <a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/SAX">SAX</a>-парсеры) не умеют работать со схемами Schematron, а дважды проверять один и тот же XML по разным схемам не рационально (потребуется дважды “отпарсить” весь XML-файл).  </p>
 <p>Предлагается задавать правила проверки на языке Schematron в подэлементах <strong><a href="xs:appinfo">xs:appinfo</a></strong> элементов <strong><a href="xs:annotation">xs:annotation</a></strong> XSD-схемы.  </p>
 <p>Пример:  </p>
-<p>&#60;?xml version=”1.0”?&#62;<br>&lt;xs:schema  xmlns:xs=”<a target="_blank" rel="noopener" href="http://www.w3.org/2001/XMLSchema&quot;">http://www.w3.org/2001/XMLSchema&quot;</a> xmlns:sch=”<a target="_blank" rel="noopener" href="http://www.ascc.net/xml/schematron&quot;&gt;">http://www.ascc.net/xml/schematron&quot;&gt;</a><br>  &lt;xs:element name=”Root”&gt;<br>    <a href="xs:annotation">xs:annotation</a><br>      <a href="xs:appinfo">xs:appinfo</a><br>        &lt;sch:pattern name=”DocumentChecker”&gt;<br>          &lt;sch:rule context=”Person”&gt;<br>            &lt;sch:assert test=”@birthYear&lt;1990”&gt;Birth year should be less than 1990.</sch:assert><br>          </sch:rule><br>        </sch:pattern><br>      </xs:appinfo><br>    </xs:annotation><br>  </xs:element><br></xs:schema>  </p>
-<p>В этом примере мы видим <em>утверждение</em> на языке Schematron <strong>&lt;sch:assert test=”@birthYear&lt;1990”&gt;Birth year should be less than 1990.</sch:assert></strong>, которое должно проверяться в контексте XML-узла <strong>Person</strong> (<strong>&lt;sch:rule context=”Person”&gt;</strong>).  </p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>&amp;#60;?xml version&#x3D;”1.0”?&amp;#62;<br>&lt;xs:schema  xmlns:xs&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2001/XMLSchema&quot;">http://www.w3.org/2001/XMLSchema&quot;</a> xmlns:sch&#x3D;”<a target="_blank" rel="noopener" href="http://www.ascc.net/xml/schematron&quot;&gt;">http://www.ascc.net/xml/schematron&quot;&gt;</a><br>  &lt;xs:element name&#x3D;”Root”&gt;<br>    <a href="xs:annotation">xs:annotation</a><br>      <a href="xs:appinfo">xs:appinfo</a><br>        &lt;sch:pattern name&#x3D;”DocumentChecker”&gt;<br>          &lt;sch:rule context&#x3D;”Person”&gt;<br>            &lt;sch:assert test&#x3D;”@birthYear&lt;1990”&gt;Birth year should be less than 1990.</sch:assert><br>          </sch:rule><br>        </sch:pattern><br>      </xs:appinfo><br>    </xs:annotation><br>  </xs:element><br></xs:schema>  </p>
+<p>В этом примере мы видим <em>утверждение</em> на языке Schematron <strong>&lt;sch:assert test&#x3D;”@birthYear&lt;1990”&gt;Birth year should be less than 1990.</sch:assert></strong>, которое должно проверяться в контексте XML-узла <strong>Person</strong> (<strong>&lt;sch:rule context&#x3D;”Person”&gt;</strong>).  </p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -132,10 +132,6 @@ XSD-схема замечательно работае">
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
-<div>
-    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
-</div>
-
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

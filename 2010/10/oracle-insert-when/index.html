@@ -75,10 +75,10 @@ INSERTWHEN ([Condition]) THENINTO [TableName] ([ColumnName])VALUES ">
 <p><a target="_blank" rel="noopener" href="http://www.oracle.com/pls/db10g/search?remark=quick_search&word=INSERT">INSERT</a><br><a target="_blank" rel="noopener" href="http://www.oracle.com/pls/db10g/search?remark=quick_search&word=WHEN">WHEN</a> ([Condition]) <a target="_blank" rel="noopener" href="http://www.oracle.com/pls/db10g/search?remark=quick_search&word=THEN">THEN</a><br><a target="_blank" rel="noopener" href="http://www.oracle.com/pls/db10g/search?remark=quick_search&word=INTO">INTO</a> [TableName] ([ColumnName])<br><a target="_blank" rel="noopener" href="http://www.oracle.com/pls/db10g/search?remark=quick_search&word=VALUES">VALUES</a> ([<a target="_blank" rel="noopener" href="http://www.oracle.com/pls/db10g/search?remark=quick_search&word=VALUES">VALUES</a>])<br><a target="_blank" rel="noopener" href="http://www.oracle.com/pls/db10g/search?remark=quick_search&word=ELSE">ELSE</a><br><a target="_blank" rel="noopener" href="http://www.oracle.com/pls/db10g/search?remark=quick_search&word=INTO">INTO</a> [TableName] ([ColumnName])<br><a target="_blank" rel="noopener" href="http://www.oracle.com/pls/db10g/search?remark=quick_search&word=VALUES">VALUES</a> ([<a target="_blank" rel="noopener" href="http://www.oracle.com/pls/db10g/search?remark=quick_search&word=VALUES">VALUES</a>])<br><a target="_blank" rel="noopener" href="http://www.oracle.com/pls/db10g/search?remark=quick_search&word=SELECT">SELECT</a> [ColumnName] <a target="_blank" rel="noopener" href="http://www.oracle.com/pls/db10g/search?remark=quick_search&word=FROM">FROM</a> [TableName];</p>
 <p>Во первых, эта конструкция позволяет с помощью одной каманды INSERT вставлять данные в разные таблицы.  </p>
 <p>Во вторых, попробуем решить следующую задачу: пусть имеется таблица VTEST с полем A VARCHAR2(10) и нужно  написать команду INSERT, которая будет вставлять значение ‘AAA’, отсутствующее в этой таблице (если такое значение уже есть, то новую запись создавать не нужно). Решение этой задачи может выглядеть примерно так:  </p>
-<p>INSERT INTO VTEST (A)<br>  SELECT ‘AAA’ FROM dual<br>    WHERE NOT EXISTS (SELECT * FROM VTEST WHERE A=’AAA’)  </p>
-<p>Такая конструкция, конечно, работает. Но плохо в ней то, что значение ‘AAA’ фигурирует дважды: в SELECT ‘AAA’ FROM dual и в SELECT * FROM VTEST WHERE A=’AAA’.  </p>
+<p>INSERT INTO VTEST (A)<br>  SELECT ‘AAA’ FROM dual<br>    WHERE NOT EXISTS (SELECT * FROM VTEST WHERE A&#x3D;’AAA’)  </p>
+<p>Такая конструкция, конечно, работает. Но плохо в ней то, что значение ‘AAA’ фигурирует дважды: в SELECT ‘AAA’ FROM dual и в SELECT * FROM VTEST WHERE A&#x3D;’AAA’.  </p>
 <p>А вот так выглядит та же операция, но с использованием INSERT WHEN:  </p>
-<p>INSERT<br>  WHEN NOT EXISTS (SELECT * FROM VTEST WHERE A=A0)<br>   THEN INTO VTEST (A) VALUES (A0)<br>  SELECT ‘AAA’ A0 FROM dual  </p>
+<p>INSERT<br>  WHEN NOT EXISTS (SELECT * FROM VTEST WHERE A&#x3D;A0)<br>   THEN INTO VTEST (A) VALUES (A0)<br>  SELECT ‘AAA’ A0 FROM dual  </p>
 <p>Здесь ‘AAA’ присутствует только 1 раз.  </p>
 <div style="margin-bottom: 0px; margin-left: 0px; margin-right: 0px; margin-top: 0px;">===</div>
 
@@ -92,7 +92,7 @@ INSERTWHEN ([Condition]) THENINTO [TableName] ([ColumnName])VALUES ">
       
   
   <div class="tags">
-    <a href="/tags/oracle/">Oracle</a>, <a href="/tags/insert/">INSERT</a>, <a href="/tags/sql/">SQL</a>, <a href="/tags/when/">WHEN</a>
+    <a href="/tags/insert/">INSERT</a>, <a href="/tags/oracle/">Oracle</a>, <a href="/tags/sql/">SQL</a>, <a href="/tags/when/">WHEN</a>
   </div>
 
       
@@ -136,10 +136,6 @@ INSERTWHEN ([Condition]) THENINTO [TableName] ([ColumnName])VALUES ">
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
-<div>
-    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
-</div>
-
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

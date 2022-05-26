@@ -8,7 +8,7 @@
   
   <meta name="description" content="Настройка ipv6 (Teredo):  
 
-Мой компьютер (контекстное меню) –&amp;gt; Управление -&amp;gt; Службы (Рис. 1):     Вспомогательная служба IP –&amp;gt; Тип запуска –">
+Мой компьютер (контекстное меню) –&amp;gt; Управление -&amp;gt; Службы (Рис. 1):    Вспомогательная служба IP –&amp;gt; Тип запуска –&amp;">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -74,14 +74,14 @@
       
         <p>Настройка ipv6 (Teredo):  </p>
 <ol>
-<li>Мой компьютер (контекстное меню) –&gt; Управление -&gt; Службы (Рис. 1):<br>     Вспомогательная служба IP –&gt; Тип запуска –&gt; Выбираем из списка: Автоматически</li>
-<li> Пуск –&gt; Выполнить –&gt; regedit</li>
-<li>В реестре по адресу<br> HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Dnscache\Parameters<br> создать ключ AddrConfigControl типа DWORD со значением 0 (Рис. 2).</li>
-<li>Пуск –&gt; Панель управления –&gt; Сеть и Интернет –&gt; Сетевые подключения –&gt; Подключение по локальной сети –&gt; Свойства (Рис. 3):<br>     Протокол Интернета версии 6 (TCP/IPv6) –&gt; включить и в Свойствах указать:<br>     Использовать следующие адреса DNS-серверов:<br>     Предпочитаемый DNS-сервер: 2001:4860:4860::8888<br>     Альтернативный DNS-сервер: 2001:4860:4860::8844</li>
-<li> Пуск –&gt; Выполнить –&gt; gpedit.msc</li>
-<li>Конфигурация компьютера –&gt; Административные шаблоны –&gt; Сеть –&gt; Параметры TCP/IP –&gt; Технологии Туннелирования IPv6 (Рис. 4):<br>     Классификация Teredo по умолчанию –&gt; Включить –&gt; Включенное состояние<br>     Частота обновления Teredo –&gt; Включить –&gt; 10<br>     Состояние Teredo –&gt; Включить –&gt; Корпоративный клиент<br>     Порт клиента Teredo -&gt; Не задано<br>     Имя сервера Teredo –&gt; Включить –&gt; Выбираем из списка: teredo.remlab.net</li>
-<li>Пуск – Выполнить – cmd:<br>     netsh int ipv6 delete route ::/0 Teredo<br>     netsh int ipv6 add route ::/0 Teredo</li>
-<li> Тестирование подключения: <a target="_blank" rel="noopener" href="http://test-ipv6.com/">http://test-ipv6.com/</a></li>
+<li>Мой компьютер (контекстное меню) –&gt; Управление -&gt; Службы (Рис. 1):<br>    Вспомогательная служба IP –&gt; Тип запуска –&gt; Выбираем из списка: Автоматически</li>
+<li>Пуск –&gt; Выполнить –&gt; regedit</li>
+<li>В реестре по адресу<br>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Dnscache\Parameters<br>создать ключ AddrConfigControl типа DWORD со значением 0 (Рис. 2).</li>
+<li>Пуск –&gt; Панель управления –&gt; Сеть и Интернет –&gt; Сетевые подключения –&gt; Подключение по локальной сети –&gt; Свойства (Рис. 3):<br>    Протокол Интернета версии 6 (TCP&#x2F;IPv6) –&gt; включить и в Свойствах указать:<br>    Использовать следующие адреса DNS-серверов:<br>    Предпочитаемый DNS-сервер: 2001:4860:4860::8888<br>    Альтернативный DNS-сервер: 2001:4860:4860::8844</li>
+<li>Пуск –&gt; Выполнить –&gt; gpedit.msc</li>
+<li>Конфигурация компьютера –&gt; Административные шаблоны –&gt; Сеть –&gt; Параметры TCP&#x2F;IP –&gt; Технологии Туннелирования IPv6 (Рис. 4):<br>    Классификация Teredo по умолчанию –&gt; Включить –&gt; Включенное состояние<br>    Частота обновления Teredo –&gt; Включить –&gt; 10<br>    Состояние Teredo –&gt; Включить –&gt; Корпоративный клиент<br>    Порт клиента Teredo -&gt; Не задано<br>    Имя сервера Teredo –&gt; Включить –&gt; Выбираем из списка: teredo.remlab.net</li>
+<li>Пуск – Выполнить – cmd:<br>    netsh int ipv6 delete route ::&#x2F;0 Teredo<br>    netsh int ipv6 add route ::&#x2F;0 Teredo</li>
+<li>Тестирование подключения: <a target="_blank" rel="noopener" href="http://test-ipv6.com/">http://test-ipv6.com/</a></li>
 </ol>
 <div class="separator" style="clear: both; text-align: center;">Рис. 1</div>
 
@@ -96,7 +96,7 @@
 
 <p><a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-BIIj19IFcOc/VXGE4_PKJeI/AAAAAAAAAQ8/w1w4rXpCVrM/s1600/teredo.png"><img src="http://3.bp.blogspot.com/-BIIj19IFcOc/VXGE4_PKJeI/AAAAAAAAAQ8/w1w4rXpCVrM/s400/teredo.png"></a></p>
 <p>Стянул отсюда: <a target="_blank" rel="noopener" href="http://blog.cherepovets.ru/serovds/2011/11/15/teredo-win7/">http://blog.cherepovets.ru/serovds/2011/11/15/teredo-win7/</a>  </p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -150,10 +150,6 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
-<div>
-    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
-</div>
-
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

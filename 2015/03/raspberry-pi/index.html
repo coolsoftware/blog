@@ -74,13 +74,13 @@
 <p>1. Кросс-компиляция Qt 5 для Raspberry Pi:  </p>
 <p><a target="_blank" rel="noopener" href="http://qt-project.org/wiki/RaspberryPi_Beginners_guide">http://qt-project.org/wiki/RaspberryPi_Beginners_guide</a>  </p>
 <p>Несколько замечаний:  </p>
-<p>a) git clone git<span class="sy0">:</span><span class="co1">//gitorious.org/qt/qt5.git не работает, вместо него нужно выполнять: git clone <a target="_blank" rel="noopener" href="http://git.gitorious.org/qt/qt5.git">http://git.gitorious.org/qt/qt5.git</a></span>  </p>
-<p><span class="co1">б) сперва лучше (imho) залить образ на флешку ( </span>sudo dd bs<span class="sy0">=</span>1M <span class="kw1">if</span><span class="sy0">=</span><span class="nu0"></span><span class="sy0"></span>2015-02-16-raspbian-wheezy.img of<span class="sy0">=/</span>dev<span class="sy0">/</span>sdb ), вставить флешку в Raspberry Pi, установить апдейты и библиотеки (например, для разработки под X11: <a target="_blank" rel="noopener" href="http://doc.qt.io/qt-5/linux-requirements.html">http://doc.qt.io/qt-5/linux-requirements.html</a>), потом сделать образ этой флешки ( sudo dd bs<span class="sy0">=</span>1M <span class="kw1">if</span><span class="sy0">=</span><span class="sy0">/</span>dev<span class="sy0">/</span>sdb<span class="co1"></span> of<span class="sy0">=</span><span class="co1"></span><span class="sy0"></span>rasp-pi.img ) и уже с ним работать дальше.  </p>
-<p>в) “Магическое” число <span class="sy0"></span><span class="nu0">62914560 ( </span><br>sudo mount <span class="sy0">-</span>o loop<span class="sy0">,</span>offset<span class="sy0">=</span><span class="nu0">62914560</span> rasp-pi.<span class="me1">img</span> <span class="sy0">/</span>mnt<span class="sy0">/</span>rasp<span class="sy0">-</span>pi<span class="sy0">-</span>rootfs ) можно вычислить следующим образом:  </p>
+<p>a) git clone git<span class="sy0">:</span><span class="co1">&#x2F;&#x2F;gitorious.org&#x2F;qt&#x2F;qt5.git не работает, вместо него нужно выполнять: git clone <a target="_blank" rel="noopener" href="http://git.gitorious.org/qt/qt5.git">http://git.gitorious.org/qt/qt5.git</a></span>  </p>
+<p><span class="co1">б) сперва лучше (imho) залить образ на флешку ( </span>sudo dd bs<span class="sy0">&#x3D;</span>1M <span class="kw1">if</span><span class="sy0">&#x3D;</span><span class="nu0"></span><span class="sy0"></span>2015-02-16-raspbian-wheezy.img of<span class="sy0">&#x3D;&#x2F;</span>dev<span class="sy0">&#x2F;</span>sdb ), вставить флешку в Raspberry Pi, установить апдейты и библиотеки (например, для разработки под X11: <a target="_blank" rel="noopener" href="http://doc.qt.io/qt-5/linux-requirements.html">http://doc.qt.io/qt-5/linux-requirements.html</a>), потом сделать образ этой флешки ( sudo dd bs<span class="sy0">&#x3D;</span>1M <span class="kw1">if</span><span class="sy0">&#x3D;</span><span class="sy0">&#x2F;</span>dev<span class="sy0">&#x2F;</span>sdb<span class="co1"></span> of<span class="sy0">&#x3D;</span><span class="co1"></span><span class="sy0"></span>rasp-pi.img ) и уже с ним работать дальше.  </p>
+<p>в) “Магическое” число <span class="sy0"></span><span class="nu0">62914560 ( </span><br>sudo mount <span class="sy0">-</span>o loop<span class="sy0">,</span>offset<span class="sy0">&#x3D;</span><span class="nu0">62914560</span> rasp-pi.<span class="me1">img</span> <span class="sy0">&#x2F;</span>mnt<span class="sy0">&#x2F;</span>rasp<span class="sy0">-</span>pi<span class="sy0">-</span>rootfs ) можно вычислить следующим образом:  </p>
 <p>[vitaly@localhost opt]$ sudo fdisk -l rasp-pi.img  </p>
-<p>Disk rasp-pi.img: 7892 MB, 7892631552 bytes, 15415296 sectors<br>Units = sectors of 1 * 512 = 512 bytes<br>Sector size (logical/physical): 512 bytes / 512 bytes<br>I/O size (minimum/optimal): 512 bytes / 512 bytes<br>Disk label type: dos<br>Disk identifier: 0x0009bf4f  </p>
+<p>Disk rasp-pi.img: 7892 MB, 7892631552 bytes, 15415296 sectors<br>Units &#x3D; sectors of 1 * 512 &#x3D; 512 bytes<br>Sector size (logical&#x2F;physical): 512 bytes &#x2F; 512 bytes<br>I&#x2F;O size (minimum&#x2F;optimal): 512 bytes &#x2F; 512 bytes<br>Disk label type: dos<br>Disk identifier: 0x0009bf4f  </p>
 <p>Устр-во Загр     Начало       Конец       Блоки   Id  Система<br>rasp-pi.img1            8192      122879       57344    c  W95 FAT32 (LBA)<br>rasp-pi.img2          122880     6399999     3138560   83  Linux  </p>
-<p>122880 - это начало раздела (номер первого сектора раздела),  который нужно подмонтировать. 122880 * 512 = 62914560.  </p>
+<p>122880 - это начало раздела (номер первого сектора раздела),  который нужно подмонтировать. 122880 * 512 &#x3D; 62914560.  </p>
 <p>2.”Нативная” компиляция Qt5 на Raspberry Pi.  </p>
 <p><a target="_blank" rel="noopener" href="http://qt-project.org/wiki/Native_Build_of_Qt5_on_a_Raspberry_Pi">http://qt-project.org/wiki/Native_Build_of_Qt5_on_a_Raspberry_Pi</a>  </p>
 <p>Я не пробовал. Утверждается, что идет очень долго.  </p>
@@ -89,7 +89,7 @@
 <p>4. “Экономичная реализация графического интерфейса пользователя на базе одноплатного компьютера Raspberry Pi” (“Автоматика и программная инженерия”, 2014, №2(8))  </p>
 <p><a target="_blank" rel="noopener" href="http://www.nips.ru/images/stories/zhournal-AIPI/10/aipi-2-2014-3.pdf">http://www.nips.ru/images/stories/zhournal-AIPI/10/aipi-2-2014-3.pdf</a>  </p>
 <p>Хорошее подробное описание настройки кросс-компиляции.  </p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -143,10 +143,6 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
-<div>
-    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
-</div>
-
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

@@ -79,13 +79,13 @@
 <p>Выпишем координаты вершин отрезков, отсортированные по-возрастанию:  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">X = &#123;75, 76, 79, 80, 83, 84, 85, 90, 91, 92&#125;</span><br></pre></td></tr></table></figure>
 
-<p>Массив X содержит 10 элементов: X[0], X[1], …, X[9].<br>Возьмем среднее значение (медиану): 83 = X[m], m = (9-0) div 2.  </p>
+<p>Массив X содержит 10 элементов: X[0], X[1], …, X[9].<br>Возьмем среднее значение (медиану): 83 &#x3D; X[m], m &#x3D; (9-0) div 2.  </p>
 <p>Возможны три варианта расположения отрезков относительно медианы:<br>1. отрезки, которые содержат медиану.<br>2. отрезки, которые лежат слева от медианы.<br>3. отрезки, которые лежат справа от медианы.  </p>
-<p>Создадим узел дерева, который будет включать в себя значение медианы (дискриминант = 83) и список всех отрезков, которые содержат медиану:  </p>
+<p>Создадим узел дерева, который будет включать в себя значение медианы (дискриминант &#x3D; 83) и список всех отрезков, которые содержат медиану:  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">R = &#123;83, [c, f, g, h, i, j]&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Оставшиеся отрезки слева от R: {a, b, d, e} и справа от R: {k, l, m}.  </p>
-<p>Построим левый узел дерева для отрезков {a, b, d, e}, находящихся левее медианы, рассматривая вершины слева от медианы: {75, <strong>76</strong>, 79, 80}. Получим: O = {76, [a, b, d]}.<br>Аналогично правый узел для отрезков {k, l, m} и вершин {84, 85, <strong>90</strong>, 91, 92}: U = {90, []}. Обратите внимание на возможность существования узлов, не содержащих отрезков.<br>Продолжая процесс рекурсивно, получим следующие узлы:<br>N = {75, []}, P = {79, [e]}, S = {84, [k]}, V = {91, [l, m]}, Q = {80, []}, T = {85, []}, W = {92, []}.  </p>
+<p>Построим левый узел дерева для отрезков {a, b, d, e}, находящихся левее медианы, рассматривая вершины слева от медианы: {75, <strong>76</strong>, 79, 80}. Получим: O &#x3D; {76, [a, b, d]}.<br>Аналогично правый узел для отрезков {k, l, m} и вершин {84, 85, <strong>90</strong>, 91, 92}: U &#x3D; {90, []}. Обратите внимание на возможность существования узлов, не содержащих отрезков.<br>Продолжая процесс рекурсивно, получим следующие узлы:<br>N &#x3D; {75, []}, P &#x3D; {79, [e]}, S &#x3D; {84, [k]}, V &#x3D; {91, [l, m]}, Q &#x3D; {80, []}, T &#x3D; {85, []}, W &#x3D; {92, []}.  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">      R</span><br><span class="line">   /     \</span><br><span class="line">  O       U</span><br><span class="line"> / \     / \</span><br><span class="line">N   P   S   V</span><br><span class="line">     \   \   \</span><br><span class="line">      Q   T   W</span><br></pre></td></tr></table></figure>
 
 <div class="separator" style="clear: both; text-align: left;">Висячие вершины N, Q, T и W можно убрать. Окончательно получим дерево:</div>
@@ -105,10 +105,10 @@
 <p>Он заменен на следующее:  </p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::<span class="built_in">sort</span>(al.<span class="built_in">begin</span>()+list_start,</span><br><span class="line">  al.<span class="built_in">begin</span>()+list_start+list_size,</span><br><span class="line">  comp_for_al);</span><br><span class="line">std::<span class="built_in">sort</span>(dh.<span class="built_in">begin</span>()+list_start,</span><br><span class="line">  dh.<span class="built_in">begin</span>()+list_start+list_size,</span><br><span class="line">  comp_for_dh);</span><br></pre></td></tr></table></figure>
 
-<p><strong>Баг 2</strong> в методе query_iterator::init_node. Если value == cur_node-&gt;discrim, то требуется проверка, что cur_node-&gt;size != 0, а иначе возможен выход за границы массива.  </p>
+<p><strong>Баг 2</strong> в методе query_iterator::init_node. Если value &#x3D;&#x3D; cur_node-&gt;discrim, то требуется проверка, что cur_node-&gt;size !&#x3D; 0, а иначе возможен выход за границы массива.  </p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_node</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    index = <span class="number">0</span>;        </span><br><span class="line">    <span class="keyword">while</span> (cur_node != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (value &lt; cur_node-&gt;discrim)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((cur_node-&gt;size != <span class="number">0</span>) &amp;&amp;</span><br><span class="line">                ((*p_al)[cur_node-&gt;start]-&gt;<span class="built_in">low</span>() &lt;= value))</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                cur_node = cur_node-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (value &gt; cur_node-&gt;discrim)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((cur_node-&gt;size != <span class="number">0</span>) &amp;&amp;</span><br><span class="line">                ((*p_dh)[cur_node-&gt;start]-&gt;<span class="built_in">high</span>() &gt;= value))</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                cur_node = cur_node-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="comment">//(value == cur_node-&gt;discrim)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (cur_node-&gt;size == <span class="number">0</span>) <span class="comment">//VIT 2014 bugfix!</span></span><br><span class="line">            &#123;</span><br><span class="line">                cur_node = <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -118,7 +118,7 @@
       
   
   <div class="tags">
-    <a href="/tags/cpp/">cpp</a>, <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/">алгоритм</a>, <a href="/tags/github/">github</a>, <a href="/tags/interval-tree/">Interval Tree</a>, <a href="/tags/itree/">itree</a>, <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D0%B0%D0%BB%D0%BE%D0%B2/">дерево интервалов</a>, <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%BE%D1%82%D1%80%D0%B5%D0%B7%D0%BA%D0%BE%D0%B2/">дерево отрезков</a>
+    <a href="/tags/cpp/">cpp</a>, <a href="/tags/github/">github</a>, <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/">алгоритм</a>, <a href="/tags/interval-tree/">Interval Tree</a>, <a href="/tags/itree/">itree</a>, <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D0%B0%D0%BB%D0%BE%D0%B2/">дерево интервалов</a>, <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%BE%D1%82%D1%80%D0%B5%D0%B7%D0%BA%D0%BE%D0%B2/">дерево отрезков</a>
   </div>
 
       
@@ -162,10 +162,6 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
-<div>
-    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
-</div>
-
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

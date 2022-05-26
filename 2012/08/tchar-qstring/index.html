@@ -75,7 +75,7 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> TQCHAR_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TQCHAR_H</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;tchar.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _UNICODE</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _TQCHAR(x)        (wchar_t*) x.utf16()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _TQSTRING(x)    QString::fromUtf16((x))</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _TQCHAR(x)        x.toLocal8Bit().constData()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _TQSTRING(x)    QString::fromLocal8Bit((x))</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//TQCHAR_H</span></span></span><br></pre></td></tr></table></figure>
 
 <p>Кстати, нашел хороший плагин для Visual Studio чтобы копировать код в HTML с подсветкой синтаксиса: <a target="_blank" rel="noopener" href="http://visualstudiogallery.msdn.microsoft.com/98fef791-eb65-4cdf-bf84-077b98c234cf">Copy As HTML</a>.  </p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -129,10 +129,6 @@
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
-<div>
-    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
-</div>
-
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>

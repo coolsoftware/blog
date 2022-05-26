@@ -78,7 +78,7 @@ db.targets.aggregate([  &amp;#123;$sort:&amp;#123;&amp;quot;processing&amp;quot;
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">update targets </span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> (</span><br><span class="line">  <span class="keyword">select</span> targets.id <span class="keyword">from</span> targets</span><br><span class="line">    <span class="keyword">inner</span> <span class="keyword">join</span> campaigns </span><br><span class="line">    <span class="keyword">on</span> targets.campaignname<span class="operator">=</span>campaigns.campaignname</span><br><span class="line">  <span class="keyword">where</span> campaigns.enabled</span><br><span class="line">  <span class="keyword">order</span> <span class="keyword">by</span> processing</span><br><span class="line">  limit <span class="number">1</span></span><br><span class="line">) t</span><br><span class="line"><span class="keyword">on</span> targets.id <span class="operator">=</span> t.id</span><br><span class="line"><span class="keyword">set</span> processing<span class="operator">=</span>IFNULL(processing,<span class="number">0</span>)<span class="operator">+</span><span class="number">1</span>, <span class="type">date</span><span class="operator">=</span>now()</span><br></pre></td></tr></table></figure>
 
 <p>Второй вариант короче, проще, понятнее, и напишу я его в разы быстрее. В общем, по-моему, Mongo - это сильно на любителей заморочиться…</p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -132,10 +132,6 @@ db.targets.aggregate([  &amp;#123;$sort:&amp;#123;&amp;quot;processing&amp;quot;
     <h3 class="title">Избранные сообщения</h3>
     <div class="entry">
         
-<div>
-    <a href="/%D1%8F-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2-%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B/">Я против войны</a>
-</div>
-
 <div>
     <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
 </div>
