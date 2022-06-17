@@ -6,7 +6,7 @@
   <link href="https://blog.coolsoftware.ru/atom.xml" rel="self"/>
   
   <link href="https://blog.coolsoftware.ru/"/>
-  <updated>2022-06-17T07:38:07.929Z</updated>
+  <updated>2022-06-17T10:01:23.931Z</updated>
   <id>https://blog.coolsoftware.ru/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.coolsoftware.ru/2022/06/%D0%BA%D0%BE%D0%BC%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%B8%D0%B8-%D0%B2-%D0%B1%D0%BB%D0%BE%D0%B3%D0%B5/"/>
     <id>https://blog.coolsoftware.ru/2022/06/%D0%BA%D0%BE%D0%BC%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%B8%D0%B8-%D0%B2-%D0%B1%D0%BB%D0%BE%D0%B3%D0%B5/</id>
     <published>2022-06-17T07:33:55.000Z</published>
-    <updated>2022-06-17T07:38:07.929Z</updated>
+    <updated>2022-06-17T10:01:23.931Z</updated>
     
     
       
@@ -29,7 +29,8 @@
         
         
     <summary type="html">&lt;p&gt;Добавлены комментарии в блоге.&lt;/p&gt;
-&lt;p&gt;В качестве движка используется &lt;a</summary>
+&lt;p&gt;В качестве движка используется &lt;a href=&quot;https://github.com/gitalk/gitalk&quot;&gt;gitalk&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Как</summary>
         
       
     
