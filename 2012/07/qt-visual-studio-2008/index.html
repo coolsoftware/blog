@@ -87,21 +87,21 @@
 <div style="text-align: left;">1. Если хочется избавиться от Qt Runtime (статически прилинковать к exe файлу все необходимые библиотеки), то нужно пересобрать Qt с ключом -static:</div> <div style="text-align: left;"></div>
 
 <ul>
-<li>  Запустить Visual Studio 2008 Command Prompt</li>
-<li>  Выполнить команду: cd  C:\qt\4.8.2</li>
-<li>  Выполнить команду: configure -platform win32-msvc2008 -static</li>
-<li>  Выполнить команду: nmake</li>
+<li>Запустить Visual Studio 2008 Command Prompt</li>
+<li>Выполнить команду: cd  C:\qt\4.8.2</li>
+<li>Выполнить команду: configure -platform win32-msvc2008 -static</li>
+<li>Выполнить команду: nmake</li>
 </ul>
 <p>Сборка Qt у меня заняла несколько часов.</p>
-<p>2. По-умолчанию библиотеки Qt компилируются в режиме Multi-threaded DLL - /MD (для Debug -  Multi-threaded Debug DLL - /MDd). Что означает наличие зависимостей от msvcr90.dll и msvcp90.dll. Т.е. при установке программы возможно потребуется устанавливать Microsoft Visual C++ 2008 Redistributable Package. Чтобы избавиться от этой зависимости нужно перед сборкой Qt поправить qmake.conf ( C:\qt\4.8.2 \mkspecs\win32-msvc2008\qmake.conf) следующим образом:  </p>
+<p>2. По-умолчанию библиотеки Qt компилируются в режиме Multi-threaded DLL - &#x2F;MD (для Debug -  Multi-threaded Debug DLL - &#x2F;MDd). Что означает наличие зависимостей от msvcr90.dll и msvcp90.dll. Т.е. при установке программы возможно потребуется устанавливать Microsoft Visual C++ 2008 Redistributable Package. Чтобы избавиться от этой зависимости нужно перед сборкой Qt поправить qmake.conf ( C:\qt\4.8.2 \mkspecs\win32-msvc2008\qmake.conf) следующим образом:  </p>
 <p>заменить строки</p>
-<p>  QMAKE_CFLAGS_RELEASE    = -O2 -MD</p>
-<p>  QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi</p>
-<p>  QMAKE_CFLAGS_DEBUG      = -Zi -MDd</p>
+<p>  QMAKE_CFLAGS_RELEASE    &#x3D; -O2 -MD</p>
+<p>  QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO +&#x3D; -O2 -MD -Zi</p>
+<p>  QMAKE_CFLAGS_DEBUG      &#x3D; -Zi -MDd</p>
 <p>на</p>
-<p>  QMAKE_CFLAGS_RELEASE    = -O2 -MT</p>
-<p>  QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi</p>
-<p>  QMAKE_CFLAGS_DEBUG      = -Zi -MTd</p>
+<p>  QMAKE_CFLAGS_RELEASE    &#x3D; -O2 -MT</p>
+<p>  QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO +&#x3D; -O2 -MT -Zi</p>
+<p>  QMAKE_CFLAGS_DEBUG      &#x3D; -Zi -MTd</p>
 <div style="text-align: left;">===</div>
 
 <p>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
@@ -127,6 +127,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

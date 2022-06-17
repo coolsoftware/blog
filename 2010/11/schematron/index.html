@@ -85,7 +85,7 @@
 <p>Тег <strong><a href="sch:schema">sch:schema</a></strong> - <em>схема</em>, корневой тег схематрона.</p>
 <p>Внутри тега схемы располагаются  <em>название схемы</em> - тег <strong><a href="sch:title">sch:title</a></strong>, и <em>шаблоны</em> - теги <strong><a href="sch:pattern">sch:pattern</a></strong>. Атрибут шаблона <strong>name</strong> задает имя шаблона (в нашем примере: “dog_pattern”).</p>
 <p>Шаблон состоит из <em>правил</em> - тег <strong><a href="sch:rule">sch:rule</a></strong>. Каждое правило применяется к узлу проверяемого по схематрон-схеме XML-файла, путь к которому (XPath) задается атрибутом <strong>context</strong>.</p>
-<p>Правило состоит из <em>утверждений</em> (<strong><a href="sch:assert">sch:assert</a></strong>) и <em>сообщений</em> (<strong><a href="sch:report">sch:report</a></strong>), которые имеют атрибут <strong>test</strong> - <em>условие</em>, формулируемое на языке XPath. Разница между ними в том, что если <em>условие</em> в <em>сообщении</em> истинно (в примере: <strong>test=”bone”</strong>), то в выходной файл пишется текст <em>сообщения</em> (<strong>This dog has a bone.</strong>), а текст <em>утверждения</em> (<strong>A ‘dog’ element should contain two ‘ear’ elements.</strong>) пишется в выходной файл только если <em>условие</em> НЕ выполнено (<strong>test=”count(ear) = 2”</strong>).</p>
+<p>Правило состоит из <em>утверждений</em> (<strong><a href="sch:assert">sch:assert</a></strong>) и <em>сообщений</em> (<strong><a href="sch:report">sch:report</a></strong>), которые имеют атрибут <strong>test</strong> - <em>условие</em>, формулируемое на языке XPath. Разница между ними в том, что если <em>условие</em> в <em>сообщении</em> истинно (в примере: <strong>test&#x3D;”bone”</strong>), то в выходной файл пишется текст <em>сообщения</em> (<strong>This dog has a bone.</strong>), а текст <em>утверждения</em> (<strong>A ‘dog’ element should contain two ‘ear’ elements.</strong>) пишется в выходной файл только если <em>условие</em> НЕ выполнено (<strong>test&#x3D;”count(ear) &#x3D; 2”</strong>).</p>
 <div style="font: 12.0px Helvetica; margin: 0.0px 0.0px 0.0px 0.0px;"></div> <div style="font-family: Times; font-size: medium; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; margin-top: 0px;">===</div>
 
 <p>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
@@ -111,6 +111,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

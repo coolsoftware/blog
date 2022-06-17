@@ -76,7 +76,7 @@
 <p>При этом, использование REPLACE в примере выше предполагает, что построен уникальный индекс для поля FieldA.</p>
 <p><strong>Для того, чтобы загрузка в таблицу с индексом осуществлялась максимально быстро, необходимо, чтобы загружаемые данные были отсортированы по этому индексу.</strong></p>
 <p>Это нужно для того, чтобы минимизировать количество операций обращения к диску при поиске значения в индексе. Когда значения в индексе располагаются рядом, то эффективно работает буфер чтения. Выигрыш в скорости при вставке отсортированных данных по сравнению со вставкой неупорядоченных данных на больших объемах может оказаться в десятки раз.</p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -99,6 +99,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

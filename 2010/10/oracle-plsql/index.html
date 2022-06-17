@@ -88,19 +88,19 @@
 <p>  end;</p>
 <p>Результат будет выглядеть так:</p>
 <p>ORA-01403: данные не найдены</p>
-<p>Код и текст ошибки в SQLERRM есть, однако нам бы очень хотелось увидеть место возникновения ошибки - в идеале номер строки и стек вызовов. Ниже приведен код функции ERR_WHENCE, которая возвращает место возникновения ошибки, и стандартный обработчик ошибок RaiseError, который я использую при обработке всех ошибок в моем коде на PL/SQL.</p>
+<p>Код и текст ошибки в SQLERRM есть, однако нам бы очень хотелось увидеть место возникновения ошибки - в идеале номер строки и стек вызовов. Ниже приведен код функции ERR_WHENCE, которая возвращает место возникновения ошибки, и стандартный обработчик ошибок RaiseError, который я использую при обработке всех ошибок в моем коде на PL&#x2F;SQL.</p>
 <p>  function ERR_WHENCE return varchar2</p>
 <p>  is</p>
 <p>    l_back_trace varchar2(4096) default DBMS_UTILITY.FORMAT_ERROR_BACKTRACE;</p>
 <p>    l_pos integer;</p>
 <p>  begin</p>
-<p>    if substr(l_back_trace, length(l_back_trace), 1) = chr(10)</p>
+<p>    if substr(l_back_trace, length(l_back_trace), 1) &#x3D; chr(10)</p>
 <p>    then</p>
-<p>      l_back_trace := substr(l_back_trace, 1, length(l_back_trace)-1);</p>
+<p>      l_back_trace :&#x3D; substr(l_back_trace, 1, length(l_back_trace)-1);</p>
 <p>    end if;</p>
-<p>    l_pos := instr(l_back_trace, chr(10), -1);</p>
+<p>    l_pos :&#x3D; instr(l_back_trace, chr(10), -1);</p>
 <p>    if l_pos &gt; 0 then</p>
-<p>      l_back_trace := substr(l_back_trace, l_pos+1);</p>
+<p>      l_back_trace :&#x3D; substr(l_back_trace, l_pos+1);</p>
 <p>    end if;</p>
 <p>    return l_back_trace || chr(10);</p>
 <p>  end ERR_WHENCE;</p>
@@ -171,6 +171,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

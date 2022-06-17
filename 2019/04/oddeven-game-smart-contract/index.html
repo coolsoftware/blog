@@ -79,7 +79,7 @@
 <h3 id="Правила"><a href="#Правила" class="headerlink" title="Правила"></a>Правила</h3><p>В игре участвуют двое: “банкир” и игрок. За банкира играет сервис на PHP.<br>Банкир загадывает число, и записывает в смарт-контракт хэш от него. Затем игрок вводит свое число, которое отправляется в смарт-контракт. Потом “банкир” сообщает смарт-контракту загаданное им число (которое должно совпасть с хэшем). В конце определяется победитель: если игрок и банкир оба загадали четное число, или оба загадали нечетное число (иными словами: игрок угадал, загадал ли банкир четное число или нечетное), то выиграл игрок. Иначе выиграл банкир.</p>
 <p>Смарт-контракт опубликован в тестовой сети rinkeby: <a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/address/0x7a21ff65b1c509c2236aeaad47e1c938e6dd921c">https://rinkeby.etherscan.io/address/0x7a21ff65b1c509c2236aeaad47e1c938e6dd921c</a></p>
 <p>Для игры игроку нужно установить MetaMask (<a target="_blank" rel="noopener" href="https://metamask.io/">https://metamask.io/</a>) и завести аккаунт в сети rinkeby. Получить (бесплатно) ETH в этой тестовой сети можно тут: <a target="_blank" rel="noopener" href="https://www.rinkeby.io/#faucet">https://www.rinkeby.io/#faucet</a></p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -102,6 +102,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

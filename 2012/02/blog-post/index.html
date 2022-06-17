@@ -77,11 +77,11 @@
 <p>В общем, столкнувшись на практике со странностями работы стандартного ГСЧ, я решил написать свой. Основные требования - скорость работы и возможность обращаться к одному и тому же ГСЧ из разных потоков. И вот, что у меня получилось:</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">class CRnd</span><br><span class="line">&#123;</span><br><span class="line">  private:</span><br><span class="line">    unsigned long m_iran;</span><br><span class="line">  public:</span><br><span class="line">    void Init(unsigned long seed);</span><br><span class="line">    unsigned long Rand();</span><br><span class="line">&#125;</span><br><span class="line">void CRnd::Init(unsigned long seed)</span><br><span class="line">&#123;</span><br><span class="line">  m_iran = seed;</span><br><span class="line">&#125;</span><br><span class="line">unsigned long CRnd::Rand()</span><br><span class="line">&#123;</span><br><span class="line">  unsigned long old_iran = m_iran;</span><br><span class="line">  unsigned long new_iran, cur_iran;</span><br><span class="line">  for (;;)</span><br><span class="line">  &#123;</span><br><span class="line">    new_iran = 1664525L*old_iran+1013904223L;</span><br><span class="line">    cur_iran = InterlockedCompareExchange((volatile long*)&amp;m_iran, new_iran, old_iran);</span><br><span class="line">    if (cur_iran == old_iran) break;</span><br><span class="line">    old_iran = cur_iran;</span><br><span class="line">  &#125;</span><br><span class="line">  return new_iran;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>UPD</strong>. <em>Множитель a</em> = 1664525 и <em>слагаемое c</em> = 1013904223 были взяты из <a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BA%D0%BE%D0%BD%D0%B3%D1%80%D1%83%D1%8D%D0%BD%D1%82%D0%BD%D1%8B%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4">статьи в вики</a>. На практике, однако, выяснилось, что получаемая последовательность чисел имеет короткий период, поэтому имеет смысл использовать другие параметры:<br>a = 1103515245, c = 12345, m = 2^31.  </p>
+<p><strong>UPD</strong>. <em>Множитель a</em> &#x3D; 1664525 и <em>слагаемое c</em> &#x3D; 1013904223 были взяты из <a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BA%D0%BE%D0%BD%D0%B3%D1%80%D1%83%D1%8D%D0%BD%D1%82%D0%BD%D1%8B%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4">статьи в вики</a>. На практике, однако, выяснилось, что получаемая последовательность чисел имеет короткий период, поэтому имеет смысл использовать другие параметры:<br>a &#x3D; 1103515245, c &#x3D; 12345, m &#x3D; 2^31.  </p>
 <p>unsigned long CRnd::Rand()  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  unsigned long old_iran = m_iran;</span><br><span class="line">  unsigned long new_iran, cur_iran;</span><br><span class="line">  for (;;)</span><br><span class="line">  &#123;</span><br><span class="line">    new_iran = 1103515245L*old_iran+12345L;</span><br><span class="line">    cur_iran = InterlockedCompareExchange((volatile long*)&amp;m_iran, new_iran, old_iran);</span><br><span class="line">    if (cur_iran == old_iran) break;</span><br><span class="line">    old_iran = cur_iran;</span><br><span class="line">  &#125;</span><br><span class="line">  return ((new_iran &gt;&gt; 16) &amp; 32767L);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>===</p>
+<p>=&#x3D;&#x3D;</p>
 <p>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
@@ -105,6 +105,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

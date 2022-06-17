@@ -73,14 +73,14 @@
       
         <p>Как говорится, век - живи, век учись.  </p>
 <p>Захотелось мне вынести инициализацию данных класса в виртуальную функцию init(), с тем, чтобы классы-наследники могли переопределить ее и добавить в инициализацию что-то своё. Примерно так:  </p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">int</span> m_count;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123; m_count = <span class="number">1</span>; &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">C1</span>() &#123; <span class="built_in">init</span>(); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_count; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C2</span>:</span> <span class="keyword">public</span> C1</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123; C1::<span class="built_in">init</span>(); m_count = m_count+<span class="number">1</span>; &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">C2</span>() : <span class="built_in">C1</span>() &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> _tmain(<span class="keyword">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    C1 c1;</span><br><span class="line">    _tprintf(_T(<span class="string">&quot;C1 count: %i\n&quot;</span>), c1.<span class="built_in">count</span>());</span><br><span class="line">    C2 c2;</span><br><span class="line">    _tprintf(_T(<span class="string">&quot;C2 count: %i\n&quot;</span>), c2.<span class="built_in">count</span>());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">C1</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="type">int</span> m_count;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123; m_count = <span class="number">1</span>; &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">C1</span>() &#123; <span class="built_in">init</span>(); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">count</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> m_count; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C2</span>: <span class="keyword">public</span> C1</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123; C1::<span class="built_in">init</span>(); m_count = m_count+<span class="number">1</span>; &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">C2</span>() : <span class="built_in">C1</span>() &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    C1 c1;</span><br><span class="line">    _tprintf(_T(<span class="string">&quot;C1 count: %i\n&quot;</span>), c1.<span class="built_in">count</span>());</span><br><span class="line">    C2 c2;</span><br><span class="line">    _tprintf(_T(<span class="string">&quot;C2 count: %i\n&quot;</span>), c2.<span class="built_in">count</span>());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Результат получается такой:  </p>
 <p>C1 count: 1<br>C2 count: 1  </p>
 <p>Опа! Оказывается переопределенная в классе C2 функция init() не вызывается. Получается, что если вызвать из конструктора класса виртуальную функцию этого же класса, то обычный метод вызова виртуальных функций через vtable задействован не будет - функция будет вызвана как если бы они была не-виртуальной. По-моему такое поведение не выглядит логичным, поэтому от вызова виртуальных функций из конструктора лучше отказаться.  </p>
 <p>PS. Из деструктора вызывать виртуальные функции тоже не следует.  </p>
 <p>По поводу того, что при вызове виртуальных функций из конструктора (и деструктора) не используется vtable, - тут я, похоже, был не прав. vtable используется, только в конструкторе класса C1 (см. пример) используется vtable класса C1, а не класса-потомка C2 - вот в чем дело. Аналогично, в деструкторе C1 также используется vtable класса С1.  </p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -103,6 +103,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

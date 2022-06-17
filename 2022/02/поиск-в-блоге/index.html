@@ -84,8 +84,8 @@
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: </span><br><span class="line">date: 2022-02-14 17:31:44</span><br><span class="line">type: search</span><br><span class="line"><span class="section">layout: search</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
 
 <p>Я добавил <code>layout</code> <code>search</code> в тему <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/hexo-theme-light-plus">hexo-theme-light-plus</a>. <code>title</code> лучше оставить пустым, тогда в качестве заголовка страницы поиска будет использоваться локализованная строка “search”.</p>
-<p>Скрипт для поиска лежит в <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/hexo-theme-light-plus/blob/master/source/js/local-search.js">js/local-search.js</a>. Я его сделал на основе <a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next/blob/v8.8.0/source/js/third-party/search/local-search.js">вот этого</a>. Убрал “popup”. Сделал постраничный показ результатов поиска (по 10 на страницу). Настройки в самом <code>local-search.js</code>:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> CONFIG = &#123;</span><br><span class="line">    <span class="attr">root</span>             : <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>             : <span class="string">&#x27;search.json&#x27;</span>,</span><br><span class="line">    <span class="attr">localsearch</span>      : &#123;</span><br><span class="line">        <span class="attr">trigger</span>           : <span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">        <span class="attr">top_n_per_article</span> : <span class="number">1</span>,</span><br><span class="line">        <span class="attr">unescape</span>          : <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">preload</span>           : <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">results_per_page</span>  : <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Скрипт для поиска лежит в <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/hexo-theme-light-plus/blob/master/source/js/local-search.js">js&#x2F;local-search.js</a>. Я его сделал на основе <a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next/blob/v8.8.0/source/js/third-party/search/local-search.js">вот этого</a>. Убрал “popup”. Сделал постраничный показ результатов поиска (по 10 на страницу). Настройки в самом <code>local-search.js</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">CONFIG</span> = &#123;</span><br><span class="line">    root             : <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    path             : <span class="string">&#x27;search.json&#x27;</span>,</span><br><span class="line">    localsearch      : &#123;</span><br><span class="line">        trigger           : <span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">        top_n_per_article : <span class="number">1</span>,</span><br><span class="line">        <span class="built_in">unescape</span>          : <span class="literal">false</span>,</span><br><span class="line">        preload           : <span class="literal">true</span>,</span><br><span class="line">        results_per_page  : <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>В общем, получилось так: <a href="https://blog.coolsoftware.ru/search/?q=nodejs">поиск</a>.</p>
 
@@ -97,7 +97,7 @@
       
   
   <div class="tags">
-    <a href="/tags/search/">search</a>, <a href="/tags/%D0%B1%D0%BB%D0%BE%D0%B3/">блог</a>, <a href="/tags/hexo/">hexo</a>, <a href="/tags/%D0%BF%D0%BE%D0%B8%D1%81%D0%BA/">поиск</a>, <a href="/tags/theme/">theme</a>, <a href="/tags/light-plus/">light-plus</a>
+    <a href="/tags/search/">search</a>, <a href="/tags/%D0%B1%D0%BB%D0%BE%D0%B3/">блог</a>, <a href="/tags/%D0%BF%D0%BE%D0%B8%D1%81%D0%BA/">поиск</a>, <a href="/tags/hexo/">hexo</a>, <a href="/tags/theme/">theme</a>, <a href="/tags/light-plus/">light-plus</a>
   </div>
 
       
@@ -110,6 +110,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

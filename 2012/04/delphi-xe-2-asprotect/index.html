@@ -74,7 +74,7 @@
 <p><a target="_blank" rel="noopener" href="http://forum.asprotect.net/index.php?showtopic=1362">Сообщение</a> о несовместимости Delphi XE 2 и ASProtect на официальном форуме датировано 18 ноября 2011, но до сих пор решения нет. Последний ответ от 26 марта 2012 гласит:</p>
 <p>Your problem in the queue for the decision and will be solved in the next release of ASProtect (will be released in the nearest future).  </p>
 <p>Ждем новую версию… Если в ближайшее время не появится, придется переходить на какой-нибудь другой протектор.  </p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -97,6 +97,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

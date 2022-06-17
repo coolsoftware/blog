@@ -73,7 +73,7 @@
 <p><a target="_blank" rel="noopener" href="http://forum.asprotect.net/index.php?showtopic=1362">Сообщение</a> о несовместимости Delphi XE 2 и ASProtect на официальном форуме датировано 18 ноября 2011, но до сих пор решения нет. Последний ответ от 26 марта 2012 гласит:</p>
 <p>Your problem in the queue for the decision and will be solved in the next release of ASProtect (will be released in the nearest future).  </p>
 <p>Ждем новую версию… Если в ближайшее время не появится, придется переходить на какой-нибудь другой протектор.  </p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -120,8 +120,8 @@
 <div style="font-family: Georgia, serif; font-size: 100%; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; ">Как мы видим текущий каталог Git Bash - %HOMEDRIVE%%HOMEPATH%. В нем хранятся все настройки git, каталог .ssh с SSHKey и проекты обычно тоже там.</div>
 
 <p>Я создал в %HOMEDRIVE%%HOMEPATH% каталог Coolsoftware и в нем git.cmd следующего содержания:</p>
-<p>@set HOME=%HOMEDRIVE%%HOMEPATH%\Coolsoftware</p>
-<p>C:\Windows\SysWOW64\cmd.exe /c “”C:\Program Files (x86)\Git\bin\sh.exe” –login -i”</p>
+<p>@set HOME&#x3D;%HOMEDRIVE%%HOMEPATH%\Coolsoftware</p>
+<p>C:\Windows\SysWOW64\cmd.exe &#x2F;c “”C:\Program Files (x86)\Git\bin\sh.exe” –login -i”</p>
 <p>Затем создал ярлык на этот git.cmd и вынес его на рабочий стол, обозвав “Git Bash - Coolsoftware”. Теперь при его запуске текущий каталог пользователя в “баше” %HOMEDRIVE%%HOMEPATH%\Coolsoftware, а при запуске старого ярлыка “Git Bash” текущий каталог %HOMEDRIVE%%HOMEPATH%. Таким образом получилось два “баша”, в каждом - свои настройки.</p>
 <p>Далее запустил “Git Bash - Coolsoftware” произвел установку github в соответствии с <a target="_blank" rel="noopener" href="http://help.github.com/win-set-up-git/">инструкцией</a> и выложил проект <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/VHashedStringList">VHashedStringList</a> - оптимизированный список строк, доступ к элементам которого организован с помощью хеш-индекса.</p>
 <p>TVHashedStringList - аналог стандартного THashedStringList (фактически, он сделан на его основе, хотя наследуется не от него, а от TStringList).</p>
@@ -135,7 +135,7 @@
 <p>Поэтому в следующем примере полного перестроения индекса не произойдет ни разу.</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">procedure ChangeList(lst: TVHashedStringList);</span><br><span class="line">begin</span><br><span class="line">  lst.Values[&#x27;key1&#x27;] := &#x27;Value1&#x27;; //индекс модифицирован и не требует перестроения</span><br><span class="line">  lst.Values[&#x27;key2&#x27;] := &#x27;Value2&#x27;; //индекс модифицирован и не требует перестроения</span><br><span class="line">  lst.Values[&#x27;key3&#x27;] := &#x27;Value3&#x27;; //индекс модифицирован и не требует перестроения</span><br><span class="line">  lst.Values[&#x27;key4&#x27;] := &#x27;Value4&#x27;; //индекс модифицирован и не требует перестроения</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
 
-<p>===</p>
+<p>=&#x3D;&#x3D;</p>
 <p>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
@@ -187,7 +187,7 @@
 <p>[поток 1] читает gCounter, прочитан 0<br>[поток 2] читает gCounter, прочитан 0<br>[поток 1] увеличивает значение на 1, получается 1<br>[поток 2] увеличивает значение на 1, получается 1<br>[поток 1] записывает 1 в gCounter<br>[поток 2] записывает 1 в gCounter  </p>
 <p>В итоге в gCounter будет 1, а не 2, как можно было бы предположить.  </p>
 <p>UPD. LockLib - классы C++ для блокировки разделяемых ресурсов: <a href="http://blog.coolsoftware.ru/2013/12/locklib.html">http://blog.coolsoftware.ru/2013/12/locklib.html</a>  </p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -200,7 +200,7 @@
       
   
   <div class="tags">
-    <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/">алгоритм</a>, <a href="/tags/%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D0%B5%D0%BB%D0%B8/">Писатели</a>, <a href="/tags/%D1%87%D0%B8%D1%82%D0%B0%D1%82%D0%B5%D0%BB%D0%B8/">Читатели</a>
+    <a href="/tags/%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D0%B5%D0%BB%D0%B8/">Писатели</a>, <a href="/tags/%D1%87%D0%B8%D1%82%D0%B0%D1%82%D0%B5%D0%BB%D0%B8/">Читатели</a>, <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/">алгоритм</a>
   </div>
 
       
@@ -235,11 +235,11 @@
 <p>В общем, столкнувшись на практике со странностями работы стандартного ГСЧ, я решил написать свой. Основные требования - скорость работы и возможность обращаться к одному и тому же ГСЧ из разных потоков. И вот, что у меня получилось:</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">class CRnd</span><br><span class="line">&#123;</span><br><span class="line">  private:</span><br><span class="line">    unsigned long m_iran;</span><br><span class="line">  public:</span><br><span class="line">    void Init(unsigned long seed);</span><br><span class="line">    unsigned long Rand();</span><br><span class="line">&#125;</span><br><span class="line">void CRnd::Init(unsigned long seed)</span><br><span class="line">&#123;</span><br><span class="line">  m_iran = seed;</span><br><span class="line">&#125;</span><br><span class="line">unsigned long CRnd::Rand()</span><br><span class="line">&#123;</span><br><span class="line">  unsigned long old_iran = m_iran;</span><br><span class="line">  unsigned long new_iran, cur_iran;</span><br><span class="line">  for (;;)</span><br><span class="line">  &#123;</span><br><span class="line">    new_iran = 1664525L*old_iran+1013904223L;</span><br><span class="line">    cur_iran = InterlockedCompareExchange((volatile long*)&amp;m_iran, new_iran, old_iran);</span><br><span class="line">    if (cur_iran == old_iran) break;</span><br><span class="line">    old_iran = cur_iran;</span><br><span class="line">  &#125;</span><br><span class="line">  return new_iran;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>UPD</strong>. <em>Множитель a</em> = 1664525 и <em>слагаемое c</em> = 1013904223 были взяты из <a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BA%D0%BE%D0%BD%D0%B3%D1%80%D1%83%D1%8D%D0%BD%D1%82%D0%BD%D1%8B%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4">статьи в вики</a>. На практике, однако, выяснилось, что получаемая последовательность чисел имеет короткий период, поэтому имеет смысл использовать другие параметры:<br>a = 1103515245, c = 12345, m = 2^31.  </p>
+<p><strong>UPD</strong>. <em>Множитель a</em> &#x3D; 1664525 и <em>слагаемое c</em> &#x3D; 1013904223 были взяты из <a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BA%D0%BE%D0%BD%D0%B3%D1%80%D1%83%D1%8D%D0%BD%D1%82%D0%BD%D1%8B%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4">статьи в вики</a>. На практике, однако, выяснилось, что получаемая последовательность чисел имеет короткий период, поэтому имеет смысл использовать другие параметры:<br>a &#x3D; 1103515245, c &#x3D; 12345, m &#x3D; 2^31.  </p>
 <p>unsigned long CRnd::Rand()  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  unsigned long old_iran = m_iran;</span><br><span class="line">  unsigned long new_iran, cur_iran;</span><br><span class="line">  for (;;)</span><br><span class="line">  &#123;</span><br><span class="line">    new_iran = 1103515245L*old_iran+12345L;</span><br><span class="line">    cur_iran = InterlockedCompareExchange((volatile long*)&amp;m_iran, new_iran, old_iran);</span><br><span class="line">    if (cur_iran == old_iran) break;</span><br><span class="line">    old_iran = cur_iran;</span><br><span class="line">  &#125;</span><br><span class="line">  return ((new_iran &gt;&gt; 16) &amp; 32767L);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>===</p>
+<p>=&#x3D;&#x3D;</p>
 <p>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
@@ -284,24 +284,24 @@
         <p>Обычно решают противоположную задачу - вызов внешних модулей (DLL, COM), написанных на C++, Delphi и т.п., из программы на C#. У меня же возникла необходимость вызвать из программы написанной на Delphi функцию библиотеки, написанной на C#. В этом посте я расскажу о том, как это делается.  </p>
 <p>Итак, нужно сделать на C# COM объект, к которому затем мы сможем обращаться из нашей программы на Delphi.  </p>
 <ol>
-<li><p> В Visual Studio создаем новый проект New/Project/Visual C#/Class Library.</p>
+<li><p>В Visual Studio создаем новый проект New&#x2F;Project&#x2F;Visual C#&#x2F;Class Library.</p>
 </li>
-<li><p>В свойствах проекта на вкладке Application жмем кнопку “Assembly Information” и отмечаем “Make assembly COM-visible”.<br> <img src="http://2.bp.blogspot.com/-1gmRXzGe_ZY/TsoXPYjY4dI/AAAAAAAAABE/E75IOweSZvM/s400/20111121-1.png"></p>
+<li><p>В свойствах проекта на вкладке Application жмем кнопку “Assembly Information” и отмечаем “Make assembly COM-visible”.<br><img src="http://2.bp.blogspot.com/-1gmRXzGe_ZY/TsoXPYjY4dI/AAAAAAAAABE/E75IOweSZvM/s400/20111121-1.png"></p>
 </li>
-<li><p>В свойствах проекта на вкладке Build отмечаем Register for COM interop.<br> <img src="http://1.bp.blogspot.com/-83aanUd2-cQ/TsoYg4wxbdI/AAAAAAAAABQ/F4vyxSQ6jW4/s400/20111121-2.png"></p>
+<li><p>В свойствах проекта на вкладке Build отмечаем Register for COM interop.<br><img src="http://1.bp.blogspot.com/-83aanUd2-cQ/TsoYg4wxbdI/AAAAAAAAABQ/F4vyxSQ6jW4/s400/20111121-2.png"></p>
 </li>
 <li><p>Для регистрации библиотеки вместо regsvr32 нужно использовать regasm. Вызов будет типа такого:  </p>
-<p> regasm.exe vcomclasslibrary.dll /tlb:vcomclasslibrary.tlb  </p>
-<p> regasm.exe обычно расположен тут:  </p>
-<p> c:\Windows\Microsoft.NET\Framework\v2.0.50727\  </p>
+<p>regasm.exe vcomclasslibrary.dll &#x2F;tlb:vcomclasslibrary.tlb  </p>
+<p>regasm.exe обычно расположен тут:  </p>
+<p>c:\Windows\Microsoft.NET\Framework\v2.0.50727\  </p>
 </li>
 <li><p>Код на C#:  </p>
- <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">using System;</span><br><span class="line">using System.Drawing;</span><br><span class="line">using System.Runtime.InteropServices;</span><br><span class="line">namespace VCOMClassLibrary</span><br><span class="line">&#123;</span><br><span class="line"> [ComVisible(true)]</span><br><span class="line"> public interface IVCOMInterface</span><br><span class="line"> &#123;</span><br><span class="line">   string LoadImageFromStream(System.IO.Stream stream);</span><br><span class="line"> &#125;</span><br><span class="line"> [ComVisible(true), ClassInterface(ClassInterfaceType.None)]</span><br><span class="line"> public class VCOMClass : IVCOMInterface</span><br><span class="line"> &#123;</span><br><span class="line">   public string LoadImageFromStream(System.IO.Stream stream)</span><br><span class="line">   &#123;</span><br><span class="line">     Image img = Image.FromStream(stream);</span><br><span class="line">     //put code to load image here</span><br><span class="line">     return &quot;OK&quot;;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">using System;</span><br><span class="line">using System.Drawing;</span><br><span class="line">using System.Runtime.InteropServices;</span><br><span class="line">namespace VCOMClassLibrary</span><br><span class="line">&#123;</span><br><span class="line"> [ComVisible(true)]</span><br><span class="line"> public interface IVCOMInterface</span><br><span class="line"> &#123;</span><br><span class="line">   string LoadImageFromStream(System.IO.Stream stream);</span><br><span class="line"> &#125;</span><br><span class="line"> [ComVisible(true), ClassInterface(ClassInterfaceType.None)]</span><br><span class="line"> public class VCOMClass : IVCOMInterface</span><br><span class="line"> &#123;</span><br><span class="line">   public string LoadImageFromStream(System.IO.Stream stream)</span><br><span class="line">   &#123;</span><br><span class="line">     Image img = Image.FromStream(stream);</span><br><span class="line">     //put code to load image here</span><br><span class="line">     return &quot;OK&quot;;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>В проекте на Delphi импортируем VCOMClassLibrary (Project/Import Type Library). Пример вызова (в котором я заодно показал как передавать Stream):  </p>
- <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">procedure TForm1.Button1Click(Sender: TObject);</span><br><span class="line">var</span><br><span class="line"> cls: IVCOMInterface;</span><br><span class="line"> Stream: IStream;</span><br><span class="line"> FileStream: TFileStream;</span><br><span class="line">begin</span><br><span class="line"> cls := CreateComObject(CLASS_VCOMClass) as IVCOMInterface;</span><br><span class="line"> FileStream := TFileStream.Create(&#x27;c:\temp\1.jpg&#x27;, fmOpenRead);</span><br><span class="line"> Stream := TStreamAdapter.Create(FileStream, soOwned) as IStream;</span><br><span class="line"> cls.LoadImageFromStream(Stream);</span><br><span class="line"> FileStream.Free;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure></li>
+<li><p>В проекте на Delphi импортируем VCOMClassLibrary (Project&#x2F;Import Type Library). Пример вызова (в котором я заодно показал как передавать Stream):  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">procedure TForm1.Button1Click(Sender: TObject);</span><br><span class="line">var</span><br><span class="line"> cls: IVCOMInterface;</span><br><span class="line"> Stream: IStream;</span><br><span class="line"> FileStream: TFileStream;</span><br><span class="line">begin</span><br><span class="line"> cls := CreateComObject(CLASS_VCOMClass) as IVCOMInterface;</span><br><span class="line"> FileStream := TFileStream.Create(&#x27;c:\temp\1.jpg&#x27;, fmOpenRead);</span><br><span class="line"> Stream := TStreamAdapter.Create(FileStream, soOwned) as IStream;</span><br><span class="line"> cls.LoadImageFromStream(Stream);</span><br><span class="line"> FileStream.Free;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -314,7 +314,7 @@
       
   
   <div class="tags">
-    <a href="/tags/c/">C#</a>, <a href="/tags/dll/">dll</a>, <a href="/tags/delphi/">delphi</a>, <a href="/tags/com/">COM</a>
+    <a href="/tags/dll/">dll</a>, <a href="/tags/c/">C#</a>, <a href="/tags/com/">COM</a>, <a href="/tags/delphi/">delphi</a>
   </div>
 
       
@@ -345,7 +345,7 @@
         <p>Sqlite замечательная локальная база данных. Не требует установки, легко встраивается в приложения благодаря API. Шустрая благодаря тому, что данные не гоняются ни по сети, ни даже между процессами. У меня загрузка листа в миллион записей в Sqlite занимает порядка 30 секунд. Для сравнения - та же самая процедура загружает те же данные в локальный MySQL в 10 раз дольше.<br>Однако, для того, чтобы загрузка данных в Sqlite происходила с максимально возможной скоростью нужно использовать две вещи:  </p>
 <p>1. <strong>Параметризованный Sql</strong>, типа такого: INSERT INTO `table1` (`A`, `B`) VALUES (:param1, :param2). В начале процедуры загрузки выполнять “prepare” (Sqlite3_Prepare_v2). Перед вставкой “биндить” переменные с помощью sqlite3_bind_text, sqlite3_bind_int64 и т.п.,<br>а затем выполнять вставку вызовом функции sqlite3_step.  </p>
 <p>2. <strong>Транзакции</strong>: вставлять данные большими порциями, например, по 1000 записей. Перед вставкой очередной порции выполнять BEGIN TRANSACTION. В конце вставки - COMMIT TRANSACTION. Если этого не делать, то после каждой операции вставки данные будут немедленно сбрасываться на диск, что замедлит процесс во много раз.  </p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -395,8 +395,8 @@
 <p>Посмотрим в исходник модуля IdSSLOpenSSL. В нем есть такая функция:  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function VerifyCallback(Ok: Integer; ctx: PX509_STORE_CTX): Integer; cdecl;</span><br><span class="line">var</span><br><span class="line">  hcert: PX509;</span><br><span class="line">  Certificate: TIdX509;</span><br><span class="line">  hSSL: PSSL;</span><br><span class="line">  IdSSLSocket: TIdSSLSocket;</span><br><span class="line"> // str: String;</span><br><span class="line">  VerifiedOK: Boolean;</span><br><span class="line">  Depth: Integer;</span><br><span class="line"> // Error: Integer;</span><br><span class="line">begin</span><br><span class="line">  LockVerifyCB.Enter;</span><br><span class="line">  try</span><br><span class="line">    VerifiedOK := True;</span><br><span class="line">    try</span><br><span class="line">      hcert := IdSslX509StoreCtxGetCurrentCert(ctx);</span><br><span class="line">      hSSL := IdSslX509StoreCtxGetAppData(ctx);</span><br><span class="line">      Certificate := TIdX509.Create(hcert);</span><br><span class="line">      if hSSL &lt;&gt; nil then begin</span><br><span class="line">        IdSSLSocket := TIdSSLSocket(IdSslGetAppData(hSSL));</span><br><span class="line">      end</span><br><span class="line">      else begin</span><br><span class="line">        Result := Ok;</span><br><span class="line">        exit;</span><br><span class="line">      end;</span><br><span class="line">      //Error :=</span><br><span class="line">      IdSslX509StoreCtxGetError(ctx);</span><br><span class="line">      //</span><br><span class="line">      Depth := IdSslX509StoreCtxGetErrorDepth(ctx);</span><br><span class="line">     // str := Format(&#x27;Certificate: %s&#x27;, [Certificate.Subject.OneLine]);    &#123;Do not Localize&#125;</span><br><span class="line">     // str := IdSSLSocket.GetSessionIDAsString;</span><br><span class="line">     // ShowMessage(str);</span><br><span class="line">      if (IdSSLSocket.fParent is TIdSSLIOHandlerSocket) then begin</span><br><span class="line">        VerifiedOK := TIdSSLIOHandlerSocket(IdSSLSocket.fParent).DoVerifyPeer(Certificate);</span><br><span class="line">      end;</span><br><span class="line">      if (IdSSLSocket.fParent is TIdServerIOHandlerSSL) then begin</span><br><span class="line">        VerifiedOK := TIdServerIOHandlerSSL(IdSSLSocket.fParent).DoVerifyPeer(Certificate);</span><br><span class="line">      end;</span><br><span class="line">      if not ((Ok&gt;0) and (IdSSLSocket.fSSLContext.VerifyDepth&gt;=Depth)) then begin</span><br><span class="line">        Ok := 0;</span><br><span class="line">        &#123;if Error = OPENSSL_X509_V_OK then begin</span><br><span class="line">          Error := OPENSSL_X509_V_ERR_CERT_CHAIN_TOO_LONG;</span><br><span class="line">        end;&#125;</span><br><span class="line">      end;</span><br><span class="line">      FreeAndNil(Certificate);</span><br><span class="line">    except</span><br><span class="line">    end;</span><br><span class="line">    if VerifiedOK and (Ok &gt; 0) then begin</span><br><span class="line">      Result := 1;</span><br><span class="line">    end</span><br><span class="line">    else begin</span><br><span class="line">      Result := 0;</span><br><span class="line">    end;</span><br><span class="line">  //  Result := Ok; // testing</span><br><span class="line">  finally</span><br><span class="line">    LockVerifyCB.Leave;</span><br><span class="line">  end;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
 
-<p>Эта callback-функция вызывается при проверке сертификата библиотекой OpenSSL, и для того, чтобы не случилось ошибки “Error connecting with SSL” она должна возвращать значение Result = 1. Видно, что VerifyCallback возвращает Result = 1 только в том случае, когда Ok &gt; 0. А параметр Ok для последнего сертификата в цепочке проверяемых всегда будет = 0, т.к. корневой сертификат, с помощью которого его можно проверить, не определен.  </p>
-<p>Таким образом, задача в следующем: проверить - подписан ли последний в цепочке сертификат одним из доверенных корневых (ROOT) сертификатов в хранилище Windows, и если подписан, то присвоить Ok = 1.  </p>
+<p>Эта callback-функция вызывается при проверке сертификата библиотекой OpenSSL, и для того, чтобы не случилось ошибки “Error connecting with SSL” она должна возвращать значение Result &#x3D; 1. Видно, что VerifyCallback возвращает Result &#x3D; 1 только в том случае, когда Ok &gt; 0. А параметр Ok для последнего сертификата в цепочке проверяемых всегда будет &#x3D; 0, т.к. корневой сертификат, с помощью которого его можно проверить, не определен.  </p>
+<p>Таким образом, задача в следующем: проверить - подписан ли последний в цепочке сертификат одним из доверенных корневых (ROOT) сертификатов в хранилище Windows, и если подписан, то присвоить Ok &#x3D; 1.  </p>
 <p>К сожалению, при проектировании Indy 9 было допущено много ошибок, и для того, чтобы решить поставленную задачу, придется вносить изменения в код модуля IdSSLOpenSSL, а затем перекомпилировать пакет<br>Indy70.dpk.  </p>
 <p>Внесем следующие изменения:  </p>
 <p>1. Изменим определение события TVerifyPeerEvent на следующее:  </p>
@@ -423,7 +423,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var</span><br><span class="line">  IdHTTP: TIdHTTP;</span><br><span class="line">  IdSSLIOHandlerSocket: TIdSSLIOHandlerSocket;</span><br><span class="line">begin</span><br><span class="line">  IdHTTP := TIdHTTP.Create(nil);</span><br><span class="line">  IdSSLIOHandlerSocket := TIdSSLIOHandlerSocket.Create(nil);</span><br><span class="line">  IdHTTP.IOHandler := IdSSLIOHandlerSocket;</span><br><span class="line">  with IdSSLIOHandlerSocket do</span><br><span class="line">  begin</span><br><span class="line">    SSLOptions.Method := sslvSSLv23;</span><br><span class="line">    SSLOptions.Mode := sslmClient;</span><br><span class="line">    SSLOptions.VerifyMode := [sslvrfPeer];</span><br><span class="line">    SSLOptions.VerifyDepth := 10;</span><br><span class="line">    OnVerifyPeer := SSLIOHandlerVerifyPeer;</span><br><span class="line">  end;</span><br><span class="line">  IdHTTP.Get(&#x27;https://www.google.com&#x27;);</span><br><span class="line">  FreeAndNil(IdHTTP); </span><br><span class="line">  FreeAndNil(IdSSLIOHandlerSocket);</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
 
 <p>PS. <a href="http://blog.coolsoftware.ru/2012/07/enhanced-security.html">Проверка серверного сертификата и Enhanced Security</a>  </p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -436,7 +436,7 @@
       
   
   <div class="tags">
-    <a href="/tags/certificate/">certificate</a>, <a href="/tags/cryptoapi/">cryptoapi</a>, <a href="/tags/delphi/">delphi</a>, <a href="/tags/indy/">indy</a>, <a href="/tags/ssl/">ssl</a>, <a href="/tags/%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/">проверка</a>
+    <a href="/tags/delphi/">delphi</a>, <a href="/tags/certificate/">certificate</a>, <a href="/tags/cryptoapi/">cryptoapi</a>, <a href="/tags/indy/">indy</a>, <a href="/tags/ssl/">ssl</a>, <a href="/tags/%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/">проверка</a>
   </div>
 
       
@@ -471,7 +471,7 @@
 <p>Вроде работает. К Blogger-у подключается просто:<br>в шаблоне (Дизайн-&gt;Изменить HTML) перед <strong></head></strong> добавляем:  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;link href=&quot;http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;/&gt;</span><br><span class="line">&lt;script src=&quot;http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js&quot; type=&quot;text/javascript&quot;/&gt;</span><br></pre></td></tr></table></figure>
 
-<p>Затем к тегу <strong><body></strong> нужно добавить: <strong>onload=”prettyPrint()”</strong>  </p>
+<p>Затем к тегу <strong><body></strong> нужно добавить: <strong>onload&#x3D;”prettyPrint()”</strong>  </p>
 <p>Использовать так:  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;pre class=&quot;prettyprint&quot;&gt;</span><br><span class="line">    // put your code here</span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
 
@@ -479,7 +479,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;pre class=&quot;prettyprint lang-html&quot;&gt;</span><br><span class="line">  The lang-* class specifies the language file extensions.</span><br><span class="line">  File extensions supported by default include</span><br><span class="line">    &quot;bsh&quot;, &quot;c&quot;, &quot;cc&quot;, &quot;cpp&quot;, &quot;cs&quot;, &quot;csh&quot;, &quot;cyc&quot;, &quot;cv&quot;, &quot;htm&quot;, </span><br><span class="line">    &quot;html&quot;, &quot;java&quot;, &quot;js&quot;, &quot;m&quot;, &quot;mxml&quot;, &quot;perl&quot;, &quot;pl&quot;, &quot;pm&quot;, </span><br><span class="line">    &quot;py&quot;, &quot;rb&quot;, &quot;sh&quot;, &quot;xhtml&quot;, &quot;xml&quot;, &quot;xsl&quot;.</span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
 
 <p>PS. Гугловский Highlighter похоже Delphi не поддерживает. Поэтому я его удалил, а вместо него подключил highlight.js.<br>Сделал я это так:  </p>
-<p>1. Скачал <a target="_blank" rel="noopener" href="http://softwaremaniacs.org/soft/highlight/download/">HIGHLIGHT.JS</a> (при этом выбрал нужный мне Delphi).<br>2. Файлы highlight.js, highlight.pack.js и стили styles/*.css из скачанного архива разместил в google apps.<br>3. В шаблоне Blogger-а (Дизайн-&gt;Изменить HTML) перед </head> добавил:  </p>
+<p>1. Скачал <a target="_blank" rel="noopener" href="http://softwaremaniacs.org/soft/highlight/download/">HIGHLIGHT.JS</a> (при этом выбрал нужный мне Delphi).<br>2. Файлы highlight.js, highlight.pack.js и стили styles&#x2F;*.css из скачанного архива разместил в google apps.<br>3. В шаблоне Blogger-а (Дизайн-&gt;Изменить HTML) перед </head> добавил:  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;link href=&#x27;http://testapp.coolsoftware.ru/styles/default.css&#x27; rel=&#x27;stylesheet&#x27;/&gt;</span><br><span class="line">&lt;script src=&#x27;http://testapp.coolsoftware.ru/highlight.pack.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">hljs.initHighlightingOnLoad();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 <p>Чтобы использовать подсветку синтаксиса, нужно заключать код в <strong><pre><code class="delphi">...</code></pre></strong>. Пример:  </p>
@@ -526,8 +526,8 @@
         <p>Пара замечаний про конфигурирование IIS.</p>
 <p>1. Если при попытке обратиться к динамической странице (ASP) на вашем сервере IIS выдается ошибка “HTTP Error 404 - File or Directory not found” (при этом статические страницы нормально выдаются), то нужно включить “Active Server Pages” в настройках “Web Service Extensions”.</p>
 <p><img src="http://2.bp.blogspot.com/--SVi8IGF318/TrPwdyCpbDI/AAAAAAAAAAw/65t8BSC9TYM/s400/turn-on-asp.png"></p>
-<p>2. При обращении из ASP к базе Access (MDB): если SELECT выполняется нормально, а при попытке добавить, удалить или отредактировать записи выдаются сообщения “В операции должен использоваться обновляемый запрос.”, “Невозможно удаление записей из указанных таблиц.”, то нужно дать права пользователю, от имени которого выполняется сайт (IUSR или что-то похожее), на файл базы MDB и на каталог, в котором этот файл расположен (права на создание/удаление/изменение).</p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>2. При обращении из ASP к базе Access (MDB): если SELECT выполняется нормально, а при попытке добавить, удалить или отредактировать записи выдаются сообщения “В операции должен использоваться обновляемый запрос.”, “Невозможно удаление записей из указанных таблиц.”, то нужно дать права пользователю, от имени которого выполняется сайт (IUSR или что-то похожее), на файл базы MDB и на каталог, в котором этот файл расположен (права на создание&#x2F;удаление&#x2F;изменение).</p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -570,7 +570,7 @@
       
         <p>64-битного драйвера MDB в природе не существует, поэтому есть проблема доступа к MDB из 64-битных приложений. В частности из ASP-приложений под IIS. Проблема решается разрешением 32-битных приложений в настройках IIS:</p>
 <p><a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-lFFmOmiO7rc/TqmFSbJH-OI/AAAAAAAAAAQ/bOD6YS40yTg/s1600/x64-asp-mdb.png"><img src="http://4.bp.blogspot.com/-lFFmOmiO7rc/TqmFSbJH-OI/AAAAAAAAAAQ/bOD6YS40yTg/s400/x64-asp-mdb.png"></a></p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>

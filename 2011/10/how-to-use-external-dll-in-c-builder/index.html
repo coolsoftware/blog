@@ -8,7 +8,7 @@
   
   <meta name="description" content="1. Создаем либу: implib dllname.lib dllname.dll
 2. Добавляем созданную либу к проекту: Project-&amp;gt;AddToProject  
-===Перепечатка материалов блога разр">
+=&amp;#x3D;&amp;#x3D;Перепечатка материалов ">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -74,7 +74,7 @@
       
         <p>1. Создаем либу: implib dllname.lib dllname.dll</p>
 <p>2. Добавляем созданную либу к проекту: <span class="Apple-style-span" style="background-color: #efefef; font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; font-size: 14px;">Project-&gt;AddToProject</span>  </p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -84,7 +84,7 @@
       
   
   <div class="tags">
-    <a href="/tags/cpp/">cpp</a>, <a href="/tags/builder/">builder</a>, <a href="/tags/dll/">dll</a>, <a href="/tags/lib/">lib</a>
+    <a href="/tags/builder/">builder</a>, <a href="/tags/cpp/">cpp</a>, <a href="/tags/dll/">dll</a>, <a href="/tags/lib/">lib</a>
   </div>
 
       
@@ -97,6 +97,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

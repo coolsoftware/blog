@@ -6,7 +6,7 @@
   <link href="https://blog.coolsoftware.ru/atom.xml" rel="self"/>
   
   <link href="https://blog.coolsoftware.ru/"/>
-  <updated>2022-06-16T08:56:18.299Z</updated>
+  <updated>2022-06-17T05:16:40.159Z</updated>
   <id>https://blog.coolsoftware.ru/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.coolsoftware.ru/2022/06/%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-mkdocs/"/>
     <id>https://blog.coolsoftware.ru/2022/06/%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-mkdocs/</id>
     <published>2022-06-16T08:44:12.000Z</published>
-    <updated>2022-06-16T08:56:18.299Z</updated>
+    <updated>2022-06-17T05:16:40.159Z</updated>
     
     
       
@@ -47,7 +47,7 @@
     <link href="https://blog.coolsoftware.ru/2022/03/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-test-api/"/>
     <id>https://blog.coolsoftware.ru/2022/03/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-test-api/</id>
     <published>2022-03-31T10:30:02.000Z</published>
-    <updated>2022-05-26T03:56:52.792Z</updated>
+    <updated>2022-05-26T04:00:06.580Z</updated>
     
     
       
@@ -73,7 +73,7 @@
     <link href="https://blog.coolsoftware.ru/2022/02/openvpn-apk/"/>
     <id>https://blog.coolsoftware.ru/2022/02/openvpn-apk/</id>
     <published>2022-02-24T11:00:58.000Z</published>
-    <updated>2022-02-24T11:11:03.058Z</updated>
+    <updated>2022-02-24T11:11:04.000Z</updated>
     
     
       
@@ -99,7 +99,7 @@
     <link href="https://blog.coolsoftware.ru/2022/02/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-android-development/"/>
     <id>https://blog.coolsoftware.ru/2022/02/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-android-development/</id>
     <published>2022-02-19T13:11:05.000Z</published>
-    <updated>2022-02-21T06:13:34.924Z</updated>
+    <updated>2022-06-17T05:17:09.512Z</updated>
     
     
       
@@ -131,7 +131,7 @@
     <link href="https://blog.coolsoftware.ru/2022/02/%D0%BF%D0%BE%D0%B8%D1%81%D0%BA-%D0%B2-%D0%B1%D0%BB%D0%BE%D0%B3%D0%B5/"/>
     <id>https://blog.coolsoftware.ru/2022/02/%D0%BF%D0%BE%D0%B8%D1%81%D0%BA-%D0%B2-%D0%B1%D0%BB%D0%BE%D0%B3%D0%B5/</id>
     <published>2022-02-16T06:44:34.000Z</published>
-    <updated>2022-02-16T09:04:05.727Z</updated>
+    <updated>2022-02-16T09:04:06.000Z</updated>
     
     
       
@@ -149,9 +149,9 @@
     
     <category term="блог" scheme="https://blog.coolsoftware.ru/tags/%D0%B1%D0%BB%D0%BE%D0%B3/"/>
     
-    <category term="hexo" scheme="https://blog.coolsoftware.ru/tags/hexo/"/>
-    
     <category term="поиск" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%B8%D1%81%D0%BA/"/>
+    
+    <category term="hexo" scheme="https://blog.coolsoftware.ru/tags/hexo/"/>
     
     <category term="theme" scheme="https://blog.coolsoftware.ru/tags/theme/"/>
     
@@ -164,7 +164,7 @@
     <link href="https://blog.coolsoftware.ru/2022/02/%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-mysql-serrver-%D0%BD%D0%B0-centos/"/>
     <id>https://blog.coolsoftware.ru/2022/02/%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-mysql-serrver-%D0%BD%D0%B0-centos/</id>
     <published>2022-02-11T14:36:59.000Z</published>
-    <updated>2022-02-11T15:14:25.183Z</updated>
+    <updated>2022-02-11T15:14:26.000Z</updated>
     
     
       
@@ -172,7 +172,7 @@
         
         
     <summary type="html">&lt;p&gt;При обновлении MySQL Server на CentOS вылезла ошибка:&lt;/p&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span</summary>
+&lt;figure class=&quot;highlight text&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span</summary>
         
       
     
@@ -190,7 +190,7 @@
     <link href="https://blog.coolsoftware.ru/2022/02/%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4/"/>
     <id>https://blog.coolsoftware.ru/2022/02/%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4/</id>
     <published>2022-02-07T15:37:00.000Z</published>
-    <updated>2022-02-08T14:54:34.840Z</updated>
+    <updated>2022-02-08T14:54:36.000Z</updated>
     
     
       
@@ -204,11 +204,11 @@
     
     
     
-    <category term="переезд" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4/"/>
-    
     <category term="блог" scheme="https://blog.coolsoftware.ru/tags/%D0%B1%D0%BB%D0%BE%D0%B3/"/>
     
     <category term="hexo" scheme="https://blog.coolsoftware.ru/tags/hexo/"/>
+    
+    <category term="переезд" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4/"/>
     
     <category term="blogger" scheme="https://blog.coolsoftware.ru/tags/blogger/"/>
     
@@ -221,7 +221,7 @@
     <link href="https://blog.coolsoftware.ru/2022/01/nodejs/"/>
     <id>https://blog.coolsoftware.ru/2022/01/nodejs/</id>
     <published>2022-01-24T16:17:00.000Z</published>
-    <updated>2022-05-19T10:24:35.238Z</updated>
+    <updated>2022-05-19T10:24:36.000Z</updated>
     
     
       
@@ -257,7 +257,7 @@
     <link href="https://blog.coolsoftware.ru/2022/01/mongo-aggregation-with-pagination/"/>
     <id>https://blog.coolsoftware.ru/2022/01/mongo-aggregation-with-pagination/</id>
     <published>2022-01-14T15:00:00.000Z</published>
-    <updated>2022-02-03T11:33:07.088Z</updated>
+    <updated>2022-02-03T11:33:08.000Z</updated>
     
     
       
@@ -272,9 +272,9 @@
     
     
     
-    <category term="mongo" scheme="https://blog.coolsoftware.ru/tags/mongo/"/>
-    
     <category term="aggregation" scheme="https://blog.coolsoftware.ru/tags/aggregation/"/>
+    
+    <category term="mongo" scheme="https://blog.coolsoftware.ru/tags/mongo/"/>
     
     <category term="nodejs" scheme="https://blog.coolsoftware.ru/tags/nodejs/"/>
     
@@ -291,7 +291,7 @@
     <link href="https://blog.coolsoftware.ru/2022/01/shelliconoverlayidentifiers-windows-10/"/>
     <id>https://blog.coolsoftware.ru/2022/01/shelliconoverlayidentifiers-windows-10/</id>
     <published>2022-01-14T07:45:00.000Z</published>
-    <updated>2022-02-03T11:33:07.091Z</updated>
+    <updated>2022-02-03T11:33:08.000Z</updated>
     
     
       
@@ -319,7 +319,7 @@
     <link href="https://blog.coolsoftware.ru/2022/01/io-sockets-network-iocp-aio-etc/"/>
     <id>https://blog.coolsoftware.ru/2022/01/io-sockets-network-iocp-aio-etc/</id>
     <published>2022-01-09T11:08:00.000Z</published>
-    <updated>2022-02-03T11:33:07.093Z</updated>
+    <updated>2022-02-03T11:33:08.000Z</updated>
     
     
       
@@ -328,7 +328,7 @@
         
     <summary type="html">&lt;p&gt;Полезные ссылки: IO, Sockets, Network, IOCP, AIO, etc.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;  IO_URING. &lt;a</summary>
+&lt;li&gt;IO_URING. &lt;a</summary>
         
       
     
@@ -342,7 +342,7 @@
     <link href="https://blog.coolsoftware.ru/2021/12/blog-post/"/>
     <id>https://blog.coolsoftware.ru/2021/12/blog-post/</id>
     <published>2021-12-25T09:10:00.000Z</published>
-    <updated>2022-04-01T06:08:30.843Z</updated>
+    <updated>2022-04-01T06:08:32.000Z</updated>
     
     
       
@@ -369,7 +369,7 @@
     <link href="https://blog.coolsoftware.ru/2021/12/mongodb-aggregate/"/>
     <id>https://blog.coolsoftware.ru/2021/12/mongodb-aggregate/</id>
     <published>2021-12-06T09:34:00.000Z</published>
-    <updated>2022-02-03T11:33:07.097Z</updated>
+    <updated>2022-02-03T11:33:08.000Z</updated>
     
     
       
@@ -377,7 +377,7 @@
         
         
     <summary type="html">&lt;p&gt;Пример aggregation в Mongo:&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span</summary>
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;db.&lt;span</summary>
         
       
     
@@ -397,7 +397,7 @@
     <link href="https://blog.coolsoftware.ru/2021/11/best-practics/"/>
     <id>https://blog.coolsoftware.ru/2021/11/best-practics/</id>
     <published>2021-11-21T14:03:00.000Z</published>
-    <updated>2022-04-29T06:11:01.660Z</updated>
+    <updated>2022-04-29T06:11:02.000Z</updated>
     
     
       
@@ -422,7 +422,7 @@
     <link href="https://blog.coolsoftware.ru/2021/11/manage-web-site-with-git-switch-default/"/>
     <id>https://blog.coolsoftware.ru/2021/11/manage-web-site-with-git-switch-default/</id>
     <published>2021-11-16T04:37:00.000Z</published>
-    <updated>2022-02-03T11:33:07.102Z</updated>
+    <updated>2022-02-03T11:33:08.000Z</updated>
     
     
       
@@ -450,7 +450,7 @@
     <link href="https://blog.coolsoftware.ru/2021/11/web-development-design/"/>
     <id>https://blog.coolsoftware.ru/2021/11/web-development-design/</id>
     <published>2021-11-15T05:42:00.000Z</published>
-    <updated>2022-02-03T11:33:07.105Z</updated>
+    <updated>2022-02-03T11:33:08.000Z</updated>
     
     
       
@@ -459,7 +459,7 @@
         
     <summary type="html">&lt;p&gt;Web Development &amp;amp; Design&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;  &lt;a href=&quot;https://developers.google.com/speed/libraries&quot;&gt;Google Hosted</summary>
+&lt;li&gt;&lt;a href=&quot;https://developers.google.com/speed/libraries&quot;&gt;Google Hosted</summary>
         
       
     
@@ -477,7 +477,7 @@
     <link href="https://blog.coolsoftware.ru/2021/10/ffmpeg-convert-mkv-to-mp4/"/>
     <id>https://blog.coolsoftware.ru/2021/10/ffmpeg-convert-mkv-to-mp4/</id>
     <published>2021-10-16T05:09:00.000Z</published>
-    <updated>2022-02-03T11:33:07.107Z</updated>
+    <updated>2022-02-03T11:33:08.000Z</updated>
     
     
       
@@ -507,7 +507,7 @@
     <link href="https://blog.coolsoftware.ru/2021/08/selinux-mongodb-apache/"/>
     <id>https://blog.coolsoftware.ru/2021/08/selinux-mongodb-apache/</id>
     <published>2021-08-23T08:01:00.000Z</published>
-    <updated>2022-02-03T11:33:07.109Z</updated>
+    <updated>2022-02-03T11:33:08.000Z</updated>
     
     
       
@@ -532,7 +532,7 @@
     <link href="https://blog.coolsoftware.ru/2021/08/install-php-mongodb-for-php-73-on/"/>
     <id>https://blog.coolsoftware.ru/2021/08/install-php-mongodb-for-php-73-on/</id>
     <published>2021-08-23T06:53:00.000Z</published>
-    <updated>2022-02-03T11:33:07.111Z</updated>
+    <updated>2022-02-03T11:33:08.000Z</updated>
     
     
       
@@ -561,7 +561,7 @@
     <link href="https://blog.coolsoftware.ru/2021/07/developing-in-go/"/>
     <id>https://blog.coolsoftware.ru/2021/07/developing-in-go/</id>
     <published>2021-07-13T13:33:00.000Z</published>
-    <updated>2022-02-03T11:33:07.113Z</updated>
+    <updated>2022-02-03T11:33:08.000Z</updated>
     
     
       
@@ -570,7 +570,7 @@
         
     <summary type="html">&lt;p&gt;Developing in Go  &lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;  &lt;a href=&quot;https://eli.thegreenplace.net/2021/rest-servers-in-go-part-1-standard-library/&quot;&gt;REST Servers</summary>
+&lt;li&gt;&lt;a href=&quot;https://eli.thegreenplace.net/2021/rest-servers-in-go-part-1-standard-library/&quot;&gt;REST Servers in</summary>
         
       
     

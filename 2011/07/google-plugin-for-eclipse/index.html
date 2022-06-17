@@ -77,7 +77,7 @@ http://dl.google.com/eclipse/plugin/3.7
 <p>(<a target="_blank" rel="noopener" href="http://code.google.com/intl/ru/eclipse/docs/download.html">http://code.google.com/intl/ru/eclipse/docs/download.html</a>)</p>
 <p>Если устанавливать неверную версию, то будет выдаваться сообщение типа такого:</p>
 <p>Cannot complete the install because one or more required items could not be found.<br>Software being installed: Google App Engine Java SDK 1.3.4 1.3.4.v201005212032 (com.google.appengine.eclipse.sdkbundle.e35.feature.1.3.4.feature.group 1.3.4.v201005212032)<br>Missing requirement: Google Plugin for Eclipse 3.5 1.3.2.v201003242055 (com.google.gdt.eclipse.suite.e35.feature.feature.group 1.3.2.v201003242055) requires ‘org.eclipse.platform.feature.group [3.5.0,3.6.0)’ but it could not be found<br>Cannot satisfy dependency:<br>  From: Google App Engine Java SDK 1.3.4 1.3.4.v201005212032 (com.google.appengine.eclipse.sdkbundle.e35.feature.1.3.4.feature.group 1.3.4.v201005212032)<br>   To: com.google.gdt.eclipse.suite.e35.feature.feature.group 1.3.2</p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -100,6 +100,24 @@ http://dl.google.com/eclipse/plugin/3.7
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

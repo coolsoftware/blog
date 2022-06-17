@@ -7,9 +7,9 @@
   <meta name="author" content="Vitaly Yakovlev">
   
   <meta name="description" content="Аккаунт для доступа по ftp лучше (imho) делать без доступа к шелу:
-useradd ftpuser -s /sbin/nologin
+useradd ftpuser -s &amp;#x2F;sbin&amp;#x2F;nologin
 или, если пользователь уже есть:
-usermod -s /sbin/">
+usermod">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -74,14 +74,14 @@ usermod -s /sbin/">
     <div class="e-content entry" itemprop="articleBody">
       
         <p>Аккаунт для доступа по ftp лучше (imho) делать без доступа к шелу:</p>
-<p>useradd ftpuser -s /sbin/nologin</p>
+<p>useradd ftpuser -s &#x2F;sbin&#x2F;nologin</p>
 <p>или, если пользователь уже есть:</p>
-<p>usermod -s /sbin/nologin ftpuser</p>
+<p>usermod -s &#x2F;sbin&#x2F;nologin ftpuser</p>
 <p>Но при этом получаем ошибку: 530 Login incorrect</p>
-<p>Причина: в соответствии с настройками в /etc/pam.d/vsftpd пользователь должен иметь шел, перечисленный в /etc/shells. /sbin/nologin, разумеется, в /etc/shells не содержится.</p>
-<p>Фикс: комментируем следующую строчку в /etc/pam.d/vsftpd:</p>
+<p>Причина: в соответствии с настройками в &#x2F;etc&#x2F;pam.d&#x2F;vsftpd пользователь должен иметь шел, перечисленный в &#x2F;etc&#x2F;shells. &#x2F;sbin&#x2F;nologin, разумеется, в &#x2F;etc&#x2F;shells не содержится.</p>
+<p>Фикс: комментируем следующую строчку в &#x2F;etc&#x2F;pam.d&#x2F;vsftpd:</p>
 <p>#auth       required    pam_shells.so</p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -104,6 +104,24 @@ usermod -s /sbin/">
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

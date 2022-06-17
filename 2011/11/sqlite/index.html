@@ -73,7 +73,7 @@
         <p>Sqlite замечательная локальная база данных. Не требует установки, легко встраивается в приложения благодаря API. Шустрая благодаря тому, что данные не гоняются ни по сети, ни даже между процессами. У меня загрузка листа в миллион записей в Sqlite занимает порядка 30 секунд. Для сравнения - та же самая процедура загружает те же данные в локальный MySQL в 10 раз дольше.<br>Однако, для того, чтобы загрузка данных в Sqlite происходила с максимально возможной скоростью нужно использовать две вещи:  </p>
 <p>1. <strong>Параметризованный Sql</strong>, типа такого: INSERT INTO `table1` (`A`, `B`) VALUES (:param1, :param2). В начале процедуры загрузки выполнять “prepare” (Sqlite3_Prepare_v2). Перед вставкой “биндить” переменные с помощью sqlite3_bind_text, sqlite3_bind_int64 и т.п.,<br>а затем выполнять вставку вызовом функции sqlite3_step.  </p>
 <p>2. <strong>Транзакции</strong>: вставлять данные большими порциями, например, по 1000 записей. Перед вставкой очередной порции выполнять BEGIN TRANSACTION. В конце вставки - COMMIT TRANSACTION. Если этого не делать, то после каждой операции вставки данные будут немедленно сбрасываться на диск, что замедлит процесс во много раз.  </p>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -96,6 +96,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

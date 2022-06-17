@@ -76,8 +76,8 @@
 <div style="font-family: Georgia, serif; font-size: 100%; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; ">Как мы видим текущий каталог Git Bash - %HOMEDRIVE%%HOMEPATH%. В нем хранятся все настройки git, каталог .ssh с SSHKey и проекты обычно тоже там.</div>
 
 <p>Я создал в %HOMEDRIVE%%HOMEPATH% каталог Coolsoftware и в нем git.cmd следующего содержания:</p>
-<p>@set HOME=%HOMEDRIVE%%HOMEPATH%\Coolsoftware</p>
-<p>C:\Windows\SysWOW64\cmd.exe /c “”C:\Program Files (x86)\Git\bin\sh.exe” –login -i”</p>
+<p>@set HOME&#x3D;%HOMEDRIVE%%HOMEPATH%\Coolsoftware</p>
+<p>C:\Windows\SysWOW64\cmd.exe &#x2F;c “”C:\Program Files (x86)\Git\bin\sh.exe” –login -i”</p>
 <p>Затем создал ярлык на этот git.cmd и вынес его на рабочий стол, обозвав “Git Bash - Coolsoftware”. Теперь при его запуске текущий каталог пользователя в “баше” %HOMEDRIVE%%HOMEPATH%\Coolsoftware, а при запуске старого ярлыка “Git Bash” текущий каталог %HOMEDRIVE%%HOMEPATH%. Таким образом получилось два “баша”, в каждом - свои настройки.</p>
 <p>Далее запустил “Git Bash - Coolsoftware” произвел установку github в соответствии с <a target="_blank" rel="noopener" href="http://help.github.com/win-set-up-git/">инструкцией</a> и выложил проект <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/VHashedStringList">VHashedStringList</a> - оптимизированный список строк, доступ к элементам которого организован с помощью хеш-индекса.</p>
 <p>TVHashedStringList - аналог стандартного THashedStringList (фактически, он сделан на его основе, хотя наследуется не от него, а от TStringList).</p>
@@ -91,7 +91,7 @@
 <p>Поэтому в следующем примере полного перестроения индекса не произойдет ни разу.</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">procedure ChangeList(lst: TVHashedStringList);</span><br><span class="line">begin</span><br><span class="line">  lst.Values[&#x27;key1&#x27;] := &#x27;Value1&#x27;; //индекс модифицирован и не требует перестроения</span><br><span class="line">  lst.Values[&#x27;key2&#x27;] := &#x27;Value2&#x27;; //индекс модифицирован и не требует перестроения</span><br><span class="line">  lst.Values[&#x27;key3&#x27;] := &#x27;Value3&#x27;; //индекс модифицирован и не требует перестроения</span><br><span class="line">  lst.Values[&#x27;key4&#x27;] := &#x27;Value4&#x27;; //индекс модифицирован и не требует перестроения</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
 
-<p>===</p>
+<p>=&#x3D;&#x3D;</p>
 <p>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
@@ -115,6 +115,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 

@@ -78,7 +78,7 @@
 <p><a target="_blank" rel="noopener" href="https://lh3.googleusercontent.com/-kmadM7IZj9w/YeF_aOFLcrI/AAAAAAAAAeY/3p3CYGwDqfQhYVVzdq2lPi2pWkbm8FunwCNcBGAsYHQ/image.png"><img src="https://lh3.googleusercontent.com/-kmadM7IZj9w/YeF_aOFLcrI/AAAAAAAAAeY/3p3CYGwDqfQhYVVzdq2lPi2pWkbm8FunwCNcBGAsYHQ/w640-h354/image.png"></a></p>
 <p>Чтобы получить все контакты можно воспользоваться <a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/aggregation/">aggregation</a> с <a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/">$unwind</a>.</p>
 <p>Еще нам нужно посчитать количество всех контактов, после чего “вырезать” только те, которые нужно показать в выбранной странице. Для того, чтобы выполнить обе эти операции одним запросом, воспользуемся чудесной пайплайн-стадией <a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/operator/aggregation/facet/">$facet</a>. Получится так:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">db.collection(<span class="string">&#x27;users&#x27;</span>).aggregate([</span><br><span class="line">  &#123;<span class="string">&quot;$unwind&quot;</span>:<span class="string">&quot;$contacts&quot;</span>&#125;,</span><br><span class="line">  &#123;<span class="string">&quot;$facet&quot;</span>:&#123;</span><br><span class="line">    <span class="string">&quot;meta&quot;</span>:[</span><br><span class="line">      &#123;<span class="string">&quot;$count&quot;</span>: <span class="string">&quot;totalCount&quot;</span>&#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;data&quot;</span>:[</span><br><span class="line">      &#123;<span class="string">&quot;$sort&quot;</span>:&#123;<span class="string">&#x27;contacts.name&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;username&#x27;</span>:<span class="number">1</span>&#125;&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;$skip&quot;</span>:firstRow-<span class="number">1</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;$limit&quot;</span>:page_size&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;$replaceRoot&quot;</span>:</span><br><span class="line">        &#123;<span class="string">&quot;newRoot&quot;</span>:&#123;</span><br><span class="line">          <span class="string">&quot;$mergeObjects&quot;</span>:[</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="string">&quot;username&quot;</span>:<span class="string">&quot;$username&quot;</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&quot;$contacts&quot;</span></span><br><span class="line">          ]</span><br><span class="line">        &#125;&#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;&#125;,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">db.<span class="title function_">collection</span>(<span class="string">&#x27;users&#x27;</span>).<span class="title function_">aggregate</span>([</span><br><span class="line">  &#123;<span class="string">&quot;$unwind&quot;</span>:<span class="string">&quot;$contacts&quot;</span>&#125;,</span><br><span class="line">  &#123;<span class="string">&quot;$facet&quot;</span>:&#123;</span><br><span class="line">    <span class="string">&quot;meta&quot;</span>:[</span><br><span class="line">      &#123;<span class="string">&quot;$count&quot;</span>: <span class="string">&quot;totalCount&quot;</span>&#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;data&quot;</span>:[</span><br><span class="line">      &#123;<span class="string">&quot;$sort&quot;</span>:&#123;<span class="string">&#x27;contacts.name&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;username&#x27;</span>:<span class="number">1</span>&#125;&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;$skip&quot;</span>:firstRow-<span class="number">1</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;$limit&quot;</span>:page_size&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;$replaceRoot&quot;</span>:</span><br><span class="line">        &#123;<span class="string">&quot;newRoot&quot;</span>:&#123;</span><br><span class="line">          <span class="string">&quot;$mergeObjects&quot;</span>:[</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="string">&quot;username&quot;</span>:<span class="string">&quot;$username&quot;</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&quot;$contacts&quot;</span></span><br><span class="line">          ]</span><br><span class="line">        &#125;&#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;&#125;,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
 
 <p>page_size - это количество записей на странице.</p>
 <p>firstRow - это номер первой записи на странице. Вычисляется он так:</p>
@@ -87,10 +87,10 @@
 <p>Вместо $unwind могут быть другие пайплайн-стадии, которые выбирают нужные для показа данные. Основной же прием, который я хотел продемонстрировать в этом посте, - это использование $facet.</p>
 <p>Полный пример можно посмотреть на github:</p>
 <ul>
-<li>  сервер на nodejs: <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/node-mongo-aggregation-pagination">https://github.com/coolsoftware/node-mongo-aggregation-pagination</a></li>
-<li>  клиент на react: <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/react-mongo-aggregation-pagination">https://github.com/coolsoftware/react-mongo-aggregation-pagination</a></li>
+<li>сервер на nodejs: <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/node-mongo-aggregation-pagination">https://github.com/coolsoftware/node-mongo-aggregation-pagination</a></li>
+<li>клиент на react: <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/react-mongo-aggregation-pagination">https://github.com/coolsoftware/react-mongo-aggregation-pagination</a></li>
 </ul>
-<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -100,7 +100,7 @@
       
   
   <div class="tags">
-    <a href="/tags/mongo/">mongo</a>, <a href="/tags/aggregation/">aggregation</a>, <a href="/tags/nodejs/">nodejs</a>, <a href="/tags/pagination/">pagination</a>, <a href="/tags/reac/">reac</a>, <a href="/tags/tutorial/">tutorial</a>
+    <a href="/tags/aggregation/">aggregation</a>, <a href="/tags/mongo/">mongo</a>, <a href="/tags/nodejs/">nodejs</a>, <a href="/tags/pagination/">pagination</a>, <a href="/tags/reac/">reac</a>, <a href="/tags/tutorial/">tutorial</a>
   </div>
 
       
@@ -113,6 +113,24 @@
 <section id="comment">
   <h1 class="title">Комментарии</h1>
 
+  
+	  <div id="gitalk-container" style="margin: 30px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '44b2b2d79b5fffd71861',
+        clientSecret: 'd74f44111b6308d895a7e071dcd27c2178c235a8',
+        repo: 'gitalk',
+        owner: 'coolsoftware',
+        admin: ['coolsoftware'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+	  
   
 </section>
 
