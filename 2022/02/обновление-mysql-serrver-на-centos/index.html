@@ -111,6 +111,9 @@ The GPG keys listed for the &amp;quot;MySQL 8.0 Community Server&amp;quot; repos
         owner: 'coolsoftware',
         admin: ['coolsoftware'],
         id: md5(location.pathname),      // Ensure uniqueness and length less than 50
+        perPage: '10',
+        pagerDirection: 'first',
+        createIssueManually: 'false',
         distractionFreeMode: false  // Facebook-like distraction free mode
     })
     gitalk.render('gitalk-container')
