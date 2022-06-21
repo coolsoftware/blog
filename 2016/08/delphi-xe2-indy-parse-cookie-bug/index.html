@@ -76,12 +76,12 @@ function GetLastValueOf(const AName: String; var VValue: String): Boolean;  v">
 
 <p>Ошибка происходит если строка <strong>S</strong> после вызова <strong>GetLastValueOf(‘EXPIRES’, S)</strong> содержит что-нибудь (<strong>Length(S) &gt; 0</strong>), а GetLastValueOf(‘DOMAIN’, <strong>S)</strong> возвращает <strong>False</strong>.  </p>
 <p>Такое случается, если на вход <strong>TIdCookie.ParseServerCookie</strong> поступает строка <strong>ACookieText</strong> типа такой:  </p>
-<p>CookieName&#x3D;CookieValue;Path&#x3D;&#x2F;;Expires&#x3D;Wed, 20-Aug-2017 02:20:00 GMT;  </p>
+<p>CookieName=CookieValue;Path=/;Expires=Wed, 20-Aug-2017 02:20:00 GMT;  </p>
 <p>Интересно, что ошибки бы не случилось, если бы параметр <strong>VValue</strong> у функции <strong>GetLastValueOf</strong> был объявлен как <strong>out</strong>, а не как <strong>var</strong>.  </p>
 <p><strong>Fix</strong>. Для исправления этого бага я сделал класс <strong>TVCookieManager</strong>, который служит заменой для <strong>TIdCookieManager</strong>. Взять можно тут: <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/VCookieManager">https://github.com/coolsoftware/VCookieManager</a>.<br>Использовать так:  </p>
 <figure class="highlight pascal"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span></span><br><span class="line">  FixedCookieManager: TVCookieManager;</span><br><span class="line">  IdHTTP: TIdHTTP;</span><br><span class="line">  </span><br><span class="line">  ...</span><br><span class="line">  </span><br><span class="line">  FixedCookieManager := TVCookieManager.Create;</span><br><span class="line">  IdHTTP := TIdHTTP.Create;</span><br><span class="line">  IdHTTP.CookieManager := FixedCookieManager;</span><br></pre></td></tr></table></figure>
 
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>

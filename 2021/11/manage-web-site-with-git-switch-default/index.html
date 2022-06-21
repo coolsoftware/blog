@@ -72,14 +72,14 @@
     <div class="e-content entry" itemprop="articleBody">
       
         <p>GitHub настоятельно рекомендует использовать не master а main. Не буду давать эмоциональную оценку этому, она очевидна…</p>
-<p>В общем, есть последствие если git использовать для деплоя сайта&#x2F;приложения на веб сервер.  Описание тут: <a target="_blank" rel="noopener" href="https://gist.github.com/Nilpo/8ed5e44be00d6cf21f22">Using Git to Manage a Live Web Site</a>. Хук post-receive не будет работать. Точнее, не будет работать чекаут:</p>
+<p>В общем, есть последствие если git использовать для деплоя сайта/приложения на веб сервер.  Описание тут: <a target="_blank" rel="noopener" href="https://gist.github.com/Nilpo/8ed5e44be00d6cf21f22">Using Git to Manage a Live Web Site</a>. Хук post-receive не будет работать. Точнее, не будет работать чекаут:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">GIT_WORK_TREE=/path/to/webroot/of/mywebsite git checkout -f</span><br></pre></td></tr></table></figure>
 
 <p>Вылетает ошибка: fatal: You are on a branch yet to be born</p>
 <p>Короче, надо сменить дефолтный бранч в bare репозитории на веб сервере с master на main, после чего все будет работать как надо:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> mywebsite.git</span><br><span class="line">git symbolic-ref HEAD refs/heads/main</span><br></pre></td></tr></table></figure>
 
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>

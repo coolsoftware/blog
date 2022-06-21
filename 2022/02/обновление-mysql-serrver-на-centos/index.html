@@ -72,7 +72,7 @@ The GPG keys listed for the &amp;quot;MySQL 8.0 Community Server&amp;quot; repos
     <div class="e-content entry" itemprop="articleBody">
       
         <p>При обновлении MySQL Server на CentOS вылезла ошибка:</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">The GPG keys listed for the &quot;MySQL 8.0 Community Server&quot; repository are already installed but they are not correct for this package.</span><br><span class="line">Check that the correct key URLs are configured for this repository.</span><br><span class="line"> </span><br><span class="line"> Failing package is: mysql-community-icu-data-files-8.0.28-1.el7.x86_64</span><br><span class="line"> GPG Keys are configured as: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">The GPG keys listed for the &quot;MySQL 8.0 Community Server&quot; repository are already installed but they are not correct for this package.</span><br><span class="line">Check that the correct key URLs are configured for this repository.</span><br><span class="line"> </span><br><span class="line"> Failing package is: mysql-community-icu-data-files-8.0.28-1.el7.x86_64</span><br><span class="line"> GPG Keys are configured as: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql</span><br></pre></td></tr></table></figure>
 
 <p>Победить можно выполнив команду:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022</span><br></pre></td></tr></table></figure>

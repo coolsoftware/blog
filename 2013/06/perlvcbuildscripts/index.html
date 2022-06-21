@@ -73,7 +73,7 @@
         <p>Выложил на github perl-скрипты, которые я использую для автоматического изменения номера билда в проектах на Visual C++, а также генерации файлов xxx-build.txt с информацией о версии и контрольной суммой (MD5). Взять можно тут: <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/PerlVCBuildScripts">https://github.com/coolsoftware/PerlVCBuildScripts</a>  </p>
 <p>Использовать просто:  </p>
 <ol>
-<li>Нужно создать файл с информацией о билде (build-файл) в каталоге Release (где будет создан exe или dll). Например, мой проект называется HTTPGet, имя исполняемого (генерируемого) файла HTTPGet.exe, значит имя build-файла должно быть HTTPGet-build.txt. Вот как выглядит структура каталогов проекта:</li>
+<li>Нужно создать файл с информацией о билде (build-файл) в каталоге Release (где будет создан exe или dll). Например, мой проект называется HTTPGet, имя исполняемого (генерируемого) файла HTTPGet.exe, значит имя build-файла должно быть HTTPGet-build.txt. Вот как выглядит структура каталогов проекта:  </li>
 </ol>
 <p>HTTPGet \<br>  HTTPGet.sln<br>  HTTPGet.aspr<br>  Release \<br>    HTTPGet-build.txt<br>    HTTPGet.exe  </p>
 <p>Содержимое build-файла должно быть таким:  </p>
@@ -81,16 +81,16 @@
 <p>Первая строка - версия приложения (будет автоматически обновляться при сборке).<br>Вторая строка - URL для скачки последней версии.<br>Третья строка - имя файла.<br>Четвертая строка - MD5-подпись (будет автоматически обновляться при сборке).</p>
 <p>Я использую build-файлы в функции авто-обновления в приложениях. Реализацию этой функции я выложу как-нибудь позже.  </p>
 <ol start="2">
-<li>Нужно прописать в Pre-Build Event-&gt;Command Line вызов:</li>
+<li>Нужно прописать в Pre-Build Event-&gt;Command Line вызов:  </li>
 </ol>
 <p>perl $(ProjectDir)..\incbuild.pl $(ProjectDir) $(Configuration)  </p>
 <p><a target="_blank" rel="noopener" href="http://2.bp.blogspot.com/-_I0RRuemW5k/UbxXQltC6OI/AAAAAAAAAGg/ERg-7kavYus/s1600/incbuild.png"><img src="http://2.bp.blogspot.com/-_I0RRuemW5k/UbxXQltC6OI/AAAAAAAAAGg/ERg-7kavYus/s640/incbuild.png"></a></p>
 <p>а в Post-Build Event-&gt;Command Line прописать:  </p>
 <p>perl $(ProjectDir)..\makebuildinfo.pl $(TargetPath)  </p>
 <p><a target="_blank" rel="noopener" href="http://2.bp.blogspot.com/-3HY6flCPb_o/UbxXjm8tSDI/AAAAAAAAAGo/sZvmF5ZS7Zg/s1600/makebuildinfo.png"><img src="http://2.bp.blogspot.com/-3HY6flCPb_o/UbxXjm8tSDI/AAAAAAAAAGo/sZvmF5ZS7Zg/s640/makebuildinfo.png"></a></p>
-<p>Если вы используете ASProtect для упаковки&#x2F;защиты приложения, то можно прописать путь к вашему ASPR-проекту, чтобы ASProtect был вызван автоматически при сборке:  </p>
+<p>Если вы используете ASProtect для упаковки/защиты приложения, то можно прописать путь к вашему ASPR-проекту, чтобы ASProtect был вызван автоматически при сборке:  </p>
 <p>perl $(ProjectDir)..\makebuildinfo.pl $(TargetPath) $(ProjectDir)..\$(TargetName).aspr  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>

@@ -81,7 +81,7 @@
 <p><a target="_blank" rel="noopener" href="https://4.bp.blogspot.com/-_bQFfAxMjVY/VsWoZRg07TI/AAAAAAAAAUc/cDX8nT57Frw/s1600/iperf3.png"><img src="https://4.bp.blogspot.com/-_bQFfAxMjVY/VsWoZRg07TI/AAAAAAAAAUc/cDX8nT57Frw/s400/iperf3.png"></a></p>
 <p><a target="_blank" rel="noopener" href="https://3.bp.blogspot.com/-JWZifsYr2Uo/VsWmYkz41eI/AAAAAAAAAUM/E4p_kUuDYFs/s1600/iperf2.png">  
 </a></p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -125,7 +125,7 @@
         <p>Заметка себе на память:  </p>
 <p>ie4uinit.exe -ClearIconCache  </p>
 <p><a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-bWfAwd6Iemc/Vm72-k2lruI/AAAAAAAAATE/-cg5Rewtdtg/s1600/i4uinit.png"><img src="http://3.bp.blogspot.com/-bWfAwd6Iemc/Vm72-k2lruI/AAAAAAAAATE/-cg5Rewtdtg/s320/i4uinit.png"></a></p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -168,14 +168,14 @@
       
         <p>Настройка ipv6 (Teredo):  </p>
 <ol>
-<li>Мой компьютер (контекстное меню) –&gt; Управление -&gt; Службы (Рис. 1):<br>    Вспомогательная служба IP –&gt; Тип запуска –&gt; Выбираем из списка: Автоматически</li>
-<li>Пуск –&gt; Выполнить –&gt; regedit</li>
-<li>В реестре по адресу<br>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Dnscache\Parameters<br>создать ключ AddrConfigControl типа DWORD со значением 0 (Рис. 2).</li>
-<li>Пуск –&gt; Панель управления –&gt; Сеть и Интернет –&gt; Сетевые подключения –&gt; Подключение по локальной сети –&gt; Свойства (Рис. 3):<br>    Протокол Интернета версии 6 (TCP&#x2F;IPv6) –&gt; включить и в Свойствах указать:<br>    Использовать следующие адреса DNS-серверов:<br>    Предпочитаемый DNS-сервер: 2001:4860:4860::8888<br>    Альтернативный DNS-сервер: 2001:4860:4860::8844</li>
-<li>Пуск –&gt; Выполнить –&gt; gpedit.msc</li>
-<li>Конфигурация компьютера –&gt; Административные шаблоны –&gt; Сеть –&gt; Параметры TCP&#x2F;IP –&gt; Технологии Туннелирования IPv6 (Рис. 4):<br>    Классификация Teredo по умолчанию –&gt; Включить –&gt; Включенное состояние<br>    Частота обновления Teredo –&gt; Включить –&gt; 10<br>    Состояние Teredo –&gt; Включить –&gt; Корпоративный клиент<br>    Порт клиента Teredo -&gt; Не задано<br>    Имя сервера Teredo –&gt; Включить –&gt; Выбираем из списка: teredo.remlab.net</li>
-<li>Пуск – Выполнить – cmd:<br>    netsh int ipv6 delete route ::&#x2F;0 Teredo<br>    netsh int ipv6 add route ::&#x2F;0 Teredo</li>
-<li>Тестирование подключения: <a target="_blank" rel="noopener" href="http://test-ipv6.com/">http://test-ipv6.com/</a></li>
+<li>Мой компьютер (контекстное меню) –&gt; Управление -&gt; Службы (Рис. 1):<br>     Вспомогательная служба IP –&gt; Тип запуска –&gt; Выбираем из списка: Автоматически</li>
+<li> Пуск –&gt; Выполнить –&gt; regedit</li>
+<li>В реестре по адресу<br> HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Dnscache\Parameters<br> создать ключ AddrConfigControl типа DWORD со значением 0 (Рис. 2).</li>
+<li>Пуск –&gt; Панель управления –&gt; Сеть и Интернет –&gt; Сетевые подключения –&gt; Подключение по локальной сети –&gt; Свойства (Рис. 3):<br>     Протокол Интернета версии 6 (TCP/IPv6) –&gt; включить и в Свойствах указать:<br>     Использовать следующие адреса DNS-серверов:<br>     Предпочитаемый DNS-сервер: 2001:4860:4860::8888<br>     Альтернативный DNS-сервер: 2001:4860:4860::8844</li>
+<li> Пуск –&gt; Выполнить –&gt; gpedit.msc</li>
+<li>Конфигурация компьютера –&gt; Административные шаблоны –&gt; Сеть –&gt; Параметры TCP/IP –&gt; Технологии Туннелирования IPv6 (Рис. 4):<br>     Классификация Teredo по умолчанию –&gt; Включить –&gt; Включенное состояние<br>     Частота обновления Teredo –&gt; Включить –&gt; 10<br>     Состояние Teredo –&gt; Включить –&gt; Корпоративный клиент<br>     Порт клиента Teredo -&gt; Не задано<br>     Имя сервера Teredo –&gt; Включить –&gt; Выбираем из списка: teredo.remlab.net</li>
+<li>Пуск – Выполнить – cmd:<br>     netsh int ipv6 delete route ::/0 Teredo<br>     netsh int ipv6 add route ::/0 Teredo</li>
+<li> Тестирование подключения: <a target="_blank" rel="noopener" href="http://test-ipv6.com/">http://test-ipv6.com/</a></li>
 </ol>
 <div class="separator" style="clear: both; text-align: center;">Рис. 1</div>
 
@@ -190,7 +190,7 @@
 
 <p><a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-BIIj19IFcOc/VXGE4_PKJeI/AAAAAAAAAQ8/w1w4rXpCVrM/s1600/teredo.png"><img src="http://3.bp.blogspot.com/-BIIj19IFcOc/VXGE4_PKJeI/AAAAAAAAAQ8/w1w4rXpCVrM/s400/teredo.png"></a></p>
 <p>Стянул отсюда: <a target="_blank" rel="noopener" href="http://blog.cherepovets.ru/serovds/2011/11/15/teredo-win7/">http://blog.cherepovets.ru/serovds/2011/11/15/teredo-win7/</a>  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -235,13 +235,13 @@
 <p>1. Кросс-компиляция Qt 5 для Raspberry Pi:  </p>
 <p><a target="_blank" rel="noopener" href="http://qt-project.org/wiki/RaspberryPi_Beginners_guide">http://qt-project.org/wiki/RaspberryPi_Beginners_guide</a>  </p>
 <p>Несколько замечаний:  </p>
-<p>a) git clone git<span class="sy0">:</span><span class="co1">&#x2F;&#x2F;gitorious.org&#x2F;qt&#x2F;qt5.git не работает, вместо него нужно выполнять: git clone <a target="_blank" rel="noopener" href="http://git.gitorious.org/qt/qt5.git">http://git.gitorious.org/qt/qt5.git</a></span>  </p>
-<p><span class="co1">б) сперва лучше (imho) залить образ на флешку ( </span>sudo dd bs<span class="sy0">&#x3D;</span>1M <span class="kw1">if</span><span class="sy0">&#x3D;</span><span class="nu0"></span><span class="sy0"></span>2015-02-16-raspbian-wheezy.img of<span class="sy0">&#x3D;&#x2F;</span>dev<span class="sy0">&#x2F;</span>sdb ), вставить флешку в Raspberry Pi, установить апдейты и библиотеки (например, для разработки под X11: <a target="_blank" rel="noopener" href="http://doc.qt.io/qt-5/linux-requirements.html">http://doc.qt.io/qt-5/linux-requirements.html</a>), потом сделать образ этой флешки ( sudo dd bs<span class="sy0">&#x3D;</span>1M <span class="kw1">if</span><span class="sy0">&#x3D;</span><span class="sy0">&#x2F;</span>dev<span class="sy0">&#x2F;</span>sdb<span class="co1"></span> of<span class="sy0">&#x3D;</span><span class="co1"></span><span class="sy0"></span>rasp-pi.img ) и уже с ним работать дальше.  </p>
-<p>в) “Магическое” число <span class="sy0"></span><span class="nu0">62914560 ( </span><br>sudo mount <span class="sy0">-</span>o loop<span class="sy0">,</span>offset<span class="sy0">&#x3D;</span><span class="nu0">62914560</span> rasp-pi.<span class="me1">img</span> <span class="sy0">&#x2F;</span>mnt<span class="sy0">&#x2F;</span>rasp<span class="sy0">-</span>pi<span class="sy0">-</span>rootfs ) можно вычислить следующим образом:  </p>
+<p>a) git clone git<span class="sy0">:</span><span class="co1">//gitorious.org/qt/qt5.git не работает, вместо него нужно выполнять: git clone <a target="_blank" rel="noopener" href="http://git.gitorious.org/qt/qt5.git">http://git.gitorious.org/qt/qt5.git</a></span>  </p>
+<p><span class="co1">б) сперва лучше (imho) залить образ на флешку ( </span>sudo dd bs<span class="sy0">=</span>1M <span class="kw1">if</span><span class="sy0">=</span><span class="nu0"></span><span class="sy0"></span>2015-02-16-raspbian-wheezy.img of<span class="sy0">=/</span>dev<span class="sy0">/</span>sdb ), вставить флешку в Raspberry Pi, установить апдейты и библиотеки (например, для разработки под X11: <a target="_blank" rel="noopener" href="http://doc.qt.io/qt-5/linux-requirements.html">http://doc.qt.io/qt-5/linux-requirements.html</a>), потом сделать образ этой флешки ( sudo dd bs<span class="sy0">=</span>1M <span class="kw1">if</span><span class="sy0">=</span><span class="sy0">/</span>dev<span class="sy0">/</span>sdb<span class="co1"></span> of<span class="sy0">=</span><span class="co1"></span><span class="sy0"></span>rasp-pi.img ) и уже с ним работать дальше.  </p>
+<p>в) “Магическое” число <span class="sy0"></span><span class="nu0">62914560 ( </span><br>sudo mount <span class="sy0">-</span>o loop<span class="sy0">,</span>offset<span class="sy0">=</span><span class="nu0">62914560</span> rasp-pi.<span class="me1">img</span> <span class="sy0">/</span>mnt<span class="sy0">/</span>rasp<span class="sy0">-</span>pi<span class="sy0">-</span>rootfs ) можно вычислить следующим образом:  </p>
 <p>[vitaly@localhost opt]$ sudo fdisk -l rasp-pi.img  </p>
-<p>Disk rasp-pi.img: 7892 MB, 7892631552 bytes, 15415296 sectors<br>Units &#x3D; sectors of 1 * 512 &#x3D; 512 bytes<br>Sector size (logical&#x2F;physical): 512 bytes &#x2F; 512 bytes<br>I&#x2F;O size (minimum&#x2F;optimal): 512 bytes &#x2F; 512 bytes<br>Disk label type: dos<br>Disk identifier: 0x0009bf4f  </p>
+<p>Disk rasp-pi.img: 7892 MB, 7892631552 bytes, 15415296 sectors<br>Units = sectors of 1 * 512 = 512 bytes<br>Sector size (logical/physical): 512 bytes / 512 bytes<br>I/O size (minimum/optimal): 512 bytes / 512 bytes<br>Disk label type: dos<br>Disk identifier: 0x0009bf4f  </p>
 <p>Устр-во Загр     Начало       Конец       Блоки   Id  Система<br>rasp-pi.img1            8192      122879       57344    c  W95 FAT32 (LBA)<br>rasp-pi.img2          122880     6399999     3138560   83  Linux  </p>
-<p>122880 - это начало раздела (номер первого сектора раздела),  который нужно подмонтировать. 122880 * 512 &#x3D; 62914560.  </p>
+<p>122880 - это начало раздела (номер первого сектора раздела),  который нужно подмонтировать. 122880 * 512 = 62914560.  </p>
 <p>2.”Нативная” компиляция Qt5 на Raspberry Pi.  </p>
 <p><a target="_blank" rel="noopener" href="http://qt-project.org/wiki/Native_Build_of_Qt5_on_a_Raspberry_Pi">http://qt-project.org/wiki/Native_Build_of_Qt5_on_a_Raspberry_Pi</a>  </p>
 <p>Я не пробовал. Утверждается, что идет очень долго.  </p>
@@ -250,7 +250,7 @@
 <p>4. “Экономичная реализация графического интерфейса пользователя на базе одноплатного компьютера Raspberry Pi” (“Автоматика и программная инженерия”, 2014, №2(8))  </p>
 <p><a target="_blank" rel="noopener" href="http://www.nips.ru/images/stories/zhournal-AIPI/10/aipi-2-2014-3.pdf">http://www.nips.ru/images/stories/zhournal-AIPI/10/aipi-2-2014-3.pdf</a>  </p>
 <p>Хорошее подробное описание настройки кросс-компиляции.  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -263,7 +263,7 @@
       
   
   <div class="tags">
-    <a href="/tags/qt/">Qt</a>, <a href="/tags/cpp/">cpp</a>, <a href="/tags/raspberry-pi/">Raspberry Pi</a>
+    <a href="/tags/cpp/">cpp</a>, <a href="/tags/qt/">Qt</a>, <a href="/tags/raspberry-pi/">Raspberry Pi</a>
   </div>
 
       
@@ -291,15 +291,15 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p><em>Троттлинг (throttling)</em> - это регулирование (ограничение) скорости какого-нибудь процесса. Например, <em>bandwidth throttling</em> - регулирование пропускной способности канала (обычно измеряется в килобайтах в секунду, kB&#x2F;s).  </p>
+        <p><em>Троттлинг (throttling)</em> - это регулирование (ограничение) скорости какого-нибудь процесса. Например, <em>bandwidth throttling</em> - регулирование пропускной способности канала (обычно измеряется в килобайтах в секунду, kB/s).  </p>
 <p>В листинге ниже показано, как можно реализовать троттлинг.  </p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">throttle_acquire</span>()); <span class="comment">//цикл ожидания</span></span><br><span class="line">    <span class="built_in">doWork</span>(); <span class="comment">//выпоняем работу</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">throttle_acquire</span>()); <span class="comment">//цикл ожидания</span></span><br><span class="line">    <span class="built_in">doWork</span>(); <span class="comment">//выпоняем работу</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>В этом примере процесс состоит из 1000 итераций. Каждая итерация заключается в вызове функции doWork(), которая, например, отправляет очередную порцию данных. Ограничение скорости заключается в введении лимита на количество этих вызовов N за период времени dT. Перед вызовом doWork() осуществляется проверка превышения лимита: функция throttle_acquire() возвращает false, если лимит превышен, и true, в противном случае.  </p>
 <p>Троттлинг можно реализовать с использованием <a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BB%D1%8C%D1%86%D0%B5%D0%B2%D0%BE%D0%B9_%D0%B1%D1%83%D1%84%D0%B5%D1%80">кольцевого буфера</a>. Этот кольцевой буфер заполняется моментами времени последних вызовов функции doWork() (см пример выше). Размер буфера равен максимально разрешенному количеству этих вызовов N за период времени dT. Если буфер полностью заполнен, то функция acquire() возвращает false. Это означает, что необходимо подождать, пока из буфера не будет удален хотя бы один момент времени, который располагается от текущего момента (“сейчас”) дальше, чем dT.  </p>
 <p>Реализацию троттлинга на C++ (throttle.h)  я выложил на github: <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/Throttle">https://github.com/coolsoftware/Throttle</a>.  </p>
 <p>Пример использования класса <em>throttle</em> можно посмотреть в TestThrottle.cpp.  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -312,7 +312,7 @@
       
   
   <div class="tags">
-    <a href="/tags/cpp/">cpp</a>, <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/">алгоритм</a>, <a href="/tags/github/">github</a>, <a href="/tags/throttle/">throttle</a>, <a href="/tags/throttling/">throttling</a>, <a href="/tags/%D1%82%D1%80%D0%BE%D1%82%D1%82%D0%BB%D0%B8%D0%BD%D0%B3/">троттлинг</a>
+    <a href="/tags/cpp/">cpp</a>, <a href="/tags/github/">github</a>, <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/">алгоритм</a>, <a href="/tags/throttle/">throttle</a>, <a href="/tags/throttling/">throttling</a>, <a href="/tags/%D1%82%D1%80%D0%BE%D1%82%D1%82%D0%BB%D0%B8%D0%BD%D0%B3/">троттлинг</a>
   </div>
 
       
@@ -342,13 +342,13 @@
       
         <p>1. Скачиваем zlib 1.2.8 с <a target="_blank" rel="noopener" href="http://www.zlib.net/">http://www.zlib.net/</a><br>2. Распаковываем архив в c:\zlib-1.2.8<br>3. Открываем в Visual Studio 2010 проект C:\zlib-1.2.8\contrib\vstudio\vc10\zlibvc.sln<br>4. Меняем следующие настройки проекта zlibstat:  </p>
 <p>  Конфигурация Debug:  </p>
-<p>    General-&gt;Output Directory: **..\..\..\win32-MDd\**<br>    General-&gt;Intermediate Directory: **..\..\..\win32-MDd\Tmp\**<br>    C&#x2F;C++-&gt;Preprocessor-&gt;Preprocessor Definitions: &lt;удаляем **ZLIB_WINAPI**&gt;<br>    C&#x2F;C++-&gt;Code Generation-&gt;Runtime Library: <strong>Multi-threaded Debug DLL (&#x2F;MDd)</strong><br>    Librarian-&gt;General-&gt;Output File: <strong>$(OutDir)\..\zlibMDd.lib</strong>  </p>
+<p>    General-&gt;Output Directory: **..\..\..\win32-MDd\**<br>    General-&gt;Intermediate Directory: **..\..\..\win32-MDd\Tmp\**<br>    C/C++-&gt;Preprocessor-&gt;Preprocessor Definitions: &lt;удаляем **ZLIB_WINAPI**&gt;<br>    C/C++-&gt;Code Generation-&gt;Runtime Library: <strong>Multi-threaded Debug DLL (/MDd)</strong><br>    Librarian-&gt;General-&gt;Output File: <strong>$(OutDir)\..\zlibMDd.lib</strong>  </p>
 <p>  Конфигурация Release:  </p>
-<p>    General-&gt;Output Directory: **..\..\..\win32-MT\**<br>    General-&gt;Intermediate Directory: **..\..\..\win32-MT\Tmp\**<br>    C&#x2F;C++-&gt;Preprocessor-&gt;Preprocessor Definitions: &lt;удаляем **ZLIB_WINAPI**&gt;<br>    C&#x2F;C++-&gt;Code Generation-&gt;Runtime Library: <strong>Multi-threaded (&#x2F;MT)</strong><br>    Librarian-&gt;General-&gt;Output File: <strong>$(OutDir)\..\zlibMT.lib</strong><br>   <br>5. Собираем Debug и Release версии zlibstat. На выходе получаем:  </p>
+<p>    General-&gt;Output Directory: **..\..\..\win32-MT\**<br>    General-&gt;Intermediate Directory: **..\..\..\win32-MT\Tmp\**<br>    C/C++-&gt;Preprocessor-&gt;Preprocessor Definitions: &lt;удаляем **ZLIB_WINAPI**&gt;<br>    C/C++-&gt;Code Generation-&gt;Runtime Library: <strong>Multi-threaded (/MT)</strong><br>    Librarian-&gt;General-&gt;Output File: <strong>$(OutDir)\..\zlibMT.lib</strong><br>   <br>5. Собираем Debug и Release версии zlibstat. На выходе получаем:  </p>
 <p>  C:\zlib-1.2.8\zlibMDd.lib<br>  C:\zlib-1.2.8\zlibMT.lib  </p>
 <p>6. Открываем в Visual Studio 2010 любой проект C++ и открываем Property Manager-&gt;(Project Name)-&gt;Debug | Win32-&gt;Microsoft.Cpp.Win32.user-&gt;Common Properties-&gt;VC++ Directories. Добавляем c:\zlib-1.2.8 в Include Directories, Library Direcories и Source Directories.  </p>
 <p><a target="_blank" rel="noopener" href="http://2.bp.blogspot.com/-JfK1474NEAQ/VHdKsR46ehI/AAAAAAAAAPE/DLEOzwUBEZU/s1600/zlib.png"><img src="http://2.bp.blogspot.com/-JfK1474NEAQ/VHdKsR46ehI/AAAAAAAAAPE/DLEOzwUBEZU/s1600/zlib.png"></a></p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -389,28 +389,28 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>Понадобилось мне создать пару открытый&#x2F;закрытый ключ на C#. Я поискал немного и нашел замечательную криптографическую библиотеку под названием Bouncy Castle: <a target="_blank" rel="noopener" href="https://www.bouncycastle.org/">https://www.bouncycastle.org/</a>. Для C# исходники можно скачать здесь: <a target="_blank" rel="noopener" href="http://www.bouncycastle.org/csharp/">http://www.bouncycastle.org/csharp/</a>. Ниже описан порядок установки и использования.  </p>
+        <p>Понадобилось мне создать пару открытый/закрытый ключ на C#. Я поискал немного и нашел замечательную криптографическую библиотеку под названием Bouncy Castle: <a target="_blank" rel="noopener" href="https://www.bouncycastle.org/">https://www.bouncycastle.org/</a>. Для C# исходники можно скачать здесь: <a target="_blank" rel="noopener" href="http://www.bouncycastle.org/csharp/">http://www.bouncycastle.org/csharp/</a>. Ниже описан порядок установки и использования.  </p>
 <ol>
-<li><p>Качаем bccrypto-net-1.7-src.zip, распаковываем в какой-нибудь каталог на диске.</p>
+<li><p> Качаем bccrypto-net-1.7-src.zip, распаковываем в какой-нибудь каталог на диске.</p>
 </li>
-<li><p>Открываем проект csharp.sln в Visual Studio 2010.</p>
+<li><p> Открываем проект csharp.sln в Visual Studio 2010.</p>
 </li>
 <li><p>В свойствах проекта crypto в Build-&gt;General-&gt;Conditional compilation symbols комментируем INCLUDE_IDEA.  </p>
-<p><a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-vhWW_yv95co/U4ckjLlh7ZI/AAAAAAAAAOQ/BGqnXiFDGYQ/s1600/crypto1.png"><img src="http://3.bp.blogspot.com/-vhWW_yv95co/U4ckjLlh7ZI/AAAAAAAAAOQ/BGqnXiFDGYQ/s1600/crypto1.png"></a></p>
-<div class="separator" style="clear: both; text-align: center;"></div></li>
-<li><p>Пробуем выполнить Build и видим ошибки:<br>error CS1504: Source file ‘C:\temp\csharp\crypto\src\crypto\engines\IDEAEngine.cs’ could not be opened (‘Неопознанная ошибка ‘)<br>error CS1504: Source file ‘C:\temp\csharp\crypto\test\src\crypto\test\IDEATest.cs’ could not be opened (‘Неопознанная ошибка ‘)<br>error CS1504: Source file ‘C:\temp\csharp\crypto\src\asn1\misc\IDEACBCPar.cs’ could not be opened (‘Неопознанная ошибка ‘)</p>
+<p> <a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-vhWW_yv95co/U4ckjLlh7ZI/AAAAAAAAAOQ/BGqnXiFDGYQ/s1600/crypto1.png"><img src="http://3.bp.blogspot.com/-vhWW_yv95co/U4ckjLlh7ZI/AAAAAAAAAOQ/BGqnXiFDGYQ/s1600/crypto1.png"></a></p>
+ <div class="separator" style="clear: both; text-align: center;"></div></li>
+<li><p>Пробуем выполнить Build и видим ошибки:<br> error CS1504: Source file ‘C:\temp\csharp\crypto\src\crypto\engines\IDEAEngine.cs’ could not be opened (‘Неопознанная ошибка ‘)<br> error CS1504: Source file ‘C:\temp\csharp\crypto\test\src\crypto\test\IDEATest.cs’ could not be opened (‘Неопознанная ошибка ‘)<br> error CS1504: Source file ‘C:\temp\csharp\crypto\src\asn1\misc\IDEACBCPar.cs’ could not be opened (‘Неопознанная ошибка ‘)</p>
 </li>
-<li><p>Удаляем из проекта crypto отсутствующие файлы:<br>src\crypto\engines\IDEAEngine.cs<br>src\asn1\misc\IDEACBCPar.cs<br>test\src\crypto\test\IDEATest.cs</p>
+<li><p>Удаляем из проекта crypto отсутствующие файлы:<br> src\crypto\engines\IDEAEngine.cs<br> src\asn1\misc\IDEACBCPar.cs<br> test\src\crypto\test\IDEATest.cs</p>
 </li>
-<li><p>Пробуем еще раз выполнить Build - на этот раз все должно получиться и будет создана библиотека crypto.dll.</p>
+<li><p> Пробуем еще раз выполнить Build - на этот раз все должно получиться и будет создана библиотека crypto.dll.</p>
 </li>
 <li><p>Прописываем созданную библиотеку в References проекта.  </p>
-<p><a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-Jqy8eJsH5Qs/U4dlbpi5G-I/AAAAAAAAAOg/4L9JncCNtVc/s1600/ref-crypto.png"><img src="http://4.bp.blogspot.com/-Jqy8eJsH5Qs/U4dlbpi5G-I/AAAAAAAAAOg/4L9JncCNtVc/s1600/ref-crypto.png"></a></p>
+<p> <a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-Jqy8eJsH5Qs/U4dlbpi5G-I/AAAAAAAAAOg/4L9JncCNtVc/s1600/ref-crypto.png"><img src="http://4.bp.blogspot.com/-Jqy8eJsH5Qs/U4dlbpi5G-I/AAAAAAAAAOg/4L9JncCNtVc/s1600/ref-crypto.png"></a></p>
 </li>
-<li><p>Код для генерации пары открытый&#x2F;закрытый ключ приведен ниже. Открытый ключ - в формате <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/PKCS_8">PKCS#8</a>. Закрытый ключ - в формате <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/PKCS_1">PKCS#1</a>.</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Asn1.Pkcs;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Asn1.X509;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto.Parameters;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Pkcs;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Security;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.X509;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto.Generators;</span><br><span class="line"> </span><br><span class="line">RsaKeyPairGenerator rsa = <span class="keyword">new</span> RsaKeyPairGenerator();</span><br><span class="line">rsa.Init(<span class="keyword">new</span> KeyGenerationParameters(<span class="keyword">new</span> Org.BouncyCastle.Security.SecureRandom(), <span class="number">1024</span>));</span><br><span class="line">AsymmetricCipherKeyPair pair = rsa.GenerateKeyPair();</span><br><span class="line">PrivateKeyInfo privateKeyInfo = PrivateKeyInfoFactory.CreatePrivateKeyInfo(pair.Private);</span><br><span class="line"><span class="built_in">byte</span>[] serializedPrivateBytes = privateKeyInfo.PrivateKey.ToAsn1Object().GetDerEncoded();</span><br><span class="line"><span class="built_in">string</span> privateKey = Convert.ToBase64String(serializedPrivateBytes);</span><br><span class="line">SubjectPublicKeyInfo publicKeyInfo = SubjectPublicKeyInfoFactory.CreateSubjectPublicKeyInfo(pair.Public);</span><br><span class="line"><span class="built_in">byte</span>[] serializedPublicBytes = publicKeyInfo.ToAsn1Object().GetDerEncoded();</span><br><span class="line"><span class="built_in">string</span> publicKey = Convert.ToBase64String(serializedPublicBytes);</span><br></pre></td></tr></table></figure>
+<li><p>Код для генерации пары открытый/закрытый ключ приведен ниже. Открытый ключ - в формате <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/PKCS_8">PKCS#8</a>. Закрытый ключ - в формате <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/PKCS_1">PKCS#1</a>.</p>
+ <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Asn1.Pkcs;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Asn1.X509;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto.Parameters;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Pkcs;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Security;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.X509;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto.Generators;</span><br><span class="line"> </span><br><span class="line">RsaKeyPairGenerator rsa = <span class="keyword">new</span> RsaKeyPairGenerator();</span><br><span class="line">rsa.Init(<span class="keyword">new</span> KeyGenerationParameters(<span class="keyword">new</span> Org.BouncyCastle.Security.SecureRandom(), <span class="number">1024</span>));</span><br><span class="line">AsymmetricCipherKeyPair pair = rsa.GenerateKeyPair();</span><br><span class="line">PrivateKeyInfo privateKeyInfo = PrivateKeyInfoFactory.CreatePrivateKeyInfo(pair.Private);</span><br><span class="line"><span class="built_in">byte</span>[] serializedPrivateBytes = privateKeyInfo.PrivateKey.ToAsn1Object().GetDerEncoded();</span><br><span class="line"><span class="built_in">string</span> privateKey = Convert.ToBase64String(serializedPrivateBytes);</span><br><span class="line">SubjectPublicKeyInfo publicKeyInfo = SubjectPublicKeyInfoFactory.CreateSubjectPublicKeyInfo(pair.Public);</span><br><span class="line"><span class="built_in">byte</span>[] serializedPublicBytes = publicKeyInfo.ToAsn1Object().GetDerEncoded();</span><br><span class="line"><span class="built_in">string</span> publicKey = Convert.ToBase64String(serializedPublicBytes);</span><br></pre></td></tr></table></figure>
 
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p> ===<br> Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 </li>
 </ol>
 
@@ -425,7 +425,7 @@
       
   
   <div class="tags">
-    <a href="/tags/c/">C#</a>, <a href="/tags/visual-studio-2010/">Visual Studio 2010</a>, <a href="/tags/bouncy-castle/">Bouncy Castle</a>, <a href="/tags/rsa/">RSA</a>
+    <a href="/tags/bouncy-castle/">Bouncy Castle</a>, <a href="/tags/c/">C#</a>, <a href="/tags/rsa/">RSA</a>, <a href="/tags/visual-studio-2010/">Visual Studio 2010</a>
   </div>
 
       
@@ -453,18 +453,18 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>Оказалось, что организовать вызов Perl-скриптов из C&#x2F;C++ (MS Visual C++ 2010) достаточно просто:  </p>
+        <p>Оказалось, что организовать вызов Perl-скриптов из C/C++ (MS Visual C++ 2010) достаточно просто:  </p>
 <ol>
 <li><p>Прописываем в <strong>Include Directories</strong> и <strong>Library Directories</strong> проекта путь к Perl\CORE:  </p>
-<p><a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-OYOOdJk7BRc/U1Sqhzph12I/AAAAAAAAANk/nEMVKTQBHkI/s1600/testperl1.png"><img src="http://4.bp.blogspot.com/-OYOOdJk7BRc/U1Sqhzph12I/AAAAAAAAANk/nEMVKTQBHkI/s1600/testperl1.png"></a></p>
+<p> <a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-OYOOdJk7BRc/U1Sqhzph12I/AAAAAAAAANk/nEMVKTQBHkI/s1600/testperl1.png"><img src="http://4.bp.blogspot.com/-OYOOdJk7BRc/U1Sqhzph12I/AAAAAAAAANk/nEMVKTQBHkI/s1600/testperl1.png"></a></p>
 </li>
 <li><p>Добавляем perl512.lib в Linker-&gt;Input-&gt;<strong>Additional Dependencies</strong>.  </p>
-<p><a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-Bm3RzTGOCe0/U1SryOnY5dI/AAAAAAAAANw/QqTHrJ9k2tA/s1600/testperl2.png"><img src="http://3.bp.blogspot.com/-Bm3RzTGOCe0/U1SryOnY5dI/AAAAAAAAANw/QqTHrJ9k2tA/s1600/testperl2.png"></a></p>
+<p> <a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-Bm3RzTGOCe0/U1SryOnY5dI/AAAAAAAAANw/QqTHrJ9k2tA/s1600/testperl2.png"><img src="http://3.bp.blogspot.com/-Bm3RzTGOCe0/U1SryOnY5dI/AAAAAAAAANw/QqTHrJ9k2tA/s1600/testperl2.png"></a></p>
 </li>
 <li><p>Ниже приведен пример кода, вызывающего perl из консольного приложения C++. Обращу внимание на два момента: a) <strong>#pragma warning (disable:4005)</strong> для подавления сообщения компилятора “<strong>‘ENOTSOCK’ : macro redefinition</strong>“; b) если опустить вызов <strong>PERL_SYS_INIT(0, NULL)</strong>, то на шаге perl_parse получим <strong>Access Violation</strong>.  </p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"><span class="comment">//avoid warning C4005: &#x27;ENOTSOCK&#x27; : macro redefinition</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _MSC_VER</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> <span class="keyword">warning</span> ( disable : 4005 )</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> </span></span><br><span class="line"> </span><br><span class="line">PerlInterpreter *my_perl;</span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">PERL_SYS_INIT</span>(<span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"> </span><br><span class="line">    my_perl = <span class="built_in">perl_alloc</span>();</span><br><span class="line">    <span class="built_in">perl_construct</span>(my_perl);</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">perl_parse</span>(my_perl, <span class="literal">NULL</span>, argc, argv, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">perl_run</span>(my_perl);</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">perl_destruct</span>(my_perl);</span><br><span class="line">    <span class="built_in">perl_free</span>(my_perl);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"><span class="comment">//avoid warning C4005: &#x27;ENOTSOCK&#x27; : macro redefinition</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _MSC_VER</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span> ( disable : 4005 )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> </span></span><br><span class="line"> </span><br><span class="line">PerlInterpreter *my_perl;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> _tmain(<span class="keyword">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">PERL_SYS_INIT</span>(<span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"> </span><br><span class="line">    my_perl = <span class="built_in">perl_alloc</span>();</span><br><span class="line">    <span class="built_in">perl_construct</span>(my_perl);</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">perl_parse</span>(my_perl, <span class="literal">NULL</span>, argc, argv, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">perl_run</span>(my_perl);</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">perl_destruct</span>(my_perl);</span><br><span class="line">    <span class="built_in">perl_free</span>(my_perl);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -514,13 +514,13 @@
 <p>Выпишем координаты вершин отрезков, отсортированные по-возрастанию:  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">X = &#123;75, 76, 79, 80, 83, 84, 85, 90, 91, 92&#125;</span><br></pre></td></tr></table></figure>
 
-<p>Массив X содержит 10 элементов: X[0], X[1], …, X[9].<br>Возьмем среднее значение (медиану): 83 &#x3D; X[m], m &#x3D; (9-0) div 2.  </p>
+<p>Массив X содержит 10 элементов: X[0], X[1], …, X[9].<br>Возьмем среднее значение (медиану): 83 = X[m], m = (9-0) div 2.  </p>
 <p>Возможны три варианта расположения отрезков относительно медианы:<br>1. отрезки, которые содержат медиану.<br>2. отрезки, которые лежат слева от медианы.<br>3. отрезки, которые лежат справа от медианы.  </p>
-<p>Создадим узел дерева, который будет включать в себя значение медианы (дискриминант &#x3D; 83) и список всех отрезков, которые содержат медиану:  </p>
+<p>Создадим узел дерева, который будет включать в себя значение медианы (дискриминант = 83) и список всех отрезков, которые содержат медиану:  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">R = &#123;83, [c, f, g, h, i, j]&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Оставшиеся отрезки слева от R: {a, b, d, e} и справа от R: {k, l, m}.  </p>
-<p>Построим левый узел дерева для отрезков {a, b, d, e}, находящихся левее медианы, рассматривая вершины слева от медианы: {75, <strong>76</strong>, 79, 80}. Получим: O &#x3D; {76, [a, b, d]}.<br>Аналогично правый узел для отрезков {k, l, m} и вершин {84, 85, <strong>90</strong>, 91, 92}: U &#x3D; {90, []}. Обратите внимание на возможность существования узлов, не содержащих отрезков.<br>Продолжая процесс рекурсивно, получим следующие узлы:<br>N &#x3D; {75, []}, P &#x3D; {79, [e]}, S &#x3D; {84, [k]}, V &#x3D; {91, [l, m]}, Q &#x3D; {80, []}, T &#x3D; {85, []}, W &#x3D; {92, []}.  </p>
+<p>Построим левый узел дерева для отрезков {a, b, d, e}, находящихся левее медианы, рассматривая вершины слева от медианы: {75, <strong>76</strong>, 79, 80}. Получим: O = {76, [a, b, d]}.<br>Аналогично правый узел для отрезков {k, l, m} и вершин {84, 85, <strong>90</strong>, 91, 92}: U = {90, []}. Обратите внимание на возможность существования узлов, не содержащих отрезков.<br>Продолжая процесс рекурсивно, получим следующие узлы:<br>N = {75, []}, P = {79, [e]}, S = {84, [k]}, V = {91, [l, m]}, Q = {80, []}, T = {85, []}, W = {92, []}.  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">      R</span><br><span class="line">   /     \</span><br><span class="line">  O       U</span><br><span class="line"> / \     / \</span><br><span class="line">N   P   S   V</span><br><span class="line">     \   \   \</span><br><span class="line">      Q   T   W</span><br></pre></td></tr></table></figure>
 
 <div class="separator" style="clear: both; text-align: left;">Висячие вершины N, Q, T и W можно убрать. Окончательно получим дерево:</div>
@@ -540,10 +540,10 @@
 <p>Он заменен на следующее:  </p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::<span class="built_in">sort</span>(al.<span class="built_in">begin</span>()+list_start,</span><br><span class="line">  al.<span class="built_in">begin</span>()+list_start+list_size,</span><br><span class="line">  comp_for_al);</span><br><span class="line">std::<span class="built_in">sort</span>(dh.<span class="built_in">begin</span>()+list_start,</span><br><span class="line">  dh.<span class="built_in">begin</span>()+list_start+list_size,</span><br><span class="line">  comp_for_dh);</span><br></pre></td></tr></table></figure>
 
-<p><strong>Баг 2</strong> в методе query_iterator::init_node. Если value &#x3D;&#x3D; cur_node-&gt;discrim, то требуется проверка, что cur_node-&gt;size !&#x3D; 0, а иначе возможен выход за границы массива.  </p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">init_node</span><span class="params">(<span class="type">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    index = <span class="number">0</span>;        </span><br><span class="line">    <span class="keyword">while</span> (cur_node != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (value &lt; cur_node-&gt;discrim)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((cur_node-&gt;size != <span class="number">0</span>) &amp;&amp;</span><br><span class="line">                ((*p_al)[cur_node-&gt;start]-&gt;<span class="built_in">low</span>() &lt;= value))</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                cur_node = cur_node-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (value &gt; cur_node-&gt;discrim)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((cur_node-&gt;size != <span class="number">0</span>) &amp;&amp;</span><br><span class="line">                ((*p_dh)[cur_node-&gt;start]-&gt;<span class="built_in">high</span>() &gt;= value))</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                cur_node = cur_node-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="comment">//(value == cur_node-&gt;discrim)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (cur_node-&gt;size == <span class="number">0</span>) <span class="comment">//VIT 2014 bugfix!</span></span><br><span class="line">            &#123;</span><br><span class="line">                cur_node = <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Баг 2</strong> в методе query_iterator::init_node. Если value == cur_node-&gt;discrim, то требуется проверка, что cur_node-&gt;size != 0, а иначе возможен выход за границы массива.  </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_node</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    index = <span class="number">0</span>;        </span><br><span class="line">    <span class="keyword">while</span> (cur_node != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (value &lt; cur_node-&gt;discrim)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((cur_node-&gt;size != <span class="number">0</span>) &amp;&amp;</span><br><span class="line">                ((*p_al)[cur_node-&gt;start]-&gt;<span class="built_in">low</span>() &lt;= value))</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                cur_node = cur_node-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (value &gt; cur_node-&gt;discrim)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((cur_node-&gt;size != <span class="number">0</span>) &amp;&amp;</span><br><span class="line">                ((*p_dh)[cur_node-&gt;start]-&gt;<span class="built_in">high</span>() &gt;= value))</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                cur_node = cur_node-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="comment">//(value == cur_node-&gt;discrim)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (cur_node-&gt;size == <span class="number">0</span>) <span class="comment">//VIT 2014 bugfix!</span></span><br><span class="line">            &#123;</span><br><span class="line">                cur_node = <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -556,7 +556,7 @@
       
   
   <div class="tags">
-    <a href="/tags/cpp/">cpp</a>, <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/">алгоритм</a>, <a href="/tags/github/">github</a>, <a href="/tags/interval-tree/">Interval Tree</a>, <a href="/tags/itree/">itree</a>, <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D0%B0%D0%BB%D0%BE%D0%B2/">дерево интервалов</a>, <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%BE%D1%82%D1%80%D0%B5%D0%B7%D0%BA%D0%BE%D0%B2/">дерево отрезков</a>
+    <a href="/tags/cpp/">cpp</a>, <a href="/tags/github/">github</a>, <a href="/tags/interval-tree/">Interval Tree</a>, <a href="/tags/itree/">itree</a>, <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/">алгоритм</a>, <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D0%B0%D0%BB%D0%BE%D0%B2/">дерево интервалов</a>, <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%BE%D1%82%D1%80%D0%B5%D0%B7%D0%BA%D0%BE%D0%B2/">дерево отрезков</a>
   </div>
 
       
@@ -590,9 +590,9 @@
 <p>2. Конструктор класса <strong>VRWLock</strong> объявлен с ключевым словом <strong>explicit</strong> для того, чтобы исключить неявное создание экземпляра этого класса при вызове функции (см. Листинг 1: Ошибка 3). При компиляции кода, содержащего такое неявное создание <strong>VRWLock</strong>, будет выдано сообщение об ошибке:  </p>
 <p>TestLock.cpp(184): error C2664: ‘RWFunc’ : cannot convert parameter 1 from ‘int’ to ‘const VRWLock &amp;’<br>          Reason: cannot convert from ‘int’ to ‘const VRWLock’<br>          Constructor for class ‘VRWLock’ is declared ‘explicit’  </p>
 <p><strong>Листинг. 1.</strong></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">RWFunc</span><span class="params">(<span class="type">const</span> VRWLock&amp;)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//do something here</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125; </span><br><span class="line">    </span><br><span class="line">VLock lock1;</span><br><span class="line">VLock lock2 = lock1; <span class="comment">//Ошибка 1</span></span><br><span class="line">VRWLock rwlock1;</span><br><span class="line">VRWLock rwlock2 = rwlock1; <span class="comment">//Ошибка 2</span></span><br><span class="line"><span class="built_in">RWFunc</span>(<span class="number">1</span>); <span class="comment">//Ошибка 3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RWFunc</span><span class="params">(<span class="keyword">const</span> VRWLock&amp;)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//do something here</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125; </span><br><span class="line">    </span><br><span class="line">VLock lock1;</span><br><span class="line">VLock lock2 = lock1; <span class="comment">//Ошибка 1</span></span><br><span class="line">VRWLock rwlock1;</span><br><span class="line">VRWLock rwlock2 = rwlock1; <span class="comment">//Ошибка 2</span></span><br><span class="line"><span class="built_in">RWFunc</span>(<span class="number">1</span>); <span class="comment">//Ошибка 3</span></span><br></pre></td></tr></table></figure>
 
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>

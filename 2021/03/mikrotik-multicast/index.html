@@ -70,9 +70,9 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>У роутера MikroTik проявилась особенность: когда комп подключен в сеть по Wi-Fi, mDNS то работает, то не работает. Т.е. avahi-resolve то резолвит имя подключенного в той же сетке Raspberry Pi с установленным avahi, то нет. Сложилось впечатление, что теряются пакеты. В итоге выяснилось, что так оно и есть. Проблема решается включением Multicast Helper &#x3D; “full” в настройках интерфейса wlan:</p>
+        <p>У роутера MikroTik проявилась особенность: когда комп подключен в сеть по Wi-Fi, mDNS то работает, то не работает. Т.е. avahi-resolve то резолвит имя подключенного в той же сетке Raspberry Pi с установленным avahi, то нет. Сложилось впечатление, что теряются пакеты. В итоге выяснилось, что так оно и есть. Проблема решается включением Multicast Helper = “full” в настройках интерфейса wlan:</p>
 <p><a target="_blank" rel="noopener" href="https://1.bp.blogspot.com/-jg9yFx-_QrI/YFneS-V8YKI/AAAAAAAAAcQ/8ju1nMvXgWQFf8SY-vslY1BbmZrTZLcugCLcBGAsYHQ/s865/mikrotik-multicast.png"><img src="https://1.bp.blogspot.com/-jg9yFx-_QrI/YFneS-V8YKI/AAAAAAAAAcQ/8ju1nMvXgWQFf8SY-vslY1BbmZrTZLcugCLcBGAsYHQ/w400-h300/mikrotik-multicast.png"></a></p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>

@@ -73,24 +73,24 @@
         <p>Обычно решают противоположную задачу - вызов внешних модулей (DLL, COM), написанных на C++, Delphi и т.п., из программы на C#. У меня же возникла необходимость вызвать из программы написанной на Delphi функцию библиотеки, написанной на C#. В этом посте я расскажу о том, как это делается.  </p>
 <p>Итак, нужно сделать на C# COM объект, к которому затем мы сможем обращаться из нашей программы на Delphi.  </p>
 <ol>
-<li><p>В Visual Studio создаем новый проект New&#x2F;Project&#x2F;Visual C#&#x2F;Class Library.</p>
+<li><p> В Visual Studio создаем новый проект New/Project/Visual C#/Class Library.</p>
 </li>
-<li><p>В свойствах проекта на вкладке Application жмем кнопку “Assembly Information” и отмечаем “Make assembly COM-visible”.<br><img src="http://2.bp.blogspot.com/-1gmRXzGe_ZY/TsoXPYjY4dI/AAAAAAAAABE/E75IOweSZvM/s400/20111121-1.png"></p>
+<li><p>В свойствах проекта на вкладке Application жмем кнопку “Assembly Information” и отмечаем “Make assembly COM-visible”.<br> <img src="http://2.bp.blogspot.com/-1gmRXzGe_ZY/TsoXPYjY4dI/AAAAAAAAABE/E75IOweSZvM/s400/20111121-1.png"></p>
 </li>
-<li><p>В свойствах проекта на вкладке Build отмечаем Register for COM interop.<br><img src="http://1.bp.blogspot.com/-83aanUd2-cQ/TsoYg4wxbdI/AAAAAAAAABQ/F4vyxSQ6jW4/s400/20111121-2.png"></p>
+<li><p>В свойствах проекта на вкладке Build отмечаем Register for COM interop.<br> <img src="http://1.bp.blogspot.com/-83aanUd2-cQ/TsoYg4wxbdI/AAAAAAAAABQ/F4vyxSQ6jW4/s400/20111121-2.png"></p>
 </li>
 <li><p>Для регистрации библиотеки вместо regsvr32 нужно использовать regasm. Вызов будет типа такого:  </p>
-<p>regasm.exe vcomclasslibrary.dll &#x2F;tlb:vcomclasslibrary.tlb  </p>
-<p>regasm.exe обычно расположен тут:  </p>
-<p>c:\Windows\Microsoft.NET\Framework\v2.0.50727\  </p>
+<p> regasm.exe vcomclasslibrary.dll /tlb:vcomclasslibrary.tlb  </p>
+<p> regasm.exe обычно расположен тут:  </p>
+<p> c:\Windows\Microsoft.NET\Framework\v2.0.50727\  </p>
 </li>
 <li><p>Код на C#:  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">using System;</span><br><span class="line">using System.Drawing;</span><br><span class="line">using System.Runtime.InteropServices;</span><br><span class="line">namespace VCOMClassLibrary</span><br><span class="line">&#123;</span><br><span class="line"> [ComVisible(true)]</span><br><span class="line"> public interface IVCOMInterface</span><br><span class="line"> &#123;</span><br><span class="line">   string LoadImageFromStream(System.IO.Stream stream);</span><br><span class="line"> &#125;</span><br><span class="line"> [ComVisible(true), ClassInterface(ClassInterfaceType.None)]</span><br><span class="line"> public class VCOMClass : IVCOMInterface</span><br><span class="line"> &#123;</span><br><span class="line">   public string LoadImageFromStream(System.IO.Stream stream)</span><br><span class="line">   &#123;</span><br><span class="line">     Image img = Image.FromStream(stream);</span><br><span class="line">     //put code to load image here</span><br><span class="line">     return &quot;OK&quot;;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">using System;</span><br><span class="line">using System.Drawing;</span><br><span class="line">using System.Runtime.InteropServices;</span><br><span class="line">namespace VCOMClassLibrary</span><br><span class="line">&#123;</span><br><span class="line"> [ComVisible(true)]</span><br><span class="line"> public interface IVCOMInterface</span><br><span class="line"> &#123;</span><br><span class="line">   string LoadImageFromStream(System.IO.Stream stream);</span><br><span class="line"> &#125;</span><br><span class="line"> [ComVisible(true), ClassInterface(ClassInterfaceType.None)]</span><br><span class="line"> public class VCOMClass : IVCOMInterface</span><br><span class="line"> &#123;</span><br><span class="line">   public string LoadImageFromStream(System.IO.Stream stream)</span><br><span class="line">   &#123;</span><br><span class="line">     Image img = Image.FromStream(stream);</span><br><span class="line">     //put code to load image here</span><br><span class="line">     return &quot;OK&quot;;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>В проекте на Delphi импортируем VCOMClassLibrary (Project&#x2F;Import Type Library). Пример вызова (в котором я заодно показал как передавать Stream):  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">procedure TForm1.Button1Click(Sender: TObject);</span><br><span class="line">var</span><br><span class="line"> cls: IVCOMInterface;</span><br><span class="line"> Stream: IStream;</span><br><span class="line"> FileStream: TFileStream;</span><br><span class="line">begin</span><br><span class="line"> cls := CreateComObject(CLASS_VCOMClass) as IVCOMInterface;</span><br><span class="line"> FileStream := TFileStream.Create(&#x27;c:\temp\1.jpg&#x27;, fmOpenRead);</span><br><span class="line"> Stream := TStreamAdapter.Create(FileStream, soOwned) as IStream;</span><br><span class="line"> cls.LoadImageFromStream(Stream);</span><br><span class="line"> FileStream.Free;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure></li>
+<li><p>В проекте на Delphi импортируем VCOMClassLibrary (Project/Import Type Library). Пример вызова (в котором я заодно показал как передавать Stream):  </p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">procedure TForm1.Button1Click(Sender: TObject);</span><br><span class="line">var</span><br><span class="line"> cls: IVCOMInterface;</span><br><span class="line"> Stream: IStream;</span><br><span class="line"> FileStream: TFileStream;</span><br><span class="line">begin</span><br><span class="line"> cls := CreateComObject(CLASS_VCOMClass) as IVCOMInterface;</span><br><span class="line"> FileStream := TFileStream.Create(&#x27;c:\temp\1.jpg&#x27;, fmOpenRead);</span><br><span class="line"> Stream := TStreamAdapter.Create(FileStream, soOwned) as IStream;</span><br><span class="line"> cls.LoadImageFromStream(Stream);</span><br><span class="line"> FileStream.Free;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
@@ -100,7 +100,7 @@
       
   
   <div class="tags">
-    <a href="/tags/dll/">dll</a>, <a href="/tags/c/">C#</a>, <a href="/tags/com/">COM</a>, <a href="/tags/delphi/">delphi</a>
+    <a href="/tags/c/">C#</a>, <a href="/tags/dll/">dll</a>, <a href="/tags/delphi/">delphi</a>, <a href="/tags/com/">COM</a>
   </div>
 
       

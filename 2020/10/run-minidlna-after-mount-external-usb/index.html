@@ -6,8 +6,8 @@
   <title>Run minidlna after mount external usb drive on Raspberry Pi | Cool Software Blog</title>
   <meta name="author" content="Vitaly Yakovlev">
   
-  <meta name="description" content="Предполагаю, что монтируется диск с UUID&amp;#x3D;a1234567 в &amp;#x2F;mnt&amp;#x2F;hdd1. Т.е. соответствующая строка в &amp;#x2F;etc&amp;#x2F;fstab выглядит так:
-UUID&amp;#x">
+  <meta name="description" content="Предполагаю, что монтируется диск с UUID=a1234567 в /mnt/hdd1. Т.е. соответствующая строка в /etc/fstab выглядит так:
+UUID=a1234567    /mnt/hdd1      ">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -71,12 +71,12 @@ UUID&amp;#x">
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>Предполагаю, что монтируется диск с UUID&#x3D;a1234567 в &#x2F;mnt&#x2F;hdd1. Т.е. соответствующая строка в &#x2F;etc&#x2F;fstab выглядит так:</p>
-<p>UUID&#x3D;a1234567    &#x2F;mnt&#x2F;hdd1       ext4    defaults    0       0</p>
+        <p>Предполагаю, что монтируется диск с UUID=a1234567 в /mnt/hdd1. Т.е. соответствующая строка в /etc/fstab выглядит так:</p>
+<p>UUID=a1234567    /mnt/hdd1       ext4    defaults    0       0</p>
 <p>Для получения UUID диска можно воспользоваться командой: sudo blkid  </p>
 <p>1. Удаляем (или комментируем) соотв. строку в fstab.</p>
-<p>2. Создаем файл &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;mnt-hdd1.mount со следующим содержанием:</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Mount HDD1</span><br><span class="line">[Mount]</span><br><span class="line">What=/dev/disk/by-uuid/a1234567</span><br><span class="line">Where=/mnt/hdd1</span><br><span class="line">Type=ext4</span><br><span class="line">Options=defaults</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>2. Создаем файл /etc/systemd/system/mnt-hdd1.mount со следующим содержанием:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Mount HDD1</span><br><span class="line">[Mount]</span><br><span class="line">What=/dev/disk/by-uuid/a1234567</span><br><span class="line">Where=/mnt/hdd1</span><br><span class="line">Type=ext4</span><br><span class="line">Options=defaults</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
 
 <p>3. Разрешаем сервис mnt-hdd1.mount:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> mnt-hdd1.mount</span><br></pre></td></tr></table></figure>
@@ -87,16 +87,16 @@ UUID&amp;#x">
 <p>5. Если не запущен, то запускаем:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl start mnt-hdd1.mount</span><br></pre></td></tr></table></figure>
 
-<p>6 Создаем файл &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;minidlna.service. Добавляем в него следующие строки:</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Minidlna Daemon</span><br><span class="line">After=mnt-hdd1.mount</span><br><span class="line">Wants=mnt-hdd1.mount</span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line"># Uncomment the line below for 60 seconds delay.</span><br><span class="line"># ExecStartPre=/bin/sleep 60</span><br><span class="line">ExecStart=/etc/init.d/minidlna start</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>6 Создаем файл /etc/systemd/system/minidlna.service. Добавляем в него следующие строки:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Minidlna Daemon</span><br><span class="line">After=mnt-hdd1.mount</span><br><span class="line">Wants=mnt-hdd1.mount</span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line"># Uncomment the line below for 60 seconds delay.</span><br><span class="line"># ExecStartPre=/bin/sleep 60</span><br><span class="line">ExecStart=/etc/init.d/minidlna start</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
 
 <p>7. Разрешаем сервис minidlna.service:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> minidlna</span><br></pre></td></tr></table></figure>
 
 <p>8. Перегружаемся, проверяем:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">df</span> -h</span><br><span class="line">sudo systemctl status minidlna</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">df -h</span><br><span class="line">sudo systemctl status minidlna</span><br></pre></td></tr></table></figure>
 
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+<p>===<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
     </div>
