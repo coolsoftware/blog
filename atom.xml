@@ -6,7 +6,7 @@
   <link href="https://blog.coolsoftware.ru/atom.xml" rel="self"/>
   
   <link href="https://blog.coolsoftware.ru/"/>
-  <updated>2022-06-17T10:45:49.685Z</updated>
+  <updated>2022-07-13T12:57:41.581Z</updated>
   <id>https://blog.coolsoftware.ru/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Полезные ссылки: Tutorial Videos</title>
+    <link href="https://blog.coolsoftware.ru/2022/07/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-tutorial-videos/"/>
+    <id>https://blog.coolsoftware.ru/2022/07/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-tutorial-videos/</id>
+    <published>2022-07-13T12:52:13.000Z</published>
+    <updated>2022-07-13T12:57:41.581Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Обучающее видео (Tutorial Videos):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=PMHEoBkxYaQ&quot;&gt;Build + Use OpenSSL with Visual</summary>
+        
+      
+    
+    
+    
+    
+    <category term="полезные ссылки" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/"/>
+    
+    <category term="tutorial" scheme="https://blog.coolsoftware.ru/tags/tutorial/"/>
+    
+    <category term="видео" scheme="https://blog.coolsoftware.ru/tags/%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE/"/>
+    
+    <category term="обучение" scheme="https://blog.coolsoftware.ru/tags/%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/"/>
+    
+    <category term="video" scheme="https://blog.coolsoftware.ru/tags/video/"/>
+    
+  </entry>
   
   <entry>
     <title>Комментарии в блоге</title>
@@ -78,7 +111,7 @@
     <link href="https://blog.coolsoftware.ru/2022/03/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-test-api/"/>
     <id>https://blog.coolsoftware.ru/2022/03/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-test-api/</id>
     <published>2022-03-31T10:30:02.000Z</published>
-    <updated>2022-05-26T03:56:52.792Z</updated>
+    <updated>2022-07-13T12:54:17.196Z</updated>
     
     
       
@@ -96,6 +129,10 @@
     
     
     <category term="полезные ссылки" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/"/>
+    
+    <category term="test" scheme="https://blog.coolsoftware.ru/tags/test/"/>
+    
+    <category term="api" scheme="https://blog.coolsoftware.ru/tags/api/"/>
     
   </entry>
   
@@ -130,7 +167,7 @@
     <link href="https://blog.coolsoftware.ru/2022/02/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-android-development/"/>
     <id>https://blog.coolsoftware.ru/2022/02/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-android-development/</id>
     <published>2022-02-19T13:11:05.000Z</published>
-    <updated>2022-06-17T10:45:49.684Z</updated>
+    <updated>2022-07-13T12:55:27.735Z</updated>
     
     
       
@@ -149,11 +186,11 @@
     
     <category term="полезные ссылки" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/"/>
     
-    <category term="Android" scheme="https://blog.coolsoftware.ru/tags/android/"/>
+    <category term="android" scheme="https://blog.coolsoftware.ru/tags/android/"/>
     
-    <category term="Development" scheme="https://blog.coolsoftware.ru/tags/development/"/>
+    <category term="development" scheme="https://blog.coolsoftware.ru/tags/development/"/>
     
-    <category term="Testing" scheme="https://blog.coolsoftware.ru/tags/testing/"/>
+    <category term="testing" scheme="https://blog.coolsoftware.ru/tags/testing/"/>
     
   </entry>
   
@@ -555,35 +592,6 @@
     <category term="Apache" scheme="https://blog.coolsoftware.ru/tags/apache/"/>
     
     <category term="SELinux" scheme="https://blog.coolsoftware.ru/tags/selinux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Install php-mongodb for PHP 7.3 on CentOS 7</title>
-    <link href="https://blog.coolsoftware.ru/2021/08/install-php-mongodb-for-php-73-on/"/>
-    <id>https://blog.coolsoftware.ru/2021/08/install-php-mongodb-for-php-73-on/</id>
-    <published>2021-08-23T06:53:00.000Z</published>
-    <updated>2022-02-03T11:33:07.111Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum install -y php73-php-devel</summary>
-        
-      
-    
-    
-    
-    
-    <category term="howto" scheme="https://blog.coolsoftware.ru/tags/howto/"/>
-    
-    <category term="CentOS" scheme="https://blog.coolsoftware.ru/tags/centos/"/>
-    
-    <category term="PHP" scheme="https://blog.coolsoftware.ru/tags/php/"/>
-    
-    <category term="mongo" scheme="https://blog.coolsoftware.ru/tags/mongo/"/>
     
   </entry>
   
