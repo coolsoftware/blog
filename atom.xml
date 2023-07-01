@@ -6,7 +6,7 @@
   <link href="https://blog.coolsoftware.ru/atom.xml" rel="self"/>
   
   <link href="https://blog.coolsoftware.ru/"/>
-  <updated>2023-06-22T05:39:49.568Z</updated>
+  <updated>2023-07-01T06:13:38.031Z</updated>
   <id>https://blog.coolsoftware.ru/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Анекдот «я в белом»</title>
+    <link href="https://blog.coolsoftware.ru/2023/07/%D0%B0%D0%BD%D0%B5%D0%BA%D0%B4%D0%BE%D1%82-%C2%AB%D1%8F-%D0%B2-%D0%B1%D0%B5%D0%BB%D0%BE%D0%BC%C2%BB/"/>
+    <id>https://blog.coolsoftware.ru/2023/07/%D0%B0%D0%BD%D0%B5%D0%BA%D0%B4%D0%BE%D1%82-%C2%AB%D1%8F-%D0%B2-%D0%B1%D0%B5%D0%BB%D0%BE%D0%BC%C2%BB/</id>
+    <published>2023-07-01T06:11:44.000Z</published>
+    <updated>2023-07-01T06:13:38.031Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Человек приходит в цирк и говорит: &lt;/p&gt;
+&lt;p&gt;— У меня есть аттракцион.&lt;/p&gt;
+&lt;p&gt;Его спрашивают: &lt;/p&gt;
+&lt;p&gt;— Какой?&lt;/p&gt;
+&lt;p&gt;— Под куполом цирка</summary>
+        
+      
+    
+    
+    
+    
+    <category term="анекдоты" scheme="https://blog.coolsoftware.ru/tags/%D0%B0%D0%BD%D0%B5%D0%BA%D0%B4%D0%BE%D1%82%D1%8B/"/>
+    
+    <category term="юмор" scheme="https://blog.coolsoftware.ru/tags/%D1%8E%D0%BC%D0%BE%D1%80/"/>
+    
+    <category term="lol" scheme="https://blog.coolsoftware.ru/tags/lol/"/>
+    
+  </entry>
   
   <entry>
     <title>Полезные ссылки: Machine Learning, Artificial Intelligence</title>
@@ -49,18 +80,19 @@
   </entry>
   
   <entry>
-    <title>Анекдоты</title>
+    <title>Анекдот про фермера</title>
     <link href="https://blog.coolsoftware.ru/2023/02/%D0%B0%D0%BD%D0%B5%D0%BA%D0%B4%D0%BE%D1%82%D1%8B/"/>
     <id>https://blog.coolsoftware.ru/2023/02/%D0%B0%D0%BD%D0%B5%D0%BA%D0%B4%D0%BE%D1%82%D1%8B/</id>
     <published>2023-02-20T05:09:06.000Z</published>
-    <updated>2023-06-22T05:39:49.567Z</updated>
+    <updated>2023-07-01T06:17:54.458Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;figure class=&quot;highlight text&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Налоговый инспектор фермеру:&lt;/span&gt;&lt;br&gt;&lt;span</summary>
+    <summary type="html">&lt;p&gt;Налоговый инспектор фермеру:&lt;/p&gt;
+&lt;p&gt;— А вы не утаивайте, не утаивайте! В конце концов ваши деньги к вам же и возвращаются: ну, знаете,</summary>
         
       
     
@@ -571,33 +603,6 @@
     <category term="github" scheme="https://blog.coolsoftware.ru/tags/github/"/>
     
     <category term="git" scheme="https://blog.coolsoftware.ru/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Web Development &amp; Design</title>
-    <link href="https://blog.coolsoftware.ru/2021/11/web-development-design/"/>
-    <id>https://blog.coolsoftware.ru/2021/11/web-development-design/</id>
-    <published>2021-11-15T05:42:00.000Z</published>
-    <updated>2023-06-22T05:39:49.559Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Web Development &amp;amp; Design&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://developers.google.com/speed/libraries&quot;&gt;Google Hosted</summary>
-        
-      
-    
-    
-    
-    
-    <category term="полезные ссылки" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/"/>
-    
-    <category term="web development &amp; design" scheme="https://blog.coolsoftware.ru/tags/web-development-design/"/>
     
   </entry>
   
