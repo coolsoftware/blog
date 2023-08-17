@@ -6,11 +6,13 @@
   <title>Publish Python package on pypi.org | Cool Software Blog</title>
   <meta name="author" content="Vitaly Yakovlev">
   
-  <meta name="description" content="Publish Python package on pypi.orgInstall twinepip install twinepip install wheel
+  <meta name="description" content="Install twinepip install twinepip install wheel
 
 Build the wheelpython .\setup.py sdist bdist_wheel
 
-Check the wheel">
+Check the wheeltwine check dist/*
+
+Upload to pypi">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -74,15 +76,15 @@ Check the wheel">
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h1 id="Publish-Python-package-on-pypi-org"><a href="#Publish-Python-package-on-pypi-org" class="headerlink" title="Publish Python package on pypi.org"></a>Publish Python package on pypi.org</h1><h2 id="Install-twine"><a href="#Install-twine" class="headerlink" title="Install twine"></a>Install twine</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install twine</span><br><span class="line">pip install wheel</span><br></pre></td></tr></table></figure>
+        <h1 id="Install-twine"><a href="#Install-twine" class="headerlink" title="Install twine"></a>Install twine</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install twine</span><br><span class="line">pip install wheel</span><br></pre></td></tr></table></figure>
 
-<h2 id="Build-the-wheel"><a href="#Build-the-wheel" class="headerlink" title="Build the wheel"></a>Build the wheel</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python .\setup.py sdist bdist_wheel</span><br></pre></td></tr></table></figure>
+<h1 id="Build-the-wheel"><a href="#Build-the-wheel" class="headerlink" title="Build the wheel"></a>Build the wheel</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python .\setup.py sdist bdist_wheel</span><br></pre></td></tr></table></figure>
 
-<h2 id="Check-the-wheel"><a href="#Check-the-wheel" class="headerlink" title="Check the wheel"></a>Check the wheel</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">twine check dist/*</span><br></pre></td></tr></table></figure>
+<h1 id="Check-the-wheel"><a href="#Check-the-wheel" class="headerlink" title="Check the wheel"></a>Check the wheel</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">twine check dist/*</span><br></pre></td></tr></table></figure>
 
-<h2 id="Upload-to-pypi-org"><a href="#Upload-to-pypi-org" class="headerlink" title="Upload to pypi.org"></a>Upload to pypi.org</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">twine upload dist/*</span><br></pre></td></tr></table></figure>
+<h1 id="Upload-to-pypi-org"><a href="#Upload-to-pypi-org" class="headerlink" title="Upload to pypi.org"></a>Upload to pypi.org</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">twine upload dist/*</span><br></pre></td></tr></table></figure>
 
-<h2 id="Setup-py-Example"><a href="#Setup-py-Example" class="headerlink" title="Setup.py Example"></a>Setup.py Example</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> distutils.core <span class="keyword">import</span> setup</span><br><span class="line"></span><br><span class="line">setup(name=<span class="string">&#x27;package_name&#x27;</span>,</span><br><span class="line">    version=<span class="string">&#x27;1.0.1&#x27;</span>,</span><br><span class="line">    description=<span class="string">&#x27;Short descripton&#x27;</span>,</span><br><span class="line">    long_description=<span class="built_in">open</span>(<span class="string">&#x27;README.md&#x27;</span>, <span class="string">&quot;r&quot;</span>).read(),</span><br><span class="line">    long_description_content_type=<span class="string">&#x27;text/markdown&#x27;</span>,</span><br><span class="line">    install_requires=[],</span><br><span class="line">    author=<span class="string">&#x27;your_name&#x27;</span>,</span><br><span class="line">    author_email=<span class="string">&#x27;your_email&#x27;</span>,</span><br><span class="line">    keywords=[],</span><br><span class="line">    url=<span class="string">&#x27;https://github.com/your/package_name&#x27;</span>,</span><br><span class="line">    packages=[<span class="string">&#x27;package_name&#x27;</span>]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h1 id="Setup-py-Example"><a href="#Setup-py-Example" class="headerlink" title="Setup.py Example"></a>Setup.py Example</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> distutils.core <span class="keyword">import</span> setup</span><br><span class="line"></span><br><span class="line">setup(name=<span class="string">&#x27;package_name&#x27;</span>,</span><br><span class="line">    version=<span class="string">&#x27;1.0.1&#x27;</span>,</span><br><span class="line">    description=<span class="string">&#x27;Short descripton&#x27;</span>,</span><br><span class="line">    long_description=<span class="built_in">open</span>(<span class="string">&#x27;README.md&#x27;</span>, <span class="string">&quot;r&quot;</span>).read(),</span><br><span class="line">    long_description_content_type=<span class="string">&#x27;text/markdown&#x27;</span>,</span><br><span class="line">    install_requires=[],</span><br><span class="line">    author=<span class="string">&#x27;your_name&#x27;</span>,</span><br><span class="line">    author_email=<span class="string">&#x27;your_email&#x27;</span>,</span><br><span class="line">    keywords=[],</span><br><span class="line">    url=<span class="string">&#x27;https://github.com/your/package_name&#x27;</span>,</span><br><span class="line">    packages=[<span class="string">&#x27;package_name&#x27;</span>]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer>
