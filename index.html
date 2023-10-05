@@ -74,6 +74,7 @@
 <li><a target="_blank" rel="noopener" href="https://www.youtube.com/@UtahCppProgrammers">Utah Cpp Programmers</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.youtube.com/@AlexeySitnikov">Алексей Ситников</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.youtube.com/@CodeTechandTutorials">Code, Tech, and Tutorials</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/@SemenikhinDenis">Denis Semenikhin</a></li>
 </ul>
 
       
@@ -163,9 +164,42 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h1 id="Building-Boost-1-83-with-Visual-Studio-2022"><a href="#Building-Boost-1-83-with-Visual-Studio-2022" class="headerlink" title="Building Boost 1.83 with Visual Studio 2022"></a>Building Boost 1.83 with Visual Studio 2022</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\boost_1_83_0\</span><br><span class="line">bootstrap.bat</span><br><span class="line">b2 -j8 toolset=msvc-14.3 variant=debug <span class="built_in">link</span>=static threading=multi runtime-link=shared</span><br><span class="line">b2 -j8 toolset=msvc-14.3 variant=debug <span class="built_in">link</span>=static threading=multi runtime-link=static</span><br><span class="line">b2 -j8 toolset=msvc-14.3 variant=release <span class="built_in">link</span>=static threading=multi runtime-link=shared</span><br><span class="line">b2 -j8 toolset=msvc-14.3 variant=release <span class="built_in">link</span>=static threading=multi runtime-link=static</span><br></pre></td></tr></table></figure>
+        <h1 id="Building-Boost-1-83-with-Visual-Studio-2022-static-link-multithreading"><a href="#Building-Boost-1-83-with-Visual-Studio-2022-static-link-multithreading" class="headerlink" title="Building Boost 1.83 with Visual Studio 2022 (static link, multithreading)"></a>Building Boost 1.83 with Visual Studio 2022 (static link, multithreading)</h1><h2 id="For-Windows"><a href="#For-Windows" class="headerlink" title="For Windows"></a>For Windows</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\boost_1_83_0\</span><br><span class="line">bootstrap.bat</span><br><span class="line">b2 -j8 toolset=msvc-14.3 variant=debug <span class="built_in">link</span>=static threading=multi runtime-link=shared</span><br><span class="line">b2 -j8 toolset=msvc-14.3 variant=debug <span class="built_in">link</span>=static threading=multi runtime-link=static</span><br><span class="line">b2 -j8 toolset=msvc-14.3 variant=release <span class="built_in">link</span>=static threading=multi runtime-link=shared</span><br><span class="line">b2 -j8 toolset=msvc-14.3 variant=release <span class="built_in">link</span>=static threading=multi runtime-link=static</span><br></pre></td></tr></table></figure>
 
-<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">C:\boost_1_83_0\stage\lib</span><br></pre></td></tr></table></figure>
+<h2 id="For-WSL"><a href="#For-WSL" class="headerlink" title="For WSL"></a>For WSL</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://boostorg.jfrog.io/artifactory/main/release/1.83.0/source/boost_1_83_0.tar.gz</span><br><span class="line">tar vxzf boost_1_83_0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> ./boost_1_83_0</span><br><span class="line">./bootstrap.sh</span><br><span class="line">sudo ./b2 <span class="built_in">link</span>=static threading=multi install</span><br></pre></td></tr></table></figure>
+
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><h3 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h3><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">C:\boost_1_83_0\stage\lib</span><br></pre></td></tr></table></figure>
+
+<h3 id="Static-debug-shared-runtime"><a href="#Static-debug-shared-runtime" class="headerlink" title="Static debug shared runtime"></a>Static debug shared runtime</h3><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">libboost_atomic-vc143-mt-gd-x32-1_83.lib</span><br><span class="line">libboost_atomic-vc143-mt-gd-x64-1_83.lib</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="Static-debug-static-runtime"><a href="#Static-debug-static-runtime" class="headerlink" title="Static debug static runtime"></a>Static debug static runtime</h3><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">libboost_atomic-vc143-mt-sgd-x32-1_83.lib</span><br><span class="line">libboost_atomic-vc143-mt-sgd-x64-1_83.lib</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="Static-release-shared-runtime"><a href="#Static-release-shared-runtime" class="headerlink" title="Static release shared runtime"></a>Static release shared runtime</h3><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">libboost_atomic-vc143-mt-x32-1_83.lib</span><br><span class="line">libboost_atomic-vc143-mt-x64-1_83.lib</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="Static-release-static-runtime"><a href="#Static-release-static-runtime" class="headerlink" title="Static release static runtime"></a>Static release static runtime</h3><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">libboost_atomic-vc143-mt-s-x32-1_83.lib</span><br><span class="line">libboost_atomic-vc143-mt-s-x64-1_83.lib</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h2 id="Environment-Variables-Windows"><a href="#Environment-Variables-Windows" class="headerlink" title="Environment Variables (Windows)"></a>Environment Variables (Windows)</h2><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BOOST_INCLUDEDIR</td>
+<td>C:\boost_1_83_0</td>
+</tr>
+<tr>
+<td>BOOST_LIBRARYDIR</td>
+<td>C:\boost_1_83_0\stage\lib</td>
+</tr>
+<tr>
+<td>BOOST_ROOT</td>
+<td>C:\boost_1_83_0</td>
+</tr>
+</tbody></table>
+<h2 id="Link-Boost-with-CMake"><a href="#Link-Boost-with-CMake" class="headerlink" title="Link Boost with CMake"></a>Link Boost with CMake</h2><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span>(Boost_USE_STATIC_LIBS <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">set</span>(Boost_USE_MULTITHREADED <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">set</span>(Boost_USE_STATIC_RUNTIME <span class="keyword">OFF</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(Boost COMPONENTS thread chrono regex REQUIRED )</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(SYSTEM <span class="variable">$&#123;Boost_INCLUDE_DIRS&#125;</span>)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> <span class="variable">$&#123;Boost_LIBRARIES&#125;</span>)</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer>
