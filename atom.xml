@@ -6,7 +6,7 @@
   <link href="https://blog.coolsoftware.ru/atom.xml" rel="self"/>
   
   <link href="https://blog.coolsoftware.ru/"/>
-  <updated>2023-10-20T08:16:28.678Z</updated>
+  <updated>2023-12-30T11:51:57.077Z</updated>
   <id>https://blog.coolsoftware.ru/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Полезные ссылки: учим китайский язык</title>
+    <link href="https://blog.coolsoftware.ru/2023/12/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-%D1%83%D1%87%D0%B8%D0%BC-%D0%BA%D0%B8%D1%82%D0%B0%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D1%8F%D0%B7%D1%8B%D0%BA/"/>
+    <id>https://blog.coolsoftware.ru/2023/12/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-%D1%83%D1%87%D0%B8%D0%BC-%D0%BA%D0%B8%D1%82%D0%B0%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D1%8F%D0%B7%D1%8B%D0%BA/</id>
+    <published>2023-12-24T15:07:32.000Z</published>
+    <updated>2023-12-30T11:51:57.077Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Учим-китайский-язык&quot;&gt;&lt;a href=&quot;#Учим-китайский-язык&quot; class=&quot;headerlink&quot; title=&quot;Учим китайский язык&quot;&gt;&lt;/a&gt;Учим китайский</summary>
+        
+      
+    
+    
+    
+    
+    <category term="полезные ссылки" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/"/>
+    
+    <category term="китайский язык" scheme="https://blog.coolsoftware.ru/tags/%D0%BA%D0%B8%D1%82%D0%B0%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D1%8F%D0%B7%D1%8B%D0%BA/"/>
+    
+    <category term="chinese" scheme="https://blog.coolsoftware.ru/tags/chinese/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Полезные ссылки: GitHub</title>
+    <link href="https://blog.coolsoftware.ru/2023/12/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-github/"/>
+    <id>https://blog.coolsoftware.ru/2023/12/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-github/</id>
+    <published>2023-12-19T05:59:51.000Z</published>
+    <updated>2023-12-25T12:46:38.272Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Полезные репозитории&amp;#x2F;ссылки на GitHub:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/trending/&quot;&gt;See what the GitHub community is most</summary>
+        
+      
+    
+    
+    
+    
+    <category term="полезные ссылки" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/"/>
+    
+    <category term="github" scheme="https://blog.coolsoftware.ru/tags/github/"/>
+    
+  </entry>
   
   <entry>
     <title>Баллада о гордом рыцаре (И.Иртеньев)</title>
@@ -552,57 +606,6 @@
     <category term="reac" scheme="https://blog.coolsoftware.ru/tags/reac/"/>
     
     <category term="tutorial" scheme="https://blog.coolsoftware.ru/tags/tutorial/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ShellIconOverlayIdentifiers (windows 10)</title>
-    <link href="https://blog.coolsoftware.ru/2022/01/shelliconoverlayidentifiers-windows-10/"/>
-    <id>https://blog.coolsoftware.ru/2022/01/shelliconoverlayidentifiers-windows-10/</id>
-    <published>2022-01-14T07:45:00.000Z</published>
-    <updated>2023-06-22T05:39:49.562Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Забавная вещь в Windows 10: ShellIconOverlayIdentifiers&lt;/p&gt;
-&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    
-    <category term="windows" scheme="https://blog.coolsoftware.ru/tags/windows/"/>
-    
-    <category term="Icons" scheme="https://blog.coolsoftware.ru/tags/icons/"/>
-    
-    <category term="ShellIconOverlayIdentifiers" scheme="https://blog.coolsoftware.ru/tags/shelliconoverlayidentifiers/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Полезные ссылки: IO, Sockets, Network, IOCP, AIO, etc.</title>
-    <link href="https://blog.coolsoftware.ru/2022/01/io-sockets-network-iocp-aio-etc/"/>
-    <id>https://blog.coolsoftware.ru/2022/01/io-sockets-network-iocp-aio-etc/</id>
-    <published>2022-01-09T11:08:00.000Z</published>
-    <updated>2023-06-22T05:39:49.561Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Полезные ссылки: IO, Sockets, Network, IOCP, AIO, etc.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;IO_URING. &lt;a</summary>
-        
-      
-    
-    
-    
     
   </entry>
   
