@@ -6,7 +6,7 @@
   <link href="https://blog.coolsoftware.ru/atom.xml" rel="self"/>
   
   <link href="https://blog.coolsoftware.ru/"/>
-  <updated>2024-01-10T08:11:57.114Z</updated>
+  <updated>2024-05-29T14:26:20.866Z</updated>
   <id>https://blog.coolsoftware.ru/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Полезные ссылки: сварка</title>
+    <link href="https://blog.coolsoftware.ru/2024/05/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-%D1%81%D0%B2%D0%B0%D1%80%D0%BA%D0%B0/"/>
+    <id>https://blog.coolsoftware.ru/2024/05/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-%D1%81%D0%B2%D0%B0%D1%80%D0%BA%D0%B0/</id>
+    <published>2024-05-29T14:22:44.000Z</published>
+    <updated>2024-05-29T14:26:20.866Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Обучающее видео на youtube:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="полезные ссылки" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/"/>
+    
+    <category term="хобби" scheme="https://blog.coolsoftware.ru/tags/%D1%85%D0%BE%D0%B1%D0%B1%D0%B8/"/>
+    
+    <category term="сварка" scheme="https://blog.coolsoftware.ru/tags/%D1%81%D0%B2%D0%B0%D1%80%D0%BA%D0%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Полезные ссылки: учим китайский язык</title>
@@ -573,40 +602,6 @@
     <category term="bash" scheme="https://blog.coolsoftware.ru/tags/bash/"/>
     
     <category term="в одну строку" scheme="https://blog.coolsoftware.ru/tags/%D0%B2-%D0%BE%D0%B4%D0%BD%D1%83-%D1%81%D1%82%D1%80%D0%BE%D0%BA%D1%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mongo: Aggregation with Pagination</title>
-    <link href="https://blog.coolsoftware.ru/2022/01/mongo-aggregation-with-pagination/"/>
-    <id>https://blog.coolsoftware.ru/2022/01/mongo-aggregation-with-pagination/</id>
-    <published>2022-01-14T15:00:00.000Z</published>
-    <updated>2023-06-22T05:39:49.561Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Допустим у нас есть такая коллекция users в Mongo DB:&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span</summary>
-        
-      
-    
-    
-    
-    
-    <category term="mongo" scheme="https://blog.coolsoftware.ru/tags/mongo/"/>
-    
-    <category term="aggregation" scheme="https://blog.coolsoftware.ru/tags/aggregation/"/>
-    
-    <category term="nodejs" scheme="https://blog.coolsoftware.ru/tags/nodejs/"/>
-    
-    <category term="pagination" scheme="https://blog.coolsoftware.ru/tags/pagination/"/>
-    
-    <category term="reac" scheme="https://blog.coolsoftware.ru/tags/reac/"/>
-    
-    <category term="tutorial" scheme="https://blog.coolsoftware.ru/tags/tutorial/"/>
     
   </entry>
   
