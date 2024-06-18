@@ -53,6 +53,53 @@
 </div></header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
+  <article id="post-sqlite-2" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2012-11-28T08:27:00.000Z"><a href="/2012/11/sqlite-2/">2012-11-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2012/11/sqlite-2/">Быстрая загрузка данных в Sqlite - 2</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>В <a href="http://blog.coolsoftware.ru/2011/11/sqlite.html">предыдущем посте</a> на эту тему я не упомянул про важный фактор, который сильно влияет на производительность, -  это наличие у таблицы индекса. Индекс способен довольно существенно замедлить процедуру вставки, поэтому лучше если данные будут загружаться в таблицу без индексов. Но иногда, индекс необходим. Например, если мы хотим загрузить в таблицу только отсутствующие данные, то это делается с пом. SQL-конструкции REPLACE:<div dir="ltr" style="text-align: left;" trbidi="on"></div></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">REPLACE <span class="keyword">INTO</span> Table1 (FieldA) <span class="keyword">VALUES</span> (:v)</span><br></pre></td></tr></table></figure>
+
+<p>При этом, использование REPLACE в примере выше предполагает, что построен уникальный индекс для поля FieldA.</p>
+<p><strong>Для того, чтобы загрузка в таблицу с индексом осуществлялась максимально быстро, необходимо, чтобы загружаемые данные были отсортированы по этому индексу.</strong></p>
+<p>Это нужно для того, чтобы минимизировать количество операций обращения к диску при поиске значения в индексе. Когда значения в индексе располагаются рядом, то эффективно работает буфер чтения. Выигрыш в скорости при вставке отсортированных данных по сравнению со вставкой неупорядоченных данных на больших объемах может оказаться в десятки раз.</p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/fast-insert/">fast insert</a>, <a href="/tags/sqlite/">sqlite</a>, <a href="/tags/tuning/">tuning</a>, <a href="/tags/%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F-%D0%B2%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B0/">быстрая вставка</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
   <article id="post-blog-post" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
@@ -469,79 +516,6 @@
   
   <div class="tags">
     <a href="/tags/access-violation/">Access Violation</a>, <a href="/tags/unhandled-exception/">Unhandled Exception</a>, <a href="/tags/verqueryvalue/">VerQueryValue</a>
-  </div>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article id="post-qt-visual-studio-2008" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time class="dt-published" datetime="2012-07-18T17:01:00.000Z"><a href="/2012/07/qt-visual-studio-2008/">2012-07-18</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2012/07/qt-visual-studio-2008/">Qt и Visual Studio 2008</a></h1>
-  
-
-    </header>
-    <div class="e-content entry" itemprop="articleBody">
-      
-        <div style="text-align: left;">Чтобы использовать Qt совместно со средой разработки Visual Studio нужно выполнить следующие шаги:</div>
-
-<p>1. Скачать и установить Qt for Visual Studio 2008: <a target="_blank" rel="noopener" href="http://qt.nokia.com/downloads/windows-cpp-vs2008">http://qt.nokia.com/downloads/windows-cpp-vs2008</a> (каталог установки не должен содержать пробелов, например это может быть C:\qt\4.8.2)</p>
-<p>2. Скачать и установить Visual Studio Add-in: <a target="_blank" rel="noopener" href="http://qt.nokia.com/downloads/visual-studio-add-in">http://qt.nokia.com/downloads/visual-studio-add-in</a>. </p>
-<div style="text-align: left;">3. Добавить в Переменную среды Path (Пуск->Панель инструментов->Система->Дополнительно->Переменные среды) путь к bin каталогу Qt (например, C:\\qt\\4.8.2\\bin)</div>
-
-<div style="text-align: left;">Вот, в принципе, все. В Microsoft Visual Studio IDE должен появиться пункт меню Qt. А в диалоге New Project - типы проектов Qt4 Projects.</div>
-
-<p><a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-jOxA0xDFeHE/UAbnhZvwrPI/AAAAAAAAACc/83inxuVgthU/s1600/qt1.png"><img src="http://4.bp.blogspot.com/-jOxA0xDFeHE/UAbnhZvwrPI/AAAAAAAAACc/83inxuVgthU/s400/qt1.png"></a></p>
-<p><a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-8W8A1BtdcUs/UAbnmrtMHUI/AAAAAAAAACk/olYvTzTpoyA/s1600/qt2.png"><img src="http://4.bp.blogspot.com/-8W8A1BtdcUs/UAbnmrtMHUI/AAAAAAAAACk/olYvTzTpoyA/s400/qt2.png"></a></p>
-<div style="text-align: left;">Есть только два нюанса:</div>
-
-<div style="text-align: left;">1. Если хочется избавиться от Qt Runtime (статически прилинковать к exe файлу все необходимые библиотеки), то нужно пересобрать Qt с ключом -static:</div> <div style="text-align: left;"></div>
-
-<ul>
-<li>Запустить Visual Studio 2008 Command Prompt</li>
-<li>Выполнить команду: cd  C:\qt\4.8.2</li>
-<li>Выполнить команду: configure -platform win32-msvc2008 -static</li>
-<li>Выполнить команду: nmake</li>
-</ul>
-<p>Сборка Qt у меня заняла несколько часов.</p>
-<p>2. По-умолчанию библиотеки Qt компилируются в режиме Multi-threaded DLL - &#x2F;MD (для Debug -  Multi-threaded Debug DLL - &#x2F;MDd). Что означает наличие зависимостей от msvcr90.dll и msvcp90.dll. Т.е. при установке программы возможно потребуется устанавливать Microsoft Visual C++ 2008 Redistributable Package. Чтобы избавиться от этой зависимости нужно перед сборкой Qt поправить qmake.conf ( C:\qt\4.8.2 \mkspecs\win32-msvc2008\qmake.conf) следующим образом:  </p>
-<p>заменить строки</p>
-<p>  QMAKE_CFLAGS_RELEASE    &#x3D; -O2 -MD</p>
-<p>  QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO +&#x3D; -O2 -MD -Zi</p>
-<p>  QMAKE_CFLAGS_DEBUG      &#x3D; -Zi -MDd</p>
-<p>на</p>
-<p>  QMAKE_CFLAGS_RELEASE    &#x3D; -O2 -MT</p>
-<p>  QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO +&#x3D; -O2 -MT -Zi</p>
-<p>  QMAKE_CFLAGS_DEBUG      &#x3D; -Zi -MTd</p>
-<div style="text-align: left;">===</div>
-
-<p>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      
-      
-  
-  <div class="tags">
-    <a href="/tags/qt/">Qt</a>, <a href="/tags/cpp/">cpp</a>, <a href="/tags/visial-studio/">Visial Studio</a>
   </div>
 
       

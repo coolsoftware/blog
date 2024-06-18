@@ -53,6 +53,65 @@
 </div></header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
+  <article id="post-google-code-highlight" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-11-09T10:05:00.000Z"><a href="/2011/11/google-code-highlight/">2011-11-09</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/11/google-code-highlight/">Google code highlight</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Подключил подсветку кода от гугла (<a target="_blank" rel="noopener" href="http://google-code-prettify.googlecode.com/">http://google-code-prettify.googlecode.com</a>).  </p>
+<p>Проверка:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;QtCore&gt;</span><br><span class="line">#include &lt;QtGui&gt;</span><br><span class="line">int main(int argc, char* argv[]) &#123;</span><br><span class="line">    QApplication app(argc, argv);</span><br><span class="line">    QDialog *dialog = new QDialog;</span><br><span class="line">    QLabel *label = new QLabel(dialog);</span><br><span class="line">    label-&gt;setText(&quot;&lt;font color=red&gt;Hello, World!&lt;/font&gt;&quot;);</span><br><span class="line">    dialog-&gt;show();</span><br><span class="line">    return app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Вроде работает. К Blogger-у подключается просто:<br>в шаблоне (Дизайн-&gt;Изменить HTML) перед <strong></head></strong> добавляем:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;link href=&quot;http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;/&gt;</span><br><span class="line">&lt;script src=&quot;http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js&quot; type=&quot;text/javascript&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Затем к тегу <strong><body></strong> нужно добавить: <strong>onload&#x3D;”prettyPrint()”</strong>  </p>
+<p>Использовать так:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;pre class=&quot;prettyprint&quot;&gt;</span><br><span class="line">    // put your code here</span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Можно указать явным образом язык, например <strong>lang-html</strong>:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;pre class=&quot;prettyprint lang-html&quot;&gt;</span><br><span class="line">  The lang-* class specifies the language file extensions.</span><br><span class="line">  File extensions supported by default include</span><br><span class="line">    &quot;bsh&quot;, &quot;c&quot;, &quot;cc&quot;, &quot;cpp&quot;, &quot;cs&quot;, &quot;csh&quot;, &quot;cyc&quot;, &quot;cv&quot;, &quot;htm&quot;, </span><br><span class="line">    &quot;html&quot;, &quot;java&quot;, &quot;js&quot;, &quot;m&quot;, &quot;mxml&quot;, &quot;perl&quot;, &quot;pl&quot;, &quot;pm&quot;, </span><br><span class="line">    &quot;py&quot;, &quot;rb&quot;, &quot;sh&quot;, &quot;xhtml&quot;, &quot;xml&quot;, &quot;xsl&quot;.</span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+<p>PS. Гугловский Highlighter похоже Delphi не поддерживает. Поэтому я его удалил, а вместо него подключил highlight.js.<br>Сделал я это так:  </p>
+<p>1. Скачал <a target="_blank" rel="noopener" href="http://softwaremaniacs.org/soft/highlight/download/">HIGHLIGHT.JS</a> (при этом выбрал нужный мне Delphi).<br>2. Файлы highlight.js, highlight.pack.js и стили styles&#x2F;*.css из скачанного архива разместил в google apps.<br>3. В шаблоне Blogger-а (Дизайн-&gt;Изменить HTML) перед </head> добавил:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;link href=&#x27;http://testapp.coolsoftware.ru/styles/default.css&#x27; rel=&#x27;stylesheet&#x27;/&gt;</span><br><span class="line">&lt;script src=&#x27;http://testapp.coolsoftware.ru/highlight.pack.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">hljs.initHighlightingOnLoad();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Чтобы использовать подсветку синтаксиса, нужно заключать код в <strong><pre><code class="delphi">...</code></pre></strong>. Пример:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">type</span><br><span class="line">  TMyObject = class(TObject)</span><br><span class="line">  private</span><br><span class="line">    FStr: String;</span><br><span class="line">  public</span><br><span class="line">    constructor Create;  </span><br><span class="line">  end;</span><br><span class="line">&#123; TMyObject &#125;</span><br><span class="line">constructor TMyObject.Create;</span><br><span class="line">begin</span><br><span class="line">  FStr := &#x27;Hello, world!&#x27;;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/google/">google</a>, <a href="/tags/code/">code</a>, <a href="/tags/highlight/">highlight</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
   <article id="post-active-server-pages" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
@@ -489,54 +548,6 @@
   
   <div class="tags">
     <a href="/tags/designer/">Designer</a>, <a href="/tags/mac/">Mac</a>, <a href="/tags/netbeans/">NetBeans</a>, <a href="/tags/qt/">Qt</a>
-  </div>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article id="post-schematron-xsd" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time class="dt-published" datetime="2010-11-01T17:47:00.000Z"><a href="/2010/11/schematron-xsd/">2010-11-01</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2010/11/schematron-xsd/">Schematron и XSD</a></h1>
-  
-
-    </header>
-    <div class="e-content entry" itemprop="articleBody">
-      
-        <p>Коротко про схематрон я написал в <a href="http://blog.coolsoftware.ru/2010/11/schematron.html">предыдущей статье</a>. Здесь же речь пойдет об объединении схематрон-схемы и схемы <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/xsd">XSD</a>.  </p>
-<p>XSD-схема замечательно работает, когда необходимо провести <em>форматный контроль</em> <a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/Xml">XML</a> файла. В нем есть все необходимые инструменты, чтобы проверить <em>структуру</em> XML-файла и соответствие данных определенным <em>типам</em>. Однако <em>логический и арифметический контроль</em> с помощью XSD-схемы осуществить нельзя. Для этого лучше всего подходит схематрон.  </p>
-<p>Однако, хранить две отдельных схемы (XSD и Schematron) в разных файлах неудобно. К тому же, существующие механизмы обработки XML-файлов (<a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/Document_Object_Model">DOM</a>- и <a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/SAX">SAX</a>-парсеры) не умеют работать со схемами Schematron, а дважды проверять один и тот же XML по разным схемам не рационально (потребуется дважды “отпарсить” весь XML-файл).  </p>
-<p>Предлагается задавать правила проверки на языке Schematron в подэлементах <strong><a href="xs:appinfo">xs:appinfo</a></strong> элементов <strong><a href="xs:annotation">xs:annotation</a></strong> XSD-схемы.  </p>
-<p>Пример:  </p>
-<p>&amp;#60;?xml version&#x3D;”1.0”?&amp;#62;<br>&lt;xs:schema  xmlns:xs&#x3D;”<a target="_blank" rel="noopener" href="http://www.w3.org/2001/XMLSchema&quot;">http://www.w3.org/2001/XMLSchema&quot;</a> xmlns:sch&#x3D;”<a target="_blank" rel="noopener" href="http://www.ascc.net/xml/schematron&quot;&gt;">http://www.ascc.net/xml/schematron&quot;&gt;</a><br>  &lt;xs:element name&#x3D;”Root”&gt;<br>    <a href="xs:annotation">xs:annotation</a><br>      <a href="xs:appinfo">xs:appinfo</a><br>        &lt;sch:pattern name&#x3D;”DocumentChecker”&gt;<br>          &lt;sch:rule context&#x3D;”Person”&gt;<br>            &lt;sch:assert test&#x3D;”@birthYear&lt;1990”&gt;Birth year should be less than 1990.</sch:assert><br>          </sch:rule><br>        </sch:pattern><br>      </xs:appinfo><br>    </xs:annotation><br>  </xs:element><br></xs:schema>  </p>
-<p>В этом примере мы видим <em>утверждение</em> на языке Schematron <strong>&lt;sch:assert test&#x3D;”@birthYear&lt;1990”&gt;Birth year should be less than 1990.</sch:assert></strong>, которое должно проверяться в контексте XML-узла <strong>Person</strong> (<strong>&lt;sch:rule context&#x3D;”Person”&gt;</strong>).  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      
-      
-  
-  <div class="tags">
-    <a href="/tags/schematron/">Schematron</a>, <a href="/tags/xml/">XML</a>, <a href="/tags/xsd/">XSD</a>
   </div>
 
       

@@ -6,7 +6,7 @@
   <link href="https://blog.coolsoftware.ru/atom.xml" rel="self"/>
   
   <link href="https://blog.coolsoftware.ru/"/>
-  <updated>2024-05-29T14:26:20.866Z</updated>
+  <updated>2024-06-18T06:35:48.385Z</updated>
   <id>https://blog.coolsoftware.ru/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Полезные ссылки: 氣功, 功夫</title>
+    <link href="https://blog.coolsoftware.ru/2024/06/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-%E6%B0%A3%E5%8A%9F-%E5%8A%9F%E5%A4%AB/"/>
+    <id>https://blog.coolsoftware.ru/2024/06/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-%E6%B0%A3%E5%8A%9F-%E5%8A%9F%E5%A4%AB/</id>
+    <published>2024-06-18T06:33:44.000Z</published>
+    <updated>2024-06-18T06:35:48.385Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><a href="https://www.youtube.com/playlist?list=PLh1Et8WABpZ9VMzaV4kIGMC-zDqpi9Qel">Курс Нейгун мастера Ян Цзюнмина</a></li></ul>]]></content>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PLh1Et8WABpZ9VMzaV4kIGMC-zDqpi9Qel&quot;&gt;Курс Нейгун мастера Ян</summary>
+        
+      
+    
+    
+    
+    
+    <category term="полезные ссылки" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/"/>
+    
+  </entry>
   
   <entry>
     <title>Полезные ссылки: сварка</title>
@@ -602,46 +628,6 @@
     <category term="blogger" scheme="https://blog.coolsoftware.ru/tags/blogger/"/>
     
     <category term="blogspot" scheme="https://blog.coolsoftware.ru/tags/blogspot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>В одну строку</title>
-    <link href="https://blog.coolsoftware.ru/2022/01/nodejs/"/>
-    <id>https://blog.coolsoftware.ru/2022/01/nodejs/</id>
-    <published>2022-01-24T16:17:00.000Z</published>
-    <updated>2023-06-22T05:39:49.561Z</updated>
-    
-    <content type="html"><![CDATA[<p>Генерация случайной строки (например, пароля) в nodejs в одну строку:  </p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params">length,charset</span>)&#123;<span class="keyword">return</span> [...<span class="title class_">Array</span>(length)].<span class="title function_">reduce</span>(<span class="function"><span class="params">x</span>=&gt;</span>x+charset[<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*charset.<span class="property">length</span>)],<span class="string">&#x27;&#x27;</span>)&#125;)(<span class="number">16</span>,<span class="string">&#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&#x27;</span>);</span><br></pre></td></tr></table></figure><p>Base64 -&gt; hex (nodejs)</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params">b64</span>)&#123;<span class="keyword">return</span> <span class="title class_">Buffer</span>.<span class="title function_">from</span>(b64, <span class="string">&#x27;base64&#x27;</span>).<span class="title function_">toString</span>(<span class="string">&#x27;hex&#x27;</span>);&#125;)(<span class="string">&#x27;AQAB&#x27;</span>);</span><br></pre></td></tr></table></figure><p>Base64url -&gt; hex (nodejs)</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params">b64url</span>)&#123;<span class="keyword">return</span> <span class="title class_">Buffer</span>.<span class="title function_">from</span>(b64url.<span class="title function_">replaceAll</span>(<span class="regexp">/[_-]/g</span>, <span class="keyword">function</span>(<span class="params">m</span>)&#123;<span class="keyword">return</span> <span class="string">&#x27;/+&#x27;</span>[<span class="string">&#x27;_-&#x27;</span>.<span class="title function_">indexOf</span>(m)];&#125;), <span class="string">&#x27;base64&#x27;</span>).<span class="title function_">toString</span>(<span class="string">&#x27;hex&#x27;</span>); &#125;)(<span class="string">&#x27;AQAB_A=&#x27;</span>);</span><br></pre></td></tr></table></figure><p>String -&gt; Base64 (nodejs)</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params">s</span>)&#123;<span class="keyword">return</span> <span class="title class_">Buffer</span>.<span class="title function_">from</span>(s).<span class="title function_">toString</span>(<span class="string">&#x27;base64&#x27;</span>);&#125;)(<span class="string">&#x27;test&#x27;</span>);</span><br></pre></td></tr></table></figure><p>String -&gt; Base64url (nodejs)</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params">s</span>)&#123;<span class="keyword">return</span> <span class="title class_">Buffer</span>.<span class="title function_">from</span>(s).<span class="title function_">toString</span>(<span class="string">&#x27;base64&#x27;</span>).<span class="title function_">replaceAll</span>(<span class="regexp">/[+/=]/g</span>,<span class="function"><span class="params">m</span>=&gt;</span><span class="string">&#x27;-_&#x27;</span>[<span class="string">&#x27;+/&#x27;</span>.<span class="title function_">indexOf</span>(m)]||<span class="string">&#x27;&#x27;</span>);&#125;)(<span class="string">&#x27;test&#x27;</span>);</span><br></pre></td></tr></table></figure><p>SHA-256 Digest (nodejs)</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">crypto.<span class="title function_">createHash</span>(<span class="string">&#x27;sha256&#x27;</span>).<span class="title function_">update</span>(<span class="string">&#x27;12345&#x27;</span>).<span class="title function_">digest</span>().<span class="title function_">toString</span>(<span class="string">&#x27;hex&#x27;</span>);</span><br></pre></td></tr></table></figure><p>Переименование файлов: “Сериал.Part-1.mkv” -&gt; “Сериал.S01E01.mkv”, “Сериал.Part-2.mkv” -&gt; “Сериал.S01E02.mkv” и т.д. (bash)</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> *.mkv; <span class="keyword">do</span> <span class="built_in">mv</span> <span class="variable">$i</span> $(<span class="built_in">echo</span> <span class="variable">$i</span> | sed <span class="string">&#x27;s/Part-\([0-9]\)/S01E0\1/&#x27;</span>); <span class="keyword">done</span>;</span><br></pre></td></tr></table></figure><p><a href="https://ru.wikipedia.org/wiki/ROT13">ROT13</a> (“шифр Цезаря”)</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params">s</span>)&#123;<span class="keyword">return</span> s.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>).<span class="title function_">reduce</span>(<span class="function">(<span class="params">x,y</span>) =&gt;</span> x + (<span class="string">&#x27;nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM&#x27;</span>[<span class="string">&#x27;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#x27;</span>.<span class="title function_">indexOf</span>(y)] || y), <span class="string">&#x27;&#x27;</span>)&#125;)(<span class="string">&#x27;Test12345&#x27;</span>);</span><br></pre></td></tr></table></figure><p>Base64 to Pascal array of bytes:</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params">b64</span>)&#123;<span class="keyword">return</span> <span class="title class_">Buffer</span>.<span class="title function_">from</span>(b64, <span class="string">&#x27;base64&#x27;</span>).<span class="title function_">reduce</span>(<span class="function">(<span class="params">s,b,i</span>)=&gt;</span>s+(i?(i%<span class="number">16</span>==<span class="number">0</span>?<span class="string">&#x27;,\n&#x27;</span>:<span class="string">&#x27;, &#x27;</span>):<span class="string">&#x27;&#x27;</span>)+<span class="string">&#x27;$&#x27;</span>+b.<span class="title function_">toString</span>(<span class="string">&#x27;16&#x27;</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>), <span class="string">&#x27;&#x27;</span>)&#125;)(<span class="string">&#x27;AQAB&#x27;</span>);</span><br></pre></td></tr></table></figure><p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>]]></content>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Генерация случайной строки (например, пароля) в nodejs в одну строку:  &lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
-        
-      
-    
-    
-    
-    
-    <category term="howto" scheme="https://blog.coolsoftware.ru/tags/howto/"/>
-    
-    <category term="string" scheme="https://blog.coolsoftware.ru/tags/string/"/>
-    
-    <category term="nodejs" scheme="https://blog.coolsoftware.ru/tags/nodejs/"/>
-    
-    <category term="javascript" scheme="https://blog.coolsoftware.ru/tags/javascript/"/>
-    
-    <category term="random" scheme="https://blog.coolsoftware.ru/tags/random/"/>
-    
-    <category term="trick" scheme="https://blog.coolsoftware.ru/tags/trick/"/>
-    
-    <category term="bash" scheme="https://blog.coolsoftware.ru/tags/bash/"/>
-    
-    <category term="в одну строку" scheme="https://blog.coolsoftware.ru/tags/%D0%B2-%D0%BE%D0%B4%D0%BD%D1%83-%D1%81%D1%82%D1%80%D0%BE%D0%BA%D1%83/"/>
     
   </entry>
   
