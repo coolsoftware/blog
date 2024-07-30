@@ -6,7 +6,7 @@
   <link href="https://blog.coolsoftware.ru/atom.xml" rel="self"/>
   
   <link href="https://blog.coolsoftware.ru/"/>
-  <updated>2024-06-18T06:35:48.385Z</updated>
+  <updated>2024-07-30T06:58:27.224Z</updated>
   <id>https://blog.coolsoftware.ru/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Полезные ссылки: AI, ML, DL, OCR</title>
+    <link href="https://blog.coolsoftware.ru/2024/07/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-ai-ml-dl-ocr/"/>
+    <id>https://blog.coolsoftware.ru/2024/07/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-ai-ml-dl-ocr/</id>
+    <published>2024-07-30T06:42:03.000Z</published>
+    <updated>2024-07-30T06:58:27.224Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/2024/07/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-ai-ml-dl-ocr/AIMLDL.jpg"></p><ul><li><a href="https://www.geeksforgeeks.org/handwritten-digit-recognition-with-opencv/">Handwritten Digit Recognition with OpenCV</a></li></ul>]]></content>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    
+    <category term="полезные ссылки" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Полезные ссылки: 氣功, 功夫</title>
     <link href="https://blog.coolsoftware.ru/2024/06/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-%E6%B0%A3%E5%8A%9F-%E5%8A%9F%E5%A4%AB/"/>
     <id>https://blog.coolsoftware.ru/2024/06/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-%E6%B0%A3%E5%8A%9F-%E5%8A%9F%E5%A4%AB/</id>
     <published>2024-06-18T06:33:44.000Z</published>
-    <updated>2024-06-18T06:35:48.385Z</updated>
+    <updated>2024-07-30T06:44:04.560Z</updated>
     
     <content type="html"><![CDATA[<ul><li><a href="https://www.youtube.com/playlist?list=PLh1Et8WABpZ9VMzaV4kIGMC-zDqpi9Qel">Курс Нейгун мастера Ян Цзюнмина</a></li></ul>]]></content>
     
@@ -39,6 +64,10 @@
     
     
     <category term="полезные ссылки" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/"/>
+    
+    <category term="цигун" scheme="https://blog.coolsoftware.ru/tags/%D1%86%D0%B8%D0%B3%D1%83%D0%BD/"/>
+    
+    <category term="кунгфу" scheme="https://blog.coolsoftware.ru/tags/%D0%BA%D1%83%D0%BD%D0%B3%D1%84%D1%83/"/>
     
   </entry>
   
@@ -595,39 +624,6 @@
     <category term="mysql" scheme="https://blog.coolsoftware.ru/tags/mysql/"/>
     
     <category term="CentOS" scheme="https://blog.coolsoftware.ru/tags/centos/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Переезд</title>
-    <link href="https://blog.coolsoftware.ru/2022/02/%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4/"/>
-    <id>https://blog.coolsoftware.ru/2022/02/%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4/</id>
-    <published>2022-02-07T15:37:00.000Z</published>
-    <updated>2023-06-22T05:39:49.564Z</updated>
-    
-    <content type="html"><![CDATA[<p>Гугл прислал письмо о том, что бесплатная версия G Suite прекратит работать с 1 июля 2022 года. И это послужило толчком для переезда блога с blogspot на другую платформу. После недолгих поисков подходящего движка для блога, я остановил свой выбор на Hexo (<a href="https://hexo.io/">https://hexo.io</a>).</p><p>Тему для блога я выбрал простенькую “light”, которую пришлось немного “допилить”. “Допиленная” тема получила название “light plus” и лежит тут: <a href="https://github.com/coolsoftware/hexo-theme-light-plus">https://github.com/coolsoftware/hexo-theme-light-plus</a></p><p>В теме было сделано следующее:</p><ul><li>Заголовок оформлен как блок.</li><li>В заголовок добавлена картинка.</li><li>Добавлен блок контактов с возможность выводить в нем ссылку на репозиторий github, контактный email и ссылку на сайт.</li><li>Добавлен блок “Избранные сообщения”.</li><li>В “Архив” добавлена навигация по годам, месяцам и пролистывание (кнопки “Вперед”, “Назад”).</li></ul><p>Кроме работы над темой, пришлось разбираться с импортом записей из старого блога. Для миграции из blogger в hexo нашелся “hexo-migrator-blogger”. Однако, он сильно устарел, некоторые зависимости уже не устанавливаются. А кроме того, мне хотелось, чтобы сохранились все внешние ссылки на записи. Поэтому пришлось писать свой “мигратор”: <a href="https://github.com/coolsoftware/hexo-migrator-blogspot">https://github.com/coolsoftware/hexo-migrator-blogspot</a>.</p><p>Чтобы сохранить ссылки на существующие посты нужно:</p><ol><li><p>В новом блоге сделать такую же структуру записей, что была в старом, т.е. &#x2F;&lt;год&gt;&#x2F;&lt;месяц&gt;&#x2F;&lt;заголовок&gt;. <code>_config.yml</code>:</p> <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:name/</span></span><br><span class="line"><span class="attr">new_post_name:</span> <span class="string">:year/:month/:title.md</span></span><br></pre></td></tr></table></figure></li><li><p>Прописать mod_rewrite-правила (для Апача):</p> <figure class="highlight apacheconf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">RewriteEngine</span> <span class="literal">on</span></span><br><span class="line"><span class="attribute">RewriteRule</span> ^(/[<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">4</span>&#125;/[<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">2</span>&#125;/[^/]+).html$ $<span class="number">1</span>/<span class="meta"> [NC,NE,L,R=301]</span></span><br><span class="line"><span class="attribute">RewriteRule</span> ^/([<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">4</span>&#125;)/$ /archives/$<span class="number">1</span>/<span class="meta"> [NC,NE,L,R=301]</span></span><br><span class="line"><span class="attribute">RewriteRule</span> ^/([<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">4</span>&#125;)/([<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">2</span>&#125;)/$ /archives/$<span class="number">1</span>/$<span class="number">2</span>/<span class="meta"> [NC,NE,L,R=301]</span></span><br></pre></td></tr></table></figure></li></ol>]]></content>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Гугл прислал письмо о том, что бесплатная версия G Suite прекратит работать с 1 июля 2022 года. И это послужило толчком для переезда</summary>
-        
-      
-    
-    
-    
-    
-    <category term="переезд" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4/"/>
-    
-    <category term="блог" scheme="https://blog.coolsoftware.ru/tags/%D0%B1%D0%BB%D0%BE%D0%B3/"/>
-    
-    <category term="hexo" scheme="https://blog.coolsoftware.ru/tags/hexo/"/>
-    
-    <category term="blogger" scheme="https://blog.coolsoftware.ru/tags/blogger/"/>
-    
-    <category term="blogspot" scheme="https://blog.coolsoftware.ru/tags/blogspot/"/>
     
   </entry>
   
