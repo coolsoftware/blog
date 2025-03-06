@@ -1,0 +1,729 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Страница 7 | Cool Software Blog</title>
+  <meta name="author" content="Vitaly Yakovlev">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Cool Software Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="shortcut icon" href="/favicon.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Cool Software Blog" type="application/atom+xml">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+  
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div id="title-wrapper">
+  <div class="alignleft">
+    <div id="title"><a href="/"><img src="/images/coolsoftware-blog.png" /></a></div>
+    <h2><a href="/">Записки программиста</a></h2>
+  </div>
+  <nav id="main-nav" class="alignright">
+    <ul>
+      
+        
+        <li><a href="/archives">Архив</a></li>
+      
+        
+        <li><a href="/search"><span class="menuicon"></span></a></li>
+      
+        
+        <li><a href="/atom.xml" target="_blank"><span class="menuicon"></span></a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article id="post-blog-post_23" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2016-03-23T16:47:00.000Z"><a href="/2016/03/blog-post_23/">2016-03-23</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/03/blog-post_23/">Построение дерева цифрового поиска</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Ниже приведена иллюстрация построения дерева цифрового поиска на Python (см. алгоритм в посте <a href="http://blog.coolsoftware.ru/2016/03/blog-post.html">http://blog.coolsoftware.ru/2016/03/blog-post.html</a>):</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;f1.txt&quot;</span>)</span><br><span class="line">lines = f.read().split()</span><br><span class="line">f.close()</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sort</span>(<span class="params">array</span>):</span><br><span class="line">    equal = []</span><br><span class="line">    greater = []</span><br><span class="line">    less = []</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(array) &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> array</span><br><span class="line">    linem = array[<span class="built_in">int</span>((<span class="built_in">len</span>(array)-<span class="number">1</span>)/<span class="number">2</span>)]</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> array:</span><br><span class="line">        <span class="keyword">if</span> linem &lt; line:</span><br><span class="line">            greater.append(line)</span><br><span class="line">        <span class="keyword">elif</span> linem &gt; line:</span><br><span class="line">            less.append(line)</span><br><span class="line">        <span class="keyword">elif</span> linem == line:</span><br><span class="line">            equal.append(line)</span><br><span class="line">    <span class="keyword">return</span> sort(less) + equal + sort(greater)</span><br><span class="line"> </span><br><span class="line">sorted_lines = sort(lines) </span><br><span class="line"><span class="built_in">print</span>(sorted_lines)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node</span>(<span class="params">C, P</span>):</span><br><span class="line">    <span class="built_in">print</span>(P + C)</span><br><span class="line">    <span class="keyword">return</span> P + <span class="string">&quot; &quot;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">R</span>(<span class="params">P, K, I0, J0</span>):</span><br><span class="line">    I = I0</span><br><span class="line">    Si = sorted_lines[I]</span><br><span class="line">    Li = <span class="built_in">len</span>(Si)</span><br><span class="line">    <span class="keyword">if</span> K &gt;= Li <span class="keyword">and</span> I == J0:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">if</span> K &lt; Li:</span><br><span class="line">        C = Si[K]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        C = <span class="string">&quot;&#123;0&#125;&quot;</span></span><br><span class="line">    X = node(C, P)</span><br><span class="line">    J = I</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> J == J0 <span class="keyword">or</span> sorted_lines[J+<span class="number">1</span>][K] != C:</span><br><span class="line">            R(X, K+<span class="number">1</span>, I, J)</span><br><span class="line">            <span class="keyword">if</span> J == J0:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            I = J + <span class="number">1</span></span><br><span class="line">            Si = sorted_lines[I]</span><br><span class="line">            Li = <span class="built_in">len</span>(Si)</span><br><span class="line">            C = Si[K]</span><br><span class="line">            X = node(C, P)</span><br><span class="line">        J = J + <span class="number">1</span></span><br><span class="line"> </span><br><span class="line">N = <span class="built_in">len</span>(sorted_lines)</span><br><span class="line">X = node(<span class="string">&quot;[ROOT_NODE]&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">R(X, <span class="number">0</span>, <span class="number">0</span>, N-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>f1.txt:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">BC</span><br><span class="line">ABBA</span><br><span class="line">ABC</span><br><span class="line">ABA</span><br><span class="line">ABB</span><br><span class="line">BAC</span><br><span class="line">A</span><br></pre></td></tr></table></figure>
+
+<p>Вывод:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[&#x27;A&#x27;, &#x27;ABA&#x27;, &#x27;ABB&#x27;, &#x27;ABBA&#x27;, &#x27;ABC&#x27;, &#x27;BAC&#x27;, &#x27;BC&#x27;]</span><br><span class="line">[ROOT_NODE]</span><br><span class="line"> A</span><br><span class="line">  &#123;0&#125;</span><br><span class="line">  B</span><br><span class="line">   A</span><br><span class="line">   B</span><br><span class="line">    &#123;0&#125;</span><br><span class="line">    A</span><br><span class="line">   C</span><br><span class="line"> B</span><br><span class="line">  A</span><br><span class="line">   C</span><br><span class="line">  C</span><br></pre></td></tr></table></figure>
+
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/trie/">trie</a>, <a href="/tags/%D0%B1%D0%BE%D1%80/">бор</a>, <a href="/tags/python/">Python</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-blog-post" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2016-03-16T13:29:00.000Z"><a href="/2016/03/blog-post/">2016-03-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/03/blog-post/">Поиск подстрок с помощью дерева цифрового поиска</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p><strong>Теория</strong>  </p>
+<p>Задача: имеется два больших (100 000+) списка строк, и требуется отфильтровать первый список (Source List) таким образом, чтобы в нем остались только строки, содержащие подстроки из второго списка (Search List).  </p>
+<p>Решать эту задачу будем следующим образом: для каждой строки Z из Source List будем искать строку S из Search List, такую, что S является подстрокой Z.  </p>
+<p><em>Примитивный алгоритм</em>  </p>
+<p>Можно решить задачу нахождения подстроки из списка Search List при помощи следующего очевидного (<em>примитивного</em>), но крайне медленного алгоритма: будем последовательно перебирать все строки S из Search List до тех пор, пока не окажется, что S является подстрокой Z. При этом, алгоритм поиска подстроки в строке можно использовать либо <em>примитивный</em>, либо один из более продвинутых (например, <em>Бойера-Мура,</em> см. <a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA_%D0%BF%D0%BE%D0%B4%D1%81%D1%82%D1%80%D0%BE%D0%BA%D0%B8">https://ru.wikipedia.org/wiki/Поиск_подстроки</a>). Однако, использование более быстрого алгоритма поиска подстроки в строке не сильно ускоряет <em>поиск подстроки из списка</em>, т.к. все-равно требуется перебрать в среднем N&#x2F;2 строк (здесь N - количество строк в Search List).  </p>
+<p><em>Дерево цифрового поиска</em>  </p>
+<p>Дерево цифрового поиска (также <em>бор, Trie, Префиксное дерево)</em> - структура данных, которая используется для осуществления поразрядного поиска. Каждый узел дерева содержит значение одного “разряда” (в нашем случае - строковый символ). Вся строка представлена последовательностью узлов от корня до листа дерева. Пример - дерево цифрового поиска для строк A, ABA, ABB, ABBA, ABC, BAC, BC:  </p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">    [ROOT NODE]</span><br><span class="line">    /         \</span><br><span class="line">   A           B</span><br><span class="line">  / \         / \</span><br><span class="line">&#123;0&#125;  B       A   C</span><br><span class="line">   / | \    /</span><br><span class="line">  A  B  C  C</span><br><span class="line">    / \</span><br><span class="line">  &#123;0&#125;  A</span><br></pre></td></tr></table></figure>
+
+<p>Почитать про эту структуру можно, например, тут: <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Trie">https://en.wikipedia.org/wiki/Trie</a>.  </p>
+<p>Алгоритм A1 поиска <em>префикса</em> строки S по дереву:  </p>
+<p>1. Пусть L &#x3D; длина строки S.<br>2. Если L &#x3D; 0 (“пустая” строка), то выход: префикс не найден.<br>3. Если дерево не содержит узлов (“пустое” дерево), то выход: префикс не найден.<br>4. Терминальный узел T &#x3D; NULL.<br>5. Текущий узел P &#x3D; корень дерева ( [ROOT NODE] ).<br>6. Цикл по K &#x3D; 1..L:<br>7.   Если у текущего узла нет дочернего, соответствующего символу S[K], то выход из цикла.<br>8.   Текущий узел P &#x3D; дочерний, узел, соответствующий символу S[K].<br>9.   Если у узла P есть дочерний узел с терминальным символом {0}, то присваиваем его T.<br>10. Конец цикла.<br>11. Если узел P - лист, то выход: префикс найден.<br>12. Если T не равно NULL, то выход: префикс найден.<br>13. Префикс не найден.  </p>
+<p>В качестве терминального символа {0} как правило используется символ NUL с ASCII-кодом 0, который не может встретиться в строке.  </p>
+<p>Алгоритм A2 поиска <em>подстроки</em> строки S по дереву.  </p>
+<p>1. Пусть L &#x3D; длина строки S.<br>2. Если L &#x3D; 0 (“пустая” строка), то выход: подстрока не найдена.<br>3. Если дерево не содержит узлов (“пустое” дерево), то выход: подстрока не найдена.<br>4. Цикл по K &#x3D; 1..L:<br>5.  Пусть Sk - <em>суффикс</em> строки S, начиная с K-го символа (суффикс длины L-K+1).<br>6.  Используем алгоритм A1 для поиска префикса строки Sk по дереву; если префикс найден, то выход: подстрока найдена.<br>7. Конец цикла.<br>8. Подстрока не найдена.  </p>
+<p>В алгоритмах A1 и A2 использованы определения <em>префикса</em> и <em>суффикса</em> строки из статьи: <a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%B4%D1%81%D1%82%D1%80%D0%BE%D0%BA%D0%B0">https://ru.wikipedia.org/wiki/Подстрока</a>. По-простому: префикс строки длины X - это первые X символов строки, суффикс строки длины Y - последние Y символов строки.  </p>
+<p><em>Построение дерева цифрового поиска</em>  </p>
+<p>Обозначения:  </p>
+<p>N - количество строк.<br>Si - i-я строка, i &#x3D; 1..N.<br>Li - длина i-ой строки.<br>[ROOT NODE] - корневой узел.  </p>
+<p>Построение дерева цифрового поиска:  </p>
+<p>1. Сортировка списка строк по возрастанию, удаление дубликатов.<br>2. Вызов рекурсивной процедуры R( [ROOT NODE], 1, 1, N).  </p>
+<p>Рекурсивная процедура R (параметры: P - узел-родитель, K - позиция текущего символа, I0, J0 - индексы строк; I0&lt;&#x3D;J0):  </p>
+<p>1. Индекс i &#x3D; I0.<br>2. Если K &gt; Li и i &#x3D; J0, то выход из процедуры R.<br>3. Если K &lt;&#x3D; Li, то символ C &#x3D; Si[K], иначе C &#x3D; {0}.<br>4. Создать X &#x3D; узел (C, P).<br>5. Индекс j &#x3D; i.<br>6. Цикл:<br>7.      Если j &#x3D; J0 или S(j+1)[K] не равно C, то:<br>8.        Вызвать R (X, K+1, i, j)<br>9.        Если j &#x3D; J0, то выход из цикла.<br>10.      i &#x3D; j+1.<br>10.      C &#x3D; Si[K].<br>11.      Создать X &#x3D; узел (C, P).<br>12.    Конец если.<br>13.    j &#x3D; j + 1.<br>14. Конец цикла.  </p>
+<p>См. иллюстрацию на Python: <a href="http://blog.coolsoftware.ru/2016/03/blog-post_23.html">http://blog.coolsoftware.ru/2016/03/blog-post_23.html</a>.  </p>
+<p><em>Оптимизация (сжатие)</em>  </p>
+<p>Под-деревья, узлы которых содержат не более одного потомка, можно объединить в один узел - см. узел (AC) в примере ниже.  </p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">    [ROOT NODE]</span><br><span class="line">    /         \</span><br><span class="line">   A           B</span><br><span class="line">  / \         / \</span><br><span class="line">&#123;0&#125;  B      (AC) C</span><br><span class="line">   / | \</span><br><span class="line">  A  B  C</span><br><span class="line">    / \</span><br><span class="line">  &#123;0&#125;  A</span><br></pre></td></tr></table></figure>
+
+<p>Реализация на Delphi: <a target="_blank" rel="noopener" href="https://github.com/optinsoft/SearchStrings">https://github.com/optinsoft/SearchStrings</a>  </p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/dst/">DST</a>, <a href="/tags/search/">search</a>, <a href="/tags/string/">string</a>, <a href="/tags/trie/">trie</a>, <a href="/tags/%D0%B1%D0%BE%D1%80/">бор</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-lazarus-exe" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2016-03-01T13:19:00.000Z"><a href="/2016/03/lazarus-exe/">2016-03-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/03/lazarus-exe/">Lazarus Exe </a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Чтобы уменьшить размер генерируемого Lazarus exe файла, нужно включить следующие опции в параметрах компилятора:  </p>
+<ol>
+<li>“Компиляция и компоновка”-&gt;”Стиль модулей”-&gt;”Умная компоновка (-CX)”</li>
+<li>“Компиляция и компоновка”-&gt;”Компоновка”-&gt;”Умная компоновка (-XX)”</li>
+<li>“Отладка”-&gt;”Информация для GDB”-&gt;”Использовать внешний файл отладочных символов GDB (-Xg)”</li>
+<li>“Отладка”-&gt;”Прочая отладочная информация”-&gt;”Вырезать символы из исполнимого файла (-Xs)”</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://1.bp.blogspot.com/-uSYj434mwss/VtWVR-1_cKI/AAAAAAAAAUw/f2VzkmwdVV8/s1600/lazarus-exe-1.png"><img src="https://1.bp.blogspot.com/-uSYj434mwss/VtWVR-1_cKI/AAAAAAAAAUw/f2VzkmwdVV8/s400/lazarus-exe-1.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://3.bp.blogspot.com/-fXjX_tMrpMs/VtWVUS1O_sI/AAAAAAAAAU0/PFUjIgQFCvY/s1600/lazarus-exe-2.png"><img src="https://3.bp.blogspot.com/-fXjX_tMrpMs/VtWVUS1O_sI/AAAAAAAAAU0/PFUjIgQFCvY/s400/lazarus-exe-2.png"></a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/exe/">exe</a>, <a href="/tags/lazarus/">Lazarus</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-asus-n10-nano-vs-tp-link-tl-wn823n" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2016-02-18T11:19:00.000Z"><a href="/2016/02/asus-n10-nano-vs-tp-link-tl-wn823n/">2016-02-18</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/asus-n10-nano-vs-tp-link-tl-wn823n/">ASUS N10 Nano vs TP-LINK TL-WN823N</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Решил сравнить скорость двух беспроводных сетевых USB-адаптеров: ASUS N10 Nano и TP-LINK TL-WN823N. На первом написно до 150 Mbps, на втором - до 300 Mbps.  </p>
+<p>Оба адаптера втыкались в Raspberry Pi B+. Для тестов использовался iperf.  </p>
+<div style="text-align: left;">Результаты тестов представлены на Рис. 1,2. Как видим, ASUS показывает скорость около 42 Mbit/sec, TP-LINK - около 74 Mbit/sec.</div>
+
+<div style="text-align: left;">Рис.1. ASUS N10 Nano.</div>
+
+<p><a target="_blank" rel="noopener" href="https://4.bp.blogspot.com/-tDcPintEjDY/VsWmYszNcZI/AAAAAAAAAUQ/8wYol5Wv42s/s1600/iperf1.png"><img src="https://4.bp.blogspot.com/-tDcPintEjDY/VsWmYszNcZI/AAAAAAAAAUQ/8wYol5Wv42s/s400/iperf1.png"></a></p>
+<div style="text-align: left;">Рис.2. TP-LINK TL-WN823N.</div>
+
+<p><a target="_blank" rel="noopener" href="https://4.bp.blogspot.com/-_bQFfAxMjVY/VsWoZRg07TI/AAAAAAAAAUc/cDX8nT57Frw/s1600/iperf3.png"><img src="https://4.bp.blogspot.com/-_bQFfAxMjVY/VsWoZRg07TI/AAAAAAAAAUc/cDX8nT57Frw/s400/iperf3.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://3.bp.blogspot.com/-JWZifsYr2Uo/VsWmYkz41eI/AAAAAAAAAUM/E4p_kUuDYFs/s1600/iperf2.png">  
+</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/raspberry-pi/">Raspberry Pi</a>, <a href="/tags/performance/">Performance</a>, <a href="/tags/wi-fi/">Wi-Fi</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-windows" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2015-12-14T17:06:00.000Z"><a href="/2015/12/windows/">2015-12-14</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/12/windows/">Обновить иконки рабочего стола (Windows)</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Заметка себе на память:  </p>
+<p>ie4uinit.exe -ClearIconCache  </p>
+<p><a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-bWfAwd6Iemc/Vm72-k2lruI/AAAAAAAAATE/-cg5Rewtdtg/s1600/i4uinit.png"><img src="http://3.bp.blogspot.com/-bWfAwd6Iemc/Vm72-k2lruI/AAAAAAAAATE/-cg5Rewtdtg/s320/i4uinit.png"></a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/windows/">windows</a>, <a href="/tags/desktop/">Desktop</a>, <a href="/tags/icons/">Icons</a>, <a href="/tags/refresh/">Refresh</a>, <a href="/tags/%D0%B8%D0%BA%D0%BE%D0%BD%D0%BA%D0%B8/">иконки</a>, <a href="/tags/%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C/">обновить</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-teredo-ipv6" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2015-06-05T11:50:00.000Z"><a href="/2015/06/teredo-ipv6/">2015-06-05</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/06/teredo-ipv6/">Teredo ipv6</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Настройка ipv6 (Teredo):  </p>
+<ol>
+<li>Мой компьютер (контекстное меню) –&gt; Управление -&gt; Службы (Рис. 1):<br>    Вспомогательная служба IP –&gt; Тип запуска –&gt; Выбираем из списка: Автоматически</li>
+<li>Пуск –&gt; Выполнить –&gt; regedit</li>
+<li>В реестре по адресу<br>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Dnscache\Parameters<br>создать ключ AddrConfigControl типа DWORD со значением 0 (Рис. 2).</li>
+<li>Пуск –&gt; Панель управления –&gt; Сеть и Интернет –&gt; Сетевые подключения –&gt; Подключение по локальной сети –&gt; Свойства (Рис. 3):<br>    Протокол Интернета версии 6 (TCP&#x2F;IPv6) –&gt; включить и в Свойствах указать:<br>    Использовать следующие адреса DNS-серверов:<br>    Предпочитаемый DNS-сервер: 2001:4860:4860::8888<br>    Альтернативный DNS-сервер: 2001:4860:4860::8844</li>
+<li>Пуск –&gt; Выполнить –&gt; gpedit.msc</li>
+<li>Конфигурация компьютера –&gt; Административные шаблоны –&gt; Сеть –&gt; Параметры TCP&#x2F;IP –&gt; Технологии Туннелирования IPv6 (Рис. 4):<br>    Классификация Teredo по умолчанию –&gt; Включить –&gt; Включенное состояние<br>    Частота обновления Teredo –&gt; Включить –&gt; 10<br>    Состояние Teredo –&gt; Включить –&gt; Корпоративный клиент<br>    Порт клиента Teredo -&gt; Не задано<br>    Имя сервера Teredo –&gt; Включить –&gt; Выбираем из списка: teredo.remlab.net</li>
+<li>Пуск – Выполнить – cmd:<br>    netsh int ipv6 delete route ::&#x2F;0 Teredo<br>    netsh int ipv6 add route ::&#x2F;0 Teredo</li>
+<li>Тестирование подключения: <a target="_blank" rel="noopener" href="http://test-ipv6.com/">http://test-ipv6.com/</a></li>
+</ol>
+<div class="separator" style="clear: both; text-align: center;">Рис. 1</div>
+
+<p><a target="_blank" rel="noopener" href="http://2.bp.blogspot.com/-Gwt1bQxlfNQ/VXGH_hjiIuI/AAAAAAAAARI/XUmueDKV3dI/s1600/iphlpsvc.png"><img src="http://2.bp.blogspot.com/-Gwt1bQxlfNQ/VXGH_hjiIuI/AAAAAAAAARI/XUmueDKV3dI/s400/iphlpsvc.png"></a></p>
+<div class="" style="clear: both; text-align: center;">Рис. 2</div>
+
+<p><a target="_blank" rel="noopener" href="http://1.bp.blogspot.com/-1doq_Uc3Q9U/VXGJsqpf-RI/AAAAAAAAARQ/OGt6x6Y03s4/s1600/AddrConfigControl.png"><img src="http://1.bp.blogspot.com/-1doq_Uc3Q9U/VXGJsqpf-RI/AAAAAAAAARQ/OGt6x6Y03s4/s400/AddrConfigControl.png"></a></p>
+<div class="" style="clear: both; text-align: center;">Рис.3</div>
+
+<p><a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-nQBcXA8rJ1Y/VXGMg_ORlzI/AAAAAAAAARc/vXqKb7YQX6g/s1600/ipv6dns.png"><img src="http://4.bp.blogspot.com/-nQBcXA8rJ1Y/VXGMg_ORlzI/AAAAAAAAARc/vXqKb7YQX6g/s400/ipv6dns.png"></a></p>
+<div class="" style="clear: both; text-align: center;">Рис. 4</div>
+
+<p><a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-BIIj19IFcOc/VXGE4_PKJeI/AAAAAAAAAQ8/w1w4rXpCVrM/s1600/teredo.png"><img src="http://3.bp.blogspot.com/-BIIj19IFcOc/VXGE4_PKJeI/AAAAAAAAAQ8/w1w4rXpCVrM/s400/teredo.png"></a></p>
+<p>Стянул отсюда: <a target="_blank" rel="noopener" href="http://blog.cherepovets.ru/serovds/2011/11/15/teredo-win7/">http://blog.cherepovets.ru/serovds/2011/11/15/teredo-win7/</a>  </p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/ipv6/">ipv6</a>, <a href="/tags/teredo/">Teredo</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-raspberry-pi" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2015-03-20T15:31:00.000Z"><a href="/2015/03/raspberry-pi/">2015-03-20</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/raspberry-pi/">Raspberry Pi</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Полезные ссылки, касающиеся разработки под Raspberry Pi. Пишу главным образом для себя, чтобы не забыть :) Пост будет время от времени дополнятся (я надеюсь :)  </p>
+<p>1. Кросс-компиляция Qt 5 для Raspberry Pi:  </p>
+<p><a target="_blank" rel="noopener" href="http://qt-project.org/wiki/RaspberryPi_Beginners_guide">http://qt-project.org/wiki/RaspberryPi_Beginners_guide</a>  </p>
+<p>Несколько замечаний:  </p>
+<p>a) git clone git<span class="sy0">:</span><span class="co1">&#x2F;&#x2F;gitorious.org&#x2F;qt&#x2F;qt5.git не работает, вместо него нужно выполнять: git clone <a target="_blank" rel="noopener" href="http://git.gitorious.org/qt/qt5.git">http://git.gitorious.org/qt/qt5.git</a></span>  </p>
+<p><span class="co1">б) сперва лучше (imho) залить образ на флешку ( </span>sudo dd bs<span class="sy0">&#x3D;</span>1M <span class="kw1">if</span><span class="sy0">&#x3D;</span><span class="nu0"></span><span class="sy0"></span>2015-02-16-raspbian-wheezy.img of<span class="sy0">&#x3D;&#x2F;</span>dev<span class="sy0">&#x2F;</span>sdb ), вставить флешку в Raspberry Pi, установить апдейты и библиотеки (например, для разработки под X11: <a target="_blank" rel="noopener" href="http://doc.qt.io/qt-5/linux-requirements.html">http://doc.qt.io/qt-5/linux-requirements.html</a>), потом сделать образ этой флешки ( sudo dd bs<span class="sy0">&#x3D;</span>1M <span class="kw1">if</span><span class="sy0">&#x3D;</span><span class="sy0">&#x2F;</span>dev<span class="sy0">&#x2F;</span>sdb<span class="co1"></span> of<span class="sy0">&#x3D;</span><span class="co1"></span><span class="sy0"></span>rasp-pi.img ) и уже с ним работать дальше.  </p>
+<p>в) “Магическое” число <span class="sy0"></span><span class="nu0">62914560 ( </span><br>sudo mount <span class="sy0">-</span>o loop<span class="sy0">,</span>offset<span class="sy0">&#x3D;</span><span class="nu0">62914560</span> rasp-pi.<span class="me1">img</span> <span class="sy0">&#x2F;</span>mnt<span class="sy0">&#x2F;</span>rasp<span class="sy0">-</span>pi<span class="sy0">-</span>rootfs ) можно вычислить следующим образом:  </p>
+<p>[vitaly@localhost opt]$ sudo fdisk -l rasp-pi.img  </p>
+<p>Disk rasp-pi.img: 7892 MB, 7892631552 bytes, 15415296 sectors<br>Units &#x3D; sectors of 1 * 512 &#x3D; 512 bytes<br>Sector size (logical&#x2F;physical): 512 bytes &#x2F; 512 bytes<br>I&#x2F;O size (minimum&#x2F;optimal): 512 bytes &#x2F; 512 bytes<br>Disk label type: dos<br>Disk identifier: 0x0009bf4f  </p>
+<p>Устр-во Загр     Начало       Конец       Блоки   Id  Система<br>rasp-pi.img1            8192      122879       57344    c  W95 FAT32 (LBA)<br>rasp-pi.img2          122880     6399999     3138560   83  Linux  </p>
+<p>122880 - это начало раздела (номер первого сектора раздела),  который нужно подмонтировать. 122880 * 512 &#x3D; 62914560.  </p>
+<p>2.”Нативная” компиляция Qt5 на Raspberry Pi.  </p>
+<p><a target="_blank" rel="noopener" href="http://qt-project.org/wiki/Native_Build_of_Qt5_on_a_Raspberry_Pi">http://qt-project.org/wiki/Native_Build_of_Qt5_on_a_Raspberry_Pi</a>  </p>
+<p>Я не пробовал. Утверждается, что идет очень долго.  </p>
+<p>3. Кросс-компиляция <a target="_blank" rel="noopener" href="http://www.webtoolkit.eu/wt">Wt</a> на Raspberry Pi:  </p>
+<p><a target="_blank" rel="noopener" href="http://redmine.emweb.be/projects/wt/wiki/Cross_compile_Wt_on_Raspberry_Pi">http://redmine.emweb.be/projects/wt/wiki/Cross_compile_Wt_on_Raspberry_Pi</a>  </p>
+<p>4. “Экономичная реализация графического интерфейса пользователя на базе одноплатного компьютера Raspberry Pi” (“Автоматика и программная инженерия”, 2014, №2(8))  </p>
+<p><a target="_blank" rel="noopener" href="http://www.nips.ru/images/stories/zhournal-AIPI/10/aipi-2-2014-3.pdf">http://www.nips.ru/images/stories/zhournal-AIPI/10/aipi-2-2014-3.pdf</a>  </p>
+<p>Хорошее подробное описание настройки кросс-компиляции.  </p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/qt/">Qt</a>, <a href="/tags/cpp/">cpp</a>, <a href="/tags/raspberry-pi/">Raspberry Pi</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-throttling" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2014-11-29T10:11:00.000Z"><a href="/2014/11/throttling/">2014-11-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/11/throttling/">Throttling</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p><em>Троттлинг (throttling)</em> - это регулирование (ограничение) скорости какого-нибудь процесса. Например, <em>bandwidth throttling</em> - регулирование пропускной способности канала (обычно измеряется в килобайтах в секунду, kB&#x2F;s).  </p>
+<p>В листинге ниже показано, как можно реализовать троттлинг.  </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">throttle_acquire</span>()); <span class="comment">//цикл ожидания</span></span><br><span class="line">    <span class="built_in">doWork</span>(); <span class="comment">//выпоняем работу</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>В этом примере процесс состоит из 1000 итераций. Каждая итерация заключается в вызове функции doWork(), которая, например, отправляет очередную порцию данных. Ограничение скорости заключается в введении лимита на количество этих вызовов N за период времени dT. Перед вызовом doWork() осуществляется проверка превышения лимита: функция throttle_acquire() возвращает false, если лимит превышен, и true, в противном случае.  </p>
+<p>Троттлинг можно реализовать с использованием <a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BB%D1%8C%D1%86%D0%B5%D0%B2%D0%BE%D0%B9_%D0%B1%D1%83%D1%84%D0%B5%D1%80">кольцевого буфера</a>. Этот кольцевой буфер заполняется моментами времени последних вызовов функции doWork() (см пример выше). Размер буфера равен максимально разрешенному количеству этих вызовов N за период времени dT. Если буфер полностью заполнен, то функция acquire() возвращает false. Это означает, что необходимо подождать, пока из буфера не будет удален хотя бы один момент времени, который располагается от текущего момента (“сейчас”) дальше, чем dT.  </p>
+<p>Реализацию троттлинга на C++ (throttle.h)  я выложил на github: <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/Throttle">https://github.com/coolsoftware/Throttle</a>.  </p>
+<p>Пример использования класса <em>throttle</em> можно посмотреть в TestThrottle.cpp.  </p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/cpp/">cpp</a>, <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/">алгоритм</a>, <a href="/tags/github/">github</a>, <a href="/tags/throttle/">throttle</a>, <a href="/tags/throttling/">throttling</a>, <a href="/tags/%D1%82%D1%80%D0%BE%D1%82%D1%82%D0%BB%D0%B8%D0%BD%D0%B3/">троттлинг</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-zlib-visual-studio-2010" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2014-11-27T16:02:00.000Z"><a href="/2014/11/zlib-visual-studio-2010/">2014-11-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/11/zlib-visual-studio-2010/">Сборка zlib в Visual Studio 2010</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>1. Скачиваем zlib 1.2.8 с <a target="_blank" rel="noopener" href="http://www.zlib.net/">http://www.zlib.net/</a><br>2. Распаковываем архив в c:\zlib-1.2.8<br>3. Открываем в Visual Studio 2010 проект C:\zlib-1.2.8\contrib\vstudio\vc10\zlibvc.sln<br>4. Меняем следующие настройки проекта zlibstat:  </p>
+<p>  Конфигурация Debug:  </p>
+<p>    General-&gt;Output Directory: **..\..\..\win32-MDd\**<br>    General-&gt;Intermediate Directory: **..\..\..\win32-MDd\Tmp\**<br>    C&#x2F;C++-&gt;Preprocessor-&gt;Preprocessor Definitions: &lt;удаляем **ZLIB_WINAPI**&gt;<br>    C&#x2F;C++-&gt;Code Generation-&gt;Runtime Library: <strong>Multi-threaded Debug DLL (&#x2F;MDd)</strong><br>    Librarian-&gt;General-&gt;Output File: <strong>$(OutDir)\..\zlibMDd.lib</strong>  </p>
+<p>  Конфигурация Release:  </p>
+<p>    General-&gt;Output Directory: **..\..\..\win32-MT\**<br>    General-&gt;Intermediate Directory: **..\..\..\win32-MT\Tmp\**<br>    C&#x2F;C++-&gt;Preprocessor-&gt;Preprocessor Definitions: &lt;удаляем **ZLIB_WINAPI**&gt;<br>    C&#x2F;C++-&gt;Code Generation-&gt;Runtime Library: <strong>Multi-threaded (&#x2F;MT)</strong><br>    Librarian-&gt;General-&gt;Output File: <strong>$(OutDir)\..\zlibMT.lib</strong><br>   <br>5. Собираем Debug и Release версии zlibstat. На выходе получаем:  </p>
+<p>  C:\zlib-1.2.8\zlibMDd.lib<br>  C:\zlib-1.2.8\zlibMT.lib  </p>
+<p>6. Открываем в Visual Studio 2010 любой проект C++ и открываем Property Manager-&gt;(Project Name)-&gt;Debug | Win32-&gt;Microsoft.Cpp.Win32.user-&gt;Common Properties-&gt;VC++ Directories. Добавляем c:\zlib-1.2.8 в Include Directories, Library Direcories и Source Directories.  </p>
+<p><a target="_blank" rel="noopener" href="http://2.bp.blogspot.com/-JfK1474NEAQ/VHdKsR46ehI/AAAAAAAAAPE/DLEOzwUBEZU/s1600/zlib.png"><img src="http://2.bp.blogspot.com/-JfK1474NEAQ/VHdKsR46ehI/AAAAAAAAAPE/DLEOzwUBEZU/s1600/zlib.png"></a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/cpp/">cpp</a>, <a href="/tags/visual-studio-2010/">Visual Studio 2010</a>, <a href="/tags/zlib/">zlib</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-rsa-c" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2014-05-29T17:13:00.000Z"><a href="/2014/05/rsa-c/">2014-05-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/05/rsa-c/">Генерация пар открытых/закрытых ключей (RSA) на C#</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Понадобилось мне создать пару открытый&#x2F;закрытый ключ на C#. Я поискал немного и нашел замечательную криптографическую библиотеку под названием Bouncy Castle: <a target="_blank" rel="noopener" href="https://www.bouncycastle.org/">https://www.bouncycastle.org/</a>. Для C# исходники можно скачать здесь: <a target="_blank" rel="noopener" href="http://www.bouncycastle.org/csharp/">http://www.bouncycastle.org/csharp/</a>. Ниже описан порядок установки и использования.  </p>
+<ol>
+<li><p>Качаем bccrypto-net-1.7-src.zip, распаковываем в какой-нибудь каталог на диске.</p>
+</li>
+<li><p>Открываем проект csharp.sln в Visual Studio 2010.</p>
+</li>
+<li><p>В свойствах проекта crypto в Build-&gt;General-&gt;Conditional compilation symbols комментируем INCLUDE_IDEA.  </p>
+<p><a target="_blank" rel="noopener" href="http://3.bp.blogspot.com/-vhWW_yv95co/U4ckjLlh7ZI/AAAAAAAAAOQ/BGqnXiFDGYQ/s1600/crypto1.png"><img src="http://3.bp.blogspot.com/-vhWW_yv95co/U4ckjLlh7ZI/AAAAAAAAAOQ/BGqnXiFDGYQ/s1600/crypto1.png"></a></p>
+<div class="separator" style="clear: both; text-align: center;"></div></li>
+<li><p>Пробуем выполнить Build и видим ошибки:<br>error CS1504: Source file ‘C:\temp\csharp\crypto\src\crypto\engines\IDEAEngine.cs’ could not be opened (‘Неопознанная ошибка ‘)<br>error CS1504: Source file ‘C:\temp\csharp\crypto\test\src\crypto\test\IDEATest.cs’ could not be opened (‘Неопознанная ошибка ‘)<br>error CS1504: Source file ‘C:\temp\csharp\crypto\src\asn1\misc\IDEACBCPar.cs’ could not be opened (‘Неопознанная ошибка ‘)</p>
+</li>
+<li><p>Удаляем из проекта crypto отсутствующие файлы:<br>src\crypto\engines\IDEAEngine.cs<br>src\asn1\misc\IDEACBCPar.cs<br>test\src\crypto\test\IDEATest.cs</p>
+</li>
+<li><p>Пробуем еще раз выполнить Build - на этот раз все должно получиться и будет создана библиотека crypto.dll.</p>
+</li>
+<li><p>Прописываем созданную библиотеку в References проекта.  </p>
+<p><a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-Jqy8eJsH5Qs/U4dlbpi5G-I/AAAAAAAAAOg/4L9JncCNtVc/s1600/ref-crypto.png"><img src="http://4.bp.blogspot.com/-Jqy8eJsH5Qs/U4dlbpi5G-I/AAAAAAAAAOg/4L9JncCNtVc/s1600/ref-crypto.png"></a></p>
+</li>
+<li><p>Код для генерации пары открытый&#x2F;закрытый ключ приведен ниже. Открытый ключ - в формате <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/PKCS_8">PKCS#8</a>. Закрытый ключ - в формате <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/PKCS_1">PKCS#1</a>.</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Asn1.Pkcs;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Asn1.X509;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto.Parameters;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Pkcs;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Security;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.X509;</span><br><span class="line"><span class="keyword">using</span> Org.BouncyCastle.Crypto.Generators;</span><br><span class="line"> </span><br><span class="line">RsaKeyPairGenerator rsa = <span class="keyword">new</span> RsaKeyPairGenerator();</span><br><span class="line">rsa.Init(<span class="keyword">new</span> KeyGenerationParameters(<span class="keyword">new</span> Org.BouncyCastle.Security.SecureRandom(), <span class="number">1024</span>));</span><br><span class="line">AsymmetricCipherKeyPair pair = rsa.GenerateKeyPair();</span><br><span class="line">PrivateKeyInfo privateKeyInfo = PrivateKeyInfoFactory.CreatePrivateKeyInfo(pair.Private);</span><br><span class="line"><span class="built_in">byte</span>[] serializedPrivateBytes = privateKeyInfo.PrivateKey.ToAsn1Object().GetDerEncoded();</span><br><span class="line"><span class="built_in">string</span> privateKey = Convert.ToBase64String(serializedPrivateBytes);</span><br><span class="line">SubjectPublicKeyInfo publicKeyInfo = SubjectPublicKeyInfoFactory.CreateSubjectPublicKeyInfo(pair.Public);</span><br><span class="line"><span class="built_in">byte</span>[] serializedPublicBytes = publicKeyInfo.ToAsn1Object().GetDerEncoded();</span><br><span class="line"><span class="built_in">string</span> publicKey = Convert.ToBase64String(serializedPublicBytes);</span><br></pre></td></tr></table></figure>
+
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/c/">C#</a>, <a href="/tags/visual-studio-2010/">Visual Studio 2010</a>, <a href="/tags/bouncy-castle/">Bouncy Castle</a>, <a href="/tags/rsa/">RSA</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/6/" class="alignleft prev">Назад</a>
+  
+  
+    <a href="/page/8/" class="alignright next">Вперед</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  
+
+<div class="widget tag">
+    <h3 class="title">Контакты</h3>
+    <div class="entry">
+        
+<div class="contactlink githublink">
+    <div class="icon"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/">github.com/coolsoftware</a>
+</div>
+
+    </div>
+</div>
+
+
+  
+
+<div class="widget tag">
+    <h3 class="title">Избранные сообщения</h3>
+    <div class="entry">
+        
+<div>
+    <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
+</div>
+
+<div>
+    <a href="/tags/howto/">Howto</a>
+</div>
+
+<div>
+    <a href="/2021/01/blog-post/">Музыка</a>
+</div>
+
+<div>
+    <a href="/tags/trie/">Поиск подстрок с помощью дерева цифрового поиска</a>
+</div>
+
+<div>
+    <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D0%B0%D0%BB%D0%BE%D0%B2/">Дерево Интервалов (Отрезков)</a>
+</div>
+
+<div>
+    <a href="/tags/throttling/">Throttling</a>
+</div>
+
+<div>
+    <a href="/2022/01/nodejs/">В одну строку</a>
+</div>
+
+<div>
+    <a href="/tags/%D0%B0%D0%BD%D0%B5%D0%BA%D0%B4%D0%BE%D1%82%D1%8B/">Анекдоты</a>
+</div>
+
+    </div>
+</div>
+
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Облако меток</h3>
+  <div class="entry">
+    <a href="/tags/net/" style="font-size: 11.11px;">.NET</a> <a href="/tags/0xe06d7363/" style="font-size: 10px;">0xe06d7363</a> <a href="/tags/32/" style="font-size: 10px;">32</a> <a href="/tags/404/" style="font-size: 10px;">404</a> <a href="/tags/64/" style="font-size: 11.11px;">64</a> <a href="/tags/ahci/" style="font-size: 10px;">AHCI</a> <a href="/tags/asp/" style="font-size: 11.11px;">ASP</a> <a href="/tags/asprotect/" style="font-size: 11.11px;">ASProtect</a> <a href="/tags/asus/" style="font-size: 10px;">ASUS</a> <a href="/tags/access-violation/" style="font-size: 10px;">Access Violation</a> <a href="/tags/active-server-pages/" style="font-size: 10px;">Active Server Pages</a> <a href="/tags/amazon/" style="font-size: 10px;">Amazon</a> <a href="/tags/angular/" style="font-size: 10px;">Angular</a> <a href="/tags/apache/" style="font-size: 11.11px;">Apache</a> <a href="/tags/bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/bouncy-castle/" style="font-size: 10px;">Bouncy Castle</a> <a href="/tags/c/" style="font-size: 12.22px;">C#</a> <a href="/tags/com/" style="font-size: 10px;">COM</a> <a href="/tags/centos/" style="font-size: 15.56px;">CentOS</a> <a href="/tags/cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/createprocess/" style="font-size: 10px;">CreateProcess</a> <a href="/tags/dst/" style="font-size: 10px;">DST</a> <a href="/tags/designer/" style="font-size: 10px;">Designer</a> <a href="/tags/desktop/" style="font-size: 10px;">Desktop</a> <a href="/tags/driver/" style="font-size: 10px;">Driver</a> <a href="/tags/ec2/" style="font-size: 10px;">EC2</a> <a href="/tags/eosio/" style="font-size: 10px;">EOSIO</a> <a href="/tags/enhanced-security/" style="font-size: 10px;">Enhanced Security</a> <a href="/tags/git/" style="font-size: 10px;">Git.</a> <a href="/tags/iis/" style="font-size: 11.11px;">IIS</a> <a href="/tags/insert/" style="font-size: 10px;">INSERT</a> <a href="/tags/icons/" style="font-size: 11.11px;">Icons</a> <a href="/tags/interval-tree/" style="font-size: 10px;">Interval Tree</a> <a href="/tags/java/" style="font-size: 10px;">Java</a> <a href="/tags/lazarus/" style="font-size: 10px;">Lazarus</a> <a href="/tags/linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/locklib/" style="font-size: 11.11px;">LockLib</a> <a href="/tags/md4/" style="font-size: 10px;">MD4</a> <a href="/tags/md5/" style="font-size: 10px;">MD5</a> <a href="/tags/mdb-access/" style="font-size: 10px;">MDB Access</a> <a href="/tags/mac/" style="font-size: 10px;">Mac</a> <a href="/tags/microsoft/" style="font-size: 10px;">Microsoft</a> <a href="/tags/mikrotik/" style="font-size: 10px;">MikroTik</a> <a href="/tags/minidlna/" style="font-size: 11.11px;">MiniDLNA</a> <a href="/tags/netbeans/" style="font-size: 10px;">NetBeans</a> <a href="/tags/node-js/" style="font-size: 11.11px;">Node.js</a> <a href="/tags/oracle/" style="font-size: 11.11px;">Oracle</a> <a href="/tags/php/" style="font-size: 12.22px;">PHP</a> <a href="/tags/pl-sql/" style="font-size: 10px;">PL/SQL</a> <a href="/tags/parseservercookie/" style="font-size: 10px;">ParseServerCookie</a> <a href="/tags/performance/" style="font-size: 10px;">Performance</a> <a href="/tags/perl/" style="font-size: 10px;">Perl</a> <a href="/tags/python/" style="font-size: 10px;">Python</a> <a href="/tags/qstring/" style="font-size: 10px;">QString</a> <a href="/tags/qt/" style="font-size: 13.33px;">Qt</a> <a href="/tags/raii/" style="font-size: 10px;">RAII</a> <a href="/tags/rsa/" style="font-size: 10px;">RSA</a> <a href="/tags/raspberry-pi/" style="font-size: 13.33px;">Raspberry Pi</a> <a href="/tags/react/" style="font-size: 10px;">React</a> <a href="/tags/redis/" style="font-size: 10px;">Redis</a> <a href="/tags/refresh/" style="font-size: 10px;">Refresh</a> <a href="/tags/sax/" style="font-size: 12.22px;">SAX</a> <a href="/tags/seh/" style="font-size: 10px;">SEH</a> <a href="/tags/selinux/" style="font-size: 10px;">SELinux</a> <a href="/tags/sql/" style="font-size: 11.11px;">SQL</a> <a href="/tags/schematron/" style="font-size: 11.11px;">Schematron</a> <a href="/tags/shelliconoverlayidentifiers/" style="font-size: 10px;">ShellIconOverlayIdentifiers</a> <a href="/tags/skype/" style="font-size: 10px;">Skype</a> <a href="/tags/teredo/" style="font-size: 10px;">Teredo</a> <a href="/tags/tinker-board/" style="font-size: 10px;">Tinker Board</a> <a href="/tags/tortoisegit/" style="font-size: 10px;">TortoiseGit</a> <a href="/tags/unhandled-exception/" style="font-size: 10px;">Unhandled Exception</a> <a href="/tags/vhashedstringlist/" style="font-size: 11.11px;">VHashedStringList</a> <a href="/tags/vlock/" style="font-size: 11.11px;">VLock</a> <a href="/tags/vrwlock/" style="font-size: 11.11px;">VRWLock</a> <a href="/tags/vuncopyable/" style="font-size: 10px;">VUncopyable</a> <a href="/tags/verqueryvalue/" style="font-size: 10px;">VerQueryValue</a> <a href="/tags/visial-studio/" style="font-size: 10px;">Visial Studio</a> <a href="/tags/visual-c/" style="font-size: 10px;">Visual C++</a> <a href="/tags/visual-studio-2010/" style="font-size: 13.33px;">Visual Studio 2010</a> <a href="/tags/wcf/" style="font-size: 10px;">WCF</a> <a href="/tags/when/" style="font-size: 10px;">WHEN</a> <a href="/tags/wsdl/" style="font-size: 10px;">WSDL</a> <a href="/tags/web-service/" style="font-size: 10px;">Web Service</a> <a href="/tags/wi-fi/" style="font-size: 10px;">Wi-Fi</a> <a href="/tags/xe-2/" style="font-size: 11.11px;">XE 2</a> <a href="/tags/xe2/" style="font-size: 11.11px;">XE2</a> <a href="/tags/xml/" style="font-size: 12.22px;">XML</a> <a href="/tags/xsd/" style="font-size: 12.22px;">XSD</a> <a href="/tags/tchar/" style="font-size: 10px;">_TCHAR</a> <a href="/tags/throwinfo/" style="font-size: 10px;">_ThrowInfo</a> <a href="/tags/aggregate/" style="font-size: 10px;">aggregate</a> <a href="/tags/aggregation/" style="font-size: 10px;">aggregation</a> <a href="/tags/android/" style="font-size: 11.11px;">android</a> <a href="/tags/api/" style="font-size: 10px;">api</a> <a href="/tags/apk/" style="font-size: 10px;">apk</a> <a href="/tags/arm/" style="font-size: 11.11px;">arm</a> <a href="/tags/artificial-intelligence/" style="font-size: 11.11px;">artificial intelligence</a> <a href="/tags/auto-increment/" style="font-size: 10px;">auto-increment</a> <a href="/tags/avahi/" style="font-size: 11.11px;">avahi</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/bigdata/" style="font-size: 10px;">bigdata</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/blogger/" style="font-size: 10px;">blogger</a> <a href="/tags/blogspot/" style="font-size: 10px;">blogspot</a> <a href="/tags/books/" style="font-size: 10px;">books</a> <a href="/tags/boost/" style="font-size: 11.11px;">boost</a> <a href="/tags/bug/" style="font-size: 11.11px;">bug</a> <a href="/tags/build/" style="font-size: 11.11px;">build</a> <a href="/tags/builder/" style="font-size: 10px;">builder</a> <a href="/tags/certificate/" style="font-size: 11.11px;">certificate</a> <a href="/tags/chinese/" style="font-size: 10px;">chinese</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/comments/" style="font-size: 10px;">comments</a> <a href="/tags/console/" style="font-size: 10px;">console</a> <a href="/tags/cpp/" style="font-size: 18.89px;">cpp</a> <a href="/tags/cryptoapi/" style="font-size: 10px;">cryptoapi</a> <a href="/tags/dataset/" style="font-size: 10px;">dataset</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/delphi/" style="font-size: 16.67px;">delphi</a> <a href="/tags/development/" style="font-size: 10px;">development</a> <a href="/tags/dll/" style="font-size: 11.11px;">dll</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/ethereum/" style="font-size: 14.44px;">ethereum</a> <a href="/tags/exception/" style="font-size: 10px;">exception</a> <a href="/tags/exe/" style="font-size: 10px;">exe</a> <a href="/tags/failure/" style="font-size: 10px;">failure</a> <a href="/tags/fast-insert/" style="font-size: 11.11px;">fast insert</a> <a href="/tags/faucet/" style="font-size: 10px;">faucet</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/geth/" style="font-size: 10px;">geth</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitalk/" style="font-size: 10px;">gitalk</a> <a href="/tags/github/" style="font-size: 16.67px;">github</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/google/" style="font-size: 13.33px;">google</a> <a href="/tags/hexo/" style="font-size: 11.11px;">hexo</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/howto/" style="font-size: 17.78px;">howto</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/indy/" style="font-size: 11.11px;">indy</a> <a href="/tags/ipv6/" style="font-size: 10px;">ipv6</a> <a href="/tags/itree/" style="font-size: 10px;">itree</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/lib/" style="font-size: 10px;">lib</a> <a href="/tags/light-plus/" style="font-size: 10px;">light-plus</a> <a href="/tags/links/" style="font-size: 10px;">links</a> <a href="/tags/lol/" style="font-size: 12.22px;">lol</a> <a href="/tags/mdns/" style="font-size: 10px;">mDNS</a> <a href="/tags/machine-learning/" style="font-size: 12.22px;">machine learning</a> <a href="/tags/max-connections/" style="font-size: 10px;">max_connections</a> <a href="/tags/mist/" style="font-size: 10px;">mist</a> <a href="/tags/mkdocs/" style="font-size: 10px;">mkdocs</a> <a href="/tags/mkv/" style="font-size: 10px;">mkv</a> <a href="/tags/mongo/" style="font-size: 12.22px;">mongo</a> <a href="/tags/mp4/" style="font-size: 10px;">mp4</a> <a href="/tags/my-ini/" style="font-size: 10px;">my.ini</a> <a href="/tags/mysql/" style="font-size: 11.11px;">mysql</a> <a href="/tags/nodejs/" style="font-size: 11.11px;">nodejs</a> <a href="/tags/oddeven/" style="font-size: 10px;">oddeven</a> <a href="/tags/openssl/" style="font-size: 11.11px;">openssl</a> <a href="/tags/openvpn/" style="font-size: 11.11px;">openvpn</a> <a href="/tags/pagination/" style="font-size: 10px;">pagination</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/pypi/" style="font-size: 10px;">pypi</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/random/" style="font-size: 10px;">random</a> <a href="/tags/reac/" style="font-size: 10px;">reac</a> <a href="/tags/rinkeby/" style="font-size: 11.11px;">rinkeby</a> <a href="/tags/rpi/" style="font-size: 11.11px;">rpi</a> <a href="/tags/search/" style="font-size: 11.11px;">search</a> <a href="/tags/smart-contract/" style="font-size: 13.33px;">smart contract</a> <a href="/tags/sqlite/" style="font-size: 11.11px;">sqlite</a> <a href="/tags/ssl/" style="font-size: 12.22px;">ssl</a> <a href="/tags/string/" style="font-size: 11.11px;">string</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/testing/" style="font-size: 10px;">testing</a> <a href="/tags/theme/" style="font-size: 10px;">theme</a> <a href="/tags/throttle/" style="font-size: 10px;">throttle</a> <a href="/tags/throttling/" style="font-size: 10px;">throttling</a> <a href="/tags/tinkerboard/" style="font-size: 11.11px;">tinkerboard</a> <a href="/tags/trick/" style="font-size: 10px;">trick</a> <a href="/tags/trie/" style="font-size: 11.11px;">trie</a> <a href="/tags/tuning/" style="font-size: 11.11px;">tuning</a> <a href="/tags/tutorial/" style="font-size: 11.11px;">tutorial</a> <a href="/tags/uncopyable/" style="font-size: 10px;">uncopyable</a> <a href="/tags/version/" style="font-size: 10px;">version</a> <a href="/tags/video/" style="font-size: 10px;">video</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/web-development-design/" style="font-size: 10px;">web development & design</a> <a href="/tags/web3/" style="font-size: 10px;">web3</a> <a href="/tags/windows/" style="font-size: 15.56px;">windows</a> <a href="/tags/wsl2/" style="font-size: 11.11px;">wsl2</a> <a href="/tags/youtube/" style="font-size: 10px;">youtube</a> <a href="/tags/zlib/" style="font-size: 10px;">zlib</a> <a href="/tags/%D0%B3%D1%81%D1%87/" style="font-size: 10px;">ГСЧ</a> <a href="/tags/%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D0%B5%D0%BB%D0%B8/" style="font-size: 11.11px;">Писатели</a> <a href="/tags/%D1%81%D1%85%D0%B5%D0%BC%D0%B0%D1%82%D1%80%D0%BE%D0%BD/" style="font-size: 10px;">Схематрон</a> <a href="/tags/%D1%87%D0%B8%D1%82%D0%B0%D1%82%D0%B5%D0%BB%D0%B8/" style="font-size: 11.11px;">Читатели</a> <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/" style="font-size: 12.22px;">алгоритм</a> <a href="/tags/%D0%B0%D0%BD%D0%B5%D0%BA%D0%B4%D0%BE%D1%82%D1%8B/" style="font-size: 11.11px;">анекдоты</a> <a href="/tags/%D0%B1%D0%B0%D0%B3/" style="font-size: 10px;">баг</a> <a href="/tags/%D0%B1%D0%BB%D0%BE%D0%B3/" style="font-size: 11.11px;">блог</a> <a href="/tags/%D0%B1%D0%BB%D0%BE%D0%B3%D0%B8/" style="font-size: 10px;">блоги</a> <a href="/tags/%D0%B1%D0%BE%D1%80/" style="font-size: 11.11px;">бор</a> <a href="/tags/%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F-%D0%B2%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B0/" style="font-size: 11.11px;">быстрая вставка</a> <a href="/tags/%D0%B2-%D0%BE%D0%B4%D0%BD%D1%83-%D1%81%D1%82%D1%80%D0%BE%D0%BA%D1%83/" style="font-size: 10px;">в одну строку</a> <a href="/tags/%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE/" style="font-size: 10px;">видео</a> <a href="/tags/%D0%B2%D0%B8%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F/" style="font-size: 10px;">виртуальная функция</a> <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D0%B0%D0%BB%D0%BE%D0%B2/" style="font-size: 10px;">дерево интервалов</a> <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%BE%D1%82%D1%80%D0%B5%D0%B7%D0%BA%D0%BE%D0%B2/" style="font-size: 10px;">дерево отрезков</a> <a href="/tags/%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F/" style="font-size: 10px;">документация</a> <a href="/tags/%D0%B8%D0%BA%D0%BE%D0%BD%D0%BA%D0%B8/" style="font-size: 10px;">иконки</a> <a href="/tags/%D0%B8%D1%81%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D1%8F/" style="font-size: 10px;">исключения</a> <a href="/tags/%D0%BA%D0%B8%D1%82%D0%B0%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D1%8F%D0%B7%D1%8B%D0%BA/" style="font-size: 10px;">китайский язык</a> <a href="/tags/%D0%BA%D0%BD%D0%B8%D0%B3%D0%B8/" style="font-size: 10px;">книги</a> <a href="/tags/%D0%BA%D0%BE%D0%BC%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%B8%D0%B8/" style="font-size: 10px;">комментарии</a> <a href="/tags/%D0%BA%D0%BE%D0%BD%D1%81%D0%BE%D0%BB%D1%8C/" style="font-size: 10px;">консоль</a> <a href="/tags/%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D0%BE%D1%80/" style="font-size: 10px;">конструктор</a> <a href="/tags/%D0%BA%D1%83%D0%BD%D0%B3%D1%84%D1%83/" style="font-size: 10px;">кунгфу</a> <a href="/tags/%D0%BC%D1%83%D0%B7%D1%8B%D0%BA%D0%B0/" style="font-size: 10px;">музыка</a> <a href="/tags/%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C/" style="font-size: 10px;">обновить</a> <a href="/tags/%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BE%D1%88%D0%B8%D0%B1%D0%BE%D0%BA/" style="font-size: 10px;">обработка ошибок</a> <a href="/tags/%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/" style="font-size: 10px;">обучение</a> <a href="/tags/%D0%BF%D0%B0%D1%80%D1%81%D0%B5%D1%80/" style="font-size: 11.11px;">парсер</a> <a href="/tags/%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4/" style="font-size: 10px;">переезд</a> <a href="/tags/%D0%BF%D0%BE%D0%B8%D1%81%D0%BA/" style="font-size: 10px;">поиск</a> <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/" style="font-size: 20px;">полезные ссылки</a> <a href="/tags/%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80/" style="font-size: 10px;">пример</a> <a href="/tags/%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/" style="font-size: 10px;">проверка</a> <a href="/tags/%D1%81%D0%B2%D0%B0%D1%80%D0%BA%D0%B0/" style="font-size: 10px;">сварка</a> <a href="/tags/%D1%81%D1%82%D0%B8%D1%85%D0%B8/" style="font-size: 10px;">стихи</a> <a href="/tags/%D1%82%D1%80%D0%BE%D1%82%D1%82%D0%BB%D0%B8%D0%BD%D0%B3/" style="font-size: 10px;">троттлинг</a> <a href="/tags/%D1%85%D0%BE%D0%B1%D0%B1%D0%B8/" style="font-size: 11.11px;">хобби</a> <a href="/tags/%D1%86%D0%B8%D0%B3%D1%83%D0%BD/" style="font-size: 10px;">цигун</a> <a href="/tags/%D1%8E%D0%BC%D0%BE%D1%80/" style="font-size: 12.22px;">юмор</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2025 Vitaly Yakovlev
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+<script src="/js/copy-code.js"></script>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script>
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

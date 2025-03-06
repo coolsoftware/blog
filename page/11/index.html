@@ -1,0 +1,715 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Страница 11 | Cool Software Blog</title>
+  <meta name="author" content="Vitaly Yakovlev">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Cool Software Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="shortcut icon" href="/favicon.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Cool Software Blog" type="application/atom+xml">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+  
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div id="title-wrapper">
+  <div class="alignleft">
+    <div id="title"><a href="/"><img src="/images/coolsoftware-blog.png" /></a></div>
+    <h2><a href="/">Записки программиста</a></h2>
+  </div>
+  <nav id="main-nav" class="alignright">
+    <ul>
+      
+        
+        <li><a href="/archives">Архив</a></li>
+      
+        
+        <li><a href="/search"><span class="menuicon"></span></a></li>
+      
+        
+        <li><a href="/atom.xml" target="_blank"><span class="menuicon"></span></a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article id="post-ssl-delphi" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-11-09T13:48:00.000Z"><a href="/2011/11/ssl-delphi/">2011-11-09</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/11/ssl-delphi/">Проверка серверного сертификата SSL в Delphi</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Понадобилось мне осуществить проверку серверного сертификата в моей программе на Delphi. Эта программа была написана довольно давно, на Delphi 7 с использованием Indy 9.  </p>
+<p>Вот как выглядит проверка сертификата:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var</span><br><span class="line">  IdHTTP: TIdHTTP;</span><br><span class="line">  IdSSLIOHandlerSocket: TIdSSLIOHandlerSocket;</span><br><span class="line">begin</span><br><span class="line">  IdHTTP := TIdHTTP.Create(nil);</span><br><span class="line">  IdSSLIOHandlerSocket := TIdSSLIOHandlerSocket.Create(nil);</span><br><span class="line">  IdHTTP.IOHandler := IdSSLIOHandlerSocket;</span><br><span class="line">  with IdSSLIOHandlerSocket do</span><br><span class="line">  begin</span><br><span class="line">    SSLOptions.Method := sslvSSLv23;</span><br><span class="line">    SSLOptions.Mode := sslmClient;</span><br><span class="line">    SSLOptions.VerifyMode := [sslvrfPeer];</span><br><span class="line">    SSLOptions.VerifyDepth := 10;</span><br><span class="line">  end;</span><br><span class="line">  IdHTTP.Get(&#x27;https://www.google.com&#x27;);</span><br><span class="line">  FreeAndNil(IdHTTP); </span><br><span class="line">  FreeAndNil(IdSSLIOHandlerSocket);</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>Если попробовать выполнить выше приведенный код, то результат будет всегда такой: <strong>Error connecting with SSL.</strong>  </p>
+<p>Проблема тут в том, что в Indy используется OpenSSL, который не умеет работать с хранилищем сертификатов Windows и не может проверить подписан ли сертификат, полученный от сервера, одним из доверенных корневых сертификатов из этого хранилища.  </p>
+<p>Посмотрим в исходник модуля IdSSLOpenSSL. В нем есть такая функция:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function VerifyCallback(Ok: Integer; ctx: PX509_STORE_CTX): Integer; cdecl;</span><br><span class="line">var</span><br><span class="line">  hcert: PX509;</span><br><span class="line">  Certificate: TIdX509;</span><br><span class="line">  hSSL: PSSL;</span><br><span class="line">  IdSSLSocket: TIdSSLSocket;</span><br><span class="line"> // str: String;</span><br><span class="line">  VerifiedOK: Boolean;</span><br><span class="line">  Depth: Integer;</span><br><span class="line"> // Error: Integer;</span><br><span class="line">begin</span><br><span class="line">  LockVerifyCB.Enter;</span><br><span class="line">  try</span><br><span class="line">    VerifiedOK := True;</span><br><span class="line">    try</span><br><span class="line">      hcert := IdSslX509StoreCtxGetCurrentCert(ctx);</span><br><span class="line">      hSSL := IdSslX509StoreCtxGetAppData(ctx);</span><br><span class="line">      Certificate := TIdX509.Create(hcert);</span><br><span class="line">      if hSSL &lt;&gt; nil then begin</span><br><span class="line">        IdSSLSocket := TIdSSLSocket(IdSslGetAppData(hSSL));</span><br><span class="line">      end</span><br><span class="line">      else begin</span><br><span class="line">        Result := Ok;</span><br><span class="line">        exit;</span><br><span class="line">      end;</span><br><span class="line">      //Error :=</span><br><span class="line">      IdSslX509StoreCtxGetError(ctx);</span><br><span class="line">      //</span><br><span class="line">      Depth := IdSslX509StoreCtxGetErrorDepth(ctx);</span><br><span class="line">     // str := Format(&#x27;Certificate: %s&#x27;, [Certificate.Subject.OneLine]);    &#123;Do not Localize&#125;</span><br><span class="line">     // str := IdSSLSocket.GetSessionIDAsString;</span><br><span class="line">     // ShowMessage(str);</span><br><span class="line">      if (IdSSLSocket.fParent is TIdSSLIOHandlerSocket) then begin</span><br><span class="line">        VerifiedOK := TIdSSLIOHandlerSocket(IdSSLSocket.fParent).DoVerifyPeer(Certificate);</span><br><span class="line">      end;</span><br><span class="line">      if (IdSSLSocket.fParent is TIdServerIOHandlerSSL) then begin</span><br><span class="line">        VerifiedOK := TIdServerIOHandlerSSL(IdSSLSocket.fParent).DoVerifyPeer(Certificate);</span><br><span class="line">      end;</span><br><span class="line">      if not ((Ok&gt;0) and (IdSSLSocket.fSSLContext.VerifyDepth&gt;=Depth)) then begin</span><br><span class="line">        Ok := 0;</span><br><span class="line">        &#123;if Error = OPENSSL_X509_V_OK then begin</span><br><span class="line">          Error := OPENSSL_X509_V_ERR_CERT_CHAIN_TOO_LONG;</span><br><span class="line">        end;&#125;</span><br><span class="line">      end;</span><br><span class="line">      FreeAndNil(Certificate);</span><br><span class="line">    except</span><br><span class="line">    end;</span><br><span class="line">    if VerifiedOK and (Ok &gt; 0) then begin</span><br><span class="line">      Result := 1;</span><br><span class="line">    end</span><br><span class="line">    else begin</span><br><span class="line">      Result := 0;</span><br><span class="line">    end;</span><br><span class="line">  //  Result := Ok; // testing</span><br><span class="line">  finally</span><br><span class="line">    LockVerifyCB.Leave;</span><br><span class="line">  end;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>Эта callback-функция вызывается при проверке сертификата библиотекой OpenSSL, и для того, чтобы не случилось ошибки “Error connecting with SSL” она должна возвращать значение Result &#x3D; 1. Видно, что VerifyCallback возвращает Result &#x3D; 1 только в том случае, когда Ok &gt; 0. А параметр Ok для последнего сертификата в цепочке проверяемых всегда будет &#x3D; 0, т.к. корневой сертификат, с помощью которого его можно проверить, не определен.  </p>
+<p>Таким образом, задача в следующем: проверить - подписан ли последний в цепочке сертификат одним из доверенных корневых (ROOT) сертификатов в хранилище Windows, и если подписан, то присвоить Ok &#x3D; 1.  </p>
+<p>К сожалению, при проектировании Indy 9 было допущено много ошибок, и для того, чтобы решить поставленную задачу, придется вносить изменения в код модуля IdSSLOpenSSL, а затем перекомпилировать пакет<br>Indy70.dpk.  </p>
+<p>Внесем следующие изменения:  </p>
+<p>1. Изменим определение события TVerifyPeerEvent на следующее:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">TVerifyPeerEvent = function(Certificate: TIdX509; Error: Integer; var Ok: Integer): Boolean of object;</span><br></pre></td></tr></table></figure>
+
+<p>2. Изменим определение метода DoVerifyPeer в классах TIdSSLIOHandlerSocket и TIdServerIOHandlerSSL на следующее:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function DoVerifyPeer(Certificate: TIdX509; Error: Integer; var Ok: Integer): Boolean; virtual;</span><br></pre></td></tr></table></figure>
+
+<p>3. Изменим реализации метода DoVerifyPeer в классах TIdSSLIOHandlerSocket и TIdServerIOHandlerSSL на следующие:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function TIdServerIOHandlerSSL.DoVerifyPeer(Certificate: TIdX509;</span><br><span class="line">  Error: Integer; var Ok: Integer): Boolean;</span><br><span class="line">begin</span><br><span class="line">  Result := True;</span><br><span class="line">  if Assigned(fOnVerifyPeer) then</span><br><span class="line">    Result := fOnVerifyPeer(Certificate, Error, Ok);</span><br><span class="line">end;</span><br><span class="line">function TIdSSLIOHandlerSocket.DoVerifyPeer(Certificate: TIdX509;</span><br><span class="line">  Error: Integer; var Ok: Integer): Boolean;</span><br><span class="line">begin</span><br><span class="line">  Result := True;</span><br><span class="line">  if Assigned(fOnVerifyPeer) then</span><br><span class="line">    Result := fOnVerifyPeer(Certificate, Error, Ok);</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>4. Добавим public-свойство X509 классу TIdX509:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">property X509: PX509 read FX509;</span><br></pre></td></tr></table></figure>
+
+<p>5. Изменим функцию VerifyCallback на следующую:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function VerifyCallback(Ok: Integer; ctx: PX509_STORE_CTX): Integer; cdecl;</span><br><span class="line">var</span><br><span class="line">  hcert: PX509;</span><br><span class="line">  Certificate: TIdX509;</span><br><span class="line">  hSSL: PSSL;</span><br><span class="line">  IdSSLSocket: TIdSSLSocket;</span><br><span class="line"> // str: String;</span><br><span class="line">  VerifiedOK: Boolean;</span><br><span class="line">  Depth: Integer;</span><br><span class="line">  Error: Integer;</span><br><span class="line">begin</span><br><span class="line">  LockVerifyCB.Enter;</span><br><span class="line">  try</span><br><span class="line">    VerifiedOK := True;</span><br><span class="line">    try</span><br><span class="line">      hcert := IdSslX509StoreCtxGetCurrentCert(ctx);</span><br><span class="line">      hSSL := IdSslX509StoreCtxGetAppData(ctx);</span><br><span class="line">      Certificate := TIdX509.Create(hcert);</span><br><span class="line">      if hSSL &lt;&gt; nil then begin</span><br><span class="line">        IdSSLSocket := TIdSSLSocket(IdSslGetAppData(hSSL));</span><br><span class="line">      end</span><br><span class="line">      else begin</span><br><span class="line">        Result := Ok;</span><br><span class="line">        exit;</span><br><span class="line">      end;</span><br><span class="line">      Error :=</span><br><span class="line">      IdSslX509StoreCtxGetError(ctx);</span><br><span class="line">      //</span><br><span class="line">      Depth := IdSslX509StoreCtxGetErrorDepth(ctx);</span><br><span class="line">     // str := Format(&#x27;Certificate: %s&#x27;, [Certificate.Subject.OneLine]);    &#123;Do not Localize&#125;</span><br><span class="line">     // str := IdSSLSocket.GetSessionIDAsString;</span><br><span class="line">     // ShowMessage(str);</span><br><span class="line">      if (IdSSLSocket.fParent is TIdSSLIOHandlerSocket) then begin</span><br><span class="line">        VerifiedOK := TIdSSLIOHandlerSocket(IdSSLSocket.fParent).DoVerifyPeer(Certificate, Error, Ok);</span><br><span class="line">      end;</span><br><span class="line">      if (IdSSLSocket.fParent is TIdServerIOHandlerSSL) then begin</span><br><span class="line">        VerifiedOK := TIdServerIOHandlerSSL(IdSSLSocket.fParent).DoVerifyPeer(Certificate, Error, Ok);</span><br><span class="line">      end;</span><br><span class="line">      if not ((Ok&gt;0) and (IdSSLSocket.fSSLContext.VerifyDepth&gt;=Depth)) then begin</span><br><span class="line">        Ok := 0;</span><br><span class="line">        &#123;if Error = OPENSSL_X509_V_OK then begin</span><br><span class="line">          Error := OPENSSL_X509_V_ERR_CERT_CHAIN_TOO_LONG;</span><br><span class="line">        end;&#125;</span><br><span class="line">      end;</span><br><span class="line">      FreeAndNil(Certificate);</span><br><span class="line">    except</span><br><span class="line">    end;</span><br><span class="line">    if VerifiedOK and (Ok &gt; 0) then begin</span><br><span class="line">      Result := 1;</span><br><span class="line">    end</span><br><span class="line">    else begin</span><br><span class="line">      Result := 0;</span><br><span class="line">    end;</span><br><span class="line">  //  Result := Ok; // testing</span><br><span class="line">  finally</span><br><span class="line">    LockVerifyCB.Leave;</span><br><span class="line">  end;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>Теперь нужно перекомпилировать Indy70.dpk.  </p>
+<p>В результате наших изменений обработчик события OnVerifyPeer получает два дополнительных параметра: Error - код ошибки проверки сертификата (это может быть, например, OPENSSL_X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY) и параметр Ok, который можно изменить. Ниже приведена реализация обработчика:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function TForm1.SSLIOHandlerVerifyPeer(ThePeerCert: TIdX509; Error: Integer; var Ok: Integer): Boolean;</span><br><span class="line">var</span><br><span class="line">  LBIO: PBIO;</span><br><span class="line">  LLen: Integer;</span><br><span class="line">  LStr: String;</span><br><span class="line">  hStore: HCERTSTORE;</span><br><span class="line">  pCert, pIssuer: PCCERT_CONTEXT;</span><br><span class="line">  dwFlags: DWORD;</span><br><span class="line">begin</span><br><span class="line">  //Result := False;</span><br><span class="line">  //</span><br><span class="line">  if (Ok = 0)</span><br><span class="line">  then begin</span><br><span class="line">    hStore := nil;</span><br><span class="line">    pCert := nil;</span><br><span class="line">    pIssuer := nil;</span><br><span class="line">    LBIO := BIO_new(BIO_s_mem());</span><br><span class="line">    try</span><br><span class="line">      i2d_X509_bio(LBIO, ThePeerCert.X509);</span><br><span class="line">      LLen := BIO_ctrl_pending(LBIO);</span><br><span class="line">      SetLength(LStr, LLen);</span><br><span class="line">      BIO_read(LBIO, @LStr[1], LLen);</span><br><span class="line">      BIO_free(LBIO);</span><br><span class="line">      LBIO := nil;</span><br><span class="line">      hStore := CertOpenSystemStore(0, &#x27;ROOT&#x27;);</span><br><span class="line">      if hStore &lt;&gt; nil then</span><br><span class="line">      begin</span><br><span class="line">        pCert := CertCreateCertificateContext(</span><br><span class="line">          PKCS_7_ASN_ENCODING or X509_ASN_ENCODING, @LStr[1], LLen);</span><br><span class="line">        if pCert &lt;&gt; nil then</span><br><span class="line">        begin</span><br><span class="line">          dwFlags := CERT_STORE_REVOCATION_FLAG or</span><br><span class="line">                     CERT_STORE_SIGNATURE_FLAG or</span><br><span class="line">                     CERT_STORE_TIME_VALIDITY_FLAG;</span><br><span class="line">          pIssuer := CertGetIssuerCertificateFromStore(</span><br><span class="line">                       hStore, pCert, nil, @dwFlags);</span><br><span class="line">          if pIssuer &lt;&gt; nil then</span><br><span class="line">          begin</span><br><span class="line">            Ok := 1;</span><br><span class="line">            CertFreeCertificateContext(pIssuer);</span><br><span class="line">            pIssuer := nil;</span><br><span class="line">          end;</span><br><span class="line">          CertFreeCertificateContext(pCert);</span><br><span class="line">          pCert := nil;</span><br><span class="line">        end;</span><br><span class="line">        CertCloseStore(hStore, 0);</span><br><span class="line">        hStore := nil;</span><br><span class="line">      end;</span><br><span class="line">    finally</span><br><span class="line">      if LBIO &lt;&gt; nil then</span><br><span class="line">        BIO_free(LBIO);</span><br><span class="line">      if pIssuer &lt;&gt; nil then</span><br><span class="line">        CertFreeCertificateContext(pIssuer);</span><br><span class="line">      if pCert &lt;&gt; nil then</span><br><span class="line">        CertFreeCertificateContext(pCert);</span><br><span class="line">      if hStore &lt;&gt; nil then</span><br><span class="line">        CertCloseStore(hStore, 0);</span><br><span class="line">    end;</span><br><span class="line">  end;</span><br><span class="line">  //</span><br><span class="line">  Result := (Ok &gt; 0);</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>В этом обработчике использованы функции OpenSSL и СryptoAPI, объявления которых можно найти в libeay32.pas и wcrypt2.pas. Собственно, из-за необходимости подключения этих модулей я и вынес проверку в обработчик события OnVerifyPeer, вместо того, чтобы сделать все в функции VerifyCallback.  </p>
+<p>Подключаем обработчик SSLIOHandlerVerifyPeer к IdSSLIOHandlerSocket и окончательно получаем загрузку страницы по протоколу https: с проверкой серверного сертификата:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var</span><br><span class="line">  IdHTTP: TIdHTTP;</span><br><span class="line">  IdSSLIOHandlerSocket: TIdSSLIOHandlerSocket;</span><br><span class="line">begin</span><br><span class="line">  IdHTTP := TIdHTTP.Create(nil);</span><br><span class="line">  IdSSLIOHandlerSocket := TIdSSLIOHandlerSocket.Create(nil);</span><br><span class="line">  IdHTTP.IOHandler := IdSSLIOHandlerSocket;</span><br><span class="line">  with IdSSLIOHandlerSocket do</span><br><span class="line">  begin</span><br><span class="line">    SSLOptions.Method := sslvSSLv23;</span><br><span class="line">    SSLOptions.Mode := sslmClient;</span><br><span class="line">    SSLOptions.VerifyMode := [sslvrfPeer];</span><br><span class="line">    SSLOptions.VerifyDepth := 10;</span><br><span class="line">    OnVerifyPeer := SSLIOHandlerVerifyPeer;</span><br><span class="line">  end;</span><br><span class="line">  IdHTTP.Get(&#x27;https://www.google.com&#x27;);</span><br><span class="line">  FreeAndNil(IdHTTP); </span><br><span class="line">  FreeAndNil(IdSSLIOHandlerSocket);</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>PS. <a href="http://blog.coolsoftware.ru/2012/07/enhanced-security.html">Проверка серверного сертификата и Enhanced Security</a>  </p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/delphi/">delphi</a>, <a href="/tags/certificate/">certificate</a>, <a href="/tags/cryptoapi/">cryptoapi</a>, <a href="/tags/indy/">indy</a>, <a href="/tags/ssl/">ssl</a>, <a href="/tags/%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/">проверка</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-google-code-highlight" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-11-09T10:05:00.000Z"><a href="/2011/11/google-code-highlight/">2011-11-09</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/11/google-code-highlight/">Google code highlight</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Подключил подсветку кода от гугла (<a target="_blank" rel="noopener" href="http://google-code-prettify.googlecode.com/">http://google-code-prettify.googlecode.com</a>).  </p>
+<p>Проверка:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;QtCore&gt;</span><br><span class="line">#include &lt;QtGui&gt;</span><br><span class="line">int main(int argc, char* argv[]) &#123;</span><br><span class="line">    QApplication app(argc, argv);</span><br><span class="line">    QDialog *dialog = new QDialog;</span><br><span class="line">    QLabel *label = new QLabel(dialog);</span><br><span class="line">    label-&gt;setText(&quot;&lt;font color=red&gt;Hello, World!&lt;/font&gt;&quot;);</span><br><span class="line">    dialog-&gt;show();</span><br><span class="line">    return app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Вроде работает. К Blogger-у подключается просто:<br>в шаблоне (Дизайн-&gt;Изменить HTML) перед <strong></head></strong> добавляем:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;link href=&quot;http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;/&gt;</span><br><span class="line">&lt;script src=&quot;http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js&quot; type=&quot;text/javascript&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Затем к тегу <strong><body></strong> нужно добавить: <strong>onload&#x3D;”prettyPrint()”</strong>  </p>
+<p>Использовать так:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;pre class=&quot;prettyprint&quot;&gt;</span><br><span class="line">    // put your code here</span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Можно указать явным образом язык, например <strong>lang-html</strong>:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;pre class=&quot;prettyprint lang-html&quot;&gt;</span><br><span class="line">  The lang-* class specifies the language file extensions.</span><br><span class="line">  File extensions supported by default include</span><br><span class="line">    &quot;bsh&quot;, &quot;c&quot;, &quot;cc&quot;, &quot;cpp&quot;, &quot;cs&quot;, &quot;csh&quot;, &quot;cyc&quot;, &quot;cv&quot;, &quot;htm&quot;, </span><br><span class="line">    &quot;html&quot;, &quot;java&quot;, &quot;js&quot;, &quot;m&quot;, &quot;mxml&quot;, &quot;perl&quot;, &quot;pl&quot;, &quot;pm&quot;, </span><br><span class="line">    &quot;py&quot;, &quot;rb&quot;, &quot;sh&quot;, &quot;xhtml&quot;, &quot;xml&quot;, &quot;xsl&quot;.</span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+<p>PS. Гугловский Highlighter похоже Delphi не поддерживает. Поэтому я его удалил, а вместо него подключил highlight.js.<br>Сделал я это так:  </p>
+<p>1. Скачал <a target="_blank" rel="noopener" href="http://softwaremaniacs.org/soft/highlight/download/">HIGHLIGHT.JS</a> (при этом выбрал нужный мне Delphi).<br>2. Файлы highlight.js, highlight.pack.js и стили styles&#x2F;*.css из скачанного архива разместил в google apps.<br>3. В шаблоне Blogger-а (Дизайн-&gt;Изменить HTML) перед </head> добавил:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;link href=&#x27;http://testapp.coolsoftware.ru/styles/default.css&#x27; rel=&#x27;stylesheet&#x27;/&gt;</span><br><span class="line">&lt;script src=&#x27;http://testapp.coolsoftware.ru/highlight.pack.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">hljs.initHighlightingOnLoad();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Чтобы использовать подсветку синтаксиса, нужно заключать код в <strong><pre><code class="delphi">...</code></pre></strong>. Пример:  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">type</span><br><span class="line">  TMyObject = class(TObject)</span><br><span class="line">  private</span><br><span class="line">    FStr: String;</span><br><span class="line">  public</span><br><span class="line">    constructor Create;  </span><br><span class="line">  end;</span><br><span class="line">&#123; TMyObject &#125;</span><br><span class="line">constructor TMyObject.Create;</span><br><span class="line">begin</span><br><span class="line">  FStr := &#x27;Hello, world!&#x27;;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/google/">google</a>, <a href="/tags/code/">code</a>, <a href="/tags/highlight/">highlight</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-active-server-pages" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-11-04T13:51:00.000Z"><a href="/2011/11/active-server-pages/">2011-11-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/11/active-server-pages/">Active Server Pages</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Пара замечаний про конфигурирование IIS.</p>
+<p>1. Если при попытке обратиться к динамической странице (ASP) на вашем сервере IIS выдается ошибка “HTTP Error 404 - File or Directory not found” (при этом статические страницы нормально выдаются), то нужно включить “Active Server Pages” в настройках “Web Service Extensions”.</p>
+<p><img src="http://2.bp.blogspot.com/--SVi8IGF318/TrPwdyCpbDI/AAAAAAAAAAw/65t8BSC9TYM/s400/turn-on-asp.png"></p>
+<p>2. При обращении из ASP к базе Access (MDB): если SELECT выполняется нормально, а при попытке добавить, удалить или отредактировать записи выдаются сообщения “В операции должен использоваться обновляемый запрос.”, “Невозможно удаление записей из указанных таблиц.”, то нужно дать права пользователю, от имени которого выполняется сайт (IUSR или что-то похожее), на файл базы MDB и на каталог, в котором этот файл расположен (права на создание&#x2F;удаление&#x2F;изменение).</p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/asp/">ASP</a>, <a href="/tags/iis/">IIS</a>, <a href="/tags/404/">404</a>, <a href="/tags/active-server-pages/">Active Server Pages</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-classic-asp-microsoft-access-databases" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-10-27T16:10:00.000Z"><a href="/2011/10/classic-asp-microsoft-access-databases/">2011-10-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/10/classic-asp-microsoft-access-databases/">Classic ASP и Microsoft Access Databases (MDB) на IIS 7 и 64-битной системе</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>64-битного драйвера MDB в природе не существует, поэтому есть проблема доступа к MDB из 64-битных приложений. В частности из ASP-приложений под IIS. Проблема решается разрешением 32-битных приложений в настройках IIS:</p>
+<p><a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/-lFFmOmiO7rc/TqmFSbJH-OI/AAAAAAAAAAQ/bOD6YS40yTg/s1600/x64-asp-mdb.png"><img src="http://4.bp.blogspot.com/-lFFmOmiO7rc/TqmFSbJH-OI/AAAAAAAAAAQ/bOD6YS40yTg/s400/x64-asp-mdb.png"></a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/32/">32</a>, <a href="/tags/64/">64</a>, <a href="/tags/asp/">ASP</a>, <a href="/tags/driver/">Driver</a>, <a href="/tags/iis/">IIS</a>, <a href="/tags/mdb-access/">MDB Access</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-how-to-use-external-dll-in-c-builder" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-10-07T10:28:00.000Z"><a href="/2011/10/how-to-use-external-dll-in-c-builder/">2011-10-07</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/10/how-to-use-external-dll-in-c-builder/">How to use external dll in c++ builder</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>1. Создаем либу: implib dllname.lib dllname.dll</p>
+<p>2. Добавляем созданную либу к проекту: <span class="Apple-style-span" style="background-color: #efefef; font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; font-size: 14px;">Project-&gt;AddToProject</span>  </p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/builder/">builder</a>, <a href="/tags/cpp/">cpp</a>, <a href="/tags/dll/">dll</a>, <a href="/tags/lib/">lib</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-android-hello-world" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-07-28T11:29:00.000Z"><a href="/2011/07/android-hello-world/">2011-07-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/07/android-hello-world/">Android: Hello World</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Как создать HelloWorld для андроида написано тут: <a target="_blank" rel="noopener" href="http://developer.android.com/resources/tutorials/hello-world.html">http://developer.android.com/resources/tutorials/hello-world.html</a></p>
+<p>У меня при старте сразу вывалилась ошибка:</p>
+<p>invalid command-line parameter: Files.<br>Hint: use ‘@foo’ to launch a virtual device named ‘foo’.</p>
+<p>please use -help for more information</p>
+<p>Причина - эмулятор андроида не любит длинные пути к SDK (у меня: c:\program files (x86)\Android\android-sdk). Заработало, когда заменил путь на короткий: C:\Progra~2\Android\android-sdk.</p>
+<p>=&#x3D;&#x3D;</p>
+<p>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/google/">google</a>, <a href="/tags/android/">android</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-google-plugin-for-eclipse" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-07-16T05:24:00.000Z"><a href="/2011/07/google-plugin-for-eclipse/">2011-07-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/07/google-plugin-for-eclipse/">Google Plugin for Eclipse</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Для последней версии Eclipse (Indigo) нужно устанавливать правильную версию Google Plugin:</p>
+<p><span class="Apple-style-span" style="color: rgb(0, 112, 0); line-height:16px;"><a target="_blank" rel="noopener" href="http://dl.google.com/eclipse/plugin/3.7">http://dl.google.com/eclipse/plugin/3.7</a></span>  </p>
+<p>(<a target="_blank" rel="noopener" href="http://code.google.com/intl/ru/eclipse/docs/download.html">http://code.google.com/intl/ru/eclipse/docs/download.html</a>)</p>
+<p>Если устанавливать неверную версию, то будет выдаваться сообщение типа такого:</p>
+<p>Cannot complete the install because one or more required items could not be found.<br>Software being installed: Google App Engine Java SDK 1.3.4 1.3.4.v201005212032 (com.google.appengine.eclipse.sdkbundle.e35.feature.1.3.4.feature.group 1.3.4.v201005212032)<br>Missing requirement: Google Plugin for Eclipse 3.5 1.3.2.v201003242055 (com.google.gdt.eclipse.suite.e35.feature.feature.group 1.3.2.v201003242055) requires ‘org.eclipse.platform.feature.group [3.5.0,3.6.0)’ but it could not be found<br>Cannot satisfy dependency:<br>  From: Google App Engine Java SDK 1.3.4 1.3.4.v201005212032 (com.google.appengine.eclipse.sdkbundle.e35.feature.1.3.4.feature.group 1.3.4.v201005212032)<br>   To: com.google.gdt.eclipse.suite.e35.feature.feature.group 1.3.2</p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/google/">google</a>, <a href="/tags/eclipse/">eclipse</a>, <a href="/tags/plugin/">plugin</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-google-app-engine" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2011-06-22T12:06:00.000Z"><a href="/2011/06/google-app-engine/">2011-06-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/06/google-app-engine/">Google App Engine</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>Согласно <a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/Google_App_Engine">Вики</a>: <strong>Google App Engine</strong> — сервис <a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/%D0%A5%D0%BE%D1%81%D1%82%D0%B8%D0%BD%D0%B3" title="Хостинг">хостинга</a> сайтов и <a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%B1-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5" title="Веб-приложение">web-приложений</a> на серверах <a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/Google" title="Google">Google</a> с бесплатным именем <a target="_blank" rel="noopener" href="http://appspot.com/">&lt;имя_сайта&gt;.appspot.com</a>, либо с <a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/%D0%94%D0%BE%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5_%D0%B8%D0%BC%D1%8F" title="Доменное имя">собственным именем</a>, задействованным<a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/Google_App_Engine#cite_note-0">[1]</a> с помощью <a target="_blank" rel="noopener" href="http://www.google.com/a/help/intl/ru/">служб Google</a></p>
+<p>Отличная, оказывается, штука. Установил плагин Google под эклипс, за пять минут создал и задеплоил простейшее приложение: <a target="_blank" rel="noopener" href="http://coolsoftware-test.appspot.com/">http://coolsoftware-test.appspot.com/</a>.</p>
+<p>Update. Немного шаманства с ДНС и приложение доступно на домене coolsoftware.ru: <a target="_blank" rel="noopener" href="http://testapp.coolsoftware.ru/">http://testapp.coolsoftware.ru/</a></p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/google/">google</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-sax-java" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2010-11-14T18:05:00.000Z"><a href="/2010/11/sax-java/">2010-11-14</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2010/11/sax-java/">Пример использования SAX-парсера на Java</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>В статье про <a href="http://blog.coolsoftware.ru/2010/11/sax.html">SAX-парсер</a> я рассказал что это такое и пообещал привести примеры не только на Visual Basic, но и на других языках программирования, в частности на Java. Ниже приведен такой пример - класс VXMLChecker, который умеет проверять XML-текст и XML-файл на соответствие XSD-схеме. Для этого у него есть два публичных метода: checkXML и checkFile.  </p>
+<style type="text/css"></style>  
+
+<p><span class="kw1">package</span> <span class="co2">VXMLParseUtils</span><span class="sy0">;</span><br><span class="Apple-style-span" style="color: green; font-size: x-small; font-style: italic; font-weight: bold;">&#x2F;**</span><br><span class="Apple-style-span" style="color: #003030; font-family: 'Courier New', Courier, monospace; font-size: x-small;"></span><br><span class="Apple-style-span" style="color: green; font-size: x-small; font-style: italic; font-weight: bold;"> *</span><br> * @author Vitaly (<a href="http://blog.coolsoftware.ru/">http://blog.coolsoftware.ru/</a>)<br><span class="Apple-style-span" style="color: green; font-size: x-small; font-style: italic; font-weight: bold;"> *&#x2F;</span>  </p>
+<p><span class="kw1">import</span> <span class="co2">java.io.*</span><span class="sy0">;</span>  </p>
+<p><span class="kw1">import</span> <span class="co2">javax.xml.parsers.SAXParserFactory</span><span class="sy0">;</span><br><span class="kw1">import</span> <span class="co2">javax.xml.parsers.SAXParser</span><span class="sy0">;</span><br><span class="kw1">import</span> <span class="co2">javax.xml.parsers.ParserConfigurationException</span><span class="sy0">;</span>  </p>
+<p><span class="kw1">import</span> <span class="co2">org.xml.sax.helpers.DefaultHandler</span><span class="sy0">;</span><br><span class="kw1">import</span> <span class="co2">org.xml.sax.InputSource</span><span class="sy0">;</span><br><span class="kw1">import</span> <span class="co2">org.xml.sax.SAXException</span><span class="sy0">;</span>  </p>
+<p><span class="kw1">import</span> <span class="co2">org.xml.sax.SAXParseException</span><span class="sy0">;</span><br><span class="kw1">import</span> <span class="co2">org.xml.sax.Locator</span><span class="sy0">;</span><br><span class="kw1">import</span> <span class="co2">org.xml.sax.Attributes</span><span class="sy0">;</span><br><span class="kw1">import</span> <span class="co2">org.xml.sax.XMLReader</span><span class="sy0">;</span>  </p>
+<p><span class="kw1">public</span> <span class="kw1">class</span> VXMLChecker <span class="kw1">extends</span> DefaultHandler <span class="br0">{</span><br>    <span class="kw4">boolean</span> m_bOutLog<span class="sy0">;</span><br>    Locator m_Locator<span class="sy0">;</span><br>    <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> m_sErrorString<span class="sy0">;</span><br><span class="Apple-style-span" style="color: #000020; font-size: x-small;">   </span><br>    <span class="kw1">public</span> VXMLChecker<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>        m_bOutLog <span class="sy0">&#x3D;</span> <span class="kw2">true</span><span class="sy0">;</span><br>        m_Locator <span class="sy0">&#x3D;</span> <span class="kw2">null</span><span class="sy0">;</span><br>        m_sErrorString <span class="sy0">&#x3D;</span> <span class="st0">“”</span><span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="co1">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span><br>    <span class="co1">&#x2F;&#x2F; content handlers</span><br>    <span class="co1">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw4">void</span> setDocumentLocator <span class="br0">(</span>Locator locator<span class="br0">)</span><br>    <span class="br0">{</span><br>    m_Locator <span class="sy0">&#x3D;</span> locator<span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw4">void</span> startDocument <span class="br0">(</span><span class="br0">)</span><br>    <span class="kw1">throws</span> SAXException<br>    <span class="br0">{</span><br>    <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“startDocument”</span><span class="br0">)</span><span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw4">void</span> endDocument <span class="br0">(</span><span class="br0">)</span><br>    <span class="kw1">throws</span> SAXException<br>    <span class="br0">{</span><br>    <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“endDocument”</span><span class="br0">)</span><span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw4">void</span> endPrefixMapping <span class="br0">(</span><a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> prefix<span class="br0">)</span><br>    <span class="kw1">throws</span> SAXException<br>    <span class="br0">{</span><br>    <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“endPrefixMapping: “</span><span class="sy0">+</span>prefix<span class="br0">)</span><span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw4">void</span> startElement <span class="br0">(</span><a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> uri, <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> localName,<br>                  <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> qName, <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:attributes+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Attributes</span></a> attributes<span class="br0">)</span><br>    <span class="kw1">throws</span> SAXException<br>    <span class="br0">{</span><br>    <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“startElement: “</span><span class="sy0">+</span>uri<span class="sy0">+</span><span class="st0">“,”</span><span class="sy0">+</span>localName<span class="sy0">+</span><span class="st0">“,”</span><span class="sy0">+</span>qName<span class="br0">)</span><span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw4">void</span> endElement <span class="br0">(</span><a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> uri, <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> localName, <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> qName<span class="br0">)</span><br>    <span class="kw1">throws</span> SAXException<br>    <span class="br0">{</span><br>    <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“endElement: “</span><span class="sy0">+</span>uri<span class="sy0">+</span><span class="st0">“,”</span><span class="sy0">+</span>localName<span class="sy0">+</span><span class="st0">“,”</span><span class="sy0">+</span>qName<span class="br0">)</span><span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw4">void</span> characters <span class="br0">(</span><span class="kw4">char</span> ch<span class="br0">[</span><span class="br0">]</span>, <span class="kw4">int</span> start, <span class="kw4">int</span> length<span class="br0">)</span><br>    <span class="kw1">throws</span> SAXException<br>    <span class="br0">{</span><br>    <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“characters: “</span><span class="sy0">+</span><span class="kw1">new</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a><span class="br0">(</span>ch, start, length<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw4">void</span> ignorableWhitespace <span class="br0">(</span><span class="kw4">char</span> ch<span class="br0">[</span><span class="br0">]</span>, <span class="kw4">int</span> start, <span class="kw4">int</span> length<span class="br0">)</span><br>    <span class="kw1">throws</span> SAXException<br>    <span class="br0">{</span><br>    <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“ignorableWhitespace: “</span><span class="sy0">+</span><span class="kw1">new</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a><span class="br0">(</span>ch, start, length<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw4">void</span> processingInstruction <span class="br0">(</span><a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> target, <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> data<span class="br0">)</span><br>    <span class="kw1">throws</span> SAXException<br>    <span class="br0">{</span><br>    <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“processingInstruction: “</span><span class="sy0">+</span>target<span class="sy0">+</span><span class="st0">“,”</span><span class="sy0">+</span>data<span class="br0">)</span><span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw4">void</span> skippedEntity <span class="br0">(</span><a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> name<span class="br0">)</span><br>    <span class="kw1">throws</span> SAXException<br>    <span class="br0">{</span><br>    <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“skippedEntity: “</span><span class="sy0">+</span>name<span class="br0">)</span><span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="co1">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span><br>    <span class="co1">&#x2F;&#x2F; error handlers</span><br>    <span class="co1">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span><br>    <span class="kw1">public</span> <span class="kw4">void</span> warning <span class="br0">(</span>SAXParseException e<span class="br0">)</span><br>        <span class="kw1">throws</span> SAXException<br>    <span class="br0">{</span><br>        <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“warning: “</span><span class="sy0">+</span>e.<span class="me1">getMessage</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw4">void</span> error <span class="br0">(</span>SAXParseException e<span class="br0">)</span><br>        <span class="kw1">throws</span> SAXException<br>    <span class="br0">{</span><br>        <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“error: “</span><span class="sy0">+</span>e.<span class="me1">getMessage</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span><br>        <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> sAddErrorString <span class="sy0">&#x3D;</span> “[XMLChecker2.error] SAXParseException thrown:<span class="es0">\n</span>“ <span class="sy0">+</span> e.<span class="me1">getMessage</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        m_sErrorString <span class="sy0">&#x3D;</span> m_sErrorString <span class="sy0">+</span> “<span class="es0">\n</span>“ <span class="sy0">+</span> sAddErrorString<span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw4">void</span> fatalError <span class="br0">(</span>SAXParseException e<span class="br0">)</span><br>        <span class="kw1">throws</span> SAXException<br>    <span class="br0">{</span><br>        <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“fatal error: “</span><span class="sy0">+</span>e.<span class="me1">getMessage</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span><br>        <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> sAddErrorString <span class="sy0">&#x3D;</span> “[XMLChecker2.fatalError] SAXParseException thrown:<span class="es0">\n</span>“ <span class="sy0">+</span> e.<span class="me1">getMessage</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        m_sErrorString <span class="sy0">&#x3D;</span> m_sErrorString <span class="sy0">+</span> “<span class="es0">\n</span>“ <span class="sy0">+</span> sAddErrorString<span class="sy0">;</span><br>        <span class="kw1">throw</span> e<span class="sy0">;</span><br>    <span class="br0">}</span><br>    <span class="co1">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span><br><span class="Apple-style-span" style="color: #000020; font-size: x-small;">   </span><br>    <span class="kw1">public</span> <span class="kw4">boolean</span> parseXML<span class="br0">(</span><a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:reader+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Reader</span></a> xmlReader, <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:reader+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Reader</span></a> xsdReader<span class="br0">)</span><br>        <span class="kw1">throws</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:ioexception+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">IOException</span></a>, SAXException, ParserConfigurationException<br>    <span class="br0">{</span><br>        <span class="kw4">boolean</span> bRes <span class="sy0">&#x3D;</span> <span class="kw2">false</span><span class="sy0">;</span>  </p>
+<p>        m_sErrorString <span class="sy0">&#x3D;</span> <span class="st0">“”</span><span class="sy0">;</span>  </p>
+<p>        SAXParserFactory saxFactory <span class="sy0">&#x3D;</span> SAXParserFactory.<span class="me1">newInstance</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        SAXParser parser <span class="sy0">&#x3D;</span> saxFactory.<span class="me1">newSAXParser</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        XMLReader reader <span class="sy0">&#x3D;</span> parser.<span class="me1">getXMLReader</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>  </p>
+<p>        reader.<span class="me1">setContentHandler</span><span class="br0">(</span><span class="kw1">this</span><span class="br0">)</span><span class="sy0">;</span><br>        reader.<span class="me1">setErrorHandler</span><span class="br0">(</span><span class="kw1">this</span><span class="br0">)</span><span class="sy0">;</span>  </p>
+<p>        <span class="kw1">if</span> <span class="br0">(</span>xsdReader <span class="sy0">!&#x3D;</span> <span class="kw2">null</span><span class="br0">)</span><br>        <span class="br0">{</span><br>            reader.<span class="me1">setProperty</span><span class="br0">(</span><br>                <span class="st0">“<a target="_blank" rel="noopener" href="http://java.sun.com/xml/jaxp/properties/schemaLanguage&quot;">http://java.sun.com/xml/jaxp/properties/schemaLanguage&quot;</a></span>,<br>                <span class="st0">“<a target="_blank" rel="noopener" href="http://www.w3.org/2001/XMLSchema&quot;">http://www.w3.org/2001/XMLSchema&quot;</a></span><span class="br0">)</span><span class="sy0">;</span><br>            reader.<span class="me1">setProperty</span><span class="br0">(</span><br>                <span class="st0">“<a target="_blank" rel="noopener" href="http://java.sun.com/xml/jaxp/properties/schemaSource&quot;">http://java.sun.com/xml/jaxp/properties/schemaSource&quot;</a></span>,<br>                <span class="kw1">new</span> InputSource<span class="br0">(</span>xsdReader<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span><br>            reader.<span class="me1">setFeature</span><span class="br0">(</span><span class="st0">“<a target="_blank" rel="noopener" href="http://xml.org/sax/features/validation&quot;">http://xml.org/sax/features/validation&quot;</a></span>, <span class="kw2">true</span><span class="br0">)</span><span class="sy0">;</span><br>        <span class="br0">}</span><br>        <span class="kw1">try</span><br>        <span class="br0">{</span><br>            reader.<span class="me1">parse</span><span class="br0">(</span><span class="kw1">new</span> InputSource<span class="br0">(</span>xmlReader<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span><br>        <span class="br0">}</span><br>        <span class="kw1">catch</span> <span class="br0">(</span><a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:exception+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Exception</span></a> e<span class="br0">)</span><br>        <span class="br0">{</span><br>            <span class="kw1">if</span> <span class="br0">(</span>m_bOutLog<span class="br0">)</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:system+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">“parse failed: “</span><span class="sy0">+</span>e.<span class="me1">getMessage</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span><br>            <span class="kw1">if</span> <span class="br0">(</span>m_sErrorString.<span class="me1">length</span><span class="br0">(</span><span class="br0">)</span> <span class="sy0">&lt;&#x3D;</span> <span class="nu0">0</span><span class="br0">)</span> m_sErrorString <span class="sy0">&#x3D;</span> e.<span class="me1">getMessage</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        <span class="br0">}</span><br>        bRes <span class="sy0">&#x3D;</span> <span class="br0">(</span>m_sErrorString.<span class="me1">length</span><span class="br0">(</span><span class="br0">)</span> <span class="sy0">&#x3D;&#x3D;</span> <span class="nu0">0</span><span class="br0">)</span><span class="sy0">;</span>  </p>
+<p>        <span class="kw1">return</span> bRes<span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw1">static</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> checkXML<span class="br0">(</span><a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> XmlText, <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> SchemaFileName<span class="br0">)</span><br>        <span class="kw1">throws</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:classnotfoundexception+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">ClassNotFoundException</span></a>, <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:ioexception+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">IOException</span></a>, SAXException<br>    <span class="br0">{</span><br>        VXMLChecker checker <span class="sy0">&#x3D;</span> <span class="kw1">new</span> VXMLChecker<span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:reader+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Reader</span></a> xmlReader <span class="sy0">&#x3D;</span> <span class="kw2">null</span><span class="sy0">;</span><br>        <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:reader+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Reader</span></a> xsdReader <span class="sy0">&#x3D;</span> <span class="kw2">null</span><span class="sy0">;</span><br>        <span class="kw1">try</span><br>        <span class="br0">{</span><br>            xmlReader <span class="sy0">&#x3D;</span> <span class="kw1">new</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:stringreader+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">StringReader</span></a><span class="br0">(</span>XmlText<span class="br0">)</span><span class="sy0">;</span><br>            xsdReader <span class="sy0">&#x3D;</span> <span class="kw1">new</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:filereader+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">FileReader</span></a><span class="br0">(</span>SchemaFileName<span class="br0">)</span><span class="sy0">;</span><br>            checker.<span class="me1">parseXML</span><span class="br0">(</span>xmlReader, xsdReader<span class="br0">)</span><span class="sy0">;</span><br>        <span class="br0">}</span><br>        <span class="kw1">catch</span><span class="br0">(</span><a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:exception+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Exception</span></a> e<span class="br0">)</span><br>        <span class="br0">{</span><br>            <span class="kw1">if</span> <span class="br0">(</span>xmlReader <span class="sy0">!&#x3D;</span> <span class="kw2">null</span><span class="br0">)</span> xmlReader.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>            <span class="kw1">if</span> <span class="br0">(</span>xsdReader <span class="sy0">!&#x3D;</span> <span class="kw2">null</span><span class="br0">)</span> xsdReader.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>            <span class="kw1">return</span> e.<span class="me1">getMessage</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        <span class="br0">}</span><br>        <span class="kw1">if</span> <span class="br0">(</span>xmlReader <span class="sy0">!&#x3D;</span> <span class="kw2">null</span><span class="br0">)</span> xmlReader.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        <span class="kw1">if</span> <span class="br0">(</span>xsdReader <span class="sy0">!&#x3D;</span> <span class="kw2">null</span><span class="br0">)</span> xsdReader.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        <span class="kw1">return</span> checker.<span class="me1">m_sErrorString</span><span class="sy0">;</span><br>    <span class="br0">}</span>  </p>
+<p>    <span class="kw1">public</span> <span class="kw1">static</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> checkFile<span class="br0">(</span><a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> XmlFileName, <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:string+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">String</span></a> SchemaFileName<span class="br0">)</span><br>        <span class="kw1">throws</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:classnotfoundexception+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">ClassNotFoundException</span></a>, <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:ioexception+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">IOException</span></a>, SAXException<br>    <span class="br0">{</span><br>        VXMLChecker checker <span class="sy0">&#x3D;</span> <span class="kw1">new</span> VXMLChecker<span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:reader+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Reader</span></a> xmlReader <span class="sy0">&#x3D;</span> <span class="kw2">null</span><span class="sy0">;</span><br>        <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:reader+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Reader</span></a> xsdReader <span class="sy0">&#x3D;</span> <span class="kw2">null</span><span class="sy0">;</span><br>        <span class="kw1">try</span><br>        <span class="br0">{</span><br>            xmlReader <span class="sy0">&#x3D;</span> <span class="kw1">new</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:filereader+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">FileReader</span></a><span class="br0">(</span>XmlFileName<span class="br0">)</span><span class="sy0">;</span><br>            xsdReader <span class="sy0">&#x3D;</span> <span class="kw1">new</span> <a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:filereader+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">FileReader</span></a><span class="br0">(</span>SchemaFileName<span class="br0">)</span><span class="sy0">;</span><br>            checker.<span class="me1">parseXML</span><span class="br0">(</span>xmlReader, xsdReader<span class="br0">)</span><span class="sy0">;</span><br>        <span class="br0">}</span><br>        <span class="kw1">catch</span><span class="br0">(</span><a target="_blank" rel="noopener" href="http://www.google.com/search?hl=en&q=allinurl:exception+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Exception</span></a> e<span class="br0">)</span><br>        <span class="br0">{</span><br>            <span class="kw1">if</span> <span class="br0">(</span>xmlReader <span class="sy0">!&#x3D;</span> <span class="kw2">null</span><span class="br0">)</span> xmlReader.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>            <span class="kw1">if</span> <span class="br0">(</span>xsdReader <span class="sy0">!&#x3D;</span> <span class="kw2">null</span><span class="br0">)</span> xsdReader.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>            <span class="kw1">return</span> e.<span class="me1">getMessage</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        <span class="br0">}</span><br>        <span class="kw1">if</span> <span class="br0">(</span>xmlReader <span class="sy0">!&#x3D;</span> <span class="kw2">null</span><span class="br0">)</span> xmlReader.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        <span class="kw1">if</span> <span class="br0">(</span>xsdReader <span class="sy0">!&#x3D;</span> <span class="kw2">null</span><span class="br0">)</span> xsdReader.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><br>        <span class="kw1">return</span> checker.<span class="me1">m_sErrorString</span><span class="sy0">;</span><br>    <span class="br0">}</span><br><span class="Apple-style-span" style="color: #009900; font-size: x-small;">}</span>  </p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/xml/">XML</a>, <a href="/tags/xsd/">XSD</a>, <a href="/tags/java/">Java</a>, <a href="/tags/sax/">SAX</a>, <a href="/tags/%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80/">пример</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-sax" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2010-11-11T17:33:00.000Z"><a href="/2010/11/sax/">2010-11-11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2010/11/sax/">SAX-парсер</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>В заметке <a href="http://blog.coolsoftware.ru/2010/11/schematron-xsd.html">Schematron и XSD</a> я вскользь упомянул про SAX-парсер и то, что с его помощью можно проверить XML-файл на соответствие XSD-схеме. Здесь я постараюсь описать это подробнее на примере SAX-парсера от Microsoft.  </p>
+<p>Итак, способ разбора XML-файла с помощью SAX-парсера является <em>событийно-ориентированным</em>. Это означает, что приложение, которое  использует SAX-парсер, получает от него уведомления о начале и об окончании XML-элементов, атрибутах, тексте внутри XML-узлов, ошибках разбора и т.д. - в том порядке, в котором SAX-парсер встретил их в XML-файле. При этом, SAX-парсер не сохраняет в памяти разобранные элементы, в отличие от интерфейса DOM,  для которого строится и хранится в памяти объектная модель всего XML. Это делает SAX-парсер пригодным для потоковой обработки (например, для проверки или для загрузки куда-либо) XML-файлов любого размера.  </p>
+<p>Посмотрим на пример использования SAX-парсера в Visual Basic 6.0 (примеры на Java, C# обязательно будут в след. статьях).  </p>
+<p>Для начала в нашем проекте на VB нам необходимо подключить Reference “Microsoft XML, v6.0”.  </p>
+<p><a target="_blank" rel="noopener" href="http://4.bp.blogspot.com/_f8rnAFN0nXA/TNwcxJ9QElI/AAAAAAAABqA/iRHwkSMsoMU/s1600/ProjectReferences1.png"><img src="http://4.bp.blogspot.com/_f8rnAFN0nXA/TNwcxJ9QElI/AAAAAAAABqA/iRHwkSMsoMU/s400/ProjectReferences1.png"></a></p>
+<p>Затем нам необходимо создать ClassModule - класс объекта, который будет принимать уведомления от SAX-парсера. Назовем его MySAXReader. Он должен реализовывать интерфейсы MSXML2.IVBSAXContentHandler и MSXML2.IVBSAXErrorHandler.  </p>
+<p><span class="Apple-style-span" style="color: #351c75;">Implements</span> MSXML2.IVBSAXContentHandler<br><span class="Apple-style-span" style="color: #351c75;">Implements</span> MSXML2.IVBSAXErrorHandler  </p>
+<p><span class="Apple-style-span" style="color: #351c75;">Private Sub</span> IVBSAXContentHandler_endElement(strNamespaceURI<span class="Apple-style-span" style="color: #351c75;"> As String</span>, _</p>
+<p>strLocalName<span class="Apple-style-span" style="color: #351c75;"> As String</span>, strQName<span class="Apple-style-span" style="color: #351c75;"> As String</span>)</p>
+<p>    <span class="Apple-style-span" style="color: #351c75;">Debug.Print</span> “endElement: “ &amp; strLocalName</p>
+<p><span class="Apple-style-span" style="color: #351c75;">End Sub</span></p>
+<p><span class="Apple-style-span" style="color: #351c75;">Private Sub</span> IVBSAXContentHandler_startElement(strNamespaceURI<span class="Apple-style-span" style="color: #351c75;"> As String</span>, _</p>
+<p>strLocalName<span class="Apple-style-span" style="color: #351c75;"> As String</span>, strQName<span class="Apple-style-span" style="color: #351c75;"> As String</span>, <span class="Apple-style-span" style="color: #351c75;">ByVal</span> oAttributes <span class="Apple-style-span" style="color: #351c75;">As</span> MSXML2.IVBSAXAttributes)</p>
+<p>    <span class="Apple-style-span" style="color: #351c75;">Debug.Print</span> “startElement: “ &amp; strLocalName</p>
+<p><span class="Apple-style-span" style="color: #351c75;">End Sub</span></p>
+<p><span class="Apple-style-span" style="color: #351c75;">Private Sub</span> IVBSAXErrorHandler_error(<span class="Apple-style-span" style="color: #351c75;">ByVal</span> oLocator <span class="Apple-style-span" style="color: #351c75;">As</span> MSXML2.IVBSAXLocator, _<br>strErrorMessage <span class="Apple-style-span" style="color: #351c75;">As String</span>, <span class="Apple-style-span" style="color: #351c75;">ByVal</span> nErrorCode <span class="Apple-style-span" style="color: #351c75;">As Long</span>)  </p>
+<p>    <span class="Apple-style-span" style="color: #351c75;">Debug.Assert</span> “error: “ &amp; strErrorMessage</p>
+<p><span class="Apple-style-span" style="color: #351c75;">End Sub</span></p>
+<div style="margin-bottom: 0px; margin-left: 0px; margin-right: 0px; margin-top: 0px;"></div> <div style="margin-bottom: 0px; margin-left: 0px; margin-right: 0px; margin-top: 0px;"></div>
+
+<p>Методы IVBSAXContentHandler_startElement и IVBSAXContentHandler_endElement будут вызываться SAX-парсером в начале и в конце XML-элемента соответственно. В этих методах, а также в других методах интерфейсов MSXML2.IVBSAXContentHandler и MSXML2.IVBSAXErrorHandler, нужно реализовывать логику приложения. Это может быть, например, загрузка значений в базу данных. Или запись ошибок в лог.  </p>
+<p>Теперь сделаем у нашего класса публичный метод, который будет осуществлять обработку XML-файла, а заодно и проверку его по XSD-схеме. Вот код:  </p>
+<p><span class="Apple-style-span" style="color: #351c75;">Public Sub</span> VerifyFile(<span class="Apple-style-span" style="color: #351c75;">ByVal</span> sXmlFileName <span class="Apple-style-span" style="color: #351c75;">As</span> <span class="Apple-style-span" style="color: #351c75;">String</span>, <span class="Apple-style-span" style="color: #351c75;">ByVal</span> sSchemaFileName <span class="Apple-style-span" style="color: #351c75;">As</span> <span class="Apple-style-span" style="color: #351c75;">String</span>)<br>    <span class="Apple-style-span" style="color: #351c75;">Dim</span> oSaxReader <span class="Apple-style-span" style="color: #351c75;">As</span> MSXML2.SAXXMLReader60<br>    <span class="Apple-style-span" style="color: #351c75;">Dim</span> oSC <span class="Apple-style-span" style="color: #351c75;">As</span> MSXML2.XMLSchemaCache60<br>    <span class="Apple-style-span" style="color: #351c75;">Set</span> oSaxReader &#x3D; CreateObject(“MSXML2.SAXXMLReader.6.0”) ‘<span class="Apple-style-span" style="color: #38761d;">создаем объект SAXXMLReader</span><br>    <span class="Apple-style-span" style="color: #351c75;">Set</span> oSaxReader.contentHandler &#x3D; Me <span class="Apple-style-span" style="color: #38761d;">‘Обработчик событий SAX-паресера -</span><br>                                                               <span class="Apple-style-span" style="color: #38761d;">‘объект, реализующий интерфейс IVBSAXContentHandler</span><br>    <span class="Apple-style-span" style="color: #351c75;">Set</span> oSaxReader.errorHandler &#x3D; Me <span class="Apple-style-span" style="color: #38761d;">‘Обработчик ошибок  -</span><br>                                                           <span class="Apple-style-span" style="color: #38761d;"> ‘объект, реализующий интерфейс IVBSAXErrorHandler</span><br>    <span class="Apple-style-span" style="color: #351c75;">Set</span> oSC &#x3D; CreateObject(“MSXML2.XMLSchemaCache.6.0”) <span class="Apple-style-span" style="color: #38761d;">‘Кэш XSD-схем</span><br>    oSC.Add “”, sSchemaFileName <span class="Apple-style-span" style="color: #38761d;">‘Добавляем в кэш имя файла нашей XSD-схемы</span><br>    oSaxReader.putFeature “schema-validation”, <span class="Apple-style-span" style="color: #351c75;">True</span> <span class="Apple-style-span" style="color: #38761d;">‘Включаем проверку по схеме</span><br>    oSaxReader.putFeature “exhaustive-errors”, <span class="Apple-style-span" style="color: #351c75;">True</span> <span class="Apple-style-span" style="color: #38761d;">‘Включаем проверку всех ошибок</span><br>    oSaxReader.putProperty “schemas”, oSC <span class="Apple-style-span" style="color: #38761d;">‘Связываем SAXXMLReader и XMLSchemaCache</span><br>    oSaxReader.parseURL sXmlFileName <span class="Apple-style-span" style="color: #38761d;">‘Запускаем SAX-парсер</span><br><span class="Apple-style-span" style="color: #351c75;">End Sub</span>  </p>
+<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/xsd/">XSD</a>, <a href="/tags/sax/">SAX</a>, <a href="/tags/%D0%BF%D0%B0%D1%80%D1%81%D0%B5%D1%80/">парсер</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/10/" class="alignleft prev">Назад</a>
+  
+  
+    <a href="/page/12/" class="alignright next">Вперед</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  
+
+<div class="widget tag">
+    <h3 class="title">Контакты</h3>
+    <div class="entry">
+        
+<div class="contactlink githublink">
+    <div class="icon"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/coolsoftware/">github.com/coolsoftware</a>
+</div>
+
+    </div>
+</div>
+
+
+  
+
+<div class="widget tag">
+    <h3 class="title">Избранные сообщения</h3>
+    <div class="entry">
+        
+<div>
+    <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/">Полезные ссылки</a>
+</div>
+
+<div>
+    <a href="/tags/howto/">Howto</a>
+</div>
+
+<div>
+    <a href="/2021/01/blog-post/">Музыка</a>
+</div>
+
+<div>
+    <a href="/tags/trie/">Поиск подстрок с помощью дерева цифрового поиска</a>
+</div>
+
+<div>
+    <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D0%B0%D0%BB%D0%BE%D0%B2/">Дерево Интервалов (Отрезков)</a>
+</div>
+
+<div>
+    <a href="/tags/throttling/">Throttling</a>
+</div>
+
+<div>
+    <a href="/2022/01/nodejs/">В одну строку</a>
+</div>
+
+<div>
+    <a href="/tags/%D0%B0%D0%BD%D0%B5%D0%BA%D0%B4%D0%BE%D1%82%D1%8B/">Анекдоты</a>
+</div>
+
+    </div>
+</div>
+
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Облако меток</h3>
+  <div class="entry">
+    <a href="/tags/net/" style="font-size: 11.11px;">.NET</a> <a href="/tags/0xe06d7363/" style="font-size: 10px;">0xe06d7363</a> <a href="/tags/32/" style="font-size: 10px;">32</a> <a href="/tags/404/" style="font-size: 10px;">404</a> <a href="/tags/64/" style="font-size: 11.11px;">64</a> <a href="/tags/ahci/" style="font-size: 10px;">AHCI</a> <a href="/tags/asp/" style="font-size: 11.11px;">ASP</a> <a href="/tags/asprotect/" style="font-size: 11.11px;">ASProtect</a> <a href="/tags/asus/" style="font-size: 10px;">ASUS</a> <a href="/tags/access-violation/" style="font-size: 10px;">Access Violation</a> <a href="/tags/active-server-pages/" style="font-size: 10px;">Active Server Pages</a> <a href="/tags/amazon/" style="font-size: 10px;">Amazon</a> <a href="/tags/angular/" style="font-size: 10px;">Angular</a> <a href="/tags/apache/" style="font-size: 11.11px;">Apache</a> <a href="/tags/bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/bouncy-castle/" style="font-size: 10px;">Bouncy Castle</a> <a href="/tags/c/" style="font-size: 12.22px;">C#</a> <a href="/tags/com/" style="font-size: 10px;">COM</a> <a href="/tags/centos/" style="font-size: 15.56px;">CentOS</a> <a href="/tags/cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/createprocess/" style="font-size: 10px;">CreateProcess</a> <a href="/tags/dst/" style="font-size: 10px;">DST</a> <a href="/tags/designer/" style="font-size: 10px;">Designer</a> <a href="/tags/desktop/" style="font-size: 10px;">Desktop</a> <a href="/tags/driver/" style="font-size: 10px;">Driver</a> <a href="/tags/ec2/" style="font-size: 10px;">EC2</a> <a href="/tags/eosio/" style="font-size: 10px;">EOSIO</a> <a href="/tags/enhanced-security/" style="font-size: 10px;">Enhanced Security</a> <a href="/tags/git/" style="font-size: 10px;">Git.</a> <a href="/tags/iis/" style="font-size: 11.11px;">IIS</a> <a href="/tags/insert/" style="font-size: 10px;">INSERT</a> <a href="/tags/icons/" style="font-size: 11.11px;">Icons</a> <a href="/tags/interval-tree/" style="font-size: 10px;">Interval Tree</a> <a href="/tags/java/" style="font-size: 10px;">Java</a> <a href="/tags/lazarus/" style="font-size: 10px;">Lazarus</a> <a href="/tags/linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/locklib/" style="font-size: 11.11px;">LockLib</a> <a href="/tags/md4/" style="font-size: 10px;">MD4</a> <a href="/tags/md5/" style="font-size: 10px;">MD5</a> <a href="/tags/mdb-access/" style="font-size: 10px;">MDB Access</a> <a href="/tags/mac/" style="font-size: 10px;">Mac</a> <a href="/tags/microsoft/" style="font-size: 10px;">Microsoft</a> <a href="/tags/mikrotik/" style="font-size: 10px;">MikroTik</a> <a href="/tags/minidlna/" style="font-size: 11.11px;">MiniDLNA</a> <a href="/tags/netbeans/" style="font-size: 10px;">NetBeans</a> <a href="/tags/node-js/" style="font-size: 11.11px;">Node.js</a> <a href="/tags/oracle/" style="font-size: 11.11px;">Oracle</a> <a href="/tags/php/" style="font-size: 12.22px;">PHP</a> <a href="/tags/pl-sql/" style="font-size: 10px;">PL/SQL</a> <a href="/tags/parseservercookie/" style="font-size: 10px;">ParseServerCookie</a> <a href="/tags/performance/" style="font-size: 10px;">Performance</a> <a href="/tags/perl/" style="font-size: 10px;">Perl</a> <a href="/tags/python/" style="font-size: 10px;">Python</a> <a href="/tags/qstring/" style="font-size: 10px;">QString</a> <a href="/tags/qt/" style="font-size: 13.33px;">Qt</a> <a href="/tags/raii/" style="font-size: 10px;">RAII</a> <a href="/tags/rsa/" style="font-size: 10px;">RSA</a> <a href="/tags/raspberry-pi/" style="font-size: 13.33px;">Raspberry Pi</a> <a href="/tags/react/" style="font-size: 10px;">React</a> <a href="/tags/redis/" style="font-size: 10px;">Redis</a> <a href="/tags/refresh/" style="font-size: 10px;">Refresh</a> <a href="/tags/sax/" style="font-size: 12.22px;">SAX</a> <a href="/tags/seh/" style="font-size: 10px;">SEH</a> <a href="/tags/selinux/" style="font-size: 10px;">SELinux</a> <a href="/tags/sql/" style="font-size: 11.11px;">SQL</a> <a href="/tags/schematron/" style="font-size: 11.11px;">Schematron</a> <a href="/tags/shelliconoverlayidentifiers/" style="font-size: 10px;">ShellIconOverlayIdentifiers</a> <a href="/tags/skype/" style="font-size: 10px;">Skype</a> <a href="/tags/teredo/" style="font-size: 10px;">Teredo</a> <a href="/tags/tinker-board/" style="font-size: 10px;">Tinker Board</a> <a href="/tags/tortoisegit/" style="font-size: 10px;">TortoiseGit</a> <a href="/tags/unhandled-exception/" style="font-size: 10px;">Unhandled Exception</a> <a href="/tags/vhashedstringlist/" style="font-size: 11.11px;">VHashedStringList</a> <a href="/tags/vlock/" style="font-size: 11.11px;">VLock</a> <a href="/tags/vrwlock/" style="font-size: 11.11px;">VRWLock</a> <a href="/tags/vuncopyable/" style="font-size: 10px;">VUncopyable</a> <a href="/tags/verqueryvalue/" style="font-size: 10px;">VerQueryValue</a> <a href="/tags/visial-studio/" style="font-size: 10px;">Visial Studio</a> <a href="/tags/visual-c/" style="font-size: 10px;">Visual C++</a> <a href="/tags/visual-studio-2010/" style="font-size: 13.33px;">Visual Studio 2010</a> <a href="/tags/wcf/" style="font-size: 10px;">WCF</a> <a href="/tags/when/" style="font-size: 10px;">WHEN</a> <a href="/tags/wsdl/" style="font-size: 10px;">WSDL</a> <a href="/tags/web-service/" style="font-size: 10px;">Web Service</a> <a href="/tags/wi-fi/" style="font-size: 10px;">Wi-Fi</a> <a href="/tags/xe-2/" style="font-size: 11.11px;">XE 2</a> <a href="/tags/xe2/" style="font-size: 11.11px;">XE2</a> <a href="/tags/xml/" style="font-size: 12.22px;">XML</a> <a href="/tags/xsd/" style="font-size: 12.22px;">XSD</a> <a href="/tags/tchar/" style="font-size: 10px;">_TCHAR</a> <a href="/tags/throwinfo/" style="font-size: 10px;">_ThrowInfo</a> <a href="/tags/aggregate/" style="font-size: 10px;">aggregate</a> <a href="/tags/aggregation/" style="font-size: 10px;">aggregation</a> <a href="/tags/android/" style="font-size: 11.11px;">android</a> <a href="/tags/api/" style="font-size: 10px;">api</a> <a href="/tags/apk/" style="font-size: 10px;">apk</a> <a href="/tags/arm/" style="font-size: 11.11px;">arm</a> <a href="/tags/artificial-intelligence/" style="font-size: 11.11px;">artificial intelligence</a> <a href="/tags/auto-increment/" style="font-size: 10px;">auto-increment</a> <a href="/tags/avahi/" style="font-size: 11.11px;">avahi</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/bigdata/" style="font-size: 10px;">bigdata</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/blogger/" style="font-size: 10px;">blogger</a> <a href="/tags/blogspot/" style="font-size: 10px;">blogspot</a> <a href="/tags/books/" style="font-size: 10px;">books</a> <a href="/tags/boost/" style="font-size: 11.11px;">boost</a> <a href="/tags/bug/" style="font-size: 11.11px;">bug</a> <a href="/tags/build/" style="font-size: 11.11px;">build</a> <a href="/tags/builder/" style="font-size: 10px;">builder</a> <a href="/tags/certificate/" style="font-size: 11.11px;">certificate</a> <a href="/tags/chinese/" style="font-size: 10px;">chinese</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/comments/" style="font-size: 10px;">comments</a> <a href="/tags/console/" style="font-size: 10px;">console</a> <a href="/tags/cpp/" style="font-size: 18.89px;">cpp</a> <a href="/tags/cryptoapi/" style="font-size: 10px;">cryptoapi</a> <a href="/tags/dataset/" style="font-size: 10px;">dataset</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/delphi/" style="font-size: 16.67px;">delphi</a> <a href="/tags/development/" style="font-size: 10px;">development</a> <a href="/tags/dll/" style="font-size: 11.11px;">dll</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/ethereum/" style="font-size: 14.44px;">ethereum</a> <a href="/tags/exception/" style="font-size: 10px;">exception</a> <a href="/tags/exe/" style="font-size: 10px;">exe</a> <a href="/tags/failure/" style="font-size: 10px;">failure</a> <a href="/tags/fast-insert/" style="font-size: 11.11px;">fast insert</a> <a href="/tags/faucet/" style="font-size: 10px;">faucet</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/geth/" style="font-size: 10px;">geth</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitalk/" style="font-size: 10px;">gitalk</a> <a href="/tags/github/" style="font-size: 16.67px;">github</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/google/" style="font-size: 13.33px;">google</a> <a href="/tags/hexo/" style="font-size: 11.11px;">hexo</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/howto/" style="font-size: 17.78px;">howto</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/indy/" style="font-size: 11.11px;">indy</a> <a href="/tags/ipv6/" style="font-size: 10px;">ipv6</a> <a href="/tags/itree/" style="font-size: 10px;">itree</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/lib/" style="font-size: 10px;">lib</a> <a href="/tags/light-plus/" style="font-size: 10px;">light-plus</a> <a href="/tags/links/" style="font-size: 10px;">links</a> <a href="/tags/lol/" style="font-size: 12.22px;">lol</a> <a href="/tags/mdns/" style="font-size: 10px;">mDNS</a> <a href="/tags/machine-learning/" style="font-size: 12.22px;">machine learning</a> <a href="/tags/max-connections/" style="font-size: 10px;">max_connections</a> <a href="/tags/mist/" style="font-size: 10px;">mist</a> <a href="/tags/mkdocs/" style="font-size: 10px;">mkdocs</a> <a href="/tags/mkv/" style="font-size: 10px;">mkv</a> <a href="/tags/mongo/" style="font-size: 12.22px;">mongo</a> <a href="/tags/mp4/" style="font-size: 10px;">mp4</a> <a href="/tags/my-ini/" style="font-size: 10px;">my.ini</a> <a href="/tags/mysql/" style="font-size: 11.11px;">mysql</a> <a href="/tags/nodejs/" style="font-size: 11.11px;">nodejs</a> <a href="/tags/oddeven/" style="font-size: 10px;">oddeven</a> <a href="/tags/openssl/" style="font-size: 11.11px;">openssl</a> <a href="/tags/openvpn/" style="font-size: 11.11px;">openvpn</a> <a href="/tags/pagination/" style="font-size: 10px;">pagination</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/pypi/" style="font-size: 10px;">pypi</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/random/" style="font-size: 10px;">random</a> <a href="/tags/reac/" style="font-size: 10px;">reac</a> <a href="/tags/rinkeby/" style="font-size: 11.11px;">rinkeby</a> <a href="/tags/rpi/" style="font-size: 11.11px;">rpi</a> <a href="/tags/search/" style="font-size: 11.11px;">search</a> <a href="/tags/smart-contract/" style="font-size: 13.33px;">smart contract</a> <a href="/tags/sqlite/" style="font-size: 11.11px;">sqlite</a> <a href="/tags/ssl/" style="font-size: 12.22px;">ssl</a> <a href="/tags/string/" style="font-size: 11.11px;">string</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/testing/" style="font-size: 10px;">testing</a> <a href="/tags/theme/" style="font-size: 10px;">theme</a> <a href="/tags/throttle/" style="font-size: 10px;">throttle</a> <a href="/tags/throttling/" style="font-size: 10px;">throttling</a> <a href="/tags/tinkerboard/" style="font-size: 11.11px;">tinkerboard</a> <a href="/tags/trick/" style="font-size: 10px;">trick</a> <a href="/tags/trie/" style="font-size: 11.11px;">trie</a> <a href="/tags/tuning/" style="font-size: 11.11px;">tuning</a> <a href="/tags/tutorial/" style="font-size: 11.11px;">tutorial</a> <a href="/tags/uncopyable/" style="font-size: 10px;">uncopyable</a> <a href="/tags/version/" style="font-size: 10px;">version</a> <a href="/tags/video/" style="font-size: 10px;">video</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/web-development-design/" style="font-size: 10px;">web development & design</a> <a href="/tags/web3/" style="font-size: 10px;">web3</a> <a href="/tags/windows/" style="font-size: 15.56px;">windows</a> <a href="/tags/wsl2/" style="font-size: 11.11px;">wsl2</a> <a href="/tags/youtube/" style="font-size: 10px;">youtube</a> <a href="/tags/zlib/" style="font-size: 10px;">zlib</a> <a href="/tags/%D0%B3%D1%81%D1%87/" style="font-size: 10px;">ГСЧ</a> <a href="/tags/%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D0%B5%D0%BB%D0%B8/" style="font-size: 11.11px;">Писатели</a> <a href="/tags/%D1%81%D1%85%D0%B5%D0%BC%D0%B0%D1%82%D1%80%D0%BE%D0%BD/" style="font-size: 10px;">Схематрон</a> <a href="/tags/%D1%87%D0%B8%D1%82%D0%B0%D1%82%D0%B5%D0%BB%D0%B8/" style="font-size: 11.11px;">Читатели</a> <a href="/tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/" style="font-size: 12.22px;">алгоритм</a> <a href="/tags/%D0%B0%D0%BD%D0%B5%D0%BA%D0%B4%D0%BE%D1%82%D1%8B/" style="font-size: 11.11px;">анекдоты</a> <a href="/tags/%D0%B1%D0%B0%D0%B3/" style="font-size: 10px;">баг</a> <a href="/tags/%D0%B1%D0%BB%D0%BE%D0%B3/" style="font-size: 11.11px;">блог</a> <a href="/tags/%D0%B1%D0%BB%D0%BE%D0%B3%D0%B8/" style="font-size: 10px;">блоги</a> <a href="/tags/%D0%B1%D0%BE%D1%80/" style="font-size: 11.11px;">бор</a> <a href="/tags/%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F-%D0%B2%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B0/" style="font-size: 11.11px;">быстрая вставка</a> <a href="/tags/%D0%B2-%D0%BE%D0%B4%D0%BD%D1%83-%D1%81%D1%82%D1%80%D0%BE%D0%BA%D1%83/" style="font-size: 10px;">в одну строку</a> <a href="/tags/%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE/" style="font-size: 10px;">видео</a> <a href="/tags/%D0%B2%D0%B8%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F/" style="font-size: 10px;">виртуальная функция</a> <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D0%B0%D0%BB%D0%BE%D0%B2/" style="font-size: 10px;">дерево интервалов</a> <a href="/tags/%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%BE%D1%82%D1%80%D0%B5%D0%B7%D0%BA%D0%BE%D0%B2/" style="font-size: 10px;">дерево отрезков</a> <a href="/tags/%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F/" style="font-size: 10px;">документация</a> <a href="/tags/%D0%B8%D0%BA%D0%BE%D0%BD%D0%BA%D0%B8/" style="font-size: 10px;">иконки</a> <a href="/tags/%D0%B8%D1%81%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D1%8F/" style="font-size: 10px;">исключения</a> <a href="/tags/%D0%BA%D0%B8%D1%82%D0%B0%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D1%8F%D0%B7%D1%8B%D0%BA/" style="font-size: 10px;">китайский язык</a> <a href="/tags/%D0%BA%D0%BD%D0%B8%D0%B3%D0%B8/" style="font-size: 10px;">книги</a> <a href="/tags/%D0%BA%D0%BE%D0%BC%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%B8%D0%B8/" style="font-size: 10px;">комментарии</a> <a href="/tags/%D0%BA%D0%BE%D0%BD%D1%81%D0%BE%D0%BB%D1%8C/" style="font-size: 10px;">консоль</a> <a href="/tags/%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D0%BE%D1%80/" style="font-size: 10px;">конструктор</a> <a href="/tags/%D0%BA%D1%83%D0%BD%D0%B3%D1%84%D1%83/" style="font-size: 10px;">кунгфу</a> <a href="/tags/%D0%BC%D1%83%D0%B7%D1%8B%D0%BA%D0%B0/" style="font-size: 10px;">музыка</a> <a href="/tags/%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C/" style="font-size: 10px;">обновить</a> <a href="/tags/%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BE%D1%88%D0%B8%D0%B1%D0%BE%D0%BA/" style="font-size: 10px;">обработка ошибок</a> <a href="/tags/%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/" style="font-size: 10px;">обучение</a> <a href="/tags/%D0%BF%D0%B0%D1%80%D1%81%D0%B5%D1%80/" style="font-size: 11.11px;">парсер</a> <a href="/tags/%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4/" style="font-size: 10px;">переезд</a> <a href="/tags/%D0%BF%D0%BE%D0%B8%D1%81%D0%BA/" style="font-size: 10px;">поиск</a> <a href="/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/" style="font-size: 20px;">полезные ссылки</a> <a href="/tags/%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80/" style="font-size: 10px;">пример</a> <a href="/tags/%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/" style="font-size: 10px;">проверка</a> <a href="/tags/%D1%81%D0%B2%D0%B0%D1%80%D0%BA%D0%B0/" style="font-size: 10px;">сварка</a> <a href="/tags/%D1%81%D1%82%D0%B8%D1%85%D0%B8/" style="font-size: 10px;">стихи</a> <a href="/tags/%D1%82%D1%80%D0%BE%D1%82%D1%82%D0%BB%D0%B8%D0%BD%D0%B3/" style="font-size: 10px;">троттлинг</a> <a href="/tags/%D1%85%D0%BE%D0%B1%D0%B1%D0%B8/" style="font-size: 11.11px;">хобби</a> <a href="/tags/%D1%86%D0%B8%D0%B3%D1%83%D0%BD/" style="font-size: 10px;">цигун</a> <a href="/tags/%D1%8E%D0%BC%D0%BE%D1%80/" style="font-size: 12.22px;">юмор</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2025 Vitaly Yakovlev
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+<script src="/js/copy-code.js"></script>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script>
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
