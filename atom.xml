@@ -6,7 +6,7 @@
   <link href="https://blog.coolsoftware.ru/atom.xml" rel="self"/>
   
   <link href="https://blog.coolsoftware.ru/"/>
-  <updated>2024-08-26T11:30:04.720Z</updated>
+  <updated>2025-03-30T08:10:53.607Z</updated>
   <id>https://blog.coolsoftware.ru/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hsk1</title>
+    <link href="https://blog.coolsoftware.ru/2025/03/hsk1/"/>
+    <id>https://blog.coolsoftware.ru/2025/03/hsk1/</id>
+    <published>2025-03-30T07:13:41.000Z</published>
+    <updated>2025-03-30T08:10:53.607Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="HSK1-150"><a href="#HSK1-150" class="headerlink" title="HSK1 - 150"></a>HSK1 - 150</h1><table><thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr></thead><tbody><tr><td>000</td><td>爱</td><td>八</td><td>爸爸</td><td>杯子</td><td>北京</td><td>本</td><td>不客气</td><td>不</td><td>菜</td><td>茶</td></tr><tr><td>010</td><td>吃</td><td>出租车</td><td>打电话</td><td>大</td><td>的</td><td>点</td><td>电脑</td><td>电视</td><td>电影</td><td>东西</td></tr><tr><td>020</td><td>都</td><td>读</td><td>对不起</td><td>多</td><td>多少</td><td>儿子</td><td>二</td><td>饭馆</td><td>飞机</td><td>分钟</td></tr><tr><td>030</td><td>高兴</td><td>个</td><td>工作</td><td>狗</td><td>汉语</td><td>好</td><td>喝</td><td>和</td><td>很</td><td>后面</td></tr><tr><td>040</td><td>回</td><td>会</td><td>候车站</td><td>几</td><td>家</td><td>叫</td><td>今天</td><td>九</td><td>开</td><td>看</td></tr><tr><td>050</td><td>看见</td><td>快</td><td>来</td><td>老师</td><td>了</td><td>冷</td><td>里</td><td>零</td><td>六</td><td>妈妈</td></tr><tr><td>060</td><td>吗</td><td>买</td><td>猫</td><td>没</td><td>没关系</td><td>米饭</td><td>名字</td><td>明天</td><td>哪 （哪儿）</td><td>那 （那儿）</td></tr><tr><td>070</td><td>呢</td><td>能</td><td>你</td><td>年</td><td>女儿</td><td>朋友</td><td>漂亮</td><td>苹果</td><td>七</td><td>前面</td></tr><tr><td>080</td><td>钱</td><td>请</td><td>去</td><td>热</td><td>人</td><td>认识</td><td>日</td><td>三</td><td>商店</td><td>上</td></tr><tr><td>090</td><td>上午</td><td>少</td><td>谁</td><td>什么</td><td>十</td><td>时候</td><td>是</td><td>书</td><td>水</td><td>水果</td></tr><tr><td>100</td><td>睡觉</td><td>说话</td><td>四</td><td>岁</td><td>他</td><td>她</td><td>太</td><td>天气</td><td>听</td><td>同学</td></tr><tr><td>110</td><td>喂</td><td>我</td><td>我们</td><td>五</td><td>喜欢</td><td>下</td><td>下午</td><td>下雨</td><td>先生</td><td>现在</td></tr><tr><td>120</td><td>想</td><td>小</td><td>小姐</td><td>些</td><td>写</td><td>谢谢</td><td>星期</td><td>学生</td><td>学习</td><td>学校</td></tr><tr><td>130</td><td>一</td><td>衣服</td><td>医生</td><td>医院</td><td>椅子</td><td>有</td><td>月</td><td>再见</td><td>在</td><td>怎么</td></tr><tr><td>140</td><td>怎么样</td><td>这</td><td>中国</td><td>中午</td><td>住</td><td>桌子</td><td>字</td><td>昨天</td><td>做</td><td>坐</td></tr></tbody></table>]]></content>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;HSK1-150&quot;&gt;&lt;a href=&quot;#HSK1-150&quot; class=&quot;headerlink&quot; title=&quot;HSK1 - 150&quot;&gt;&lt;/a&gt;HSK1 -</summary>
+        
+      
+    
+    
+    
+    
+    <category term="китайский язык" scheme="https://blog.coolsoftware.ru/tags/%D0%BA%D0%B8%D1%82%D0%B0%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D1%8F%D0%B7%D1%8B%D0%BA/"/>
+    
+    <category term="chinese" scheme="https://blog.coolsoftware.ru/tags/chinese/"/>
+    
+  </entry>
   
   <entry>
     <title>Полезные ссылки: AI, ML, DL, OCR</title>
@@ -611,34 +638,6 @@
     <category term="theme" scheme="https://blog.coolsoftware.ru/tags/theme/"/>
     
     <category term="light-plus" scheme="https://blog.coolsoftware.ru/tags/light-plus/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Обновление MySQL Server на CentOS</title>
-    <link href="https://blog.coolsoftware.ru/2022/02/%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-mysql-serrver-%D0%BD%D0%B0-centos/"/>
-    <id>https://blog.coolsoftware.ru/2022/02/%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-mysql-serrver-%D0%BD%D0%B0-centos/</id>
-    <published>2022-02-11T14:36:59.000Z</published>
-    <updated>2023-06-22T05:39:49.563Z</updated>
-    
-    <content type="html"><![CDATA[<p>При обновлении MySQL Server на CentOS вылезла ошибка:</p><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">The GPG keys listed for the &quot;MySQL 8.0 Community Server&quot; repository are already installed but they are not correct for this package.</span><br><span class="line">Check that the correct key URLs are configured for this repository.</span><br><span class="line"> </span><br><span class="line"> Failing package is: mysql-community-icu-data-files-8.0.28-1.el7.x86_64</span><br><span class="line"> GPG Keys are configured as: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql</span><br></pre></td></tr></table></figure><p>Победить можно выполнив команду:</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;При обновлении MySQL Server на CentOS вылезла ошибка:&lt;/p&gt;
-&lt;figure class=&quot;highlight text&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span</summary>
-        
-      
-    
-    
-    
-    
-    <category term="mysql" scheme="https://blog.coolsoftware.ru/tags/mysql/"/>
-    
-    <category term="CentOS" scheme="https://blog.coolsoftware.ru/tags/centos/"/>
     
   </entry>
   
