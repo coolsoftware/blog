@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>C++: конструкторы и виртуальные функции | Cool Software Blog</title>
+  <title>Обо мне | Cool Software Blog</title>
   <meta name="author" content="Vitaly Yakovlev">
   
-  <meta name="description" content="Как говорится, век - живи, век учись.  
-Захотелось мне вынести инициализацию данных класса в виртуальную функцию init(), с тем, чтобы классы-наследник">
+  <meta name="description" content="Привет! Меня зовут Виталий. Я универсальный разработчик с глубокой экспертизой в создании комплексных software-решений.
+Я специализируюсь на полном ци">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="C++: конструкторы и виртуальные функции"/>
+  <meta property="og:title" content="Обо мне"/>
   <meta property="og:site_name" content="Cool Software Blog"/>
 
   
@@ -67,32 +67,51 @@
   <div class="clearfix"></div>
 </div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-c" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="page-" class="h-entry page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
-        <div class="icon"></div>
-        <time class="dt-published" datetime="2013-03-24T03:29:00.000Z"><a href="/2013/03/c/">2013-03-24</a></time>
-      
       
   
-    <h1 class="p-name title" itemprop="headline name">C++: конструкторы и виртуальные функции</h1>
+    <h1 class="p-name title" itemprop="headline name">Обо мне</h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <p>Как говорится, век - живи, век учись.  </p>
-<p>Захотелось мне вынести инициализацию данных класса в виртуальную функцию init(), с тем, чтобы классы-наследники могли переопределить ее и добавить в инициализацию что-то своё. Примерно так:  </p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">C1</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="type">int</span> m_count;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123; m_count = <span class="number">1</span>; &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">C1</span>() &#123; <span class="built_in">init</span>(); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">count</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> m_count; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C2</span>: <span class="keyword">public</span> C1</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123; C1::<span class="built_in">init</span>(); m_count = m_count+<span class="number">1</span>; &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">C2</span>() : <span class="built_in">C1</span>() &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    C1 c1;</span><br><span class="line">    _tprintf(_T(<span class="string">&quot;C1 count: %i\n&quot;</span>), c1.<span class="built_in">count</span>());</span><br><span class="line">    C2 c2;</span><br><span class="line">    _tprintf(_T(<span class="string">&quot;C2 count: %i\n&quot;</span>), c2.<span class="built_in">count</span>());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Результат получается такой:  </p>
-<p>C1 count: 1<br>C2 count: 1  </p>
-<p>Опа! Оказывается переопределенная в классе C2 функция init() не вызывается. Получается, что если вызвать из конструктора класса виртуальную функцию этого же класса, то обычный метод вызова виртуальных функций через vtable задействован не будет - функция будет вызвана как если бы они была не-виртуальной. По-моему такое поведение не выглядит логичным, поэтому от вызова виртуальных функций из конструктора лучше отказаться.  </p>
-<p>PS. Из деструктора вызывать виртуальные функции тоже не следует.  </p>
-<p>По поводу того, что при вызове виртуальных функций из конструктора (и деструктора) не используется vtable, - тут я, похоже, был не прав. vtable используется, только в конструкторе класса C1 (см. пример) используется vtable класса C1, а не класса-потомка C2 - вот в чем дело. Аналогично, в деструкторе C1 также используется vtable класса С1.  </p>
-<p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
+        <p>Привет! Меня зовут Виталий. Я универсальный разработчик с глубокой экспертизой в создании комплексных software-решений.</p>
+<p>Я специализируюсь на полном цикле разработки: от проектирования и реализации высоконагруженных бэкенд-систем и API до создания интуитивно понятных и отзывчивых пользовательских интерфейсов. </p>
+<h2 id="Мой-технический-арсенал"><a href="#Мой-технический-арсенал" class="headerlink" title="Мой технический арсенал:"></a>Мой технический арсенал:</h2><ul>
+<li><p>Десктоп-разработка: глубокое понимание низкоуровневых возможностей C++, мощь и богатая экосистема C#, а также проверенная надежность Delphi для создания производительного нативного ПО.</p>
+</li>
+<li><p>Backend-разработка: создание современных серверных приложений на Node.js и его фреймворке NestJS. Использую Python для скриптинга, анализа данных и бэкенда, а также PHP для веб-проектов.</p>
+</li>
+<li><p>Frontend-разработка: разработка динамических SPA-приложений с использованием современных фреймворков React и Vue. Пишу чистый и строгий код на JavaScript и TypeScript.</p>
+</li>
+<li><p>Базы данных и хранилища: опыт работы с реляционными (Oracle, MS SQL Server, PostgreSQL, MySQL) и NoSQL (MongoDB) СУБД, включая проектирование схем, оптимизацию запросов и обеспечение целостности данных. Использую Redis для кэширования и работы с высокопроизводительными структурами данных.</p>
+</li>
+</ul>
+<h2 id="Что-я-ценю-в-разработке"><a href="#Что-я-ценю-в-разработке" class="headerlink" title="Что я ценю в разработке:"></a>Что я ценю в разработке:</h2><ul>
+<li><p>Чистый и поддерживаемый код: я убежден, что код читается чаще, чем пишется. Стараюсь писать код, понятный моим коллегам и мне самому через полгода.</p>
+</li>
+<li><p>Эффективность и масштабируемость: архитектура приложения должна быть продумана так, чтобы оно могло расти вместе с бизнес-требованиями.</p>
+</li>
+<li><p>Прагматичный подход: выбор инструмента под задачу, а не под модные тенденции. Мой широкий стек технологий позволяет это делать осознанно.</p>
+</li>
+<li><p>Решение проблем: для меня разработка — это в первую очередь поиск элегантных решений сложных задач.</p>
+</li>
+</ul>
+<p>Мой опыт позволяет мне уверенно браться за проекты любой сложности:</p>
+<ul>
+<li>Разработка с нуля десктопных приложений для Windows.</li>
+<li>Создание высоконагруженных бэкенд-API и микросервисных архитектур.</li>
+<li>Построение современного и интерактивного фронтенда.</li>
+<li>Интеграция различных систем и сервисов.</li>
+<li>Оптимизация производительности на всех уровнях приложения.</li>
+</ul>
+<p>Нахожусь в постоянном поиске интересных проектов, где могу применить свою экспертизу и принести максимальную пользу.</p>
+<p>Пишите мне на <a href="mailto:&#118;&#105;&#116;&#97;&#108;&#121;&#x40;&#x63;&#111;&#111;&#108;&#115;&#x6f;&#x66;&#x74;&#119;&#97;&#x72;&#x65;&#x2e;&#114;&#x75;">&#118;&#105;&#116;&#97;&#108;&#121;&#x40;&#x63;&#111;&#111;&#108;&#115;&#x6f;&#x66;&#x74;&#119;&#97;&#x72;&#x65;&#x2e;&#114;&#x75;</a></p>
 
       
     </div>
@@ -100,11 +119,6 @@
       
       
       
-  
-  <div class="tags">
-    <a href="/tags/cpp/">cpp</a>, <a href="/tags/%D0%B2%D0%B8%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F/">виртуальная функция</a>, <a href="/tags/%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D0%BE%D1%80/">конструктор</a>
-  </div>
-
       
       <div class="clearfix"></div>
     </footer>
