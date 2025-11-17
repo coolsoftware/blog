@@ -123,6 +123,9 @@
 <p>Find the latest 100 modified files in a folder and its subfolders on Windows:</p>
 <figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Get-ChildItem</span> <span class="literal">-Path</span> . <span class="literal">-Recurse</span> | <span class="built_in">Where-Object</span> &#123; !<span class="variable">$_</span>.PSIsContainer &#125; | <span class="built_in">Sort-Object</span> LastWriteTime <span class="literal">-Descending</span> | <span class="built_in">Select-Object</span> <span class="literal">-First</span> <span class="number">100</span> Directory, Name, LastWriteTime</span><br></pre></td></tr></table></figure>
 
+<p>Декодировать JWT:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params">token</span>)&#123;<span class="keyword">return</span> <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="title class_">Buffer</span>.<span class="title function_">from</span>(token.<span class="title function_">split</span>(<span class="string">&#x27;.&#x27;</span>)[<span class="number">1</span>], <span class="string">&#x27;base64&#x27;</span>).<span class="title function_">toString</span>())&#125;)(<span class="string">&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNzA4MzQ1MTIzLCJleHAiOjE3MDgzNTUxMjN9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
 <p>=&#x3D;&#x3D;<br>Перепечатка материалов блога разрешается с обязательной ссылкой на <a href="http://blog.coolsoftware.ru/">blog.coolsoftware.ru</a></p>
 
       
