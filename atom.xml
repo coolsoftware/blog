@@ -6,7 +6,7 @@
   <link href="https://blog.coolsoftware.ru/atom.xml" rel="self"/>
   
   <link href="https://blog.coolsoftware.ru/"/>
-  <updated>2025-09-03T15:41:42.893Z</updated>
+  <updated>2026-02-03T13:47:46.918Z</updated>
   <id>https://blog.coolsoftware.ru/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RAII wrapper для Critical Section в Delphi</title>
+    <link href="https://blog.coolsoftware.ru/2026/02/raii-wrapper-%D0%B4%D0%BB%D1%8F-critical-section-%D0%B2-delphi/"/>
+    <id>https://blog.coolsoftware.ru/2026/02/raii-wrapper-%D0%B4%D0%BB%D1%8F-critical-section-%D0%B2-delphi/</id>
+    <published>2026-02-03T13:42:07.000Z</published>
+    <updated>2026-02-03T13:47:46.918Z</updated>
+    
+    <content type="html"><![CDATA[<p>Код ниже - это RAII wrapper для критических секций в Delphi, - был сгенерирован chatgpt. Диалог с ChatGPT доступен по ссылке: <a href="https://chatgpt.com/share/6981f74e-422c-8013-9cd6-9a8f4518e18a">https://chatgpt.com/share/6981f74e-422c-8013-9cd6-9a8f4518e18a</a>.</p><figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span></span><br><span class="line">  ICriticalSectionGuard = <span class="keyword">interface</span> <span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title">TCriticalSectionGuard</span> = <span class="keyword">class</span>(TInterfacedObject, ICriticalSectionGuard)</span><br><span class="line">  <span class="keyword">private</span></span><br><span class="line">    FCritSec: TCriticalSection;</span><br><span class="line">  <span class="keyword">public</span></span><br><span class="line">    <span class="function"><span class="keyword">constructor</span> <span class="title">Create</span><span class="params">(ACritSec: TCriticalSection)</span>;</span></span><br><span class="line">    <span class="function"><span class="keyword">destructor</span> <span class="title">Destroy</span>;</span> <span class="keyword">override</span>;</span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">constructor</span> <span class="title">TCriticalSectionGuard</span>.<span class="title">Create</span><span class="params">(ACritSec: TCriticalSection)</span>;</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">inherited</span> Create;</span><br><span class="line">  FCritSec := ACritSec;</span><br><span class="line">  FCritSec.Enter;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">destructor</span> <span class="title">TCriticalSectionGuard</span>.<span class="title">Destroy</span>;</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  FCritSec.Leave;</span><br><span class="line">  <span class="keyword">inherited</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">procedure</span> <span class="title">Guard</span><span class="params">(<span class="keyword">const</span> ACritSec: TCriticalSection; <span class="keyword">out</span> AGuard: ICriticalSectionGuard)</span>;</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  AGuard := TCriticalSectionGuard.Create(ACritSec);</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure><p>Использование:</p><figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span></span><br><span class="line">  g: ICriticalSectionGuard;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  Guard(FCritSec, g);</span><br><span class="line"></span><br><span class="line">  Work;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Код ниже - это RAII wrapper для критических секций в Delphi, - был сгенерирован chatgpt. Диалог с ChatGPT доступен по ссылке: &lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="RAII" scheme="https://blog.coolsoftware.ru/tags/raii/"/>
+    
+    <category term="Delphi" scheme="https://blog.coolsoftware.ru/tags/delphi/"/>
+    
+    <category term="CriticalSection" scheme="https://blog.coolsoftware.ru/tags/criticalsection/"/>
+    
+    <category term="ChatGPT" scheme="https://blog.coolsoftware.ru/tags/chatgpt/"/>
+    
+  </entry>
   
   <entry>
     <title>Что &quot;думает&quot; deepseek: заменит ли ИИ программистов?</title>
@@ -638,38 +669,6 @@
     <category term="mkdocs" scheme="https://blog.coolsoftware.ru/tags/mkdocs/"/>
     
     <category term="документация" scheme="https://blog.coolsoftware.ru/tags/%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Полезные ссылки: Test API</title>
-    <link href="https://blog.coolsoftware.ru/2022/03/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-test-api/"/>
-    <id>https://blog.coolsoftware.ru/2022/03/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-test-api/</id>
-    <published>2022-03-31T10:30:02.000Z</published>
-    <updated>2023-06-22T05:39:49.565Z</updated>
-    
-    <content type="html"><![CDATA[<p>Test API Tools:</p><ul><li><a href="https://www.postman.com/">Postman</a></li><li><a href="https://www.soapui.org/">SoapUI</a></li><li><a href="https://jmeter.apache.org/">JMeter</a></li><li><a href="https://www.blazemeter.com/blog/jmeter-websocket-samplers-a-practical-guide">JMeter WebSocket Samplers (Guide)</a></li><li><a href="https://insomnia.rest/">Insomnia</a></li><li><a href="https://www.telerik.com/fiddler/">Fiddler</a></li></ul>]]></content>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Test API Tools:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.postman.com/&quot;&gt;Postman&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    
-    <category term="полезные ссылки" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/"/>
-    
-    <category term="test" scheme="https://blog.coolsoftware.ru/tags/test/"/>
-    
-    <category term="api" scheme="https://blog.coolsoftware.ru/tags/api/"/>
     
   </entry>
   
