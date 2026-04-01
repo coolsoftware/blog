@@ -6,7 +6,7 @@
   <link href="https://blog.coolsoftware.ru/atom.xml" rel="self"/>
   
   <link href="https://blog.coolsoftware.ru/"/>
-  <updated>2026-03-28T05:48:23.897Z</updated>
+  <updated>2026-04-01T13:39:33.478Z</updated>
   <id>https://blog.coolsoftware.ru/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>April Fools Day Error: The system cannot find the file specified</title>
+    <link href="https://blog.coolsoftware.ru/2026/04/error-the-system-cannot-find-the-file-specified/"/>
+    <id>https://blog.coolsoftware.ru/2026/04/error-the-system-cannot-find-the-file-specified/</id>
+    <published>2026-04-01T13:31:09.000Z</published>
+    <updated>2026-04-01T13:39:33.478Z</updated>
+    
+    <content type="html"><![CDATA[<p>“Первоапрельская” ошибка возникла в приложении ASP.NET под IIS: Error: The system cannot find the file specified.</p><p>Отладка показала: ошибка возникает в строчке:</p><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> X509Certificate2(caCertificatePath, caCertificatePassword);</span><br></pre></td></tr></table></figure><p>Файл, разумеется есть. Права на доступ для <code>IIS AppPool\ИмяПулаПриложения</code> дал.</p><p>Оказывается этого мало! Нужно еще для пула приложения включить: <code>Load User Profile</code> &#x3D; <code>True</code>.</p>]]></content>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;“Первоапрельская” ошибка возникла в приложении ASP.NET под IIS: Error: The system cannot find the file specified.&lt;/p&gt;
+&lt;p&gt;Отладка</summary>
+        
+      
+    
+    
+    
+    
+    <category term="IIS" scheme="https://blog.coolsoftware.ru/tags/iis/"/>
+    
+    <category term="C#" scheme="https://blog.coolsoftware.ru/tags/c/"/>
+    
+    <category term="Error" scheme="https://blog.coolsoftware.ru/tags/error/"/>
+    
+    <category term="ASP.NET" scheme="https://blog.coolsoftware.ru/tags/asp-net/"/>
+    
+    <category term="Certificate" scheme="https://blog.coolsoftware.ru/tags/certificate/"/>
+    
+  </entry>
   
   <entry>
     <title>Почему спрашивать ИИ лучше чем Stack Overflow</title>
@@ -639,39 +673,6 @@
     <category term="обучение" scheme="https://blog.coolsoftware.ru/tags/%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/"/>
     
     <category term="video" scheme="https://blog.coolsoftware.ru/tags/video/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Комментарии в блоге</title>
-    <link href="https://blog.coolsoftware.ru/2022/06/%D0%BA%D0%BE%D0%BC%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%B8%D0%B8-%D0%B2-%D0%B1%D0%BB%D0%BE%D0%B3%D0%B5/"/>
-    <id>https://blog.coolsoftware.ru/2022/06/%D0%BA%D0%BE%D0%BC%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%B8%D0%B8-%D0%B2-%D0%B1%D0%BB%D0%BE%D0%B3%D0%B5/</id>
-    <published>2022-06-17T07:33:55.000Z</published>
-    <updated>2023-06-22T05:39:49.566Z</updated>
-    
-    <content type="html"><![CDATA[<p>Добавлены комментарии в блоге.</p><p>В качестве движка используется <a href="https://github.com/gitalk/gitalk">gitalk</a>.</p><p>Как его добавить в light-тему Hexo:</p><ol><li><p>Создайте репозиторий для хранения <code>Issues</code>. Я создал с названием <a href="https://github.com/coolsoftware/gitalk/issues">gitalk</a>.</p></li><li><p>Создайте приложение в github: <a href="https://github.com/settings/applications/new">тынц</a>.</p><p> <img src="/images/new_github_app.png" alt="New GitHub Application"></p><p> Это приложение потом можно будет увидеть в списке <a href="https://github.com/settings/developers">Settings &#x2F; Developer settings</a>.</p></li><li><p>Сгенерируйте “секрет” (Generate a new client secret); запомните (запишите) его.</p></li><li><p>В light-теме Hexo в <code>layout\_partial</code> создайте файл <a href="https://github.com/coolsoftware/hexo-theme-light-plus/blob/master/layout/_partial/gitalk_comment.ejs">gitalk_comment.ejs</a> со следующим содержанием:</p> <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;gitalk-container&quot;</span> <span class="attr">style</span>=<span class="string">&quot;margin: 30px;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://unpkg.com/gitalk/dist/gitalk.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/gitalk/dist/gitalk.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/gh/gangdong/gangdong.github.io@dev/assets/js/md5.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> gitalk = <span class="keyword">new</span> <span class="title class_">Gitalk</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">clientID</span>: <span class="string">&#x27;&lt;%= gtConfig.clientID %&gt;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">clientSecret</span>: <span class="string">&#x27;&lt;%= gtConfig.clientSecret %&gt;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">repo</span>: <span class="string">&#x27;&lt;%= gtConfig.repo %&gt;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">owner</span>: <span class="string">&#x27;&lt;%= gtConfig.owner %&gt;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">admin</span>: [<span class="string">&#x27;&lt;%= gtConfig.admin %&gt;&#x27;</span>],</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">id</span>: <span class="title function_">md5</span>(location.<span class="property">pathname</span>),      <span class="comment">// Ensure uniqueness and length less than 50</span></span></span><br><span class="line"><span class="language-javascript">        <span class="attr">pagerDirection</span>: <span class="string">&#x27;&lt;%= gtConfig.pagerDirection %&gt;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">distractionFreeMode</span>: <span class="literal">false</span>  <span class="comment">// Facebook-like distraction free mode</span></span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript">    gitalk.<span class="title function_">render</span>(<span class="string">&#x27;gitalk-container&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li><li><p>В <code>layout\_partial\comment.ejs</code> подключите <code>gitalk_comment.ejs</code>:</p> <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;% if (theme.comment_provider == &quot;gitalk&quot;) &#123;</span><br><span class="line">    if (config.gitalk) &#123; %&gt;</span><br><span class="line">    &lt;%- partial(&#x27;_partial/gitalk_comment&#x27;, &#123;gtConfig: config.gitalk&#125;) %&gt;</span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure></li><li><p>В <code>_config.yml</code> light-темы включите использование gitalk-комментариев:</p> <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">comment_provider:</span> <span class="string">gitalk</span></span><br></pre></td></tr></table></figure></li><li><p>В корневом <code>_config.yml</code> вашего блога выполните настройку gitalk:</p> <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gitalk comment</span></span><br><span class="line"><span class="attr">gitalk:</span></span><br><span class="line">    <span class="attr">clientID:</span> <span class="string">your_client_id</span></span><br><span class="line">    <span class="attr">clientSecret:</span> <span class="string">your_secrat</span></span><br><span class="line">    <span class="attr">repo:</span> <span class="string">your_repo_name</span></span><br><span class="line">    <span class="attr">owner:</span> <span class="string">your_github_user</span></span><br><span class="line">    <span class="attr">admin:</span> <span class="string">your_github_user</span></span><br><span class="line">    <span class="attr">pagerDirection:</span> <span class="string">first</span></span><br></pre></td></tr></table></figure><ul><li><code>clientID</code> - значение <code>Client ID</code> из настроек приложения, созданного на шаге 2.</li><li><code>clientSecret</code> - “секрет” (Client secret), созданный на шаге 3.</li><li><code>repo</code> - название репозитория (шаг 1).</li><li><code>owner</code> и <code>admin</code> - имя Вашего пользователя в Github.</li></ul></li></ol>]]></content>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Добавлены комментарии в блоге.&lt;/p&gt;
-&lt;p&gt;В качестве движка используется &lt;a href=&quot;https://github.com/gitalk/gitalk&quot;&gt;gitalk&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Как</summary>
-        
-      
-    
-    
-    
-    
-    <category term="blog" scheme="https://blog.coolsoftware.ru/tags/blog/"/>
-    
-    <category term="gitalk" scheme="https://blog.coolsoftware.ru/tags/gitalk/"/>
-    
-    <category term="comments" scheme="https://blog.coolsoftware.ru/tags/comments/"/>
-    
-    <category term="комментарии" scheme="https://blog.coolsoftware.ru/tags/%D0%BA%D0%BE%D0%BC%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%80%D0%B8%D0%B8/"/>
     
   </entry>
   
