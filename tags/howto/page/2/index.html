@@ -83,6 +83,16 @@
               <h1 class="title"><a href="/1970/08/howto-nodejs-linux/">Howto: запустить приложение на node.js в виде сервиса (linux)</a></h1>
             
           </header>
+          <div class="archive-post-excerpt" style="font-size: 0.9em; color: #666; margin-top: 5px;">
+            
+            1. Создаем файл ~&#x2F;myapp.service:
+[Unit]
+Description&#x3D;My App
+After&#x3D;network-online.target
+[Service]
+Restart&#x3D;on-failure
+WorkingDire...
+          </div>
           <footer>
             
             
