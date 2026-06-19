@@ -6,7 +6,7 @@
   <link href="https://blog.coolsoftware.ru/atom.xml" rel="self"/>
   
   <link href="https://blog.coolsoftware.ru/"/>
-  <updated>2026-06-11T07:43:14.339Z</updated>
+  <updated>2026-06-19T04:27:33.274Z</updated>
   <id>https://blog.coolsoftware.ru/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Полезные ссылки: proxy</title>
+    <link href="https://blog.coolsoftware.ru/2026/06/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-proxy/"/>
+    <id>https://blog.coolsoftware.ru/2026/06/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8-proxy/</id>
+    <published>2026-06-19T04:24:29.000Z</published>
+    <updated>2026-06-19T04:27:33.274Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><a href="https://optinsoft.net/wpc/">Proxy Checker</a></li><li><a href="https://github.com/optinsoft/ProxyMapService">Port to proxy mapper</a></li></ul>]]></content>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://optinsoft.net/wpc/&quot;&gt;Proxy Checker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/optinsoft/ProxyMapService&quot;&gt;Port to</summary>
+        
+      
+    
+    
+    
+    
+    <category term="полезные ссылки" scheme="https://blog.coolsoftware.ru/tags/%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8/"/>
+    
+    <category term="proxy" scheme="https://blog.coolsoftware.ru/tags/proxy/"/>
+    
+  </entry>
   
   <entry>
     <title>中文: Ключи китайских иероглифов</title>
@@ -598,36 +627,6 @@
     <category term="artificial intelligence" scheme="https://blog.coolsoftware.ru/tags/artificial-intelligence/"/>
     
     <category term="dataset" scheme="https://blog.coolsoftware.ru/tags/dataset/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Анекдот про фермера</title>
-    <link href="https://blog.coolsoftware.ru/2023/02/%D0%B0%D0%BD%D0%B5%D0%BA%D0%B4%D0%BE%D1%82%D1%8B/"/>
-    <id>https://blog.coolsoftware.ru/2023/02/%D0%B0%D0%BD%D0%B5%D0%BA%D0%B4%D0%BE%D1%82%D1%8B/</id>
-    <published>2023-02-20T05:09:06.000Z</published>
-    <updated>2023-07-01T06:17:54.458Z</updated>
-    
-    <content type="html"><![CDATA[<p>Налоговый инспектор фермеру:</p><p>— А вы не утаивайте, не утаивайте! В конце концов ваши деньги к вам же и возвращаются: ну, знаете, субсидии, дотации…</p><p>— Понятно. Вот сейчас отрежу хвост у собаки, чтобы и ей было что на обед.</p>]]></content>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Налоговый инспектор фермеру:&lt;/p&gt;
-&lt;p&gt;— А вы не утаивайте, не утаивайте! В конце концов ваши деньги к вам же и возвращаются: ну, знаете,</summary>
-        
-      
-    
-    
-    
-    
-    <category term="анекдоты" scheme="https://blog.coolsoftware.ru/tags/%D0%B0%D0%BD%D0%B5%D0%BA%D0%B4%D0%BE%D1%82%D1%8B/"/>
-    
-    <category term="юмор" scheme="https://blog.coolsoftware.ru/tags/%D1%8E%D0%BC%D0%BE%D1%80/"/>
-    
-    <category term="lol" scheme="https://blog.coolsoftware.ru/tags/lol/"/>
     
   </entry>
   
