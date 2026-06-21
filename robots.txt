@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://blog.coolsoftware.ru/sitemap.xml
